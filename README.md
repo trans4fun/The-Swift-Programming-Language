@@ -53,7 +53,7 @@ The Swift Programming Language 中文化项目
 
 翻译请使用Markdown语法。
 
-第一次pull request只是为了认领，请在翻译完成自己负责的小节后进行第二次pull request将翻译内容合并到一个项目中来。
+翻译完成后6月20日前会人肉确认并merge到主项目中方便进行下一步review操作。
 
 # 项目里程碑进度
 
