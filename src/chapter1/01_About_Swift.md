@@ -1,38 +1,38 @@
 # About Swift
-# Swift½éÉÜ
+# Swiftä»‹ç»
 
-Swift is a new programming language for iOS and OS X apps that builds on the best of C and Objective-C, without the constraints of C compatibility.Swift adopts safe programming patterns and adds modern features to make programming easier, more flexible, and more fun.Swift¡¯s clean slate, backed by the mature and much-loved Cocoa and Cocoa Touch frameworks, is an opportunity to reimagine how software development works.
+Swift is a new programming language for iOS and OS X apps that builds on the best of C and Objective-C, without the constraints of C compatibility.Swift adopts safe programming patterns and adds modern features to make programming easier, more flexible, and more fun.Swiftâ€™s clean slate, backed by the mature and much-loved Cocoa and Cocoa Touch frameworks, is an opportunity to reimagine how software development works.
 
-SwiftÊÇÒ»¿îÎªiOSºÍOS X Ó¦ÓÃ´òÔìµÄĞÂÊ½±à³ÌÓïÑÔ£¬ËüÎüÈ¡ÁËCÓïÑÔºÍObjective-CÓïÑÔµÄ¾«»ª£¬Í¬Ê±ÍêÃÀ¼æÈİCÓïÑÔ¡£Swift²ÉÓÃÁË°²È«±à³ÌÄ£Ê½£¬Ôö¼ÓÁËĞí¶àÏÖ´úÓïÑÔµÄÌØĞÔ£¬Ê¹±à³Ì¹¤×÷¸ü¼Ó¼òµ¥£¬Áé»î£¬ÓĞÈ¤¡£Ò»¿îÖØĞÂÉè¼ÆµÄÓïÑÔ£¬ÔÙ¼ÓÉÏ³ÉÊì²¢ÇÒÉîÊÜ»¶Ó­µÄCocoa¿ò¼ÜºÍCocoa Touch¿ò¼Ü£¬SwiftÎªÈí¼ş¿ª·¢¹¤×÷´øÀ´ÁËÎŞÏŞåÚÏë¡£
+Swiftæ˜¯ä¸€æ¬¾ä¸ºiOSå’ŒOS X åº”ç”¨æ‰“é€ çš„æ–°å¼ç¼–ç¨‹è¯­è¨€ï¼Œå®ƒå¸å–äº†Cè¯­è¨€å’ŒObjective-Cè¯­è¨€çš„ç²¾åï¼ŒåŒæ—¶å®Œç¾å…¼å®¹Cè¯­è¨€ã€‚Swifté‡‡ç”¨äº†å®‰å…¨ç¼–ç¨‹æ¨¡å¼ï¼Œå¢åŠ äº†è®¸å¤šç°ä»£è¯­è¨€çš„ç‰¹æ€§ï¼Œä½¿ç¼–ç¨‹å·¥ä½œæ›´åŠ ç®€å•ï¼Œçµæ´»ï¼Œæœ‰è¶£ã€‚ä¸€æ¬¾é‡æ–°è®¾è®¡çš„è¯­è¨€ï¼Œå†åŠ ä¸Šæˆç†Ÿå¹¶ä¸”æ·±å—æ¬¢è¿çš„Cocoaæ¡†æ¶å’ŒCocoa Touchæ¡†æ¶ï¼ŒSwiftä¸ºè½¯ä»¶å¼€å‘å·¥ä½œå¸¦æ¥äº†æ— é™éæƒ³ã€‚
 
 
 Swift has been years in the making. Apple laid the foundation for Swift by advancing our existing compiler, debugger, and framework infrastructure. We simplified memory management with Automatic Reference Counting (ARC). Our framework stack, built on the solid base of Foundation and Cocoa, has been modernized and standardized throughout. Objective-C itself has evolved to support blocks, collection literals, and modules, enabling framework adoption of modern language technologies without disruption. Thanks to this groundwork, we can now
 introduce a new language for the future of Apple software development.
 
-SwiftÒÑ¾­³ÖĞøÑĞ·¢¶àÄêÁË¡£Æ»¹û¹«Ë¾Í¨¹ı¶àÄê¶ÔÒÑÓĞ±àÒëÆ÷£¬µ÷ÊÔÆ÷ºÍ»ù´¡¼Ü¹¹µÄ¸Ä½ø¾­ÑéÎªSwiftµì¶¨ÁË»ù´¡¡£ÎÒÃÇÍ¨¹ıARC(Automatic Reference Counting£¬×Ô¶¯ÒıÓÃ¼ÆÊı)¼ò»¯ÄÚ´æ¹ÜÀí¡£ÒÔCocoa¿ò¼Ü×÷Îª¼áÊµµÄ»ù´¡£¬ÎÒÃÇµÄ¿ò¼Ü¶ÑÕ»ÒÑÈ»ÔÚ¸÷·½Ãæ¶¼¸ü¼ÓµÄÏÖ´ú»¯ºÍ±ê×¼»¯ÁË¡£Objective-CÔÚ·¢Õ¹¹ı³ÌÖĞÖ§³ÖÁË¿é£¬×ÖÃæÁ¿¼¯ºÏ£¬Ä£¿é£¬Ê¹¿ò¼ÜÓëÏÖ´úÓïÑÔµÄÏÎ½Ó²»ÖÁÓÚÖĞ¶Ï¡£¶à¿÷ÁËËü£¬Ê¹ÎÒÃÇÄÜ¹»Ïò´ó¼ÒÍÆ¼öÎªÆ»¹ûÈí¼ş¿ª·¢µÄÎ´À´¶øÉúµÄ±à³ÌÓïÑÔ----Swift¡£
+Swiftå·²ç»æŒç»­ç ”å‘å¤šå¹´äº†ã€‚è‹¹æœå…¬å¸é€šè¿‡å¤šå¹´å¯¹å·²æœ‰ç¼–è¯‘å™¨ï¼Œè°ƒè¯•å™¨å’ŒåŸºç¡€æ¶æ„çš„æ”¹è¿›ç»éªŒä¸ºSwiftå¥ å®šäº†åŸºç¡€ã€‚æˆ‘ä»¬é€šè¿‡ARC(Automatic Reference Countingï¼Œè‡ªåŠ¨å¼•ç”¨è®¡æ•°)ç®€åŒ–å†…å­˜ç®¡ç†ã€‚ä»¥Cocoaæ¡†æ¶ä½œä¸ºåšå®çš„åŸºç¡€ï¼Œæˆ‘ä»¬çš„æ¡†æ¶å †æ ˆå·²ç„¶åœ¨å„æ–¹é¢éƒ½æ›´åŠ çš„ç°ä»£åŒ–å’Œæ ‡å‡†åŒ–äº†ã€‚Objective-Cåœ¨å‘å±•è¿‡ç¨‹ä¸­æ”¯æŒäº†å—ï¼Œå­—é¢é‡é›†åˆï¼Œæ¨¡å—ï¼Œä½¿æ¡†æ¶ä¸ç°ä»£è¯­è¨€çš„è¡”æ¥ä¸è‡³äºä¸­æ–­ã€‚å¤šäºäº†å®ƒï¼Œä½¿æˆ‘ä»¬èƒ½å¤Ÿå‘å¤§å®¶æ¨èä¸ºè‹¹æœè½¯ä»¶å¼€å‘çš„æœªæ¥è€Œç”Ÿçš„ç¼–ç¨‹è¯­è¨€----Swiftã€‚
 
 
-Swift feels familiar to Objective-C developers. It adopts the readability of Objective-C¡¯s named parameters and the power of Objective-C¡¯s dynamic object model. It provides seamless access to existing Cocoa frameworks and mix-and-match interoperability with Objective-C code. Building from this common ground, Swift introduces many new features and unifies the procedural and object-oriented portions of the language.
+Swift feels familiar to Objective-C developers. It adopts the readability of Objective-Câ€™s named parameters and the power of Objective-Câ€™s dynamic object model. It provides seamless access to existing Cocoa frameworks and mix-and-match interoperability with Objective-C code. Building from this common ground, Swift introduces many new features and unifies the procedural and object-oriented portions of the language.
 
-Swift¶ÔÓÚObject-C¿ª·¢ÈËÔ±·Ç³£ÓÑºÃ¡£Ëü²ÉÓÃÁËObjective-CµÄ²ÎÊıÃüÃûºÍ¶¯Ì¬¶ÔÏóÄ£ĞÍ¡£ËüÓëÏÖÓĞµÄCocoa¿ò¼ÜÎŞ·ì¶Ô½Ó²¢ÓëObjective-CÊµÏÖÁËMix-and-Match£¨»ìÈëÄÚÇ¶Ê½£©»¥Í¨¡£»ùÓÚ´Ë£¬Swift»¹ÒıÈëÁËÒ»Ğ©ĞÂÌØĞÔ²¢½áºÏÁËÓïÑÔµÄÃæÏò¹ı³ÌºÍÃæÏò¶ÔÏóµÄ¹¦ÄÜ¡£
+Swiftå¯¹äºObject-Cå¼€å‘äººå‘˜éå¸¸å‹å¥½ã€‚å®ƒé‡‡ç”¨äº†Objective-Cçš„å‚æ•°å‘½åå’ŒåŠ¨æ€å¯¹è±¡æ¨¡å‹ã€‚å®ƒä¸ç°æœ‰çš„Cocoaæ¡†æ¶æ— ç¼å¯¹æ¥å¹¶ä¸Objective-Cå®ç°äº†Mix-and-Matchï¼ˆæ··å…¥å†…åµŒå¼ï¼‰äº’é€šã€‚åŸºäºæ­¤ï¼ŒSwiftè¿˜å¼•å…¥äº†ä¸€äº›æ–°ç‰¹æ€§å¹¶ç»“åˆäº†è¯­è¨€çš„é¢å‘è¿‡ç¨‹å’Œé¢å‘å¯¹è±¡çš„åŠŸèƒ½ã€‚
 
 
 Swift is friendly to new programmers. It is the first industrial-quality systems programming language that is as expressive and enjoyable as a scripting language. It supports playgrounds, an innovative feature that allows programmers to experiment with Swift code and see the results immediately, without the overhead of building and running an app.
 
-Swift¶ÔÓÚĞÂÊÖÒ²ÊÇÓÑºÃµÄ£¬ËüÊÇ¹¤Òµ¼¶Æ·ÖÊµÄÏµÍ³±à³ÌÓïÑÔ£¬¶øÇÒÏñ½Å±¾ÓïÑÔÒ»°ãÉú¶¯ÓĞÈ¤¡£ËüÌá¹©ÁËPlayground£¬ÔÊĞí³ÌĞò¿ª·¢ÈËÔ±ÊµÊ±Ô¤ÀÀĞ§¹û£¬ÎŞĞè¹¹½¨ºÍÔËĞĞÕû¸öapp¡£
+Swiftå¯¹äºæ–°æ‰‹ä¹Ÿæ˜¯å‹å¥½çš„ï¼Œå®ƒæ˜¯å·¥ä¸šçº§å“è´¨çš„ç³»ç»Ÿç¼–ç¨‹è¯­è¨€ï¼Œè€Œä¸”åƒè„šæœ¬è¯­è¨€ä¸€èˆ¬ç”ŸåŠ¨æœ‰è¶£ã€‚å®ƒæä¾›äº†Playgroundï¼Œå…è®¸ç¨‹åºå¼€å‘äººå‘˜å®æ—¶é¢„è§ˆæ•ˆæœï¼Œæ— éœ€æ„å»ºå’Œè¿è¡Œæ•´ä¸ªappã€‚
 
 
-Swift combines the best in modern language thinking with wisdom from the wider Apple engineering culture. The compiler is optimized for performance, and the language is optimized for development, without compromising on either. It¡¯s designed to scale from ¡°hello, world¡± to an entire operating system. All this makes Swift a sound future investment for developers and for Apple.
+Swift combines the best in modern language thinking with wisdom from the wider Apple engineering culture. The compiler is optimized for performance, and the language is optimized for development, without compromising on either. Itâ€™s designed to scale from â€œhello, worldâ€ to an entire operating system. All this makes Swift a sound future investment for developers and for Apple.
 
-SwiftÈÚÈëÁË²©´óµÄÆ»¹ûµÄ¹¤³ÌÎÄ»¯ÖĞ¸»ÓĞÖÇ»ÛµÄÏÖ´úÓïÑÔË¼Î¬¡£´Ó¡°hello£¬world¡±¿ªÊ¼µ½Õû¸öÓïÑÔÏµÍ³£¬±àÒëÆ÷ÓÅ»¯ÁËĞÔÄÜ£¬ÓïÑÔÌáÉıÁË¿ª·¢Ğ§ÂÊ£¬ÎŞĞèÈÎºÎÍ×Ğ­£¬ÕâÒ»ÇĞ£¬ÈÃSwift³ÉÎªÁË¿ª·¢ÕßÓëAppleÎ´À´ÊµÓÃµÄÑ¡Ôñ¡£
+Swiftèå…¥äº†åšå¤§çš„è‹¹æœçš„å·¥ç¨‹æ–‡åŒ–ä¸­å¯Œæœ‰æ™ºæ…§çš„ç°ä»£è¯­è¨€æ€ç»´ã€‚ä»â€œhelloï¼Œworldâ€å¼€å§‹åˆ°æ•´ä¸ªè¯­è¨€ç³»ç»Ÿï¼Œç¼–è¯‘å™¨ä¼˜åŒ–äº†æ€§èƒ½ï¼Œè¯­è¨€æå‡äº†å¼€å‘æ•ˆç‡ï¼Œæ— éœ€ä»»ä½•å¦¥åï¼Œè¿™ä¸€åˆ‡ï¼Œè®©Swiftæˆä¸ºäº†å¼€å‘è€…ä¸Appleæœªæ¥å®ç”¨çš„é€‰æ‹©ã€‚
 
 
-Swift is a fantastic way to write iOS and OS X apps, and will continue to evolve with new features and capabilities. Our goals for Swift are ambitious. We can¡¯t wait to see what you create with it.¡±
+Swift is a fantastic way to write iOS and OS X apps, and will continue to evolve with new features and capabilities. Our goals for Swift are ambitious. We canâ€™t wait to see what you create with it.â€
 
-SwiftÊÇ±àĞ´iOSºÍOS XÓ¦ÓÃµÄ¾øÃÀ·½Ê½£¬ÎÒÃÇ»á³ÖĞøÒıÈëĞÂÌØĞÔºÍĞÂ¹¦ÄÜ¡£ÎÒÃÇ¶ÔSwift³äÂúÁËĞÅÏ¢¡£ÎÒÃÇÒÑ¾­ÆÈ²»¼°´ıµÄÏë¿´µ½ÄãÓÃËüÀ´×öµãÊ²Ã´¡£
+Swiftæ˜¯ç¼–å†™iOSå’ŒOS Xåº”ç”¨çš„ç»ç¾æ–¹å¼ï¼Œæˆ‘ä»¬ä¼šæŒç»­å¼•å…¥æ–°ç‰¹æ€§å’Œæ–°åŠŸèƒ½ã€‚æˆ‘ä»¬å¯¹Swiftå……æ»¡äº†ä¿¡æ¯ã€‚æˆ‘ä»¬å·²ç»è¿«ä¸åŠå¾…çš„æƒ³çœ‹åˆ°ä½ ç”¨å®ƒæ¥åšç‚¹ä»€ä¹ˆã€‚
 
-¡¡¡¡
-¡¡¡¡
-¡¡¡¡
-¡¡¡¡
+ã€€ã€€
+ã€€ã€€
+ã€€ã€€
+ã€€ã€€
 
