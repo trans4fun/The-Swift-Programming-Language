@@ -8,7 +8,7 @@ The Swift Programming Language 中文化项目
 # 任务和进度
 
 * 欢迎使用 Swift
-   * 关于 Swift
+   * 关于 Swift ［认领 by 飞长］
    * Swift 初见
 * Swift 教程
    * 基础部分
@@ -62,3 +62,7 @@ The Swift Programming Language 中文化项目
 如果没有合适的请再搜索words.md中是否有，如果都找不到请在words.md中按照格式进行添加 `[原词] - [译词] - [样句]`
 
 允许同样原词有多种翻译，看样句场景不同。
+
+# 翻译标准
+
+一段英文 一段中文 参照 About Swift 这章节
