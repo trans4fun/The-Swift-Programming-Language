@@ -8,7 +8,7 @@ The Swift Programming Language 中文化项目
 # 任务和进度
 
 * 欢迎使用 Swift
-   * 关于 Swift ［认领 by 飞长］
+   * Swift 介绍 ［认领 by 飞长］
    * Swift 初见
 * Swift 教程
    * 基础部分
@@ -47,7 +47,7 @@ The Swift Programming Language 中文化项目
 
 # 认领流程
 
-请在自己大块范围内尽早的pull request，不需要翻译完了再发，只要翻译一部分即可以发pull request，表示认领成功。
+请在README的任务和进度中对应章节后面加上自己的认领标记，参考Swift介绍，并且请在自己大块范围内尽早的pull request，不需要翻译完了再发，只要翻译一部分即可以发pull request，表示认领成功。
 
 请不要跨大块认领非自己会长范围内的小节。
 
