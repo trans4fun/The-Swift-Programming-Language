@@ -22,7 +22,7 @@ The Swift Programming Language 中文化项目
    * 类和结构体
    * 属性
    * 方法
-   * 下标
+   * 下标  [认领 by 递归]
    * 继承
    * 构造过程
    * 析构过程
