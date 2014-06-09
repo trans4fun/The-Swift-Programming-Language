@@ -21,7 +21,7 @@ The Swift Programming Language 中文化项目
    * 枚举 [认领 by 灵吾]
    * 类和结构体 [认领 by 晓毒]
    * 属性
-   * 方法
+   * 方法 [认领 by 米尔]
    * 下标  [已完成 by 递归]
    * 继承
    * 构造过程
@@ -29,7 +29,7 @@ The Swift Programming Language 中文化项目
    * 自动引用计数
    * 可选链
    * 类型检查
-   * 嵌套类型
+   * 嵌套类型 [认领 by 导演]
    * 扩展
    * 接口
    * 泛型
