@@ -18,7 +18,7 @@ The Swift Programming Language 中文化项目
    * 控制流
    * 函数 [紫溪]
    * 闭包 [闻西]
-   * 枚举
+   * 枚举 [灵吾]
    * 类和结构体
    * 属性
    * 方法
