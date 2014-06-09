@@ -29,7 +29,7 @@ Swift融入了博大的苹果的工程文化中富有智慧的现代语言思维
 
 Swift is a fantastic way to write iOS and OS X apps, and will continue to evolve with new features and capabilities. Our goals for Swift are ambitious. We can’t wait to see what you create with it.”
 
-Swift是编写iOS和OS X应用的绝美方式，我们会持续引入新特性和新功能。我们对Swift充满了信息。我们已经迫不及待的想看到你用它来做点什么。
+Swift是编写iOS和OS X应用的绝美方式，我们会持续引入新特性和新功能。我们对Swift充满了信心。我们已经迫不及待的想看到你用它来做点什么。
 
 　　
 　　
