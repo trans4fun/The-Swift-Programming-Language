@@ -1,5 +1,5 @@
-Type Casting
-On This Page
+#Type Casting
+#On This Page
 Type casting is a way to check the type of an instance, and/or to treat that instance as if it is a different superclass or subclass from somewhere else in its own class hierarchy.
 
 Type casting in Swift is implemented with the is and as operators. These two operators provide a simple and expressive way to check the type of a value or cast a value to a different type.
