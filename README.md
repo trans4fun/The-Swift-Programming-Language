@@ -19,7 +19,7 @@ The Swift Programming Language 中文化项目
    * 函数
    * 闭包
    * 枚举
-   * 类和结构体
+   * 类和结构体 [已认领 by 曾赟]
    * 属性
    * 方法
    * 下标  [已完成 by 递归]
