@@ -32,7 +32,7 @@ The Swift Programming Language 中文化项目
    * 嵌套类型
    * 扩展
    * 接口
-   * 泛型
+   * 泛型 [认领 by 胡衍明]
    * 高级操作符
 * 语言参考
    * 关于语言参考
