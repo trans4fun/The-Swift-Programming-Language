@@ -31,7 +31,7 @@ The Swift Programming Language 中文化项目
    * 类型检查
    * 嵌套类型 [认领 by 祁涛]
    * 扩展
-   * 接口
+   * 接口[认领 by 姜天意]
    * 泛型
    * 高级操作符
 * 语言参考
