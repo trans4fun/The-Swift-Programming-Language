@@ -32,6 +32,8 @@ The first snippet defines a new base class called MediaItem. This class provides
     }
 The next snippet defines two subclasses of MediaItem. The first subclass, Movie, encapsulates additional information about a movie or film. It adds a director property on top of the base MediaItem class, with a corresponding initializer. The second subclass, Song, adds an artist property and initializer on top of the base class:
 
+接下来的片断定义MediaItem的两个子类。第一个子类，电影，封装了有关电影或电影的附加信息。它增加了一个属性主任在基MediaItem类的顶部，有一个相应的初始化。第二个亚类，宋，增加了一个艺术家财产和初始化基类的顶部：
+
     class Movie: MediaItem {
         var director: String
         init(name: String, director: String) {
@@ -49,6 +51,8 @@ The next snippet defines two subclasses of MediaItem. The first subclass, Movie,
     }
 The final snippet creates a constant array called library, which contains two Movie instances and three Song instances. The type of the library array is inferred by initializing it with the contents of an array literal. Swift’s type checker is able to deduce that Movie and Song have a common superclass of MediaItem, and so it infers a type of MediaItem[] for the library array:
 
+最后的代码片断创建一个常量数组叫做库，其中包含两个电影实例和三首歌曲的实例。图书馆数组的类型是由具有数组文本的内容初始化它的推断。斯威夫特的类型检查是能够演绎出电影和歌曲有MediaItem一个共同的超类，所以它会推断图书馆数组类型MediaItem[]中：
+
     let library = [
         Movie(name: "Casablanca", director: "Michael Curtiz"),
         Song(name: "Blue Suede Shoes", artist: "Elvis Presley"),
@@ -59,11 +63,19 @@ The final snippet creates a constant array called library, which contains two Mo
     // the type of "library" is inferred to be MediaItem[]
 The items stored in library are still Movie and Song instances behind the scenes. However, if you iterate over the contents of this array, the items you receive back are typed as MediaItem, and not as Movie or Song. In order to work with them as their native type, you need to check their type, or downcast them to a different type, as described below.
 
+存储在库中的项目仍然在幕后电影和歌曲实例。但是，如果你遍历这个数组的内容，您会收到回项目类型为MediaItem，而不是电影或歌曲。为了与他们合作，因为他们自身的类型，你需要检查它们的类型，或将它们向下转换为不同的类型，如下所述。
+
 ##Checking Type
 
 Use the type check operator (is) to check whether an instance is of a certain subclass type. The type check operator returns true if the instance is of that subclass type and false if it is not.
 
 The example below defines two variables, movieCount and songCount, which count the number of Movie and Song instances in the library array:
+
+＃＃检查类型 
+
+使用类型检查运算符（是）来检查一个实例是否是一个子类的类型。如果实例是子类的类型和虚假的，如果它不是类型检查运算符返回true。 
+
+下面的例子定义了两个变量，movieCount和songCount，这算电影和歌曲实例库中的数组数：
 
     var movieCount = 0
     var songCount = 0
@@ -78,6 +90,7 @@ The example below defines two variables, movieCount and songCount, which count t
      
     println("Media library contains \(movieCount) movies and \(songCount) songs")
     // prints "Media library contains 2 movies and 3 songs"
+    
 This example iterates through all items in the library array. On each pass, the for-in loop sets the item constant to the next MediaItem in the array.
 
 item is Movie returns true if the current MediaItem is a Movie instance and false if it is not. Similarly, item is Song checks whether the item is a Song instance. At the end of the for-in loop, the values of movieCount and songCount contain a count of how many MediaItem instances were found of each type.
