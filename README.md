@@ -20,7 +20,7 @@ The Swift Programming Language 中文化项目
    * 闭包 [认领 by 闻西]
    * 枚举 [认领 by 灵吾]
    * 类和结构体 [认领 by 晓毒]
-   * 属性 [认领 by 周源]
+   * 属性 [认领 by 周源] 
    * 方法
    * 下标  [已完成 by 递归]
    * 继承
