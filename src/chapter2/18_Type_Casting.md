@@ -12,11 +12,17 @@ You can also use type casting to check whether a type conforms to a protocol, as
 类型转换使用is和as操作符来实现。这两个操作符提供了一种简单和富有表现力的方法来检查一个值的类型或把某个值转换为不同的类型。 
 你还可以使用类型转换来检查类型是否符合，如在检查协议一致性描述。
 
-##Defining a Class Hierarchy for Type Casting
+##定义一个类继承为类型转换
 
 You can use type casting with a hierarchy of classes and subclasses to check the type of a particular class instance and to cast that instance to another class within the same hierarchy. The three code snippets below define a hierarchy of classes and an array containing instances of those classes, for use in an example of type casting.
 
 The first snippet defines a new base class called MediaItem. This class provides basic functionality for any kind of item that appears in a digital media library. Specifically, it declares a name property of type String, and an init name initializer. (It is assumed that all media items, including all movies and songs, will have a name.)
+
+## 定义一个类继承为类型转换
+
+您可以使用类型转换与类和子类的层次结构来检查一个特定的类实例的类型和投该实例到另一个类中的同一层级内。下面的三个代码片段定义的类层次结构和包含这些类的实例数组，用于类型转换的一个例子使用。 
+
+第一个片段定义了一个名为MediaItem新的基类。这个类提供基本功能，任何类型的项目出现在一个数字媒体库。具体来说，它声明一个String类型的name属性，以及一个init名称初始值设定项。 （假设所有的媒体项目，包括所有的电影和歌曲，将有一个名称。）
 
     class MediaItem {
         var name: String
