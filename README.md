@@ -30,7 +30,7 @@ The Swift Programming Language 中文化项目
    * 可选链
    * 类型检查 [认领 by 孟志昂]
    * 嵌套类型 [认领 by 祁涛]
-   * 扩展
+   * 扩展 [认领 by 袁鹏]
    * 接口 [认领 by 姜天意]
    * 泛型
    * 高级操作符 [认领 by 林晚]
