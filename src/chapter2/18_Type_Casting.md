@@ -12,7 +12,7 @@ You can also use type casting to check whether a type conforms to a protocol, as
 类型转换使用is和as操作符来实现。这两个操作符提供了一种简单和富有表现力的方法来检查一个值的类型或把某个值转换为不同的类型。 
 你还可以使用类型转换来检查类型是否符合，如在检查协议一致性描述。
 
-##定义一个类继承为类型转换
+##Defining a Class Hierarchy for Type Casting
 
 You can use type casting with a hierarchy of classes and subclasses to check the type of a particular class instance and to cast that instance to another class within the same hierarchy. The three code snippets below define a hierarchy of classes and an array containing instances of those classes, for use in an example of type casting.
 
