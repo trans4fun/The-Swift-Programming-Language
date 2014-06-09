@@ -8,7 +8,7 @@ The Swift Programming Language 中文化项目
 # 任务和进度
 
 * 欢迎使用 Swift
-   * Swift 介绍 ［已完成 by 飞长］
+   * Swift 介绍 [已完成 by 飞长]
    * Swift 初见  [认领 by 容隽]
 * Swift 教程
    * 基础部分 [认领 by 琼雪]
@@ -22,7 +22,7 @@ The Swift Programming Language 中文化项目
    * 类和结构体 [认领 by 晓毒]
    * 属性 [认领 by 周源]
    * 方法 [认领 by 米尔]
-   * 下标  [已完成 by 递归]
+   * 下标 [已完成 by 递归]
    * 继承
    * 构造过程
    * 析构过程 [认领 by 许诺]
@@ -31,7 +31,7 @@ The Swift Programming Language 中文化项目
    * 类型检查
    * 嵌套类型 [认领 by 祁涛]
    * 扩展
-   * 接口[认领 by 姜天意]
+   * 接口 [认领 by 姜天意]
    * 泛型
    * 高级操作符 [认领 by 林晚]
 * 语言参考
