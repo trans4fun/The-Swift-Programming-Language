@@ -6,6 +6,12 @@ Type casting in Swift is implemented with the is and as operators. These two ope
 
 You can also use type casting to check whether a type conforms to a protocol, as described in Checking for Protocol Conformance.
 
+# 类型转换
+类型转换是一种方法来检查一个实例的类型，和/或处理该实例，就好像它是一个不同的超类或子类从别的在自己的类层次结构中的某个地方。 
+
+类型转换使用is和as操作符来实现。这两个操作符提供了一种简单和富有表现力的方法来检查一个值的类型或把某个值转换为不同的类型。 
+你还可以使用类型转换来检查类型是否符合，如在检查协议一致性描述。
+
 ##Defining a Class Hierarchy for Type Casting
 
 You can use type casting with a hierarchy of classes and subclasses to check the type of a particular class instance and to cast that instance to another class within the same hierarchy. The three code snippets below define a hierarchy of classes and an array containing instances of those classes, for use in an example of type casting.
