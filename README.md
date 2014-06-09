@@ -28,7 +28,7 @@ The Swift Programming Language 中文化项目
    * 析构过程
    * 自动引用计数
    * 可选链
-   * 类型检查
+   * 类型检查[认领 by 孟志昂]
    * 嵌套类型
    * 扩展
    * 接口
