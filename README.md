@@ -25,7 +25,7 @@ The Swift Programming Language 中文化项目
    * 下标  [已完成 by 递归]
    * 继承
    * 构造过程
-   * 析构过程
+   * 析构过程 [认领 by 许诺]
    * 自动引用计数
    * 可选链
    * 类型检查
