@@ -39,12 +39,12 @@ The Swift Programming Language 中文化项目
    * 词法结构 [认领 by 筱强]
    * 类型 [认领 by 兰梦]
    * 表达式 [认领 by 懂象]
-   * Statements [认领 by 墨峰]
-   * Declarations
+   * Statements 
+   * Declarations [认领 by 墨峰]
    * 属性 [认领 by 隐若]
    * 模式 [认领 by 栖邀]
    * 泛型参数 [认领 by 龙刚]
-   * 语法总结
+   * 语法总结 [认领 by 无独]
 
 # 分工
 * 西溪分会 10人 第一部分1-2章 第二部分1-8章
