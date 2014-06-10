@@ -41,7 +41,7 @@ The Swift Programming Language 中文化项目
    * 表达式 [认领 by 懂象]
    * 声明 [认领 by 墨峰]
    * 属性
-   * 模式
+   * 模式 [认领 by 栖邀]
    * 泛型参数
    * 语法总结
 
