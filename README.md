@@ -39,7 +39,7 @@ The Swift Programming Language 中文化项目
    * 词法结构 [认领 by 筱强]
    * 类型 [认领 by 兰梦]
    * 表达式 [认领 by 懂象]
-   * 声明
+   * 声明 [认领 by 墨峰]
    * 属性
    * 模式
    * 泛型参数
