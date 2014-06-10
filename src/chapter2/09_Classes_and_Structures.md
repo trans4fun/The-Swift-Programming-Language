@@ -81,6 +81,8 @@ Structures are always copied when they are passed around in your code, and do no
 
 Classes and structures have a similar definition syntax. You introduce classes with the `class` keyword and structures with the `struct` keyword. Both place their entire definition within a pair of braces:
 
+定义类和结构体的语法相似。定义类以关键词`class`开头，而定义结构体以关键词`struct`开头。类和结构体的所有定义都写在一对大括号内：
+
 ```
 class SomeClass {
     // class definition goes here
@@ -90,13 +92,35 @@ struct SomeStructure {
 }
 ```
 
-定义类和结构体的语法相似。定义类以关键词`class`开头，而定义结构体以关键词`struct`开头。类和结构体的所有定义都写在一对大括号内：
-  
+
+
 ```
-class SomeClass {
-    // class definition goes here
+NOTE
+
+Whenever you define a new class or structure, you effectively define a brand new Swift type. Give types UpperCamelCase names (such as SomeClass and SomeStructure here) to match the capitalization of standard Swift types (such as String, Int, and Bool). Conversely, always give properties and methods lowerCamelCase names (such as frameRate and incrementCount) to differentiate them from type names.
+```
+
+
+```
+注意：
+
+当你定义一个新的类或者结构体时，你实际上定义了一种新的Swift类型。为了和Swift标准类型(像String，Int，Bool)保持一致，请使用首字母大写的驼峰命名法（例如SomeClass或者SomeStructure）。相反的，为了和类型名区分，属性和方法名建议使用小写驼峰命名法（如frameRate或者incrementCount）。
+```
+
+Here’s an example of a structure definition and a class definition:
+
+下方给出了结构体和类定义的例子：
+
+
+```
+struct Resolution {
+    var width = 0
+    var height = 0
 }
-struct SomeStructure {
-    // structure definition goes here
+class VideoMode {
+    var resolution = Resolution()
+    var interlaced = false
+    var frameRate = 0.0
+    var name: String?
 }
 ```
