@@ -127,7 +127,7 @@ class VideoMode {
 
 The example above defines a new structure called `Resolution`, to describe a pixel-based display resolution. This structure has two stored properties called `width` and `height`. Stored properties are constants or variables that are bundled up and stored as part of the class or structure. These two properties are inferred to be of type `Int` by setting them to an initial integer value of 0.
 
-例子定义了一个名叫`Resolution`的新结构体，用来描述一个基于像素的显示方案。这个结构体有两个~~属性~~：`宽`和`高`。~~属性~~是捆绑存储在类和结构体中的变量活常量。这两个属性的类型将被编译器推断为`Int`，并赋予初始值0。
+例子定义了一个名叫`Resolution`的新结构体，用来描述一个基于像素的显示方案。这个结构体有两个~~属性~~：`宽`和`高`。~~属性~~是捆绑存储在类和结构体中的变量或常量。这两个属性的类型将被编译器推断为`Int`，并赋予初始值0。
 
 The example above also defines a new class called `VideoMode`, to describe a specific video mode for video display. This class has four variable stored properties. The first, `resolution`, is initialized with a new `Resolution` structure instance, which infers a property type of `Resolution`. For the other three properties, new `VideoMode` instances will be initialized with an `interlaced` setting of `false` (meaning “non-interlaced video”), a playback frame rate of `0.0`, and an optional `String` value called `name`. The `name` property is automatically given a default value of `nil`, or “no `name` value”, because it is of an optional type.
 
