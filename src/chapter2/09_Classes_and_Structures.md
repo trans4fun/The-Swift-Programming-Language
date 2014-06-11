@@ -124,3 +124,7 @@ class VideoMode {
     var name: String?
 }
 ```
+
+The example above defines a new structure called Resolution, to describe a pixel-based display resolution. This structure has two stored properties called width and height. Stored properties are constants or variables that are bundled up and stored as part of the class or structure. These two properties are inferred to be of type Int by setting them to an initial integer value of 0.
+
+以上例子定义了一个叫Resolution的结构体，用来描述一个基于像素的显示方案。这个结构体有两个属性：宽和高。
