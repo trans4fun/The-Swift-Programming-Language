@@ -220,9 +220,38 @@ A value *type* is a type that is copied when it is assigned to a variable or con
 
 You’ve actually been using value types extensively throughout the previous chapters. In fact, all of the basic types in Swift—integers, floating-point numbers, Booleans, strings, arrays and dictionaries—are value types, and are implemented as structures behind the scenes.
 
+实际上在前面章节我们已经广泛使用了值类型。事实上Swift中几乎所有的基本类型---如整数、浮点数、布尔值、字符串、数组和字典，都是值类型，并在底层都以结构体的方式来实现。
+
 All structures and enumerations are value types in Swift. This means that any structure and enumeration instances you create—and any value types they have as properties—are always copied when they are passed around in your code.
 
-Consider this example, which uses the Resolution structure from the previous example:
+Swift中的所有结构体和枚举都是值类型。这意味着你创建的任何一个结构体或枚举的实例，以及他们的属性在代码中被传递的时候都会被复制。
 
+Consider this example, which uses the `Resolution` structure from the previous example:
+
+让我们来看看这个例子，它使用了先前例子中定义的`Resolution`:
+
+```
 let hd = Resolution(width: 1920, height: 1080)
 var cinema = hd
+```
+
+This example declares a constant called `hd` and sets it to a `Resolution` instance initialized with the width and height of full HD video (`1920` pixels wide by `1080` pixels high).
+
+例子中声明了一个名叫`hd`的常量，它的值是一个初始化成全高清视频分辨率（宽`1920`长`1080`）的`Resolution`实例。
+
+It then declares a variable called cinema and sets it to the current value of hd. Because Resolution is a structure, a copy of the existing instance is made, and this new copy is assigned to cinema. Even though hd and cinema now have the same width and height, they are two completely different instances behind the scenes.
+
+
+
+Next, the width property of cinema is amended to be the width of the slightly-wider 2K standard used for digital cinema projection (2048 pixels wide and 1080 pixels high):
+
+cinema.width = 2048
+Checking the width property of cinema shows that it has indeed changed to be 2048:
+
+println("cinema is now \(cinema.width) pixels wide")
+// prints "cinema is now 2048 pixels wide"
+However, the width property of the original hd instance still has the old value of 1920:
+
+println("hd is still \(hd.width) pixels wide")
+// prints "hd is still 1920 pixels wide"
+When cinema was given the current value of hd, the values stored in
