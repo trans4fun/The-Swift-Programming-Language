@@ -299,7 +299,7 @@ The nested enumeration can now be used with Character values:
     // consonant vowel consonant consonant vowel
 
 This function, printLetterKinds, takes an input String value and iterates over its characters. For each character, it considers the kind computed property for that character, and prints an appropriate description of that kind. The printLetterKinds function can then be called to print the kinds of letters in an entire word, as shown here for the word "Hello". 
-printLetterKinds 函数迭代 String 值参数的每一个字母，。每一次迭代都根据当前字母包含的计算属性 kind，输出对应的类型描述。这样，printLetterKinds 函数就输出了一个单词内所有字母的类型，正如上面例子中的单词 "word"。
+printLetterKinds 函数迭代 String 类型的参数的每一个字母。每次迭代都根据当前字母包含的计算属性 kind 输出对应的类型描述。这样，printLetterKinds 函数就输出了一个单词内所有字母的类型，正如上面例子中的单词 "word"。
 
 
 Note
