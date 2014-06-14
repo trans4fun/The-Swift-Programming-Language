@@ -54,7 +54,7 @@ extension SomeType: SomeProtocol, AnotherProtocol {
 
 Adding protocol conformance in this way is described in Adding Protocol Conformance with an Extension.
 
-这种增加协议一致性的方式被称为通过扩展增加协议一致性
+这种增加协议一致性的方式在 [通过扩展增加协议一致性](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-XID_355) 中有记述
 
 ## Computed Properties
 
