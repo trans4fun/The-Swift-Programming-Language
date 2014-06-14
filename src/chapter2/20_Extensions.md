@@ -1,4 +1,6 @@
-Extensions
+# Extensions
+# 扩展
+
 
 Extensions add new functionality to an existing class, structure, or enumeration type. This includes the ability to extend types for which you do not have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions do not have names.)
 扩展为已有的类，结构，枚举添加新的功能。其中包括扩展没有访问权代码权限的类型（即追溯建模）。扩展和 Objective-C 当中的分类很相似。（与 Objective-C 中的分类不同的是，Swift 的扩展没有名字）
