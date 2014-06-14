@@ -2,6 +2,7 @@
 
 # 扩展
 
+
 Extensions add new functionality to an existing class, structure, or enumeration type. This includes the ability to extend types for which you do not have access to the original source code (known as retroactive modeling). Extensions are similar to categories in Objective-C. (Unlike Objective-C categories, Swift extensions do not have names.)
 
 扩展为已有的类，结构，枚举添加新的功能。其中包括扩展没有访问权代码权限的类型（即追溯建模）。扩展和 Objective-C 当中的分类很相似。（与 Objective-C 中的分类不同的是，Swift 的扩展没有名字）
@@ -23,9 +24,12 @@ Swift 中的扩展可以：
 - 将已有的类型转换为符合某一个协议
 
 > <b>Note</b>
+> 
 > If you define an extension to add new functionality to an existing type, the new functionality will be available on all existing instances of that type, even if they were created before the extension was defined.
 
+
 > <b>提示</b>
+> 
 > 如果定义一个扩展用来在已有的类型上增加新的功能，那么新功能会应用在所有已经存在的实例上，即使是在扩展被定义之前实例化的。
 
 ## Extension Syntax
@@ -54,7 +58,8 @@ extension SomeType: SomeProtocol, AnotherProtocol {
 
 Adding protocol conformance in this way is described in Adding Protocol Conformance with an Extension.
 
-这种增加协议一致性的方式在 [通过扩展增加协议一致性](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-XID_355) 中有记述
+这种增加协议一致性的方式在 [通过扩展增加协议一致性](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-XID_355) 一文中有记述。
+
 
 ## Computed Properties
 
@@ -103,11 +108,13 @@ println("A marathon is \(aMarathon) meters long")
 ```
 
 > <b>Note</b>
+> 
 > Extensions can add new computed properties, but they cannot add stored properties, or add property observers to existing properties.
 
-> <b>提示</b>
-> 扩展可以添加新的计算属性，但是不能添加存储属性，也不能向已有属性添加属性观察器。
 
+> <b>提示</b>
+> 
+> 扩展可以添加新的计算属性，但是不能添加存储属性，也不能向已有属性添加属性观察器。
 
 
 ## Initializers
@@ -124,10 +131,13 @@ Extensions can add new convenience initializers to a class, but they cannot add 
 
 
 > <b>Note</b>
+> 
 > If you use an extension to add an initializer to a value type that provides default values for all of its stored properties and does not define any custom initializers, you can call the default initializer and memberwise initializer for that value type from within your extension’s initializer.
 > This would not be the case if you had written the initializer as part of the value type’s original implementation, as described in Initializer Delegation for Value Types.
 
+
 > <b>提示</b>
+> 
 > 如果使用扩展向一个值类型添加构造器，该构造器向所有存储属性提供默认值并且未定义任何其他的自定义构造器，你可以调用默认的构造和成员构造器来为你扩展的构造器当中的值类型赋值。
 > 正如 ``构造器对值类型的构造委托一问所说的那样`` 如果你已经把构造器写成值类型原始实现的一部分，则不符合上述规则。
 
@@ -183,9 +193,12 @@ let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
 ```
 
 > <b>Note</b>
+> 
 > If you provide a new initializer with an extension, you are still responsible for making sure that each instance is fully initialized once the initializer completes.
 
+
 > <b>提示</b>
+> 
 > 如果使用扩展来提供新的构造器，那么你仍要确保构造过程中，每一个实例都被完全初始化了。
 
 
@@ -227,12 +240,15 @@ After defining this extension, you can call the repetitions method on any intege
 Use trailing closure syntax to make the call more succinct: 
 使用尾随闭包语法可以使调用更简洁
 
-    3.repetitions {
+```
+3.repetitions {
     println("Goodbye!")
-    }
-    // Goodbye!
-    // Goodbye!
-    // Goodbye!
+}
+// Goodbye!
+// Goodbye!
+// Goodbye!
+```
+
 
 ## Mutating Instance Methods
 
@@ -256,6 +272,7 @@ var someInt = 3
 someInt.square()
 // someInt is now 9
 ```
+
 
 ## Subscripts
 
@@ -301,6 +318,7 @@ If the Int value does not have enough digits for the requested index, the subscr
 // returns 0, as if you had requested:
 0746381295[9]
 ```
+
 
 ## Nested Types
 
@@ -367,9 +385,12 @@ printLetterKinds 函数迭代 String 类型的参数的每一个字母。每次�
 
 
 > <b>Note</b>
+> 
 > character.kind is already known to be of type Character.Kind. Because of this, all of the Character.Kind member values can be written in shorthand form inside the switch statement, such as .Vowel rather than Character.Kind.Vowel.
 
+
 > <b>提示</b>
+> 
 > 因为已知 character.kind 的类型是 Character.Kind，所以所有 Character.Kind 的成员值都可以在 switch 语句中使用简写形式，比如使用 .Vowel 来代替 Character.Kind.Vowel。
 
 
