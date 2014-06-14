@@ -139,7 +139,7 @@ Extensions can add new convenience initializers to a class, but they cannot add 
 > <b>提示</b>
 > 
 > 如果使用扩展向一个值类型添加构造器，该构造器向所有存储属性提供默认值并且未定义任何其他的自定义构造器，你可以调用默认的构造和成员构造器来为你扩展的构造器当中的值类型赋值。
-> 正如 ``构造器对值类型的构造委托一问所说的那样`` 如果你已经把构造器写成值类型原始实现的一部分，则不符合上述规则。
+> 正如[构造器对值类型的构造委托](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Initialization.html#//apple_ref/doc/uid/TP40014097-CH18-XID_281) 一文所说的那样，如果你已经把构造器写成值类型原始实现的一部分，则不符合上述规则。
 
 The example below defines a custom Rect structure to represent a geometric rectangle. The example also defines two supporting structures called Size and Point, both of which provide default values of 0.0 for all of their properties: 
 
