@@ -38,7 +38,7 @@ Swift 中的扩展可以：
 
 Declare extensions with the extension keyword: 
 
-使用 ``extension`` 关键字来声明扩展
+使用 ``extension`` 关键字来声明扩展：
 
 ```
 extension SomeType {
@@ -67,7 +67,7 @@ Adding protocol conformance in this way is described in Adding Protocol Conforma
 
 Extensions can add computed instance properties and computed type properties to existing types. This example adds five computed instance properties to Swift’s built-in Double type, to provide basic support for working with distance units: 
 
-扩展可以为已有的类型增加实例计算属性和类型计算属性。这个例子向 Swift 内建类型 ``Double`` 添加五个实例计算类型，用来提供转换为距离单位的基本功能
+扩展可以为已有的类型增加实例计算属性和类型计算属性。这个例子向 Swift 内建类型 ``Double`` 添加五个实例计算类型，用来提供转换为距离单位的基本功能：
 
 ```
 extension Double {
@@ -143,7 +143,7 @@ Extensions can add new convenience initializers to a class, but they cannot add 
 
 The example below defines a custom Rect structure to represent a geometric rectangle. The example also defines two supporting structures called Size and Point, both of which provide default values of 0.0 for all of their properties: 
 
-在下面的例子里，定义了一个用于描述几何矩形的结构体 ``Rect`` 。同时定义了两个辅助性结构体 ``Size``,``Point``，两个结构体当中的属性默认值都为 ``0.0``。
+在下面的例子里，定义了一个用于描述几何矩形的结构体 ``Rect`` 。同时定义了两个辅助性结构体 ``Size``,``Point``，两个结构体当中的属性默认值都为 ``0.0``：
 
 ```
 struct Size {
@@ -160,7 +160,7 @@ struct Rect {
 
 Because the Rect structure provides default values for all of its properties, it receives a default initializer and a memberwise initializer automatically, as described in Default Initializers. These initializers can be used to create new Rect instances: 
 
-因为 结构体 ``Rect`` 为所有的属性都提供了默认值，正如默认构造器一节所说的，它可以自动接受默认构造器和成员构造器。这些构造器可以用来创建新的 ``Rect`` 实例。
+因为 结构体 ``Rect`` 为所有的属性都提供了默认值，正如默认构造器一节所说的，它可以自动接受默认构造器和成员构造器。这些构造器可以用来创建新的 ``Rect`` 实例：
 
 ```
 let defaultRect = Rect()
@@ -170,7 +170,7 @@ let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0),
 
 You can extend the Rect structure to provide an additional initializer that takes a specific center point and size: 
 
-你可以使用扩展来为结构体 ``Rect`` 额外提供一个以中心点和大小作为参数的构造器
+你可以使用扩展来为结构体 ``Rect`` 额外提供一个以中心点和大小作为参数的构造器：
 
 ```
 extension Rect {
@@ -184,7 +184,7 @@ extension Rect {
 
 This new initializer starts by calculating an appropriate origin point based on the provided center point and size value. The initializer then calls the structure’s automatic memberwise initializer init(origin:size:), which stores the new origin and size values in the appropriate properties: 
 
-新构造器通过中心点和大小两个参数计算出合适的原点值，然后调用结构体的自动成员构造器 ``init(origin:size:)`` ，把计算出的值存储到合适的属性上。
+新构造器通过中心点和大小两个参数计算出合适的原点值，然后调用结构体的自动成员构造器 ``init(origin:size:)`` ，把计算出的值存储到合适的属性上：
 
 ```
 let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
@@ -208,7 +208,7 @@ let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
 
 Extensions can add new instance methods and type methods to existing types. The following example adds a new instance method called repetitions to the Int type: 
 
-扩展可以向已有类型添加新的实例方法和类型方法。下面的例子中，向 类型 ``Int`` 中添加了新的实例方法 ``repetitions`` ：
+扩展可以向已有类型添加新的实例方法和类型方法。下面的例子中，向 类型 ``Int`` 中添加了新的实例方法 ``repetitions``：
 
 ```
 extension Int {
@@ -226,7 +226,7 @@ The repetitions method takes a single argument of type () -> (), which indicates
 
 After defining this extension, you can call the repetitions method on any integer number to perform a task that many number of times: 
 
-扩展被定义之后，你就可以在任何整数上调用 ``repetitions`` 方法，来多次执行某个任务。
+扩展被定义之后，你就可以在任何整数上调用 ``repetitions`` 方法，来多次执行某个任务：
 
 ```
 3.repetitions({
@@ -261,7 +261,7 @@ Instance methods added with an extension can also modify (or mutate) the instanc
 
 The example below adds a new mutating method called square to Swift’s Int type, which squares the original value: 
 
-下面的例子为 Swift 中的 ``Int`` 类型添加了一个新的变异方法 ``square``，用来计算原始值的平方。
+下面的例子为 Swift 中的 ``Int`` 类型添加了一个新的变异方法 ``square``，用来计算原始值的平方：
 
 ```
 extension Int {
@@ -281,14 +281,14 @@ someInt.square()
 
 Extensions can add new subscripts to an existing type. This example adds an integer subscript to Swift’s built-in Int type. This subscript [n] returns the decimal digit n places in from the right of the number: 
 
-扩展可以为已有类型添加新的下标。下面的例子为 Swift 中的内建类型 ``Int`` 添加一个整型下标。下标 ``[n]`` 返回 十进制数从右往左第 n 位上的数字。
+扩展可以为已有类型添加新的下标。下面的例子为 Swift 中的内建类型 ``Int`` 添加一个整型下标。下标 ``[n]`` 返回 十进制数从右往左第 n 位上的数字：
 
 - 123456789[0] returns 9
 - 123456789[1] returns 8
 
 …and so on: 
 
-以此类推
+……以此类推：
 
 ```
 extension Int {
@@ -327,7 +327,7 @@ If the Int value does not have enough digits for the requested index, the subscr
 
 Extensions can add new nested types to existing classes, structures and enumerations: 
 
-扩展可以向已有的类，结构体和枚举类型添加新的嵌套类型。
+扩展可以向已有的类，结构体和枚举类型添加新的嵌套类型：
 
 ```
 extension Character {
