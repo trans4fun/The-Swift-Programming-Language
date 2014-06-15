@@ -237,21 +237,71 @@ var cinema = hd
 
 This example declares a constant called `hd` and sets it to a `Resolution` instance initialized with the width and height of full HD video (`1920` pixels wide by `1080` pixels high).
 
-例子中声明了一个名叫`hd`的常量，它的值是一个初始化成全高清视频分辨率（宽`1920`长`1080`）的`Resolution`实例。
+例子中声明了一个名叫`hd`的常量，并将它初始化为全高清视频分辨率（宽`1920`长`1080`）的`Resolution`实例。
 
-It then declares a variable called cinema and sets it to the current value of hd. Because Resolution is a structure, a copy of the existing instance is made, and this new copy is assigned to cinema. Even though hd and cinema now have the same width and height, they are two completely different instances behind the scenes.
+It then declares a variable called `cinema` and sets it to the current value of `hd`. Because `Resolution` is a structure, a copy of the existing instance is made, and this new copy is assigned to `cinema`. Even though `hd` and `cinema` now have the same width and height, they are two completely different instances behind the scenes.
+然后例子中声明了一个变量`cinema`，将`hd`的当前值赋给了它。由于`Resolution`是结构体，赋值操作会生成一个新的实例并传递给`cinema`。因此虽然`hd`和`cinema`有相同的宽高，但它们实际上仍是完全不同的实例。
 
+Next, the `width` property of `cinema` is amended to be the width of the slightly-wider 2K standard used for digital cinema projection (`2048` pixels wide and `1080` pixels high):
 
+接下来，将`cinema`的`width`属性改为数字电影中2K宽屏的标准宽度（宽`2048`像素高`1080`像素）：
 
-Next, the width property of cinema is amended to be the width of the slightly-wider 2K standard used for digital cinema projection (2048 pixels wide and 1080 pixels high):
-
+```
 cinema.width = 2048
-Checking the width property of cinema shows that it has indeed changed to be 2048:
+```
 
+Checking the `width` property of `cinema` shows that it has indeed changed to be `2048`:
+
+检查一下`cinema`的`width`属性的确改成了`2048`：
+
+```
 println("cinema is now \(cinema.width) pixels wide")
 // prints "cinema is now 2048 pixels wide"
-However, the width property of the original hd instance still has the old value of 1920:
+```
 
+However, the `width` property of the original `hd` instance still has the old value of `1920`:
+不过，原来的`hd`实例的`width`属性还是旧值`1920`：
+
+```
 println("hd is still \(hd.width) pixels wide")
 // prints "hd is still 1920 pixels wide"
-When cinema was given the current value of hd, the values stored in
+```
+
+When `cinema` was given the current value of `hd`, the *values* stored in `hd` were copied into the new `cinema` instance. The end result is two completely separate instances, which just happened to contain the same numeric values. Because they are separate instances, setting the width of `cinema` to `2048` doesn’t affect the width stored in `hd`.
+
+当使用`hd`给`cinema`赋值时，`hd`存储的*值*被复制了一份并传递给`cinema`实例。结果`hd`和`cinema`成为了仅仅是属性值相同的两个完全无关的实例。所以将`cinema`的`width`属性改为`2048`不会影响`hd`中的`width`值。
+
+The same behavior applies to enumerations:
+枚举也有相同的特性：
+
+```
+enum CompassPoint {
+    case North, South, East, West
+}
+var currentDirection = CompassPoint.West
+let rememberedDirection = currentDirection
+currentDirection = .East
+if rememberedDirection == .West {
+    println("The remembered direction is still .West")
+}
+// prints "The remembered direction is still .West"
+```
+
+When `rememberedDirection` is assigned the value of `currentDirection`, it is actually set to a copy of that value.
+
+当`rememberedDirection`赋值为`currentDirection`时，实际上只是赋值了值拷贝而已。
+
+Changing the value of `currentDirection` thereafter does not affect the copy of the original value that was stored in `rememberedDirection`.
+改变`currentDirection`
+‌
+Classes Are Reference Types
+Unlike value types, reference types are not copied when they are assigned to a variable or constant, or when they are passed to a function. Rather than a copy, a reference to the same existing instance is used instead.
+
+Here’s an example, using the VideoMode class defined above:
+
+let tenEighty = VideoMode()
+tenEighty.resolution = hd
+tenEighty.interlaced = true
+tenEighty.name = "1080i"
+tenEighty.frameRate = 25.0
+This example declares a new constant called tenEighty and sets it to refer to a new instance of the VideoMode class. The video mode is assigned a copy of the HD resolution of 1920 by 1080 from before. It is set to be interlaced, and is given a name of "1080i". Finally, it is set to a frame rate of 25.0 frames per second.
