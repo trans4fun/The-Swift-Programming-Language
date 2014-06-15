@@ -22,7 +22,7 @@ The first snippet defines a new base class called MediaItem. This class provides
 
 您可以使用类型转换与类和子类的层次结构来检查一个特定的类实例的类型和投该实例到另一个类中的同一层级内。下面的三个代码片段定义的类层次结构和包含这些类的实例数组，用于类型转换的一个例子使用。 
 
-第一个片段定义了一个名为MediaItem新的基类。这个类提供基本功能，任何类型的项目出现在一个数字媒体库。具体来说，它声明一个String类型的name属性，以及一个init名称初始值设定项。 （假设所有的媒体项目，包括所有的电影和歌曲，将有一个名称。）
+第一个片段定义了一个名为`MediaItem`新的基类。这个类提供基本功能，任何类型的项目出现在一个数字媒体库。具体来说，它声明一个`String`类型的`name`属性，以及一个`init`名称初始值设定项。 （假设所有的媒体项目，包括所有的电影和歌曲，将有一个名称。）
 
     class MediaItem {
         var name: String
@@ -32,7 +32,7 @@ The first snippet defines a new base class called MediaItem. This class provides
     }
 The next snippet defines two subclasses of MediaItem. The first subclass, Movie, encapsulates additional information about a movie or film. It adds a director property on top of the base MediaItem class, with a corresponding initializer. The second subclass, Song, adds an artist property and initializer on top of the base class:
 
-接下来的片断定义MediaItem的两个子类。第一个子类，电影，封装了有关电影或电影的附加信息。它增加了一个属性主任在基MediaItem类的顶部，有一个相应的初始化。第二个亚类，宋，增加了一个艺术家财产和初始化基类的顶部：
+接下来的代码定义了`MediaItem`的两个子类。第一个子类，`Movie`，封装了有关`Movie`或`Movie`的附加信息。它增加了一个属性`director`，还有相应的初始化方法。第二个`Song`，增加了一个`artist`和初始化方法：
 
     class Movie: MediaItem {
         var director: String
@@ -51,7 +51,7 @@ The next snippet defines two subclasses of MediaItem. The first subclass, Movie,
     }
 The final snippet creates a constant array called library, which contains two Movie instances and three Song instances. The type of the library array is inferred by initializing it with the contents of an array literal. Swift’s type checker is able to deduce that Movie and Song have a common superclass of MediaItem, and so it infers a type of MediaItem[] for the library array:
 
-最后的代码片断创建一个常量数组叫做库，其中包含两个电影实例和三首歌曲的实例。图书馆数组的类型是由具有数组文本的内容初始化它的推断。斯威夫特的类型检查是能够演绎出电影和歌曲有MediaItem一个共同的超类，所以它会推断图书馆数组类型MediaItem[]中：
+最后的代码创建一个常量数组叫做`library`，其中包含两个`Movie`实例和三首`Song`的实例。`library`数组的类型是由它里面包含的内容决定的。Swift能够识别出`Movie`和`Song`有MediaItem一个共同的父类，所以它会推断出`library`是一个`MediaItem[] `类型的数组。
 
     let library = [
         Movie(name: "Casablanca", director: "Michael Curtiz"),
@@ -63,7 +63,7 @@ The final snippet creates a constant array called library, which contains two Mo
     // the type of "library" is inferred to be MediaItem[]
 The items stored in library are still Movie and Song instances behind the scenes. However, if you iterate over the contents of this array, the items you receive back are typed as MediaItem, and not as Movie or Song. In order to work with them as their native type, you need to check their type, or downcast them to a different type, as described below.
 
-存储在库中的项目仍然在幕后电影和歌曲实例。但是，如果你遍历这个数组的内容，您会收到回项目类型为MediaItem，而不是电影或歌曲。为了与他们合作，因为他们自身的类型，你需要检查它们的类型，或将它们向下转换为不同的类型，如下所述。
+在系统里存储在`library`中的项目仍然是`Movie`和`Song`实例。但是，如果你遍历这个数组，您会收到回项目类型为`MediaItem`，而不是`Movie`或`Song`。为了使用他们原来的类型，你需要检查它们的类型，或将它们向下转换为不同的类型，如下所述。
 
 ##Checking Type
 
@@ -73,9 +73,9 @@ The example below defines two variables, movieCount and songCount, which count t
 
 ## 检查类型 
 
-使用类型检查运算符（是）来检查一个实例是否是一个子类的类型。如果实例是子类的类型和虚假的，如果它不是类型检查运算符返回true。 
+使用类型检查运算符（`is`）来检查一个实例是否是一个子类的类型。如果是，则返回`true`，否则返回`false`
 
-下面的例子定义了两个变量，movieCount和songCount，这算电影和歌曲实例库中的数组数：
+下面的例子定义了两个变量，`movieCount`和`songCount`，用来计算数组中`Movie` 和`Song` 的数量。
 
     var movieCount = 0
     var songCount = 0
@@ -89,15 +89,16 @@ The example below defines two variables, movieCount and songCount, which count t
     }
      
     println("Media library contains \(movieCount) movies and \(songCount) songs")
-    // prints "Media library contains 2 movies and 3 songs"
+    // 打印出 "Media library 包含 2 movies and 3 songs"
     
 This example iterates through all items in the library array. On each pass, the for-in loop sets the item constant to the next MediaItem in the array.
 
 item is Movie returns true if the current MediaItem is a Movie instance and false if it is not. Similarly, item is Song checks whether the item is a Song instance. At the end of the for-in loop, the values of movieCount and songCount contain a count of how many MediaItem instances were found of each type.
 
-通过图书馆阵列中的所有项目本示例循环。在每个传中，for-in循环设置项常量数组中的下一个MediaItem。 
+这个例子遍历了数组中的所有元素，每一次循环，都会把数组中的一个实例赋值给`item`。 
 
-产品如果当前MediaItem是一个Movie实例和虚假的，如果它不是电影返回true。同样，产品松检查项目是否为宋实例。在for-in循环的结束，movieCount和songCount的值包含多少MediaItem实例中发现每种类型的计数。
+如果`item`是`Movie`类型，则返回 `true`否则返回`false`,同样，也会检查`item`是否是`Song`类型。最后， `movieCount`和`songCount`就能统计出到底每个类型有多少个。
+
 
 ##Downcasting
 
@@ -105,7 +106,7 @@ A constant or variable of a certain class type may actually refer to an instance
 
 Because downcasting can fail, the type cast operator comes in two different forms. The optional form, as?, returns an optional value of the type you are trying to downcast to. The forced form, as, attempts the downcast and force-unwraps the result as a single compound action.
 
-## 向下转换 
+## 向下转型
 
 某一类类型的常量或变量可能实际上是指在幕后一个子类的实例。在那里你认为是这样的话，你可以尝试向下转换与类型转换运算符（如）的子类型。 
 
