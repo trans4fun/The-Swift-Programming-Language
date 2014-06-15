@@ -107,26 +107,25 @@ A constant or variable of a certain class type may actually refer to an instance
 Because downcasting can fail, the type cast operator comes in two different forms. The optional form, as?, returns an optional value of the type you are trying to downcast to. The forced form, as, attempts the downcast and force-unwraps the result as a single compound action.
 
 ## 向下转型
+有时候，一些实例的类型是它父类的类型，这个时候你就需要使用`as`操作符进行向下转型。
 
-某一类类型的常量或变量可能实际上是指在幕后一个子类的实例。在那里你认为是这样的话，你可以尝试向下转换与类型转换运算符（如）的子类型。 
-
-因为向下转换可能会失败，类型转换运算符有两种不同的形式。可选的形式，？，返回你试图向下转换到该类型的可选值。强制的形式，如，试图丧气和强制解开的结果作为一个单一的复合动作。
+因为向下转型可能会失败，类型转换操作符带有两种不同形式。可选形式（ optional form）` as? `返回一个你试图下转成的类型的可选值（optional value）。强制形式 `as` 把试图向下转型和强制解包（force-unwraps）结果作为一个混合动作。
 
 Use the optional form of the type cast operator (as?) when you are not sure if the downcast will succeed. This form of the operator will always return an optional value, and the value will be nil if the downcast was not possible. This enables you to check for a successful downcast.
 
 Use the forced form of the type cast operator (as) only when you are sure that the downcast will always succeed. This form of the operator will trigger a runtime error if you try to downcast to an incorrect class type.
 
-使用类型转换运算符的可选形式（as？）时，你是不知道，如果向下转换会成功。这种形式的运算符将始终返回一个可选值，该值将为零，如果向下转换是不可能的。这使您可以检查是否有成功的垂头丧气。 
+当你不确定向下转型能否成功时，使用`as?`,当转化失败时，他会返回`nil `，这样你就能判断是否转换成功。
 
-使用类型转换运算符的强制形式（如）只有当你确定低垂将始终成功。如果您尝试向下转换到一个不正确的类类型这种形式的操作会触发一个运行时错误。
+当你对类型确定的对象进行向下转型时，使用`as`,当转化失败时，他会抛出一个错误。
 
 The example below iterates over each MediaItem in library, and prints an appropriate description for each item. To do this, it needs to access each item as a true Movie or Song, and not just as a MediaItem. This is necessary in order for it to be able to access the director or artist property of a Movie or Song for use in the description.
 
 In this example, each item in the array might be a Movie, or it might be a Song. You don’t know in advance which actual class to use for each item, and so it is appropriate to use the optional form of the type cast operator (as?) to check the downcast each time through the loop:
 
-下面遍历每个MediaItem库，并打印每个项目的适当描述的例子。要做到这一点，它需要访问每个项目作为一个真正的电影或歌曲，而不是仅仅作为一个MediaItem。这是必要的，以便它能够访问一个电影或歌曲的导演或艺人属性在描述中使用。 
+下面的例子，迭代了`library`里的每一个` MediaItem` ，并打印出适当的描述。要这样做，`item`需要真正作为`Movie` 或 `Song`的类型来使用。不仅仅是作为 `MediaItem`。为了能够使用`Movie` 或 `Song`的 `director` 或 `artist`属性，这是必要的。
 
-在这个例子中，数组中的每个项目可能是电影，也可能是一首乐曲。你不事先知道哪一个实际的类使用的每个项目，所以它是适合使用类型转换运算符的可选形式（如？）通过每次循环检查垂头丧气：
+在这个示例中，数组中的每一个`item`可能是 `Movie` 或 `Song`。 事前你不知道每个`item`的真实类型，所以这里使用可选形式的类型转换 (`as?`)去检查循环里的每次下转。
 
     for item in library {
         if let movie = item as? Movie {
@@ -143,7 +142,7 @@ In this example, each item in the array might be a Movie, or it might be a Song.
     // Song: 'Never Gonna Give You Up', by Rick Astley
 The example starts by trying to downcast the current item as a Movie. Because item is a MediaItem instance, it’s possible that it might be a Movie; equally, it’s also possible that it might a Song, or even just a base MediaItem. Because of this uncertainty, the as? form of the type cast operator returns an optional value when attempting to downcast to a subclass type. The result of item as Movie is of type Movie?, or “optional Movie”.
 
-这个例子开始试图通过向下转换当前项目作为电影。因为项目是一个MediaItem例如，它是可能的，它可能是一个电影;同样，它也有可能是它可能的乐曲，甚至只是一个基础MediaItem。由于这种不确定性，将作为？试图向下转换到子类类型时，类型转换运算符的形式返回一个可选值。项目作为电影的结果是类型的电影？，或“可选的电影”。
+示例首先试图将 `item` 下转为 `Movie`。因为 `item` 是一个 `MediaItem` 类型的实例，它可能是一个`Movie`；同样，它可能是一个 `Song`，或者仅仅是基类 `MediaItem`。因为不确定，`as?`形式试图下转时返还一个可选值。 `item as Movie` 的返回值是`Movie?`类型或 “optional Movie”。
 
 Downcasting to Movie fails when applied to the two Song instances in the library array. To cope with this, the example above uses optional binding to check whether the optional Movie actually contains a value (that is, to find out whether the downcast succeeded.) This optional binding is written “if let movie = item as? Movie”, which can be read as:
 
