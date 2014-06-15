@@ -285,6 +285,7 @@ For more information and to see an example of how to use property observers, see
 ##类和静态变量属性
 
 To declare a class computed property, mark the declaration with the class keyword. To declare a static variable property, mark the declaration with the static keyword. Class and static properties are discussed in Type Properties.
+要声明一个类计算属性，要用class关键字标记声明。声明静态的变量属性，用关键字static标记声明。类和静态属性在Type属性里讨论。
 
 >GRAMMAR OF A VARIABLE DECLARATION
 
@@ -460,14 +461,19 @@ A parameter named with an underscore (_) is explicitly ignored an can’t be acc
 带有下划线的参数会显式的被忽略，在函数体内部不能被访问到。
 
 A parameter with a base type name followed immediately by three dots (...) is understood as a variadic parameter. A function can have at most one variadic parameter, which must be its last parameter. A variadic parameter is treated as an array that contains elements of the base type name. For instance, the variadic parameter Int... is treated as Int[]. For an example that uses a variadic parameter, see Variadic Parameters.
+
 带有基本类型后面接着3个点的参数。
+
 A parameter with an equals sign (=) and an expression after its type is understood to have a default value of the given expression. If the parameter is omitted when calling the function, the default value is used instead. If the parameter is not omitted, it must have its name in the function call. For example, f() and f(x: 7) are both valid calls to a function with a single default parameter named x, but f(7) is invalid because it provides a value without a name.
 
 带有等号（=）的参数和它类型后面的表达式会被仿作给定表达式的默认类型。如果参数在调用函数的时候被忽略，默认值会被使用。例如，f()和f(x:7)都是有效的调用对于带有单个默认的的参数名x的函数，但是f(7)是有效的，因为它提供了没有名字的值。
 
 Special Kinds of MethodsMethods on an enumeration or a structure that modify self must be marked with the mutating keyword at the start of the function declaration.
+
 枚举类型或者结构上的方法，会修改self的必须在函数声明的开始标记为mutating关键字
+
 Methods that override a superclass method must be marked with the override keyword at the start of the function declaration. It is an error to override a method without the override keyword or to use the overridekeyword on a method that doesn’t override a superclass method.
+
 重写超类方法的方法必须在函数声明的开头override关键词标记。不适用override就重写方法会产生错误或者使用override在没有override超类的方法
 
 Methods associated with a type rather than an instance of a type must be marked with the static attribute for enumerations and structures or the class attribute for classes.
@@ -477,6 +483,7 @@ Methods associated with a type rather than an instance of a type must be marked 
 Curried Functions and Methods
 
 Curried functions and methods have the following form:
+
 当前的函数和方法有以下的形式：
 
 
@@ -523,12 +530,14 @@ Curried functions and methods have the following form:
 >  default-argument-clause → =­expression­：
 
 A function declared this way is understood as a function whose return type is another function. For example, the following two declarations are equivalent:
+
 用这种方式声明的函数会被当做一个函数，这个函数的返回类型是另外一个函数。例如，下面2个声明是一样的：
 
 
 Enumeration Declaration
 
 An enumeration declaration introduces a named enumeration type into your program.
+
 枚举声明引入一个个名叫枚举的类型到你的程序中。
 
 
@@ -537,6 +546,7 @@ Enumeration declarations have two basic forms and are declared using the keyword
 枚举声明有2中基本的形式，使用关键字enum声明。一个枚举类型的的主题使用2中形式之一，包含0或者蒙多的值-被称作枚举类型还有任何数量的声明，包括可计算的属性，实例方法，静态方法，初始化，类型aliase,和其它的枚举、结构和类声明。枚举声明不能包含析构或者协议声明。
 
 Unlike classes and structures, enumeration types do not have an implicitly provided default initializer; all initializers must be declared explicitly. Initializers can delegate to other initializers in the enumeration, but the initialization process is complete only after an initializer assigns one of the enumeration cases to self.
+
 不像类或者结构，枚举类型没有一个默认的初始化，但是初始化过程仅仅在初始化赋值给枚举类型的一个给self的时候。
 
 Like structures but unlike classes, enumerations are value types; instances of an enumeration are copied when assigned to variables or constants, or when passed as arguments to a function call. For information about value types, see Structures and Enumerations Are Value Types.
@@ -548,6 +558,7 @@ You can extend the behavior of an enumeration type with an extension declaration
 Enumerations with Cases of Any Type
 
 The following form declares an enumeration type that contains enumeration cases of any type:
+
 下面的形式声明了一个枚举类型，包含了所有类型的枚举。
 
 
@@ -568,32 +579,29 @@ The following form declares an enumeration type that contains enumeration cases 
 
 
 Enumerations declared in this form are sometimes called discriminated unions in other programming languages.
+
 用这种形式声明的枚举在其他语言里有时候被叫做discriminated unions
 
 In this form, each case block consists of the keyword case followed by one or more enumeration cases, separated by commas. The name of each case must be unique. Each case can also specify that it stores values of a given type. These types are specified in the associated value types tuple, immediately following the name of the case. For more information and to see examples of cases with associated value types, seeAssociated Values.
-用这种方式，每个cast块由关键字case组成，case后跟着一个或者多个逗号分隔的枚举情况。每个case的名字必须是唯一的。每个case页能够确定他存储一个给定类型的值。这些类型用关联只类型元组来设置，后面紧梗着case的名字。获取更多信息，看下关联至类型的的例子，请看Assiciated Values
-Enumerations with Raw Cases Values
+
+用这种方式，每个cast块由关键字case组成，case后跟着一个或者多个逗号分隔的枚举情况。每个case的名字必须是唯一的。每个case页能够确定他存储一个给定类型的值。这些类型用关联只类型元组来设置，后面紧梗着case的名字。获取更多信息，看下关联至类型的的例子，请看Assiciated Values Enumerations with Raw Cases Values
 
 The following form declares an enumeration type that contains enumeration cases of the same basic type:
-下面的形式声明了一种枚举类型，保护同样基本类型的枚举case
+
+下面的形式声明了一种枚举类型，包含同样基本类型的枚举case
 
 
-	* enum enumeration name: raw value type {
+	enum enumeration name: raw value type {
 
+	case enumeration case 1 = raw value 1
 
-	* 
-    case enumeration case 1 = raw value 1
+	case enumeration case 2 = raw value 2
 
-	* 
-    case enumeration case 2 = raw value 2
-
-	* 
-}
-
-
+      }
 
 
 In this form, each case block consists of the keyword case, followed by one or more enumeration cases, separated by commas. Unlike the cases in the first form, each case has an underlying value, called a raw value, of the same basic type. The type of these values is specified in the raw value type and must represent a literal integer, floating-point number, character, or string.
+
 通过这种形式，每种caes块是由关键字case后面跟着一个或者多个由多个逗号分隔的枚举case。不像第一种形式的case，每个case有一个underlying值，叫做原生值。这些值的类型在rsw值的类型设置，必须表示一个字面量整数，浮点数，字符和字符串。
 
 Each case must have a unique name and be assigned a unique raw value. If the raw value type is specified as Int and you don’t assign a value to the cases explicitly, they are implicitly assigned the values 0, 1, 2, and so on. Each unassigned case of type Int is implicitly assigned a raw value that is automatically incremented from the raw value of the previous case.
@@ -601,9 +609,9 @@ Each case must have a unique name and be assigned a unique raw value. If the raw
 每个case必须有一个唯一的名字，然后被赋值为一个单独的原生值。如果原生值用Int设置，你不需要要显式的赋值，他们可以默认的赋值1,1,2等等。每个没有赋值的Int类型会被赋值为原生类型，可以自动的从之前的case的原生值增加。
 
 
-	* enum ExampleEnum: Int {
-	* case A, B, C = 5, D
-	* }
+	enum ExampleEnum: Int {
+	    case A, B, C = 5, D
+	}
 
 
 In the above example, the value of ExampleEnum.A is 0 and the value of ExampleEnum.B is 1. And because the value of ExampleEnum.C is explicitly set to 5, the value of ExampleEnum.D is automatically incremented from 5 and is therefore 6.
@@ -613,10 +621,15 @@ In the above example, the value of ExampleEnum.A is 0 and the value of ExampleEn
 The raw value of an enumeration case can be accessed by calling its toRaw method, as inExampleEnum.B.toRaw(). You can also use a raw value to find a corresponding case, if there is one, by calling the fromRaw method, which returns an optional case. For more information and to see examples of cases with raw value types, see Raw Values.
 
 枚举类型的原生值可以通过toRaw方法访问，比如ExampleEnum.B.toRaw()。你也可以使用一个原生值来找到对应的case通过调用fromRaw方法。
-Accessing Enumeration Cases
+
+##Accessing Enumeration Cases
+
+##访问枚举case
 
 To reference the case of an enumeration type, use dot (.) syntax, as in EnumerationType.EnumerationCase. When the enumeration type can be inferred from context, you can omit it (the dot is still required), as described inEnumeration Syntax and Implicit Member Expression.
+
 正如EnumerationType.EnumerationCase，可以使用。来引用一个enumeration类型的case，正如inEnumeration Syntax and Implicit Member Expression.描述的。
+
 To check the values of enumeration cases, use a switch statement, as shown in Matching Enumeration Values with a Switch Statement. The enumeration type is pattern-matched against the enumeration case patterns in the case blocks of the switch statement, as described in Enumeration Case Pattern.
 
 >GRAMMAR OF AN ENUMERATION DECLARATION
@@ -641,19 +654,12 @@ To check the values of enumeration cases, use a switch statement, as shown in Ma
 Structure Declaration
 
 A structure declaration introduces a named structure type into your program. Structure declarations are declared using the keyword struct and have the following form:
+
 一个结构声明引入了一个命名的类型到你的程序。结构声明使用struct声明，采用以下的形式：
 
-
-	* struct structure name: adopted protocols {
-
-
-	* 
-    declarations
-
-	* 
-}
-
-
+   struct structure name: adopted protocols {
+     declarations
+   }
 
 
 The body of a structure contains zero or more declarations. These declarations can include both stored and computed properties, static properties, instance methods, static methods, initializers, type aliases, and even other structure, class, and enumeration declarations. Structure declarations can’t contain destructor or protocol declarations. For a discussion and several examples of structures that include various kinds of declarations, see Classes and Structures.
@@ -669,17 +675,14 @@ There are three ways create an instance of a previously declared structure:
 有3种方式创建过去声明过的示例结构的示例。
 
 
-	* 
-Call one of the initializers declared within the structure, as described in Initializers.
-就像Initializers描述的，调用结构里的一个初始器之一。
+	* Call one of the initializers declared within the structure, as described in Initializers.
+          就像Initializers描述的，调用结构里的一个初始器之一。
 
-	* 
-If no initializers are declared, call the structure’s memberwise initializer, as described in Memberwise Initializers for Structure Types.
-如果没有初始器被声明，就可以调用结构区的成员
+	* If no initializers are declared, call the structure’s memberwise initializer, as described in Memberwise Initializers for Structure Types.
+         如果没有初始器被声明，就可以调用结构区的成员
 
-	* 
-If no initializers are declared, and all properties of the structure declaration were given initial values, call the structure’s default initializer, as described in Default Initializers.
-如果没有初始化器被声明，结构所有其他声明的属性就会被给予初始化的值，调用结构的某人初始化器，正如Default Initializers.描述的那样。 
+	* If no initializers are declared, and all properties of the structure declaration were given initial values, call the structure’s default initializer, as described in Default Initializers.
+          如果没有初始化器被声明，结构所有其他声明的属性就会被给予初始化的值，调用结构的某人初始化器，正如Default Initializers    .描述的那样。 
 
 
 
@@ -697,31 +700,26 @@ Structures are value types; instances of a structure are copied when assigned to
 
 You can extend the behavior of a structure type with an extension declaration, as discussed in Extension Declaration.
 你可以用一个扩展声明来扩展一个结构类型的行为，正如Extension Declaration讨论的。
-GRAMMAR OF A STRUCTURE DECLARATION
-struct-declaration → attributes­opt­struct­struct-name­generic-parameter-clause­opt­type-inheritance-clause­opt­struct-body­
-struct-name → identifier­
-struct-body → {­declarations­opt­}
 
+>GRAMMAR OF A STRUCTURE DECLARATION
 
+>    struct-declaration → attributes­opt­struct­struct-name­generic-parameter-clause­opt­type-inheritance-clause­opt­struct-body­
+>    struct-name → identifier­
+>    struct-body → {­declarations­opt­}
 
-Class Declaration
+##Class Declaration
+
+##类声明
+
 
 A class declaration introduces a named class type into your program. Class declarations are declared using the keyword class and have the following form:
 
 类型声明映入了一个命令的类型到你的程序中。类声明使用关键字class声明，采用下面的形式：
 
 
-
-	* class class name: superclass, adopted protocols {
-
-
-	* 
-    declarations
-
-	* 
-}
-
-
+    class class name: superclass, adopted protocols {
+        declarations
+    }
 
 
 The body of a class contains zero or more declarations. These declarations can include both stored and computed properties, instance methods, class methods, initializers, a single destructor method, type aliases, and even other class, structure, and enumeration declarations. Class declarations can’t contain protocol declarations. For a discussion and several examples of classes that include various kinds of declarations, see Classes and Structures.
@@ -748,14 +746,12 @@ There are two ways create an instance of a previously declared class:
 有两种方式创建过去声明的类的实例：
 
 
-	* 
-Call one of the initializers declared within the class, as described in Initializers.
-在类的内部调用声明的初始化器。
+	* Call one of the initializers declared within the class, as described in Initializers.
+         在类的内部调用声明的初始化器。
 
-	* 
-If no initializers are declared, and all properties of the class declaration were given initial values, call the class’s default initializer, as described in Default Initializers.
+	* If no initializers are declared, and all properties of the class declaration were given initial values, call the class’s default initializer, as described in Default Initializers.
 
-如果没有声明的初始化器，类声明的素有属性会有一个初始化值，是通过调用类的默认的初始化器来完成的。正如Default Initializers描述的。
+       如果没有声明的初始化器，类声明的素有属性会有一个初始化值，是通过调用类的默认的初始化器来完成的。正如Default Initializers描述的。
 
 
 
@@ -774,24 +770,68 @@ You can extend the behavior of a class type with an extension declaration, as di
 
 你可以使用extension声明来扩展类的行为，正如Extension Desclaration.
 
-GRAMMAR OF A CLASS DECLARATION
-class-declaration → attributes­opt­class­class-name­generic-parameter-clause­opt­type-inheritance-clause­opt­class-body­
-class-name → identifier­
-class-body → {­declarations­opt­}­
-Protocol Declaration
+
+ >  GRAMMAR OF A CLASS DECLARATION
+ >   class-declaration → attributes­opt­class­class-name­generic-parameter-clause­opt­type-inheritance-clause­opt­class-body­
+ >   class-name → identifier­
+ >  class-body → {­declarations­opt­}
+
+##Protocol Declaration
+
+##协议声明
+
 A protocol declaration introduces a named protocol type into your program. Protocol declarations are declared using the keyword protocol and have the following form:
+
 一个协议声明引入了一命令协议类型到你的程序中。协议声明可以使用protoco来声明，有如下的形式：
 
 
-	* protocol protocol name: inherited protocols {
+  protocol protocol name: inherited protocols {
+     protocol member declarations
+  }
+
+The body of a protocol contains zero or more protocol member declarations, which describe the conformance requirements that any type adopting the protocol must fulfill. In particular, a protocol can declare that conforming types must implement certain properties, methods, initializers, and subscripts. Protocols can also declare special kinds of type aliases, called associated types, that can specify relationships among the various declarations of the protocol. The protocol member declarations are discussed in detail below.
+
+协议的主体包含洗衣成员声明，它描述了comformance要求，任何实现它的协议都必须满足的要求。特别是，协议可以声明comformin类型，必须实现某个属性，方法，初始化，和子脚本。协议页能声明特殊种类的typealiase,被称作关联类型，可以设置协议里的不同声明的关系。协议成员声明下面会做详细的讨论。
+
+Protocol types can inherit from any number of other protocols. When a protocol type inherits from other protocols, the set of requirements from those other protocols are aggregated, and any type that inherits from the current protocol must conform to all those requirements. For an example of how to use protocol inheritance, see Protocol Inheritance.
+
+协议类型可以从任何数量的其它协议。当一个协议类型从其它洗衣继承时，从那些协议中的要求会被集合，任何从当前协议继承的类型都必须和那些要求一致。
 
 
-	* 
-    protocol member declarations
+NOTE
+You can also aggregate the conformance requirements of multiple protocols using protocol composition types, as described in Protocol Composition Type and Protocol Composition.
 
-	* 
-}
+You can add protocol conformance to a previously declared type by adopting the protocol in an extension declaration of that type. In the extension, you must implement all of the adopted protocol’s requirements. If the type already implements all of the requirements, you can leave the body of the extension declaration empty.
 
+你可以增加协议conformance到任何一个过去声明的类型通过在那个类型的extendsion中声明。在这个扩展力，你必须实现所有使用的协议的需求。如果那个类型已经实现了所有的要求，扩展声明的主题可以是空的。
+
+By default, types that conform to a protocol must implement all properties, methods, and subscripts declared in the protocol. That said, you can mark these protocol member declarations with the optional attribute to specify that their implementation by a conforming type is optional. The optional attribute can be applied only to protocols that are marked with the objc attribute. As a result, only class types can adopt and conform to a protocol that contains optional member requirements. For more information about how to use the optionalattribute and for guidance about how to access optional protocol members—for example, when you’re not sure whether a conforming type implements them—see Optional Protocol Requirements.
+
+默认情况下，与协议一致的类型必须实现所有的属性，方法，和声明的subscripts。也就是说，你可以用opaional属性来标记协议成员，表示他们的实现是可选的。option属性仅仅能被应用到用objc标记的属性。结构，仅仅class类型能采纳和玉包含可选的成员变量的协议一致。对于如何访问可选的协议成员-例如，如果你不确定一个confroming类型是否要实现他们-看见 Optional Protocol Requirements.
+
+To restrict the adoption of a protocol to class types only, mark the entire protocol declaration with theclass_protocol attribute. Any protocol that inherits from a protocol marked with the class_protocol attribute can likewise be adopted only by a class type.
+
+为了限制协议的的只应用到某个class type，用class_protocol属性标记整个协议声明。任何从标记class_protocol协议继承的协议可以只被class 类型采纳。
+
+NOTE
+If a protocol is already marked with the objc attribute, the class_protocol attribute is implicitly applied to that protocol; there’s no need to mark the protocol with the class_protocol attribute explicitly.
+
+Protocols are named types, and thus they can appear in all the same places in your code as other named types, as discussed in Protocols as Types. However, you can’t construct an instance of a protocol, because protocols do not actually provide the implementations for the requirements they specify.
+
+
+You can use protocols to declare which methods a delegate of a class or structure should implement, as described in Delegation.
+你可以使用协议来声明类或者结构应该实现那个方法，如Delegation.描述。
+
+GRAMMAR OF A PROTOCOL DECLARATION
+protocol-declaration → attributes­opt­protocol­protocol-name­type-inheritance-clause­opt­protocol-body­
+protocol-name → identifier­
+protocol-body → {­protocol-member-declarations­opt­}­
+protocol-member-declaration → protocol-property-declaration­
+protocol-member-declaration → protocol-method-declaration­
+protocol-member-declaration → protocol-initializer-declaration­
+protocol-member-declaration → protocol-subscript-declaration­
+protocol-member-declaration → protocol-associated-type-declaration­
+protocol-member-declarations → protocol-member-declaration­protocol-member-declarations­opt­
 
 
 Protocol Method Declaration
