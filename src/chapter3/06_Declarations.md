@@ -248,6 +248,7 @@ didSet(setter name {
     statements
 }
 }
+
 You define this form of a variable declaration at global scope, the local scope of a function, or in the context of a class or structure declaration. When a variable declaration of this form is declared at global scope or the local scope of a function, the observers are referred to as stored variable observers. When it is declared in the context of a class or structure declaration, the observers are referred to as property observers.
 
 你可以i在全局范围，函数的局部返回，或者类，结构环境里声明这种形式的变量。当这类型是的变量声明在全局范围或者函数的局部范围里声明的时候，观察者会被作为可存储的变量观察者。当在类或者结构声明中声明的时候，观察者会被作为属性的观察者。
@@ -392,9 +393,7 @@ Function parameters are a comma separated list where each parameter has one of s
 
 函数参数是一个逗号分隔的列表，每个参数可以有好几种形式。函数调用的时候参数的顺序必须匹配函数声明的参数顺序。在参数列表里最简单的输入形式：
 
-
-	* parameter name: parameter type
-
+  parameter name: parameter type
 
 
 For function parameters, the parameter name is used within the function body, but is not used when calling the function. For method parameters, the parameter name is used as within the function body, and is also used as a label for the argument when calling the method. The name of a method’s first parameter is used only within the function body, like the parameter of a function. For example:
@@ -402,17 +401,18 @@ For function parameters, the parameter name is used within the function body, bu
 对于函数参数，参数名字在函数体内部使用，但是在调用函数的时候不会使用。对于方法参数，参数名可以在函数体使用，也在调用方法时可以作为参数的标签使用。函数的一个参数名字仅仅在函数体力使用，就像函数的参数。例如
 
 
-	* func f(x: Int, y: String) -> String {
-	* return y + String(x)
-	* }
-	* f(7, "hello") // x and y have no name
-	* class C {
-	* func f(x: Int, y: String) -> String {
-	* return y + String(x)
-	* }
-	* }
-	* let c = C()
-	* c.f(7, y: "hello") // x has no name, y has a name
+func f(x: Int, y: String) -> String {
+        return y + String(x)
+    }
+    f(7, "hello")  // x and y have no name
+
+    class C {
+        func f(x: Int, y: String) -> String {
+           return y + String(x)
+        }
+    }
+    let c = C()
+    c.f(7, y: "hello")  // x没有名称，y有名称
 
 
 You can override the default behavior for how parameter names are used with one of the following forms:
@@ -420,13 +420,9 @@ You can override the default behavior for how parameter names are used with one 
 你可以重写参数名字使用的默认行为，采用如下的形式：
 
 
-	* external parameter name local parameter name: parameter type
-
-	* 
-#parameter name: parameter type
-
-	* _ local parameter name: parameter type
-
+  external parameter name local parameter name: parameter type
+    #parameter name: parameter type
+    _ local parameter name: parameter type
 
 
 A second name before the local parameter name gives the parameter an external name, which can be different than the local parameter name. The external parameter name must be used when the function is called. The corresponding argument must have the external name in function or method calls.
@@ -441,23 +437,21 @@ An underscore (_) before a local parameter name gives that parameter no name to 
 
 本次参数名的下划线在函数调用的时候让参数没有使用名字。对应的参在函数或者方法调用的时候不可以有名字。
 
-Special Kinds of Parameters
+##Special Kinds of Parameters
+
+##特殊类型的参数
 
 Parameters can be ignored, take a variable number of values, and provide default values using the following forms:
 参数可以忽略，可以是可变数量的值，使用如下的形式提供默认值
 
 
-	* _ : <#parameter type#.
-
-
-	* parameter name: parameter type...
-
-
-	* parameter name: parameter type = default argument value
-
+ _ : <#parameter type#.
+    parameter name: parameter type...
+    parameter name: parameter type = default argument value
 
 
 A parameter named with an underscore (_) is explicitly ignored an can’t be accessed within the body of the function.
+
 带有下划线的参数会显式的被忽略，在函数体内部不能被访问到。
 
 A parameter with a base type name followed immediately by three dots (...) is understood as a variadic parameter. A function can have at most one variadic parameter, which must be its last parameter. A variadic parameter is treated as an array that contains elements of the base type name. For instance, the variadic parameter Int... is treated as Int[]. For an example that uses a variadic parameter, see Variadic Parameters.
@@ -480,22 +474,20 @@ Methods associated with a type rather than an instance of a type must be marked 
 
 与type相关而不是类型实例相关的方法必须使用使用static属性来标记枚举、结构或者类的class属性
 
-Curried Functions and Methods
+##Curried Functions and Methods
+
+##科里化函数和方法
 
 Curried functions and methods have the following form:
 
-当前的函数和方法有以下的形式：
+科里化函数和方法有以下的形式：
 
 
-	* func function name(parameters)(parameters) -> return type {
+  func function name(parameters)(parameters) -> return type {
+        statements
+    }
 
-
-	* 
-    statements
-
-	* 
-}
-
+以这种形式定义的函数的返回值是另一个函数。举例来说，下面的两个声明时等价的:
 
  func addTwoNumbers(a: Int)(b: Int) -> Int {
         return a + b
@@ -534,7 +526,9 @@ A function declared this way is understood as a function whose return type is an
 用这种方式声明的函数会被当做一个函数，这个函数的返回类型是另外一个函数。例如，下面2个声明是一样的：
 
 
-Enumeration Declaration
+##Enumeration Declaration
+
+##枚举声明
 
 An enumeration declaration introduces a named enumeration type into your program.
 
@@ -562,19 +556,10 @@ The following form declares an enumeration type that contains enumeration cases 
 下面的形式声明了一个枚举类型，包含了所有类型的枚举。
 
 
-	* enum enumeration name {
-
-
-	* 
-    case enumeration case 1
-
-	* 
-    case enumeration case 2(associated value types)
-
-
-	* 
-}
-
+   enum enumeration name {
+        case enumeration case 1
+        case enumeration case 2(associated value types)
+    }
 
 
 
@@ -591,13 +576,11 @@ The following form declares an enumeration type that contains enumeration cases 
 下面的形式声明了一种枚举类型，包含同样基本类型的枚举case
 
 
-	enum enumeration name: raw value type {
+    enum enumeration name: raw value type {
+        case enumeration case 1 = raw value 1
+        case enumeration case 2 = raw value 2
+    }
 
-	case enumeration case 1 = raw value 1
-
-	case enumeration case 2 = raw value 2
-
-      }
 
 
 In this form, each case block consists of the keyword case, followed by one or more enumeration cases, separated by commas. Unlike the cases in the first form, each case has an underlying value, called a raw value, of the same basic type. The type of these values is specified in the raw value type and must represent a literal integer, floating-point number, character, or string.
@@ -822,7 +805,8 @@ Protocols are named types, and thus they can appear in all the same places in yo
 You can use protocols to declare which methods a delegate of a class or structure should implement, as described in Delegation.
 你可以使用协议来声明类或者结构应该实现那个方法，如Delegation.描述。
 
-GRAMMAR OF A PROTOCOL DECLARATION
+
+>协议声明的语法
 protocol-declaration → attributes­opt­protocol­protocol-name­type-inheritance-clause­opt­protocol-body­
 protocol-name → identifier­
 protocol-body → {­protocol-member-declarations­opt­}­
@@ -833,358 +817,27 @@ protocol-member-declaration → protocol-subscript-declaration­
 protocol-member-declaration → protocol-associated-type-declaration­
 protocol-member-declarations → protocol-member-declaration­protocol-member-declarations­opt­
 
+##Protocol Property Declaration
 
-Protocol Method Declaration
-
-Protocols declare that conforming types must implement a method by including a protocol method declaration in the body of the protocol declaration. Protocol method declarations have the same form as function declarations, with two exceptions: They don’t include a function body, and you can’t provide any default parameter values as part of the function declaration. For examples of conforming types that implement the method requirements of a protocol, see Method Requirements.
-
-协议表明，conforming类型必须在协议声明体里通过包括一个协议方法声明来实现方法。协议方法声明与函数声明有同样的形式，只有2点例外：他们不需要包括函数体，你不能提供任何某人参数值作为函数声明的一部分。
-
-
-To declare a class or static method requirement in a protocol declaration, mark the method declaration with the class keyword. Classes that implement this method also declare the method with the class keyword. Structures that implement it must declare the method with the static keyword instead. If you’re implementing the method in an extension, use the class keyword if you’re extending a class and the static keyword if you’re extending a structure.
-
-在协议声明里，为了声明一个类或者静态方法要求，使用class关键字来标记方法声明。实现这个方法的类也用class来声明方法。实现它的结构必须用static进行声明。如果你在extension里实现，如果你扩展class使用class，如果是结构使用static
-See also Function Declaration.
-GRAMMAR OF A PROTOCOL METHOD DECLARATION
-protocol-method-declaration → function-head­function-name­generic-parameter-clause­opt­function-signature­
-Protocol Initializer DeclarationProtocols declare that conforming types must implement an initializer by including a protocol initializer declaration in the body of the protocol declaration. Protocol initializer declarations have the same form as initializer declarations, except they don’t include the initializer’s body.
-See also Initializer Declaration.
-GRAMMAR OF A PROTOCOL INITIALIZER DECLARATION
-protocol-initializer-declaration → initializer-head­generic-parameter-clause­opt­parameter-clause­
-Protocol Subscript Declaration
-
-Protocols declare that conforming types must implement a subscript by including a protocol subscript declaration in the body of the protocol declaration. Protocol property declarations have a special form of a subscript declaration:
-
-
-
-
-	* subscript (parameters) -> return type { get set }
-
-
-
-Subscript declarations only declare the minimum getter and setter implementation requirements for types that conform to the protocol. If the subscript declaration includes both the get and set keywords, a conforming type must implement both a getter and a setter clause. If the subscript declaration includes only the get keyword, a conforming type must implement at least a getter clause and optionally can implement a setter clause.
-See also Subscript Declaration.
-GRAMMAR OF A PROTOCOL SUBSCRIPT DECLARATION
-protocol-subscript-declaration → subscript-head­subscript-result­getter-setter-keyword-block­
-Protocol Associated Type Declaration
-
-Protocols declare associated types using the keyword typealias. An associated type provides an alias for a type that is used as part of a protocol’s declaration. Accosiated types are similiar to type paramters in generic parameter clauses, but they’re associated with Self in the protocol in which they’re declared. In that context, Self refers to the eventual type that conforms to the protocol. For more information and examples, see Associated Types.
-
-协议用关键字typealias声明关联类型。关联类型为类型提供了一个alias，这个被用作协议声明的一部分。关联类型与在通用参数预计的类型参数相似，但是他们与声明他们的协议中的self相似。在那个环境下，self指的是时间类型。
-See also Type Alias Declaration.
-GRAMMAR OF A PROTOCOL ASSOCIATED TYPE DECLARATION
-protocol-associated-type-declaration → typealias-head­type-inheritance-clause­opt­typealias-assignment­opt­
-Initializer Declaration
-
-An initializer declaration introduces an initializer for a class, structure, or enumeration into your program. Initializer declarations are declared using the keyword init and have two basic forms.
-
-实例化声明引入了类的初始化器到程序里。初始化声明使用关键字init声明，有两种基本形式：
-
-Structure, enumeration, and class types can have any number of initializers, but the rules and associated behavior for class initializers are different. Unlike structures and enumerations, classes have two kinds of initializers: designated initializers and convenience initializers, as described in Initialization.
-
-结构，枚举和类类型可以有很多初始器，但是class初始化器的规则和关联行为是不同的。不像结构和枚举类型。类有两种初始化器：制定的和便利的初始化器。
-The following form declares initializers for structures, enumerations, and designated initializers of classes:
-
-	* init(parameters) {
-
-
-	* 
-    statements
-
-	* 
-}
-
-
-
-A designated initializer of a class initializes all of the class’s properties directly. It can’t call any other initializers of the same class, and if the class has a superclass, it must call one of the superclass’s designated initializers. If the class inherits any properties from its superclass, one of the superclass’s designated initializers must be called before any of these properties can be set or modified in the current class.
-Designated initializers can be declared in the context of a class declaration only and therefore can’t be added to a class using an extension declaration.
-Initializers in structures and enumerations can call other declared initializers to delegate part or all of the initialization process.
-To declare convenience initializers for a class, prefix the initializer declaration with the context-sensitive keyword convenience.
-
-	* convenience init(parameters) {
-
-
-	* 
-    statements
-
-	* 
-}
-
-
-
-Convenience initializers can delegate the initialization process to another convenience initializer or to one of the class’s designated initializers. That said, the initialization processes must end with a call to a designated initializer that ultimately initializes the class’s properties. Convenience initializers can’t call a superclass’s initializers.
-You can mark designated and convenience initializers with the required attribute to require that every subclass implement the initializer. Because designated initializers are not inherited by subclasses, they must be implemented directly. Required convenience initializers can be either implemented explicitly or inherited when the subclass directly implements all of the superclass’s designated initializers (or overrides the designated initializers with convenience initializers). Unlike methods, properties, and subscripts, you don’t need to mark overridden initializers with the override keyword.
-To see examples of initializers in various type declarations, see Initialization.
-GRAMMAR OF AN INITIALIZER DECLARATION
-initializer-declaration → initializer-head­generic-parameter-clause­opt­parameter-clause­initializer-body­
-initializer-head → attributes­opt­convenience­opt­init­
-initializer-body → code-block­
-Deinitializer Declaration
-
-A deinitializer declaration declares a deinitializer for a class type. Deinitializers take no parameters and have the following form:
-
-析构声明在类中声明了一个析构器。析构器不需要参数，遵循如下的格式：
-
-
-	* deinit {
-
-
-	* 
-    statements
-
-	* 
-}
-
-
-
-
-A deinitializer is called automatically when there are no longer any references to a class object, just before the class object is deallocated. A deinitializer can be declared only in the body of a class declaration—but not in an extension of a class—and each class can have at most one.
-
-当类中没有对任何其它对象的引用时，在类对象释放之前，析构器会自动的被调用。析构器只能在类的声明体内、声明——但是不能在 类的扩展声明内，每个类最多只能有一个析构器声明。
-
-A subclass inherits its superclass’s deinitializer, which is implicitly called just before the subclass object is deallocated. The subclass object is not deallocated until all deinitializers in its inheritance chain have finished executing.
-
-
-Deinitializers are not called directly.
-
-子类继承了它的超类的析构器，在子类帝乡将要被释放时会被隐式的调用。子类在所有析构器被执行完毕前不会被释放。
-析构器不会被直接调用。
-For an example of how to use a deinitializer in a class declaration, see Deinitialization.
-GRAMMAR OF A DEINITIALIZER DECLARATION
-deinitializer-declaration → attributes­opt­deinit­code-block­
-Extension Declaration
-
-An extension declaration allows you to extend the behavior of existing class, structure, and enumeration types. Extension declarations begin with the keyword extension and have the following form:
-
-扩展声明用于扩展一个已存在的类，结构体，枚举的行为。扩展声明以关键字extension开始，遵循如下的规则：
-
-
-	* extension type: adopted protocols {
-
-
-	* 
-    declarations
-
-	* 
-}
-
-
-
-
-The body of an extension declaration contains zero or more declarations. These declarations can include computed properties, computed static properties, instance methods, static and class methods, initializers, subscript declarations, and even class, structure, and enumeration declarations. Extension declarations can’t contain destructor or protocol declarations, store properties, property observers, or other extension declarations. For a discussion and several examples of extensions that include various kinds of declarations, see Extensions.
-一个扩展声明体包括零个或多个声明。这些声明可以包括计算型属性，计算型静态属性，实例方法，静态和类方法，构造器， 附属脚本声明，甚至其他类，结构和枚举声明。扩展声明不能包含析构器，协议声明，存储型属性，属性监测器或其他 的扩展属性。详细讨论和查看包含多种扩展声明的实例，参见扩展一节。
-
-Extension declarations can add protocol conformance to an existing class, structure, and enumeration type in the adopted protocols. Extension declarations can’t add class inheritance to an existing class, and therefore the type-inheritance-clause in an extension declaration contains only a list of protocols.
-
-扩展声明可以向现存的类，结构体，枚举内添加一致的协议。扩展声明不能向一个类中添加继承的类，因此 type-inheritance-clause只包含协议列表。
-
-
-Properties, methods, and initializers of an existing type can’t be overridden in an extension of that type.
-属性，方法，现存类型的构造器不能被它们类型的扩展所重写。
-
-Extension declarations can contain initializer declarations. That said, if the type you’re extending is defined in another module, an initializer declaration must delegate to an initializer already defined in that module to ensure members of that type are properly initialized.
-扩展声明可以包含构造器声明，这意味着，如果你扩展的类型在其他模块中定义，构造器声明必须委托另一个在 那个模块里声明的构造器来恰当的初始化。
-
-GRAMMAR OF AN EXTENSION DECLARATION
-extension-declaration → extension­type-identifier­type-inheritance-clause­opt­extension-body­
-extension-body → {­declarations­opt­}­
-Subscript Declaration
-
-A subscript declaration allows you to add subscripting support for objects of a particular type and are typically used to provide a convenient syntax for accessing the elements in a collection, list, or sequence. Subscript declarations are declared using the keyword subscript and have the following form:
-附属脚本用于向特定类型的对象添加附属脚本支持，通常为访问集合，列表和序列的元素时提供便利的语法。附属脚本声明使用关键字subscript，声明形式如下：
-
-
-	* subscript (parameters) -> return type {
-
-
-	* 
-    get {
-
-
-	* 
-        statements
-
-	* 
-    }
-
-
-	* 
-    set(setter name) {
-
-
-	* 
-        statements
-
-	* 
-    }
-
-
-	* 
-}
-
-
-
-
-Subscript declarations can appear only in the context of a class, structure, enumeration, extension, or protocol declaration.
-
-
-The parameters specify one or more indexes used to access elements of the corresponding type in a subscript expression (for example, the i in the expression object[i]). Although the indexes used to access the elements can be of any type, each parameter must include a type annotation to specify the type of each index. The return type specifies the type of the element being accessed.
-
-变量(parameters)指定一个或多个用于在相应类型的附属脚本中访问元素的索引（例如，表达式object[i]中的i）。尽管用于元素访问的索引可以是任意类型的，但是每个变量必须包含一个用于指定每种索引类型的类型标注。返回类型(return type)指定被访问的元素的类型。
-
-
-As with computed properties, subscript declarations support reading and writing the value of the accessed elements. The getter is used to read the value, and the setter is used to write the value. The setter clause is optional, and when only a getter is needed, you can omit both clauses and simply return the requested value directly. That said, if you provide a setter clause, you must also provide a getter clause.
-和计算性属性一样，附属脚本声明支持对访问元素的读写操作。getter用于读取值，setter用于写入值。setter子句是可选的，当仅需要一个getter子句时，可以将二者都忽略且直接返回请求的值即可。也就是说，如果使用了setter子句，就必须使用getter子句。
-
-The setter name and enclosing parentheses are optional. If you provide a setter name, it is used as the name of the parameter to the setter. If you do not provide a setter name, the default parameter name to the setter is value. That type of the setter name must be the same as the return type.
-setter的名字和封闭的括号是可选的。如果使用了setter名称，它会被当做传给setter的变量的名称。如果不使用setter名称，那么传给setter的变量的名称默认是value。setter名称的类型必须与返回类型(return type)的类型相同。
-
-You can overload a subscript declaration in the type in which it is declared, as long as the parameters or thereturn type differ from the one you’re overloading. You can also override a subscript declaration inherited from a superclass. When you do so, you must mark the overridden subscript declaration with the overridekeyword.
-可以在附属脚本声明的类型中，可以重载附属脚本，只要变量(parameters)或返回类型(return type)与先前的不同即可。此时，必须使用override关键字声明那个被覆盖的附属脚本。(注：好乱啊！到底是重载还是覆盖？！)
-
-You can also declare subscripts in the context of a protocol declaration, as described in Protocol Subscript Declaration.
-同样可以在协议声明的上下文中声明附属脚本，Protocol Subscript Declaration中有所描述。
-For more information about subscripting and to see examples of subscript declarations, see Subscripts.
-GRAMMAR OF A SUBSCRIPT DECLARATION
-subscript-declaration → subscript-head­subscript-result­code-block­
-subscript-declaration → subscript-head­subscript-result­getter-setter-block­
-subscript-declaration → subscript-head­subscript-result­getter-setter-keyword-block­
-subscript-head → attributes­opt­subscript­parameter-clause­
-subscript-result → ->­attributes­opt­type­
-Operator Declaration
-
-An operator declaration introduces a new infix, prefix, or postfix operator into your program and is declared using the contextual keyword operator.
-
-
-You can declare operators of three different fixities: infix, prefix, and postfix. The fixity of an operator specifies the relative position of an operator to its operands.
-
-
-There are three basic forms of an operator declaration, one for each fixity. The fixity of the operator is specified by including the contextual keyword infix, prefix, or postfix between operator and the name of the operator. In each form, the name of the operator can contain only the operator characters defined inOperators.
-运算符声明会向程序中引入中缀、前缀或后缀运算符，它使用上下文关键字operator声明。 可以声明三种不同的缀性：中缀、前缀和后缀。操作符的缀性描述了操作符与它的操作数的相对位置。 运算符声明有三种基本形式，每种缀性各一种。运算符的缀性通过在operator和运算符之间添加上下文关键字infix，prefix或postfix来指定。每种形式中，运算符的名字只能包含Operators中定义的运算符字符。
-The following form declares a new infix operator:
-
-	* operator infix operator name {
-
-
-	* 
-    precedence precedence level
-
-	* 
-    associativity associativity
-
-	* 
-}
-
-
-
-
-An infix operator is a binary operator that is written between its two operands, such as the familiar addition operator (+) in the expression 1 + 2.
-中缀运算符是二元运算符，它可以被置于两个操作数之间，比如表达式1 + 2 中的加法运算符(+)。
-
-Infix operators can optionally specify a precedence, associativity, or both.
-中缀运算符可以可选地指定优先级，结合性，或两者同时指定。
-
-The precedence of an operator specifies how tightly an operator binds to its operands in the absence of grouping parentheses. You specify the precedence of an operator by writing the contextual keywordprecedence followed by the precedence level. The precedence level can be any whole number (decimal integer) from 0 to 255; unlike decimal integer literals, it can’t contain any underscore characters. Although the precedence level is a specific number, it is significant only relative to another operator. That is, when two operators compete with each other for their operands, such as in the expression 2 + 3 * 5, the operator with the higher precedence level binds more tightly to its operands.
-运算符的优先级可以指定在没有括号包围的情况下，运算符与它的操作数如何紧密绑定的。可以使用上下文关键字precedence并优先级(precedence level)一起来指定一个运算符的优先级。优先级可以是0到255之间的任何一个数字(十进制整数)；与十进制整数字面量不同的是，它不可以包含任何下划线字符。尽管优先级是一个特定的数字，但它仅用作与另一个运算符比较(大小)。也就是说，一个操作数可以同时被两个运算符使用时，例如2 + 3 * 5，优先级更高的运算符将优先与操作数绑定。
-
-The associativity of an operator specifies how a sequence of operators with the same precedence level are grouped together in the absence of grouping parentheses. You specify the associativity of an operator by writing the contextual keyword associativity followed by the associativity, which is one of the contextual keywords left, right, or none. Operators that are left-associative group left-to-right. For example, the subtraction operator (-) is left-associative, and therefore the expression 4 - 5 - 6 is grouped as (4 - 5) - 6and evaluates to -7. Operators that are right-associative group right-to-left, and operators that are specified with an associativity of none don’t associate at all. Nonassociative operators of the same precedence level can’t appear adjacent to each to other. For example, 1 < 2 < 3 is not a valid expression.
-运算符的结合性可以指定在没有括号包围的情况下，优先级相同的运算符以何种顺序被分组的。可以使用上下文关键字associativity并结合性(associativity)一起来指定一个运算符的结合性，其中结合性可以说是上下文关键字left，right或none中的任何一个。左结合运算符以从左到右的形式分组。例如，减法运算符(-)具有左结合性，因此4 - 5 - 6被以(4 - 5) - 6的形式分组，其结果为-7。 右结合运算符以从右到左的形式分组，对于设置为none的非结合运算符，它们不以任何形式分组。具有相同优先级的非结合运算符，不可以互相邻接。例如，表达式1 < 2 < 3非法的。
-
-Infix operators that are declared without specifying a precedence or associativity are initialized with a precedence level of 100 and an associativity of none.
-声明时不指定任何优先级或结合性的中缀运算符，它们的优先级会被初始化为100，结合性被初始化为none。
-The following form declares a new prefix operator:
-
-	* operator prefix operator name {}
-
-
-
-
-A prefix operator is a unary operator that is written immediately before its operand, such as the prefix increment operator (++) is in the expression ++i.
-缀运算符的声明中不指定优先级。前缀运算符是非结合的。
-Prefix operators declarations don’t specify a precedence level. Prefix operators are nonassociative.
-The following form declares a new postfix operator:
-
-	* operator postfix operator name {}
-
-
-
-A postfix operator is a unary operator that is written immediately after its operand, such as the postfix increment operator (++) is in the expression i++.
-As with prefix operators, postfix operator declarations don’t specify a precedence level. Postfix operators are nonassociative.
-After declaring a new operator, you implement it by declaring a function that has the same name as the operator. To see an example of how to create and implement a new operator, see Custom Operators.
-GRAMMAR OF AN OPERATOR DECLARATION
-operator-declaration → prefix-operator-declaration­  postfix-operator-declaration­  infix-operator-declaration­
-prefix-operator-declaration → operator­prefix­operator­{­}­
-postfix-operator-declaration → operator­postfix­operator­{­}­
-infix-operator-declaration → operator­infix­operator­{­infix-operator-attributes­opt­}­
-infix-operator-attributes → precedence-clause­opt­associativity-clause­opt­
-precedence-clause → precedence­precedence-level­
-precedence-level → Digit 0 through 255
-associativity-clause → associativity­associativity­
-associativity → left­  right­  none­
-
-The body of a protocol contains zero or more protocol member declarations, which describe the conformance requirements that any type adopting the protocol must fulfill. In particular, a protocol can declare that conforming types must implement certain properties, methods, initializers, and subscripts. Protocols can also declare special kinds of type aliases, called associated types, that can specify relationships among the various declarations of the protocol. The protocol member declarations are discussed in detail below.
-协议的主体包含洗衣成员声明，它描述了comformance要求，任何实现它的协议都必须满足的要求。特别是，协议可以声明comformin类型，必须实现某个属性，方法，初始化，和子脚本。协议页能声明特殊种类的type aliase,被称作关联类型，可以设置协议里的不同声明的关系。协议成员声明下面会做详细的讨论。
-
-Protocol types can inherit from any number of other protocols. When a protocol type inherits from other protocols, the set of requirements from those other protocols are aggregated, and any type that inherits from the current protocol must conform to all those requirements. For an example of how to use protocol inheritance, see Protocol Inheritance.
-
-协议类型可以从任何数量的其它协议。当一个协议类型从其它洗衣继承时，从那些协议中的要求会被集合，任何从当前协议继承的类型都必须和那些要求一致。
-
-
-
-NOTE
-You can also aggregate the conformance requirements of multiple protocols using protocol composition types, as described in Protocol Composition Type and Protocol Composition.
-
-You can add protocol conformance to a previously declared type by adopting the protocol in an extension declaration of that type. In the extension, you must implement all of the adopted protocol’s requirements. If the type already implements all of the requirements, you can leave the body of the extension declaration empty.
-
-你可以增加协议conformance到任何一个过去声明的类型通过在那个类型的extendsion中声明。在这个扩展力，你必须实现所有使用的协议的需求。如果那个类型已经实现了所有的要求，扩展声明的主题可以是空的。
-
-By default, types that conform to a protocol must implement all properties, methods, and subscripts declared in the protocol. That said, you can mark these protocol member declarations with the optional attribute to specify that their implementation by a conforming type is optional. The optional attribute can be applied only to protocols that are marked with the objc attribute. As a result, only class types can adopt and conform to a protocol that contains optional member requirements. For more information about how to use the optionalattribute and for guidance about how to access optional protocol members—for example, when you’re not sure whether a conforming type implements them—see Optional Protocol Requirements.
-
-默认情况下，与协议一致的类型必须实现所有的属性，方法，和声明的subscripts。也就是说，你可以用opaional属性来标记协议成员，表示他们的实现是可选的。option属性仅仅能被应用到用objc标记的属性。结构，仅仅class类型能采纳和玉包含可选的成员变量的协议一致。对于如何访问可选的协议成员-例如，如果你不确定一个confroming类型是否要实现他们-看见 Optional Protocol Requirements.
-
-To restrict the adoption of a protocol to class types only, mark the entire protocol declaration with theclass_protocol attribute. Any protocol that inherits from a protocol marked with the class_protocol attribute can likewise be adopted only by a class type.
-
-为了限制协议的的只应用到某个class type，用class_protocol属性标记整个协议声明。任何从标记class_protocol协议继承的协议可以只被class 类型采纳。
-
-NOTE
-If a protocol is already marked with the objc attribute, the class_protocol attribute is implicitly applied to that protocol; there’s no need to mark the protocol with the class_protocol attribute explicitly.
-
-Protocols are named types, and thus they can appear in all the same places in your code as other named types, as discussed in Protocols as Types. However, you can’t construct an instance of a protocol, because protocols do not actually provide the implementations for the requirements they specify.
-
-
-You can use protocols to declare which methods a delegate of a class or structure should implement, as described in Delegation.
-你可以使用协议来声明类或者结构应该实现那个方法，如Delegation.描述。
-
-GRAMMAR OF A PROTOCOL DECLARATION
-protocol-declaration → attributes­opt­protocol­protocol-name­type-inheritance-clause­opt­protocol-body­
-protocol-name → identifier­
-protocol-body → {­protocol-member-declarations­opt­}­
-protocol-member-declaration → protocol-property-declaration­
-protocol-member-declaration → protocol-method-declaration­
-protocol-member-declaration → protocol-initializer-declaration­
-protocol-member-declaration → protocol-subscript-declaration­
-protocol-member-declaration → protocol-associated-type-declaration­
-protocol-member-declarations → protocol-member-declaration­protocol-member-declarations­opt­
-Protocol Property Declaration
+##协议属性声明
 
 Protocols declare that conforming types must implement a property by including a protocol property declaration in the body of the protocol declaration. Protocol property declarations have a special form of a variable declaration:
 
-协议声明conforming类型必须通过在协议声明体里包括协议属性声明实现属性。协议属性声明有一个特殊形式的变量声明。
-
-
-	* var property name: type { get set }
-
-
-
-
+var property name: type { get set }
 As with other protocol member declarations, these property declarations declare only the getter and setter requirements for types that conform to the protocol. As a result, you don’t implement the getter or setter directly in the protocol in which it is declared.
-与其他成员声明一样，这些属性声明仅仅声明getter和setter要求。结果，你不需要在声明的协议里直接实现getter或setter
+
 The getter and setter requirements can be satisfied by a conforming type in a variety of ways. If a property declaration includes both the get and set keywords, a conforming type can implement it with a stored variable property or a computed property that is both readable and writeable (that is, one that implements both a getter and a setter). However, that property declaration can’t be implemented as a constant property or a read-only computed property. If a property declaration includes only the get keyword, it can be implemented as any kind of property. For examples of conforming types that implement the property requirements of a protocol, see Property Requirements.
+
 See also Variable Declaration.
+
 GRAMMAR OF A PROTOCOL PROPERTY DECLARATION
+
 protocol-property-declaration → variable-declaration-head­variable-name­type-annotation­getter-setter-keyword-block­
 
-Protocol Method Declaration
+
+##Protocol Method Declaration
+
+##协议方法声明
 
 Protocols declare that conforming types must implement a method by including a protocol method declaration in the body of the protocol declaration. Protocol method declarations have the same form as function declarations, with two exceptions: They don’t include a function body, and you can’t provide any default parameter values as part of the function declaration. For examples of conforming types that implement the method requirements of a protocol, see Method Requirements.
 
@@ -1194,37 +847,52 @@ Protocols declare that conforming types must implement a method by including a p
 To declare a class or static method requirement in a protocol declaration, mark the method declaration with the class keyword. Classes that implement this method also declare the method with the class keyword. Structures that implement it must declare the method with the static keyword instead. If you’re implementing the method in an extension, use the class keyword if you’re extending a class and the static keyword if you’re extending a structure.
 
 在协议声明里，为了声明一个类或者静态方法要求，使用class关键字来标记方法声明。实现这个方法的类也用class来声明方法。实现它的结构必须用static进行声明。如果你在extension里实现，如果你扩展class使用class，如果是结构使用static
-See also Function Declaration.
-GRAMMAR OF A PROTOCOL METHOD DECLARATION
-protocol-method-declaration → function-head­function-name­generic-parameter-clause­opt­function-signature­
-Protocol Initializer DeclarationProtocols declare that conforming types must implement an initializer by including a protocol initializer declaration in the body of the protocol declaration. Protocol initializer declarations have the same form as initializer declarations, except they don’t include the initializer’s body.
+
+
+>GRAMMAR OF A PROTOCOL METHOD DECLARATION
+
+>protocol-method-declaration → function-head­function-name­generic-parameter-clause­opt­function-signature­
+
+##Protocol Initializer Declaration
+##协议构造器声明
+
+Protocols declare that conforming types must implement an initializer by including a protocol initializer declaration in the body of the protocol declaration. Protocol initializer declarations have the same form as initializer declarations, except they don’t include the initializer’s body.
+
 See also Initializer Declaration.
-GRAMMAR OF A PROTOCOL INITIALIZER DECLARATION
-protocol-initializer-declaration → initializer-head­generic-parameter-clause­opt­parameter-clause­
-Protocol Subscript Declaration
+
+>GRAMMAR OF A PROTOCOL INITIALIZER DECLARATION
+
+>protocol-initializer-declaration → initializer-head­generic-parameter-clause­opt­parameter-clause­
+
+
+##Protocol Subscript Declaration
 
 Protocols declare that conforming types must implement a subscript by including a protocol subscript declaration in the body of the protocol declaration. Protocol property declarations have a special form of a subscript declaration:
 
 
-
-
-	* subscript (parameters) -> return type { get set }
-
+>subscript (parameters) -> return type { get set }
 
 
 Subscript declarations only declare the minimum getter and setter implementation requirements for types that conform to the protocol. If the subscript declaration includes both the get and set keywords, a conforming type must implement both a getter and a setter clause. If the subscript declaration includes only the get keyword, a conforming type must implement at least a getter clause and optionally can implement a setter clause.
 See also Subscript Declaration.
-GRAMMAR OF A PROTOCOL SUBSCRIPT DECLARATION
-protocol-subscript-declaration → subscript-head­subscript-result­getter-setter-keyword-block­
-Protocol Associated Type Declaration
+
+>GRAMMAR OF A PROTOCOL SUBSCRIPT DECLARATION
+
+>protocol-subscript-declaration → subscript-head­subscript-result­getter-setter-keyword-block­
+
+##Protocol Associated Type Declaration
+
+##协议关联类型声明
 
 Protocols declare associated types using the keyword typealias. An associated type provides an alias for a type that is used as part of a protocol’s declaration. Accosiated types are similiar to type paramters in generic parameter clauses, but they’re associated with Self in the protocol in which they’re declared. In that context, Self refers to the eventual type that conforms to the protocol. For more information and examples, see Associated Types.
 
 协议用关键字typealias声明关联类型。关联类型为类型提供了一个alias，这个被用作协议声明的一部分。关联类型与在通用参数预计的类型参数相似，但是他们与声明他们的协议中的self相似。在那个环境下，self指的是时间类型。
+
 See also Type Alias Declaration.
-GRAMMAR OF A PROTOCOL ASSOCIATED TYPE DECLARATION
-protocol-associated-type-declaration → typealias-head­type-inheritance-clause­opt­typealias-assignment­opt­
-Initializer Declaration
+
+>GRAMMAR OF A PROTOCOL ASSOCIATED TYPE DECLARATION
+
+>protocol-associated-type-declaration → typealias-head­type-inheritance-clause­opt­typealias-assignment­op
 
 An initializer declaration introduces an initializer for a class, structure, or enumeration into your program. Initializer declarations are declared using the keyword init and have two basic forms.
 
@@ -1235,15 +903,10 @@ Structure, enumeration, and class types can have any number of initializers, but
 结构，枚举和类类型可以有很多初始器，但是class初始化器的规则和关联行为是不同的。不像结构和枚举类型。类有两种初始化器：制定的和便利的初始化器。
 The following form declares initializers for structures, enumerations, and designated initializers of classes:
 
-	* init(parameters) {
 
-
-	* 
-    statements
-
-	* 
-}
-
+    init(parameters) {
+         statements
+    }
 
 
 A designated initializer of a class initializes all of the class’s properties directly. It can’t call any other initializers of the same class, and if the class has a superclass, it must call one of the superclass’s designated initializers. If the class inherits any properties from its superclass, one of the superclass’s designated initializers must be called before any of these properties can be set or modified in the current class.
@@ -1251,41 +914,31 @@ Designated initializers can be declared in the context of a class declaration on
 Initializers in structures and enumerations can call other declared initializers to delegate part or all of the initialization process.
 To declare convenience initializers for a class, prefix the initializer declaration with the context-sensitive keyword convenience.
 
-	* convenience init(parameters) {
 
-
-	* 
-    statements
-
-	* 
-}
-
+    convenience init(parameters) {
+       statements
+    }
 
 
 Convenience initializers can delegate the initialization process to another convenience initializer or to one of the class’s designated initializers. That said, the initialization processes must end with a call to a designated initializer that ultimately initializes the class’s properties. Convenience initializers can’t call a superclass’s initializers.
 You can mark designated and convenience initializers with the required attribute to require that every subclass implement the initializer. Because designated initializers are not inherited by subclasses, they must be implemented directly. Required convenience initializers can be either implemented explicitly or inherited when the subclass directly implements all of the superclass’s designated initializers (or overrides the designated initializers with convenience initializers). Unlike methods, properties, and subscripts, you don’t need to mark overridden initializers with the override keyword.
+
 To see examples of initializers in various type declarations, see Initialization.
-GRAMMAR OF AN INITIALIZER DECLARATION
-initializer-declaration → initializer-head­generic-parameter-clause­opt­parameter-clause­initializer-body­
-initializer-head → attributes­opt­convenience­opt­init­
-initializer-body → code-block­
-Deinitializer Declaration
+
+
+>GRAMMAR OF AN INITIALIZER DECLARATION
+
+>initializer-declaration → initializer-head­generic-parameter-clause­opt­parameter-clause­initializer-body­
+>initializer-head → attributes­opt­convenience­opt­init­
+>initializer-body → code-block­
 
 A deinitializer declaration declares a deinitializer for a class type. Deinitializers take no parameters and have the following form:
 
 析构声明在类中声明了一个析构器。析构器不需要参数，遵循如下的格式：
 
-
-	* deinit {
-
-
-	* 
-    statements
-
-	* 
-}
-
-
+    deinit {
+       statements
+    }
 
 
 A deinitializer is called automatically when there are no longer any references to a class object, just before the class object is deallocated. A deinitializer can be declared only in the body of a class declaration—but not in an extension of a class—and each class can have at most one.
@@ -1299,29 +952,29 @@ Deinitializers are not called directly.
 
 子类继承了它的超类的析构器，在子类帝乡将要被释放时会被隐式的调用。子类在所有析构器被执行完毕前不会被释放。
 析构器不会被直接调用。
+
 For an example of how to use a deinitializer in a class declaration, see Deinitialization.
-GRAMMAR OF A DEINITIALIZER DECLARATION
-deinitializer-declaration → attributes­opt­deinit­code-block­
-Extension Declaration
+>GRAMMAR OF A DEINITIALIZER DECLARATION
+
+>deinitializer-declaration → attributes­opt­deinit­code-block
+
+##Extension Declaration
+##扩展声明
 
 An extension declaration allows you to extend the behavior of existing class, structure, and enumeration types. Extension declarations begin with the keyword extension and have the following form:
 
 扩展声明用于扩展一个已存在的类，结构体，枚举的行为。扩展声明以关键字extension开始，遵循如下的规则：
 
 
-	* extension type: adopted protocols {
 
-
-	* 
-    declarations
-
-	* 
-}
-
+    extension type: adopted protocols {
+       declarations
+    }
 
 
 
 The body of an extension declaration contains zero or more declarations. These declarations can include computed properties, computed static properties, instance methods, static and class methods, initializers, subscript declarations, and even class, structure, and enumeration declarations. Extension declarations can’t contain destructor or protocol declarations, store properties, property observers, or other extension declarations. For a discussion and several examples of extensions that include various kinds of declarations, see Extensions.
+
 一个扩展声明体包括零个或多个声明。这些声明可以包括计算型属性，计算型静态属性，实例方法，静态和类方法，构造器， 附属脚本声明，甚至其他类，结构和枚举声明。扩展声明不能包含析构器，协议声明，存储型属性，属性监测器或其他 的扩展属性。详细讨论和查看包含多种扩展声明的实例，参见扩展一节。
 
 Extension declarations can add protocol conformance to an existing class, structure, and enumeration type in the adopted protocols. Extension declarations can’t add class inheritance to an existing class, and therefore the type-inheritance-clause in an extension declaration contains only a list of protocols.
@@ -1335,43 +988,27 @@ Properties, methods, and initializers of an existing type can’t be overridden 
 Extension declarations can contain initializer declarations. That said, if the type you’re extending is defined in another module, an initializer declaration must delegate to an initializer already defined in that module to ensure members of that type are properly initialized.
 扩展声明可以包含构造器声明，这意味着，如果你扩展的类型在其他模块中定义，构造器声明必须委托另一个在 那个模块里声明的构造器来恰当的初始化。
 
-GRAMMAR OF AN EXTENSION DECLARATION
-extension-declaration → extension­type-identifier­type-inheritance-clause­opt­extension-body­
-extension-body → {­declarations­opt­}­
-Subscript Declaration
+>GRAMMAR OF AN EXTENSION DECLARATION
+
+>extension-declaration → extension­type-identifier­type-inheritance-clause­opt­extension-body­
+>extension-body → {­declarations­opt­}­
+
+
+##Subscript Declaration
+##附属脚本声明
 
 A subscript declaration allows you to add subscripting support for objects of a particular type and are typically used to provide a convenient syntax for accessing the elements in a collection, list, or sequence. Subscript declarations are declared using the keyword subscript and have the following form:
 附属脚本用于向特定类型的对象添加附属脚本支持，通常为访问集合，列表和序列的元素时提供便利的语法。附属脚本声明使用关键字subscript，声明形式如下：
 
 
-	* subscript (parameters) -> return type {
-
-
-	* 
-    get {
-
-
-	* 
-        statements
-
-	* 
+> subscript (`parameter`) -> (return type){
+    get{
+      `statements`
     }
-
-
-	* 
-    set(setter name) {
-
-
-	* 
-        statements
-
-	* 
+    set(`setter name`){
+      `statements`
     }
-
-
-	* 
 }
-
 
 
 
@@ -1384,24 +1021,30 @@ The parameters specify one or more indexes used to access elements of the corres
 
 
 As with computed properties, subscript declarations support reading and writing the value of the accessed elements. The getter is used to read the value, and the setter is used to write the value. The setter clause is optional, and when only a getter is needed, you can omit both clauses and simply return the requested value directly. That said, if you provide a setter clause, you must also provide a getter clause.
+
 和计算性属性一样，附属脚本声明支持对访问元素的读写操作。getter用于读取值，setter用于写入值。setter子句是可选的，当仅需要一个getter子句时，可以将二者都忽略且直接返回请求的值即可。也就是说，如果使用了setter子句，就必须使用getter子句。
 
 The setter name and enclosing parentheses are optional. If you provide a setter name, it is used as the name of the parameter to the setter. If you do not provide a setter name, the default parameter name to the setter is value. That type of the setter name must be the same as the return type.
+
 setter的名字和封闭的括号是可选的。如果使用了setter名称，它会被当做传给setter的变量的名称。如果不使用setter名称，那么传给setter的变量的名称默认是value。setter名称的类型必须与返回类型(return type)的类型相同。
 
 You can overload a subscript declaration in the type in which it is declared, as long as the parameters or thereturn type differ from the one you’re overloading. You can also override a subscript declaration inherited from a superclass. When you do so, you must mark the overridden subscript declaration with the overridekeyword.
+
 可以在附属脚本声明的类型中，可以重载附属脚本，只要变量(parameters)或返回类型(return type)与先前的不同即可。此时，必须使用override关键字声明那个被覆盖的附属脚本。(注：好乱啊！到底是重载还是覆盖？！)
 
 You can also declare subscripts in the context of a protocol declaration, as described in Protocol Subscript Declaration.
 同样可以在协议声明的上下文中声明附属脚本，Protocol Subscript Declaration中有所描述。
 For more information about subscripting and to see examples of subscript declarations, see Subscripts.
-GRAMMAR OF A SUBSCRIPT DECLARATION
-subscript-declaration → subscript-head­subscript-result­code-block­
-subscript-declaration → subscript-head­subscript-result­getter-setter-block­
-subscript-declaration → subscript-head­subscript-result­getter-setter-keyword-block­
-subscript-head → attributes­opt­subscript­parameter-clause­
-subscript-result → ->­attributes­opt­type­
-Operator Declaration
+
+>GRAMMAR OF A SUBSCRIPT DECLARATION
+
+>subscript-declaration → subscript-head­subscript-result­code-block­
+>subscript-declaration → subscript-head­subscript-result­getter-setter-block­
+>subscript-declaration → subscript-head­subscript-result­getter-setter-keyword-block­
+>subscript-head → attributes­opt­subscript­parameter-clause­
+>subscript-result → ->­attributes­opt­type­
+
+#Operator Declaration
 
 An operator declaration introduces a new infix, prefix, or postfix operator into your program and is declared using the contextual keyword operator.
 
@@ -1410,20 +1053,14 @@ You can declare operators of three different fixities: infix, prefix, and postfi
 
 
 There are three basic forms of an operator declaration, one for each fixity. The fixity of the operator is specified by including the contextual keyword infix, prefix, or postfix between operator and the name of the operator. In each form, the name of the operator can contain only the operator characters defined inOperators.
+
 运算符声明会向程序中引入中缀、前缀或后缀运算符，它使用上下文关键字operator声明。 可以声明三种不同的缀性：中缀、前缀和后缀。操作符的缀性描述了操作符与它的操作数的相对位置。 运算符声明有三种基本形式，每种缀性各一种。运算符的缀性通过在operator和运算符之间添加上下文关键字infix，prefix或postfix来指定。每种形式中，运算符的名字只能包含Operators中定义的运算符字符。
 The following form declares a new infix operator:
 
-	* operator infix operator name {
-
-
-	* 
-    precedence precedence level
-
-	* 
-    associativity associativity
-
-	* 
-}
+> operator infix `operator name`{
+    precedence `precedence level`
+    associativity `associativity`
+ }
 
 
 
@@ -1435,18 +1072,18 @@ Infix operators can optionally specify a precedence, associativity, or both.
 中缀运算符可以可选地指定优先级，结合性，或两者同时指定。
 
 The precedence of an operator specifies how tightly an operator binds to its operands in the absence of grouping parentheses. You specify the precedence of an operator by writing the contextual keywordprecedence followed by the precedence level. The precedence level can be any whole number (decimal integer) from 0 to 255; unlike decimal integer literals, it can’t contain any underscore characters. Although the precedence level is a specific number, it is significant only relative to another operator. That is, when two operators compete with each other for their operands, such as in the expression 2 + 3 * 5, the operator with the higher precedence level binds more tightly to its operands.
+
 运算符的优先级可以指定在没有括号包围的情况下，运算符与它的操作数如何紧密绑定的。可以使用上下文关键字precedence并优先级(precedence level)一起来指定一个运算符的优先级。优先级可以是0到255之间的任何一个数字(十进制整数)；与十进制整数字面量不同的是，它不可以包含任何下划线字符。尽管优先级是一个特定的数字，但它仅用作与另一个运算符比较(大小)。也就是说，一个操作数可以同时被两个运算符使用时，例如2 + 3 * 5，优先级更高的运算符将优先与操作数绑定。
 
 The associativity of an operator specifies how a sequence of operators with the same precedence level are grouped together in the absence of grouping parentheses. You specify the associativity of an operator by writing the contextual keyword associativity followed by the associativity, which is one of the contextual keywords left, right, or none. Operators that are left-associative group left-to-right. For example, the subtraction operator (-) is left-associative, and therefore the expression 4 - 5 - 6 is grouped as (4 - 5) - 6and evaluates to -7. Operators that are right-associative group right-to-left, and operators that are specified with an associativity of none don’t associate at all. Nonassociative operators of the same precedence level can’t appear adjacent to each to other. For example, 1 < 2 < 3 is not a valid expression.
+
 运算符的结合性可以指定在没有括号包围的情况下，优先级相同的运算符以何种顺序被分组的。可以使用上下文关键字associativity并结合性(associativity)一起来指定一个运算符的结合性，其中结合性可以说是上下文关键字left，right或none中的任何一个。左结合运算符以从左到右的形式分组。例如，减法运算符(-)具有左结合性，因此4 - 5 - 6被以(4 - 5) - 6的形式分组，其结果为-7。 右结合运算符以从右到左的形式分组，对于设置为none的非结合运算符，它们不以任何形式分组。具有相同优先级的非结合运算符，不可以互相邻接。例如，表达式1 < 2 < 3非法的。
 
 Infix operators that are declared without specifying a precedence or associativity are initialized with a precedence level of 100 and an associativity of none.
 声明时不指定任何优先级或结合性的中缀运算符，它们的优先级会被初始化为100，结合性被初始化为none。
 The following form declares a new prefix operator:
 
-	* operator prefix operator name {}
-
-
+> operator prefix `operator name`{}
 
 
 A prefix operator is a unary operator that is written immediately before its operand, such as the prefix increment operator (++) is in the expression ++i.
@@ -1454,20 +1091,24 @@ A prefix operator is a unary operator that is written immediately before its ope
 Prefix operators declarations don’t specify a precedence level. Prefix operators are nonassociative.
 The following form declares a new postfix operator:
 
-	* operator postfix operator name {}
+> operator postfix `operator name`{}
 
 
 
 A postfix operator is a unary operator that is written immediately after its operand, such as the postfix increment operator (++) is in the expression i++.
 As with prefix operators, postfix operator declarations don’t specify a precedence level. Postfix operators are nonassociative.
 After declaring a new operator, you implement it by declaring a function that has the same name as the operator. To see an example of how to create and implement a new operator, see Custom Operators.
-GRAMMAR OF AN OPERATOR DECLARATION
-operator-declaration → prefix-operator-declaration­  postfix-operator-declaration­  infix-operator-declaration­
-prefix-operator-declaration → operator­prefix­operator­{­}­
-postfix-operator-declaration → operator­postfix­operator­{­}­
-infix-operator-declaration → operator­infix­operator­{­infix-operator-attributes­opt­}­
-infix-operator-attributes → precedence-clause­opt­associativity-clause­opt­
-precedence-clause → precedence­precedence-level­
-precedence-level → Digit 0 through 255
-associativity-clause → associativity­associativity­
-associativity → left­  right­  none­
+
+
+>GRAMMAR OF AN OPERATOR DECLARATION
+>
+>operator-declaration → prefix-operator-declaration­  postfix-operator-declaration­  >infix-operator-declaration­
+>prefix-operator-declaration → operator ­prefix­ operator­{­}­
+>postfix-operator-declaration → operator ­postfix­ operator­{­}­
+>infix-operator-declaration → operator­infix­operator­{­infix-operator-attributes­opt­}­
+>infix-operator-attributes → precedence-clause­opt­associativity-clause­opt­
+>precedence-clause → precedence­precedence-level­
+>precedence-level → Digit 0 through 255
+>associativity-clause → associativity­associativity­
+>associativity → left­  right­  none
+
