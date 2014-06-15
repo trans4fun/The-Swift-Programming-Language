@@ -93,15 +93,24 @@ Apply this attribute to the type of a function or method to indicate that the fu
 
 > GRAMMAR OF AN ATTRIBUTE
 
-‌> attribute → @attribute-nameattribute-argument-clauseopt
-‌> attribute-name → identifier
-‌> attribute-argument-clause → (balanced-tokensopt)
-‌> attributes → attributeattributesopt
-‌> balanced-tokens → balanced-tokenbalanced-tokensopt
-‌> balanced-token → (balanced-tokensopt)
-‌> balanced-token → [balanced-tokensopt]
-‌> balanced-token → {balanced-tokensopt}
-‌> balanced-token → Any identifier, keyword, literal, or operator
-‌> balanced-token → Any punctuation except (, ), [, ], {, or }
+> attribute → @attribute-nameattribute-argument-clauseopt
+
+> attribute-name → identifier
+
+> attribute-argument-clause → (balanced-tokensopt)
+
+> attributes → attributeattributesopt
+
+> balanced-tokens → balanced-tokenbalanced-tokensopt
+
+> balanced-token → (balanced-tokensopt)
+
+> balanced-token → [balanced-tokensopt]
+
+> balanced-token → {balanced-tokensopt}
+
+> balanced-token → Any identifier, keyword, literal, or operator
+
+> balanced-token → Any punctuation except (, ), [, ], {, or }
 
 
