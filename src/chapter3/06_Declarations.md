@@ -47,6 +47,8 @@ In Swift, most declarations are also definitions in the sense that they are impl
 
 The module scope defines the code that’s visible to other code in Swift source files that are part of the same module. The top-level code in a Swift source file consists of zero or more statements, declarations, and expressions. Variables, constants, and other named declarations that are declared at the top-level of a source file are visible to code in every source file that is part of the same module。
 
+模块范围定义了在模块中对Swift源文件可见的代码。在Swift源文件中顶层的代码由0或多个语句、声明和表达式组成。在源文件的最上层声明的变量、常量和其它命名的声明对于同一模块的其它源文件代码都是可见的。
+
 >GRAMMAR OF A TOP-LEVEL DECLARATION
 
 >top-level-declaration → statements­opt
@@ -213,7 +215,7 @@ The following form declares a computed variable or computed property:
   }
 You define this form of a variable declaration at global scope, the local scope of a function, or in the context of a class, structure, enumeration, or extension declaration. When a variable declaration of this form is declared at global scope or the local scope of a function, it is referred to as a computed variable. When it is declared in the context of a class, structure, or extension declaration, it is referred to as a computed property.
 
-可以在全局范围，局部范围，或者类、结构、枚举或者可扩展的声明。如果这类型是的变量声明在全局或者函数的局部返回声明，指的是可计算的变量。如果它在一个雷，结构或者扩展声明里，它就是指的可计算的属性。
+可以在全局范围，局部范围，或者类、结构、枚举或者定义可扩展的声明。如果这类型是的变量声明在全局或者函数的局部返回声明，指的是计算型变量。如果它在一个雷，结构或者扩展声明里，它就是指的是计算型属性。
 
 
 The getter is used to read the value, and the setter is used to write the value. The setter clause is optional, and when only a getter is needed, you can omit both clauses and simply return the requested value directly, as described in Read-Only Computed Properties. But if you provide a setter clause, you must also provide a getter clause.
@@ -427,22 +429,22 @@ You can override the default behavior for how parameter names are used with one 
 
 A second name before the local parameter name gives the parameter an external name, which can be different than the local parameter name. The external parameter name must be used when the function is called. The corresponding argument must have the external name in function or method calls.
 
-本地参数名的在第二个名字给参数了一个外部的名字，这个不同于本地的参数名。外部的参数名必须在函数调用的时候调用。相应的参数必须在函数或者方法调用时有外部名字。
+本地参数名前的第二个名字给参数了一个外部的名字，这个不同于本地的参数名。外部的参数名必须在函数调用的时候调用。相应的参数必须在函数或者方法调用时有外部名字。
 
 A hash symbol (#) before a parameter name indicates that the name should be used as both an external and a local parameter name. It has the same meaning as writing the local parameter name twice. The corresponding argument must have this name in function or method calls.
 
-参数名前的#显示了名字应该被作为外部和本地参数只哟个。它和写入本地参数名两次有同样的意义。嘴硬的参数在函数或者参数调用时必须有这个名字。
+参数名前的#显示了名字应该同时被作为外部和本地参数使用。它和写入本地参数名两次有同样的意义。相应的参数在函数或者参数调用时必须有这个名字。
 
 An underscore (_) before a local parameter name gives that parameter no name to be used in function calls. The corresponding argument must have no name in function or method calls.
 
-本次参数名的下划线在函数调用的时候让参数没有使用名字。对应的参在函数或者方法调用的时候不可以有名字。
+本地参数名前面的下划线在函数调用的时候让参数可以没有名字。相应的参数在函数或者方法调用的时候没有名字。
 
 ##Special Kinds of Parameters
 
 ##特殊类型的参数
 
 Parameters can be ignored, take a variable number of values, and provide default values using the following forms:
-参数可以忽略，可以是可变数量的值，使用如下的形式提供默认值
+参数可以忽略，需要不同数量的值，会提供默认值。使用如下的形式：
 
 
  _ : <#parameter type#.
@@ -460,19 +462,19 @@ A parameter with a base type name followed immediately by three dots (...) is un
 
 A parameter with an equals sign (=) and an expression after its type is understood to have a default value of the given expression. If the parameter is omitted when calling the function, the default value is used instead. If the parameter is not omitted, it must have its name in the function call. For example, f() and f(x: 7) are both valid calls to a function with a single default parameter named x, but f(7) is invalid because it provides a value without a name.
 
-带有等号（=）的参数和它类型后面的表达式会被仿作给定表达式的默认类型。如果参数在调用函数的时候被忽略，默认值会被使用。例如，f()和f(x:7)都是有效的调用对于带有单个默认的的参数名x的函数，但是f(7)是有效的，因为它提供了没有名字的值。
+带有等号（=）的参数和它的类型后面的表达式会被当作给定表达式的默认类型。如果参数在调用函数的时候被忽略，默认值会被使用。例如，对于带有单个默认的的参数名x的函数，f()和f(x:7)都是有效的调用，但是f(7)是有效的，因为它提供了没有名字的值。
 
-Special Kinds of MethodsMethods on an enumeration or a structure that modify self must be marked with the mutating keyword at the start of the function declaration.
+Special Kinds of Methods on an enumeration or a structure that modify self must be marked with the mutating keyword at the start of the function declaration.
 
-枚举类型或者结构上的方法，会修改self的必须在函数声明的开始标记为mutating关键字
+会修改self的枚举类型或者结构上的方法，必须在函数声明的开始标记为mutating关键字
 
 Methods that override a superclass method must be marked with the override keyword at the start of the function declaration. It is an error to override a method without the override keyword or to use the overridekeyword on a method that doesn’t override a superclass method.
 
-重写超类方法的方法必须在函数声明的开头override关键词标记。不适用override就重写方法会产生错误或者使用override在没有override超类的方法
+重写超类方法的方法必须在函数声明的开头override关键词标记。没有override就重写方法会产生错误或者使用override在没有重载超类的方法
 
 Methods associated with a type rather than an instance of a type must be marked with the static attribute for enumerations and structures or the class attribute for classes.
 
-与type相关而不是类型实例相关的方法必须使用使用static属性来标记枚举、结构或者类的class属性
+与type相关而不是类型实例相关的方法必须使用使用static属性来标记枚举、结构或者类的class属性。
 
 ##Curried Functions and Methods
 
@@ -523,7 +525,7 @@ Curried functions and methods have the following form:
 
 A function declared this way is understood as a function whose return type is another function. For example, the following two declarations are equivalent:
 
-用这种方式声明的函数会被当做一个函数，这个函数的返回类型是另外一个函数。例如，下面2个声明是一样的：
+用这种方式声明的函数会被当做一个函数，它的返回类型是另外一个函数。例如，下面2个声明是一样的：
 
 
 ##Enumeration Declaration
@@ -532,12 +534,12 @@ A function declared this way is understood as a function whose return type is an
 
 An enumeration declaration introduces a named enumeration type into your program.
 
-枚举声明引入一个个名叫枚举的类型到你的程序中。
+枚举声明引入了名叫枚举的类型程序中。
 
 
 Enumeration declarations have two basic forms and are declared using the keyword enum. The body of an enumeration declared using either form contains zero or more values—called enumeration cases—and any number of declarations, including computed properties, instance methods, static methods, initializers, type aliases, and even other enumeration, structure, and class declarations. Enumeration declarations can’t contain destructor or protocol declarations.
 
-枚举声明有2中基本的形式，使用关键字enum声明。一个枚举类型的的主题使用2中形式之一，包含0或者蒙多的值-被称作枚举类型还有任何数量的声明，包括可计算的属性，实例方法，静态方法，初始化，类型aliase,和其它的枚举、结构和类声明。枚举声明不能包含析构或者协议声明。
+枚举声明有2种基本的形式，使用关键字enum声明。一个枚举类型的的主体会使用这2种形式之一，包含0或多个值-被称作枚举类型。还有任何数量的声明，包括计算型的属性，实例方法，静态方法，初始化，类型别名,和其它的枚举、结构和类声明。枚举声明不能包含析构或者协议声明。
 
 Unlike classes and structures, enumeration types do not have an implicitly provided default initializer; all initializers must be declared explicitly. Initializers can delegate to other initializers in the enumeration, but the initialization process is complete only after an initializer assigns one of the enumeration cases to self.
 
@@ -545,11 +547,13 @@ Unlike classes and structures, enumeration types do not have an implicitly provi
 
 Like structures but unlike classes, enumerations are value types; instances of an enumeration are copied when assigned to variables or constants, or when passed as arguments to a function call. For information about value types, see Structures and Enumerations Are Value Types.
 
-类似结构但是不像类，枚举累心是值类型；一个枚举实例在赋值给变量或者常量的时候会被复制，或者在传递参数给函数调用的的时候。
+类似结构但是不像类，枚举是值类型；一个枚举实例在赋值给变量或者常量的时候会被复制，或者在传递参数给函数调用的的时候。
 
-You can extend the behavior of an enumeration type with an extension declaration, as discussed inExtension Declaration.
+You can extend the behavior of an enumeration type with an extension declaration, as discussed in Extension Declaration.
 
-Enumerations with Cases of Any Type
+
+
+可以使用extension声明扩展枚举类型的行为，如果Extension Declaration Enumerations with Cases of Any Type描述的那样。
 
 The following form declares an enumeration type that contains enumeration cases of any type:
 
@@ -565,11 +569,11 @@ The following form declares an enumeration type that contains enumeration cases 
 
 Enumerations declared in this form are sometimes called discriminated unions in other programming languages.
 
-用这种形式声明的枚举在其他语言里有时候被叫做discriminated unions
+用这种形式声明的枚举在其它语言里有时候被叫做discriminated unions
 
 In this form, each case block consists of the keyword case followed by one or more enumeration cases, separated by commas. The name of each case must be unique. Each case can also specify that it stores values of a given type. These types are specified in the associated value types tuple, immediately following the name of the case. For more information and to see examples of cases with associated value types, seeAssociated Values.
 
-用这种方式，每个cast块由关键字case组成，case后跟着一个或者多个逗号分隔的枚举情况。每个case的名字必须是唯一的。每个case页能够确定他存储一个给定类型的值。这些类型用关联只类型元组来设置，后面紧梗着case的名字。获取更多信息，看下关联至类型的的例子，请看Assiciated Values Enumerations with Raw Cases Values
+用这种方式，每个cast块由关键字case组成，case后跟着一个或者多个逗号分隔的枚举case。每个case的名字必须是唯一的。每个case也能够确定它存储一个给定类型的值。这些类型用关联值类型元组来设置，后面紧跟着case的名字。获取更多信息，或关联值类型的的例子，请看Assiciated Values Enumerations with Raw Cases Values
 
 The following form declares an enumeration type that contains enumeration cases of the same basic type:
 
@@ -589,7 +593,7 @@ In this form, each case block consists of the keyword case, followed by one or m
 
 Each case must have a unique name and be assigned a unique raw value. If the raw value type is specified as Int and you don’t assign a value to the cases explicitly, they are implicitly assigned the values 0, 1, 2, and so on. Each unassigned case of type Int is implicitly assigned a raw value that is automatically incremented from the raw value of the previous case.
 
-每个case必须有一个唯一的名字，然后被赋值为一个单独的原生值。如果原生值用Int设置，你不需要要显式的赋值，他们可以默认的赋值1,1,2等等。每个没有赋值的Int类型会被赋值为原生类型，可以自动的从之前的case的原生值增加。
+每个case必须有一个唯一的名字，然后被赋值为一个单独的原生值。如果原生值用Int设置，你不需要要显式的赋值，他们可以默认的赋值1,1,2等等。每个没有赋值的Int类型会被赋值为原生类型，可以自动的从之前的case的原生值递增。
 
 
 	enum ExampleEnum: Int {
@@ -611,9 +615,11 @@ The raw value of an enumeration case can be accessed by calling its toRaw method
 
 To reference the case of an enumeration type, use dot (.) syntax, as in EnumerationType.EnumerationCase. When the enumeration type can be inferred from context, you can omit it (the dot is still required), as described inEnumeration Syntax and Implicit Member Expression.
 
-正如EnumerationType.EnumerationCase，可以使用。来引用一个enumeration类型的case，正如inEnumeration Syntax and Implicit Member Expression.描述的。
+正如EnumerationType.EnumerationCase，可以使用语法.来引用一个enumeration类型的case，正如inEnumeration Syntax and Implicit Member Expression所描述的。
 
 To check the values of enumeration cases, use a switch statement, as shown in Matching Enumeration Values with a Switch Statement. The enumeration type is pattern-matched against the enumeration case patterns in the case blocks of the switch statement, as described in Enumeration Case Pattern.
+
+使用switch语句来检验枚举事件的值，正如使用switch语句匹配枚举值（Matching Enumeration Values with a Switch Statement)一节描述的那样。
 
 >GRAMMAR OF AN ENUMERATION DECLARATION
 
@@ -638,7 +644,7 @@ To check the values of enumeration cases, use a switch statement, as shown in Ma
 ##结构声明
 A structure declaration introduces a named structure type into your program. Structure declarations are declared using the keyword struct and have the following form:
 
-结构声明引入了命名的类型到程序中。结构声明使用struct声明，采用以下的形式：
+结构声明引入了命名的类型到程序中。结构声明使用struct声明，采用如下的形式：
 
    struct structure name: adopted protocols {
      declarations
@@ -876,7 +882,7 @@ To declare a class or static method requirement in a protocol declaration, mark 
 
 Protocols declare that conforming types must implement an initializer by including a protocol initializer declaration in the body of the protocol declaration. Protocol initializer declarations have the same form as initializer declarations, except they don’t include the initializer’s body.
 
-协议声明了一致性类型必须在协议声明的主体里通过引入一个协议构造器声明来实现一个构造器。协议构造器声明 除了不包含构造器体外，和构造器声明有着相同的形式.
+协议声明了一致性类型必须在协议声明的主体里通过引入一个协议构造器声明来实现一个构造器。协议构造器声明除了不包含构造器体外，和构造器声明有着相同的形式.
 
 See also Initializer Declaration.
 
@@ -891,7 +897,7 @@ See also Initializer Declaration.
 
 Protocols declare that conforming types must implement a subscript by including a protocol subscript declaration in the body of the protocol declaration. Protocol property declarations have a special form of a subscript declaration:
 
-协议声明了一致性类型必须在协议声明的主体里通过引入一个协议附属脚本声明来实现一个附属脚本。协议属性声明 对附属脚本声明有一个特殊的形式：
+协议声明了一致性类型必须在协议声明的主体里通过引入一个协议附属脚本声明来实现一个附属脚本。协议属性声明对附属脚本声明有一个特殊附属脚本声明形式：
 
 >subscript (parameters) -> return type { get set }
 
@@ -899,7 +905,7 @@ Protocols declare that conforming types must implement a subscript by including 
 Subscript declarations only declare the minimum getter and setter implementation requirements for types that conform to the protocol. If the subscript declaration includes both the get and set keywords, a conforming type must implement both a getter and a setter clause. If the subscript declaration includes only the get keyword, a conforming type must implement at least a getter clause and optionally can implement a setter clause.
 See also Subscript Declaration.
 
-附属脚本声明只为和协议一致的类型声明了必需的最小数量的的getter和setter。如果附属脚本申明包含get和set关键字， 一致的类型也必须有一个getter和setter语句。如果附属脚本声明值包含get关键字，一致的类型必须至少包含一个 getter语句，可以选择是否包含setter语句。
+附属脚本声明只为和协议一致的类型声明了必需的最小数量的的getter和setter。如果附属脚本声明包含get和set关键字， 一致的类型也必须有一个getter和setter语句。如果附属脚本声明值包含get关键字，一致的类型必须至少包含一个 getter语句，可以选择是否包含setter语句。
 
 >GRAMMAR OF A PROTOCOL SUBSCRIPT DECLARATION
 
@@ -911,9 +917,11 @@ See also Subscript Declaration.
 
 Protocols declare associated types using the keyword typealias. An associated type provides an alias for a type that is used as part of a protocol’s declaration. Accosiated types are similiar to type paramters in generic parameter clauses, but they’re associated with Self in the protocol in which they’re declared. In that context, Self refers to the eventual type that conforms to the protocol. For more information and examples, see Associated Types.
 
-协议用关键字typealias声明关联类型。关联类型为类型提供了一个alias，这个被用作协议声明的一部分。关联类型与在通用参数预计的类型参数相似，但是他们与声明他们的协议中的self相似。在那个环境下，self指的是时间类型。
+协议用关键字typealias声明关联类型。关联类型为类型提供了一个别名，这个被用作协议声明的一部分。关联类型与在通用参数子句的类型参数相似，但是他们与声明他们的协议中的self相似。在那个环境下，self指的是时间类型。
 
 See also Type Alias Declaration.
+
+也可以参看 Type Alias Declaration.
 
 >GRAMMAR OF A PROTOCOL ASSOCIATED TYPE DECLARATION
 
@@ -926,14 +934,15 @@ See also Type Alias Declaration.
 
 An initializer declaration introduces an initializer for a class, structure, or enumeration into your program. Initializer declarations are declared using the keyword init and have two basic forms.
 
-构造器声明引入了类的初始化器到程序里。初始化声明使用关键字init声明，有两种基本形式：
+构造器声明引入了类的构造器器到程序中。初始化声明使用关键字init声明，有两种基本形式：
 
 Structure, enumeration, and class types can have any number of initializers, but the rules and associated behavior for class initializers are different. Unlike structures and enumerations, classes have two kinds of initializers: designated initializers and convenience initializers, as described in Initialization.
 
-结构，枚举和类类型可以有很多初始器，但是class初始化器的规则和关联行为是不同的。不像结构和枚举类型。类有两种初始化器：制定的和便利的初始化器。
+结构，枚举和类类型可以有很多构造器，但是类构造器的规则和关联行为是不同的。不像结构和枚举类型。类有两种构造器：指定的和便利的构造器器。
 
 The following form declares initializers for structures, enumerations, and designated initializers of classes:
 
+下面的形式声明了结构，枚举和类指定的构造器
 
     init(parameters) {
          statements
@@ -942,15 +951,15 @@ The following form declares initializers for structures, enumerations, and desig
 
 A designated initializer of a class initializes all of the class’s properties directly. It can’t call any other initializers of the same class, and if the class has a superclass, it must call one of the superclass’s designated initializers. If the class inherits any properties from its superclass, one of the superclass’s designated initializers must be called before any of these properties can be set or modified in the current class.
 
-类的指定构造器将类的所有属性直接初始化。如果类有超类，它不能调用该类的其他构造器,它只能调用超类的一个 指定构造器。如果该类从它的超类处继承了任何属性，这些属性在当前类内被赋值或修饰时，必须带哦用一个超类的 指定构造器。
+类的指定构造器将类的所有属性直接初始化。如果类有超类，它不能调用该类的其它构造器,它只能调用超类的一个 指定构造器。如果该类从它的超类处继承了任何属性，这些属性在当前类内被赋值或修饰时，必须带调用一个超类的 指定构造器。
 
 Designated initializers can be declared in the context of a class declaration only and therefore can’t be added to a class using an extension declaration.
 
-指定构造器可以在类声明的上下文中声明，因此它不能用扩展声明的方法加入一个类中。
+指定构造器可以在类声明的上下文中声明，因此它不能用扩展声明的方法被加入到一个类中。
 
 Initializers in structures and enumerations can call other declared initializers to delegate part or all of the initialization process.
 
-结构体和枚举的构造器可以带哦用其他的已声明的构造器，来委托其中一个火全部进行初始化过程。
+结构体和枚举的构造器可以调用其它的已声明的构造器，来委托部分或全部初始化过程。
 
 To declare convenience initializers for a class, prefix the initializer declaration with the context-sensitive keyword convenience.
 
@@ -990,17 +999,19 @@ A deinitializer declaration declares a deinitializer for a class type. Deinitial
 
 A deinitializer is called automatically when there are no longer any references to a class object, just before the class object is deallocated. A deinitializer can be declared only in the body of a class declaration—but not in an extension of a class—and each class can have at most one.
 
-当类中没有对任何其它对象的引用时，在类对象释放之前，析构器会自动的被调用。析构器只能在类的声明体内、声明——但是不能在 类的扩展声明内，每个类最多只能有一个析构器声明。
+当类中没有对任何其它对象的引用时，在类对象释放之前，析构器会自动的被调用。析构器只能在类的声明体内、而不能在 类的扩展内声明，每个类最多只能有一个析构器声明。
 
 A subclass inherits its superclass’s deinitializer, which is implicitly called just before the subclass object is deallocated. The subclass object is not deallocated until all deinitializers in its inheritance chain have finished executing.
 
+子类继承了它的超类的析构器，在子类帝乡将要被释放时会被隐式的调用。子类在所有析构器被执行完毕前不会被释放。
 
 Deinitializers are not called directly.
 
-子类继承了它的超类的析构器，在子类帝乡将要被释放时会被隐式的调用。子类在所有析构器被执行完毕前不会被释放。
 析构器不会被直接调用。
 
 For an example of how to use a deinitializer in a class declaration, see Deinitialization.
+如何使用类声明中的析构器，请查看Deinitialization
+
 >GRAMMAR OF A DEINITIALIZER DECLARATION
 
 >deinitializer-declaration → attributes­opt­deinit­code-block
@@ -1011,7 +1022,6 @@ For an example of how to use a deinitializer in a class declaration, see Deiniti
 An extension declaration allows you to extend the behavior of existing class, structure, and enumeration types. Extension declarations begin with the keyword extension and have the following form:
 
 扩展声明用于扩展一个已存在的类，结构体，枚举的行为。扩展声明以关键字extension开始，有如下的形式：
-
 
 
     extension type: adopted protocols {
