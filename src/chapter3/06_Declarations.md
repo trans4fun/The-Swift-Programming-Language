@@ -634,11 +634,11 @@ To check the values of enumeration cases, use a switch statement, as shown in Ma
     raw-value-style-enum-case → enum-case-name­raw-value-assignment­opt­
     raw-value-assignment → =­literal­
 
-Structure Declaration
-
+##Structure Declaration
+##结构声明
 A structure declaration introduces a named structure type into your program. Structure declarations are declared using the keyword struct and have the following form:
 
-一个结构声明引入了一个命名的类型到你的程序。结构声明使用struct声明，采用以下的形式：
+结构声明引入了命名的类型到程序中。结构声明使用struct声明，采用以下的形式：
 
    struct structure name: adopted protocols {
      declarations
@@ -671,11 +671,11 @@ There are three ways create an instance of a previously declared structure:
 
 The process of initializing a structure’s declared properties is described in Initialization.
 
-初始化结构的声明的属性的过程在Initialization里描述的一样。
+初始化一个结构的声明的属性的过程在Initialization里描述的一样。
 
 Properties of a structure instance can be accessed using dot (.) syntax, as described in Accessing Properties.
 
-一个结构实例的属性使用通过。语法来访问。
+一个结构实例的属性使用通过.法来访问。
 
 Structures are value types; instances of a structure are copied when assigned to variables or constants, or when passed as arguments to a function call. For information about value types, see Structures and Enumerations Are Value Types.
 
@@ -697,7 +697,7 @@ You can extend the behavior of a structure type with an extension declaration, a
 
 A class declaration introduces a named class type into your program. Class declarations are declared using the keyword class and have the following form:
 
-类型声明映入了一个命令的类型到你的程序中。类声明使用关键字class声明，采用下面的形式：
+类型声明引入了命名的类型到程序中。类声明使用关键字class声明，采用下面的形式：
 
 
     class class name: superclass, adopted protocols {
@@ -707,7 +707,7 @@ A class declaration introduces a named class type into your program. Class decla
 
 The body of a class contains zero or more declarations. These declarations can include both stored and computed properties, instance methods, class methods, initializers, a single destructor method, type aliases, and even other class, structure, and enumeration declarations. Class declarations can’t contain protocol declarations. For a discussion and several examples of classes that include various kinds of declarations, see Classes and Structures.
 
-一个class的主题会包含0或多个声明。这些声明可以包括可存储的和可计算的属性，实例方法，类方法，初始化器，一个析构函数，type aliases ，和甚至其他的class，结构，枚举声明。类声明不能包括是协议声明。
+一个class的主题会包含0或多个声明。这些声明可以包括可存储的和可计算的属性，实例方法，类方法，初始化器，一个析构函数，类型 别名，和甚至其它的class，结构，枚举声明。类声明不能包括是协议声明。
 
 A class type can inherit from only one parent class, its superclass, but can adopt any number of protocols. The superclass appears first in the type-inheritance-clause, followed by any adopted protocols.
 一个class类只能从一个父类中继承，但是可以有多个洗衣。超类首先出现在类型继承语句中，后面跟着采用的协议。
@@ -718,11 +718,11 @@ As discussed in Initializer Declaration, classes can have designated and conveni
 
 A class can override properties, methods, and initializers of its superclass. Overridden methods and properties must be marked with the override keyword.
 
-类可以重写他的超类的属性，方法和初始化器。重写的方法和属性必须都使用overrid来标记。
+类可以重写它超类的属性，方法和构造器。重写的方法和属性必须都使用override来标记。
 
 Although properties and methods declared in the superclass are inherited by the current class, designated initializers declared in the superclass are not. That said, if the current class overrides all of the superclass’s designated initializers, it inherits the superclass’s convenience initializers. Swift classes do not inherit from a universal base class.
 
-尽管在子类中声明的属性和方法可以被当前的类继承，但是在超类中指定的初始化器却不行。也就是说，如果当前类重写了超类的所有指定的初始化器，它就会继续超类的便利的初始化器。Swift类不会从通用的基类中继承。
+尽管在子类中声明的属性和方法可以被当前的类继承，但是在超类中指定的构造器却不行。也就是说，如果当前类重写了超类的所有指定的构造器，它就会继续超类的便利构造器。Swift类不会从通用的基类中继承。
 
 There are two ways create an instance of a previously declared class:
 
@@ -734,24 +734,23 @@ There are two ways create an instance of a previously declared class:
 
 	* If no initializers are declared, and all properties of the class declaration were given initial values, call the class’s default initializer, as described in Default Initializers.
 
-       如果没有声明的初始化器，类声明的素有属性会有一个初始化值，是通过调用类的默认的初始化器来完成的。正如Default Initializers描述的。
+       如果没有声明的初始化器，类声明的素有属性会有一个初始化值，是通过调用类的默认的初始化器来完成的。正如Default             Initializers描述的。
 
 
 
 Access properties of a class instance with dot (.) syntax, as described in Accessing Properties.
 
-访问类的属性使用，如Accessing Properties的一样。
+使用.语法访问类的属性，如Accessing Properties描述的一样。
 
 
 Classes are reference types; instances of a class are referred to, rather than copied, when assigned to variables or constants, or when passed as arguments to a function call. For information about reference types, see Structures and Enumerations Are Value Types.
 
-类是引用类型；在被赋值给变量货常量的时候，类的实例会被引用而不是被赋值，当被作为参数传递给函数调用的时候。更多信息，参考
- Structures and Enumerations Are Value Types.。
+类是引用类型；在被赋值给变量或常量的时候，或者当被作为参数传递给函数调用的时候，类的实例会被引用而不是被复制。更多信息，参考Structures and Enumerations Are Value Types.。
 
 
 You can extend the behavior of a class type with an extension declaration, as discussed in Extension Declaration.
 
-你可以使用extension声明来扩展类的行为，正如Extension Desclaration.
+可以使用extension声明来扩展类的行为，如Extension Desclaration描述的那样.
 
 
  >  GRAMMAR OF A CLASS DECLARATION
@@ -765,7 +764,7 @@ You can extend the behavior of a class type with an extension declaration, as di
 
 A protocol declaration introduces a named protocol type into your program. Protocol declarations are declared using the keyword protocol and have the following form:
 
-协议声明引入命名的协议类型到程序中，以使用protoco来声明，有如下的形式：
+协议声明引入命名的协议类型到程序中，用关键字protocol来声明，有如下的形式：
 
 
   protocol protocol name: inherited protocols {
@@ -790,21 +789,26 @@ You can also aggregate the conformance requirements of multiple protocols using 
 
 You can add protocol conformance to a previously declared type by adopting the protocol in an extension declaration of that type. In the extension, you must implement all of the adopted protocol’s requirements. If the type already implements all of the requirements, you can leave the body of the extension declaration empty.
 
-你可以增加协议conformance到任何一个过去声明的类型通过在那个类型的extendsion中声明。在这个扩展力，你必须实现所有使用的协议的需求。如果那个类型已经实现了所有的要求，扩展声明的主题可以是空的。
+你可以增加协议conformance到任何一个过去声明的类型通过在那个类型的extendsion中声明。在这个扩展里，你必须实现所有使用的协议的需求。如果那个类型已经实现了所有的要求，扩展声明的主题可以是空的。
 
 By default, types that conform to a protocol must implement all properties, methods, and subscripts declared in the protocol. That said, you can mark these protocol member declarations with the optional attribute to specify that their implementation by a conforming type is optional. The optional attribute can be applied only to protocols that are marked with the objc attribute. As a result, only class types can adopt and conform to a protocol that contains optional member requirements. For more information about how to use the optionalattribute and for guidance about how to access optional protocol members—for example, when you’re not sure whether a conforming type implements them—see Optional Protocol Requirements.
 
-默认情况下，与协议一致的类型必须实现所有的属性，方法，和声明的subscripts。也就是说，你可以用opaional属性来标记协议成员，表示他们的实现是可选的。option属性仅仅能被应用到用objc标记的属性。结构，仅仅class类型能采纳和玉包含可选的成员变量的协议一致。对于如何访问可选的协议成员-例如，如果你不确定一个confroming类型是否要实现他们-看见 Optional Protocol Requirements.
+默认情况下，与协议一致的类型必须实现所有的属性，方法，和声明的附属脚本。也就是说，你可以用opaional属性来标记协议成员，表示他们的实现是可选的。option属性仅仅能被应用到objc标记的属性。结构，仅仅class类型能采纳和玉包含可选的成员变量的协议一致。对于如何访问可选的协议成员-例如，如果你不确定一个一致性类型是否要实现-查看一下 Optional Protocol Requirements.
 
 To restrict the adoption of a protocol to class types only, mark the entire protocol declaration with theclass_protocol attribute. Any protocol that inherits from a protocol marked with the class_protocol attribute can likewise be adopted only by a class type.
 
-为了限制协议的的只应用到某个class type，用class_protocol属性标记整个协议声明。任何从标记class_protocol协议继承的协议可以只被class 类型采纳。
+为了限制协议的的只应用到某个class type，用 class_protocol属性标记整个协议声明。任何从标记class_protocol 协议继承的协议可以只被class类型采纳。
 
 NOTE
+注意
+
 If a protocol is already marked with the objc attribute, the class_protocol attribute is implicitly applied to that protocol; there’s no need to mark the protocol with the class_protocol attribute explicitly.
+
+如果协议已经用objc标记过了，class_protocol会隐式的应用到那个协议；没有必要显式的用class_protocol标记协议。
 
 Protocols are named types, and thus they can appear in all the same places in your code as other named types, as discussed in Protocols as Types. However, you can’t construct an instance of a protocol, because protocols do not actually provide the implementations for the requirements they specify.
 
+协议是命名类型，因此在你的代码里它们可以像其它命名类型一样出现在左右同样的地方，如在协议里的类型一样。不管怎么样，你不能构造协议的实例，因为协议实际上不能提供它们
 
 You can use protocols to declare which methods a delegate of a class or structure should implement, as described in Delegation.
 你可以使用协议来声明类或者结构应该实现那个方法，如Delegation.描述。
