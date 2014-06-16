@@ -995,6 +995,7 @@ Extension declarations can contain initializer declarations. That said, if the t
 
 
 ##Subscript Declaration
+
 ##附属脚本声明
 
 A subscript declaration allows you to add subscripting support for objects of a particular type and are typically used to provide a convenient syntax for accessing the elements in a collection, list, or sequence. Subscript declarations are declared using the keyword subscript and have the following form:
@@ -1009,7 +1010,6 @@ A subscript declaration allows you to add subscripting support for objects of a 
       `statements`
     }
 }
-
 
 
 Subscript declarations can appear only in the context of a class, structure, enumeration, extension, or protocol declaration.
@@ -1044,18 +1044,25 @@ For more information about subscripting and to see examples of subscript declara
 >subscript-head → attributes­opt­subscript­parameter-clause­
 >subscript-result → ->­attributes­opt­type­
 
-#Operator Declaration
+##Operator Declaration
+
+##运算符声明
 
 An operator declaration introduces a new infix, prefix, or postfix operator into your program and is declared using the contextual keyword operator.
 
+运算符声明引入了新的中缀，前缀或后缀运算到程序中，使用上下文关键字operator声明。
 
 You can declare operators of three different fixities: infix, prefix, and postfix. The fixity of an operator specifies the relative position of an operator to its operands.
 
+可以声明3种不同的缀：中缀、前缀和后缀。一个运算符的缀规定了一个它相对于它的操作数的相对位置。
 
-There are three basic forms of an operator declaration, one for each fixity. The fixity of the operator is specified by including the contextual keyword infix, prefix, or postfix between operator and the name of the operator. In each form, the name of the operator can contain only the operator characters defined inOperators.
+There are three basic forms of an operator declaration, one for each fixity. The fixity of the operator is specified by including the contextual keyword infix, prefix, or postfix between operator and the name of the operator. In each form, the name of the operator can contain only the operator characters defined in Operators.
 
-运算符声明会向程序中引入中缀、前缀或后缀运算符，它使用上下文关键字operator声明。 可以声明三种不同的缀性：中缀、前缀和后缀。操作符的缀性描述了操作符与它的操作数的相对位置。 运算符声明有三种基本形式，每种缀性各一种。运算符的缀性通过在operator和运算符之间添加上下文关键字infix，prefix或postfix来指定。每种形式中，运算符的名字只能包含Operators中定义的运算符字符。
+运算符声明有三种基本形式，每种缀性各一种。运算符的缀性通过在operator和运算符之间添加上下文关键字infix，prefix或postfix来指定。对于每种形式，运算符的名字只能包含Operators中定义的运算符字符。
+
 The following form declares a new infix operator:
+
+下面这种形式声明了一个新的中缀运算符：
 
 > operator infix `operator name`{
     precedence `precedence level`
@@ -1063,41 +1070,61 @@ The following form declares a new infix operator:
  }
 
 
-
-
 An infix operator is a binary operator that is written between its two operands, such as the familiar addition operator (+) in the expression 1 + 2.
-中缀运算符是二元运算符，它可以被置于两个操作数之间，比如表达式1 + 2 中的加法运算符(+)。
+
+中缀运算符是二元运算符，置于两个操作数之间，比如我们熟悉的表达式1 + 2 中的加法运算符(+)。
 
 Infix operators can optionally specify a precedence, associativity, or both.
-中缀运算符可以可选地指定优先级，结合性，或两者同时指定。
 
-The precedence of an operator specifies how tightly an operator binds to its operands in the absence of grouping parentheses. You specify the precedence of an operator by writing the contextual keywordprecedence followed by the precedence level. The precedence level can be any whole number (decimal integer) from 0 to 255; unlike decimal integer literals, it can’t contain any underscore characters. Although the precedence level is a specific number, it is significant only relative to another operator. That is, when two operators compete with each other for their operands, such as in the expression 2 + 3 * 5, the operator with the higher precedence level binds more tightly to its operands.
+中缀运算符可以指定优先级，结合性，或两者同时指定。
 
-运算符的优先级可以指定在没有括号包围的情况下，运算符与它的操作数如何紧密绑定的。可以使用上下文关键字precedence并优先级(precedence level)一起来指定一个运算符的优先级。优先级可以是0到255之间的任何一个数字(十进制整数)；与十进制整数字面量不同的是，它不可以包含任何下划线字符。尽管优先级是一个特定的数字，但它仅用作与另一个运算符比较(大小)。也就是说，一个操作数可以同时被两个运算符使用时，例如2 + 3 * 5，优先级更高的运算符将优先与操作数绑定。
+The precedence of an operator specifies how tightly an operator binds to its operands in the absence of grouping parentheses. You specify the precedence of an operator by writing the contextual keyword precedence followed by the precedence level. The precedence level can be any whole number (decimal integer) from 0 to 255; unlike decimal integer literals, it can’t contain any underscore characters. Although the precedence level is a specific number, it is significant only relative to another operator. That is, when two operators compete with each other for their operands, such as in the expression 2 + 3 * 5, the operator with the higher precedence level binds more tightly to its operands.
 
-The associativity of an operator specifies how a sequence of operators with the same precedence level are grouped together in the absence of grouping parentheses. You specify the associativity of an operator by writing the contextual keyword associativity followed by the associativity, which is one of the contextual keywords left, right, or none. Operators that are left-associative group left-to-right. For example, the subtraction operator (-) is left-associative, and therefore the expression 4 - 5 - 6 is grouped as (4 - 5) - 6and evaluates to -7. Operators that are right-associative group right-to-left, and operators that are specified with an associativity of none don’t associate at all. Nonassociative operators of the same precedence level can’t appear adjacent to each to other. For example, 1 < 2 < 3 is not a valid expression.
+运算符的优先级指定了在没有分组括号的情况下，运算符与它的操作数绑定的紧密程度。可以使用上下文关键字precedence和优先等级一起来指定一个运算符的优先级。优先级可以是0到255之间的任何一个数字(十进制整数)；与十进制整数字面量不同的是，它不可以包含任何下划线字符。尽管优先级是一个特定的数字，但它仅用作与另一个运算符比较(大小)。也就是说，一个操作数可以同时被两个运算符使用时，例如2 + 3 * 5，优先级更高的运算符将优先与操作数绑定。
 
-运算符的结合性可以指定在没有括号包围的情况下，优先级相同的运算符以何种顺序被分组的。可以使用上下文关键字associativity并结合性(associativity)一起来指定一个运算符的结合性，其中结合性可以说是上下文关键字left，right或none中的任何一个。左结合运算符以从左到右的形式分组。例如，减法运算符(-)具有左结合性，因此4 - 5 - 6被以(4 - 5) - 6的形式分组，其结果为-7。 右结合运算符以从右到左的形式分组，对于设置为none的非结合运算符，它们不以任何形式分组。具有相同优先级的非结合运算符，不可以互相邻接。例如，表达式1 < 2 < 3非法的。
+The associativity of an operator specifies how a sequence of operators with the same precedence level are grouped together in the absence of grouping parentheses. You specify the associativity of an operator by writing the contextual keyword associativity followed by the associativity, which is one of the contextual keywords left, right, or none. Operators that are left-associative group left-to-right. For example, the subtraction operator (-) is left-associative, and therefore the expression 4 - 5 - 6 is grouped as (4 - 5) - 6 and evaluates to -7. Operators that are right-associative group right-to-left, and operators that are specified with an associativity of none don’t associate at all. Nonassociative operators of the same precedence level can’t appear adjacent to each to other. For example, 1 < 2 < 3 is not a valid expression.
+
+运算符的结合性明确了，没有分组的括号包围的情况下，优先级相同的运算符以何种顺序被分组的。使用上下文关键字associativity和结合性(associativity)一起来指定一个运算符的结合性，其中结合性的值是上下文关键字left，right或none之一。左结合运算符以从左到右的形式分组。例如，减法运算符(-)具有左结合性，因此表达式4 - 5 - 6以(4 - 5) - 6的形式分组，其结果为-7。 右结合运算符以从右到左的形式分组，对于设置为none的非结合运算符，它们不以任何形式分组。具有相同优先级的非结合运算符，不可以互相邻接。例如，1 < 2 < 3 就是一个无效的表达式
 
 Infix operators that are declared without specifying a precedence or associativity are initialized with a precedence level of 100 and an associativity of none.
-声明时不指定任何优先级或结合性的中缀运算符，它们的优先级会被初始化为100，结合性被初始化为none。
+
+如果再声明时不指定任何优先级或结合性，中缀运算符的优先级会被初始化为100，结合性被初始化为none。
+
 The following form declares a new prefix operator:
+
+下面的形式声明了一个新的前缀运算符：
 
 > operator prefix `operator name`{}
 
 
 A prefix operator is a unary operator that is written immediately before its operand, such as the prefix increment operator (++) is in the expression ++i.
-缀运算符的声明中不指定优先级。前缀运算符是非结合的。
+
+前缀运算符一元运算符，紧跟在操作数之前，比如表达式 ++i 中的前缀递增运算符(++)。
+
 Prefix operators declarations don’t specify a precedence level. Prefix operators are nonassociative.
+
+前缀缀运算符的声明中不指定优先级。前缀运算符是非结合的。
+
 The following form declares a new postfix operator:
+
+下面的形式声明了一个新的后缀运算符：
+
 
 > operator postfix `operator name`{}
 
 
 
 A postfix operator is a unary operator that is written immediately after its operand, such as the postfix increment operator (++) is in the expression i++.
+
+后缀运算符一元运算符，紧跟在操作数之前，比如表达式 i++ 中的前后缀递增运算符(++)。
+
 As with prefix operators, postfix operator declarations don’t specify a precedence level. Postfix operators are nonassociative.
+与前缀运算符一样，后缀运算符声明不会指定优先级。后缀运算符也是非结合性的。
+
 After declaring a new operator, you implement it by declaring a function that has the same name as the operator. To see an example of how to create and implement a new operator, see Custom Operators.
+
+在声明了一个新的运算符止呕，要声明一个和运算符同名的函数来实现它。如何创建和实现新的操作符，请看Custom Operators。
+
 
 
 >GRAMMAR OF AN OPERATOR DECLARATION
