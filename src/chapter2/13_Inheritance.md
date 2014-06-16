@@ -209,6 +209,7 @@ The `override` keyword also prompts the Swift compiler to check that your overri
 ##访问父类的方法，属性和脚本
 
 When you provide a method, property, or subscript override for a subclass, it is sometimes useful to use the existing superclass implementation as part of your override. For example, you can refine the behavior of that existing implementation or store a modified value in an existing inherited variable.
+
 当你访问父类的方法，属性或脚本时，有时在你的重写版本中使用已存在的父类实现会很有作用。比如你可以优化一个已有的实现或者在一个继承来的变量重储存一个修改过的值。
 
 Where this is appropriate, you access the superclass version of a method, property, or subscript by using the `super` prefix:
