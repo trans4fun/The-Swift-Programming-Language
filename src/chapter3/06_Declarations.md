@@ -765,7 +765,7 @@ You can extend the behavior of a class type with an extension declaration, as di
 
 A protocol declaration introduces a named protocol type into your program. Protocol declarations are declared using the keyword protocol and have the following form:
 
-一个协议声明引入了一命令协议类型到你的程序中。协议声明可以使用protoco来声明，有如下的形式：
+协议声明引入命名的协议类型到程序中，以使用protoco来声明，有如下的形式：
 
 
   protocol protocol name: inherited protocols {
@@ -774,15 +774,19 @@ A protocol declaration introduces a named protocol type into your program. Proto
 
 The body of a protocol contains zero or more protocol member declarations, which describe the conformance requirements that any type adopting the protocol must fulfill. In particular, a protocol can declare that conforming types must implement certain properties, methods, initializers, and subscripts. Protocols can also declare special kinds of type aliases, called associated types, that can specify relationships among the various declarations of the protocol. The protocol member declarations are discussed in detail below.
 
-协议的主体包含洗衣成员声明，它描述了comformance要求，任何实现它的协议都必须满足的要求。特别是，协议可以声明comformin类型，必须实现某个属性，方法，初始化，和子脚本。协议页能声明特殊种类的typealiase,被称作关联类型，可以设置协议里的不同声明的关系。协议成员声明下面会做详细的讨论。
+协议的主体包含0或多个协议成员声明，它描述了任何实现它的协议都必须满足的一致性要求。特别是，一致性的协议必须实现某个属性，方法，构造器，和附属脚本。协议也能声明特殊种类的类型别名,被、称作关联类型，设置协议里的不同声明的关系。下面会对协议成员声明会做详细的讨论
 
 Protocol types can inherit from any number of other protocols. When a protocol type inherits from other protocols, the set of requirements from those other protocols are aggregated, and any type that inherits from the current protocol must conform to all those requirements. For an example of how to use protocol inheritance, see Protocol Inheritance.
 
-协议类型可以从任何数量的其它协议。当一个协议类型从其它洗衣继承时，从那些协议中的要求会被集合，任何从当前协议继承的类型都必须和那些要求一致。
+协议类型可以继承任意数量的其它协议。如果一个协议类型从其它协议继承时任何从当前协议继承的类型都必须和从那些协议中的要求集合一致。如何使用协议继承，请查看Protocol Inheritance.
 
 
 NOTE
+注意
+
 You can also aggregate the conformance requirements of multiple protocols using protocol composition types, as described in Protocol Composition Type and Protocol Composition.
+
+你也可以使用协议符合类型聚合多个协议的一致性要求。
 
 You can add protocol conformance to a previously declared type by adopting the protocol in an extension declaration of that type. In the extension, you must implement all of the adopted protocol’s requirements. If the type already implements all of the requirements, you can leave the body of the extension declaration empty.
 
