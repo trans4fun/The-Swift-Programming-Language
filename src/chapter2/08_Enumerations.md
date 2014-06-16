@@ -211,14 +211,14 @@ enum Planet: Int {
 
 ```
 let earthsOrder = Planet.Earth.toRaw()
-// earthsOrder is 3
+// earthsOrder 为 3
 ```
 
 你也可以通过枚举类型的fromRaw方法去试图查找带有某一特定原始值的枚举成员。这个例子通过其原始值为7找到了Uranus：
 
 ```
 let possiblePlanet = Planet.fromRaw(7)
-// possiblePlanet类型为Planet?并等于Planet.Uranus
+// possiblePlanet类型为Planet?并且值等于Planet.Uranus
 ```
 
 然而，不是所有的int值都能匹配到一个星球。因此，fromRaw方法返回一个可选的枚举成员。以上的例子中，possiblePlanet的类型是”Planet?”或者”可选Planet”。
