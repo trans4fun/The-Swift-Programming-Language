@@ -827,12 +827,21 @@ protocol-member-declarations → protocol-member-declaration­protocol-member-de
 
 Protocols declare that conforming types must implement a property by including a protocol property declaration in the body of the protocol declaration. Protocol property declarations have a special form of a variable declaration:
 
-var property name: type { get set }
+协议声明一致性类型必须通过在协议声明体里包括一个协议属性声明来实现属性。协议属性声明有一个特殊形式的变量声明：
+
+   var property name: type { get set }
+
 As with other protocol member declarations, these property declarations declare only the getter and setter requirements for types that conform to the protocol. As a result, you don’t implement the getter or setter directly in the protocol in which it is declared.
+
+与其它协议成员声明一样，这些属性声明只声明了与协议一致的类型的getter和setter要求。结果，你不能在它声明的协议里实现getter货setter
 
 The getter and setter requirements can be satisfied by a conforming type in a variety of ways. If a property declaration includes both the get and set keywords, a conforming type can implement it with a stored variable property or a computed property that is both readable and writeable (that is, one that implements both a getter and a setter). However, that property declaration can’t be implemented as a constant property or a read-only computed property. If a property declaration includes only the get keyword, it can be implemented as any kind of property. For examples of conforming types that implement the property requirements of a protocol, see Property Requirements.
 
+getter和setter要求可以通过一致性类型以各种方式满足。如果属性声明包含get和set关键词，一致性类型就可以用可读写（实现了getter和setter）的存储型变量属性或计算型属性，但是属性不能以常量属性或只读计算型属性实现。如果属性声明仅仅包含get关键词的话，它可以作为任意类型的属性被实现。比如说实现了协议的属性要求的一致性类型，参见属性要求。
+
 See also Variable Declaration.
+
+更多参见变量声明
 
 GRAMMAR OF A PROTOCOL PROPERTY DECLARATION
 
@@ -845,7 +854,7 @@ protocol-property-declaration → variable-declaration-head­variable-name­type
 
 Protocols declare that conforming types must implement a method by including a protocol method declaration in the body of the protocol declaration. Protocol method declarations have the same form as function declarations, with two exceptions: They don’t include a function body, and you can’t provide any default parameter values as part of the function declaration. For examples of conforming types that implement the method requirements of a protocol, see Method Requirements.
 
-协议表明，conforming类型必须在协议声明体里通过包括一个协议方法声明来实现方法。协议方法声明与函数声明有同样的形式，只有2点例外：他们不需要包括函数体，你不能提供任何某人参数值作为函数声明的一部分。
+协议声明conforming类型必须在协议声明体里通过包括一个协议方法声明来实现方法。协议方法声明与函数声明有同样的形式，只有2点例外：他们不需要包括函数体，你不能提供任何某人参数值作为函数声明的一部分。
 
 
 To declare a class or static method requirement in a protocol declaration, mark the method declaration with the class keyword. Classes that implement this method also declare the method with the class keyword. Structures that implement it must declare the method with the static keyword instead. If you’re implementing the method in an extension, use the class keyword if you’re extending a class and the static keyword if you’re extending a structure.
@@ -858,11 +867,16 @@ To declare a class or static method requirement in a protocol declaration, mark 
 >protocol-method-declaration → function-head­function-name­generic-parameter-clause­opt­function-signature­
 
 ##Protocol Initializer Declaration
+
 ##协议构造器声明
 
 Protocols declare that conforming types must implement an initializer by including a protocol initializer declaration in the body of the protocol declaration. Protocol initializer declarations have the same form as initializer declarations, except they don’t include the initializer’s body.
 
+协议声明了一致性类型必须在协议声明的主体里通过引入一个协议构造器声明来实现一个构造器。协议构造器声明 除了不包含构造器体外，和构造器声明有着相同的形式.
+
 See also Initializer Declaration.
+
+更多请参阅构造器声明。
 
 >GRAMMAR OF A PROTOCOL INITIALIZER DECLARATION
 
@@ -873,12 +887,15 @@ See also Initializer Declaration.
 
 Protocols declare that conforming types must implement a subscript by including a protocol subscript declaration in the body of the protocol declaration. Protocol property declarations have a special form of a subscript declaration:
 
+协议声明了一致性类型必须在协议声明的主体里通过引入一个协议附属脚本声明来实现一个附属脚本。协议属性声明 对附属脚本声明有一个特殊的形式：
 
 >subscript (parameters) -> return type { get set }
 
 
 Subscript declarations only declare the minimum getter and setter implementation requirements for types that conform to the protocol. If the subscript declaration includes both the get and set keywords, a conforming type must implement both a getter and a setter clause. If the subscript declaration includes only the get keyword, a conforming type must implement at least a getter clause and optionally can implement a setter clause.
 See also Subscript Declaration.
+
+附属脚本声明只为和协议一致的类型声明了必需的最小数量的的getter和setter。如果附属脚本申明包含get和set关键字， 一致的类型也必须有一个getter和setter语句。如果附属脚本声明值包含get关键字，一致的类型必须至少包含一个 getter语句，可以选择是否包含setter语句。
 
 >GRAMMAR OF A PROTOCOL SUBSCRIPT DECLARATION
 
@@ -898,13 +915,19 @@ See also Type Alias Declaration.
 
 >protocol-associated-type-declaration → typealias-head­type-inheritance-clause­opt­typealias-assignment­op
 
+
+##Initializer Declaration
+
+##构造器声明
+
 An initializer declaration introduces an initializer for a class, structure, or enumeration into your program. Initializer declarations are declared using the keyword init and have two basic forms.
 
-实例化声明引入了类的初始化器到程序里。初始化声明使用关键字init声明，有两种基本形式：
+构造器声明引入了类的初始化器到程序里。初始化声明使用关键字init声明，有两种基本形式：
 
 Structure, enumeration, and class types can have any number of initializers, but the rules and associated behavior for class initializers are different. Unlike structures and enumerations, classes have two kinds of initializers: designated initializers and convenience initializers, as described in Initialization.
 
 结构，枚举和类类型可以有很多初始器，但是class初始化器的规则和关联行为是不同的。不像结构和枚举类型。类有两种初始化器：制定的和便利的初始化器。
+
 The following form declares initializers for structures, enumerations, and designated initializers of classes:
 
 
@@ -914,10 +937,20 @@ The following form declares initializers for structures, enumerations, and desig
 
 
 A designated initializer of a class initializes all of the class’s properties directly. It can’t call any other initializers of the same class, and if the class has a superclass, it must call one of the superclass’s designated initializers. If the class inherits any properties from its superclass, one of the superclass’s designated initializers must be called before any of these properties can be set or modified in the current class.
+
+类的指定构造器将类的所有属性直接初始化。如果类有超类，它不能调用该类的其他构造器,它只能调用超类的一个 指定构造器。如果该类从它的超类处继承了任何属性，这些属性在当前类内被赋值或修饰时，必须带哦用一个超类的 指定构造器。
+
 Designated initializers can be declared in the context of a class declaration only and therefore can’t be added to a class using an extension declaration.
+
+指定构造器可以在类声明的上下文中声明，因此它不能用扩展声明的方法加入一个类中。
+
 Initializers in structures and enumerations can call other declared initializers to delegate part or all of the initialization process.
+
+结构体和枚举的构造器可以带哦用其他的已声明的构造器，来委托其中一个火全部进行初始化过程。
+
 To declare convenience initializers for a class, prefix the initializer declaration with the context-sensitive keyword convenience.
 
+以关键字convenience来声明一个类的便利构造器：
 
     convenience init(parameters) {
        statements
@@ -925,10 +958,16 @@ To declare convenience initializers for a class, prefix the initializer declarat
 
 
 Convenience initializers can delegate the initialization process to another convenience initializer or to one of the class’s designated initializers. That said, the initialization processes must end with a call to a designated initializer that ultimately initializes the class’s properties. Convenience initializers can’t call a superclass’s initializers.
+
+便利构造器可以将初始化过程委托给另一个便利构造器或类的一个指定构造器。这意味着，类的初始化过程必须 以一个将所有类属性完全初始化的指定构造器的调用作为结束。便利构造器不能调用超类的构造器。
+
 You can mark designated and convenience initializers with the required attribute to require that every subclass implement the initializer. Because designated initializers are not inherited by subclasses, they must be implemented directly. Required convenience initializers can be either implemented explicitly or inherited when the subclass directly implements all of the superclass’s designated initializers (or overrides the designated initializers with convenience initializers). Unlike methods, properties, and subscripts, you don’t need to mark overridden initializers with the override keyword.
+
+你可以使用requierd关键字，将便利构造器和指定构造器标记为每个子类的构造器都必须拥有的。因为指定构造器 不被子类继承，他们必须被立即执行。当子类直接执行所有超类的指定构造器(或使用便利构造器重写指定构造器)时， 必需的便利构造器可以被隐式的执行，亦可以被继承。不像方法，附属脚本那样，你不需要为这些重写的构造器标注 overrride关键字。
 
 To see examples of initializers in various type declarations, see Initialization.
 
+查看更多关于不同声明方法的构造器的例子，参阅构造过程一节。
 
 >GRAMMAR OF AN INITIALIZER DECLARATION
 
