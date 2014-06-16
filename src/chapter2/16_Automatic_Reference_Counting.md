@@ -4,7 +4,7 @@ Swift uses Automatic Reference Counting (ARC) to track and manage your app’s m
 
 However, in a few cases ARC requires more information about the relationships between parts of your code in order to manage memory for you. This chapter describes those situations and shows how you enable ARC to manage all of your app’s memory.
 
-Swift 使用自动引用计数（ARC）机制跟踪和管理APP的内存使用，大部分情况下，此机制是自动工作的，你没有必要考虑内存管理的事情。当一个类实例不在需要的时候，ARC会自动释放其占用的内存。
+Swift 使用自动引用计数（ARC）机制跟踪和管理APP的内存使用，大部分情况下，此机制是自动工作的，你没有必要考虑内存管理的事情。当一个类实例不再需要的时候，ARC会自动释放其占用的内存。
 
 但少数情况下，ARC需要更多关于你代码之间的关系信息来帮你管理内存。本章介绍了这些情况，并向你示范如何启用ARC来管理你的APP的全部内存。
 
@@ -21,13 +21,13 @@ Every time you create a new instance of a class, ARC allocates a chunk of memory
 
 Additionally, when an instance is no longer needed, ARC frees up the memory used by that instance so that the memory can be used for other purposes instead. This ensures that class instances do not take up space in memory when they are no longer needed.
 
-当你创建一个类实例的时候，ARC会为之分配一块内存来存储该实例的相关信息。这些信息包括：该实例的类型及其相关的属性和值。当该实例不再需要的时候，ARC会释放其占用的内存留作他用。这种机制保证了不需要的类实例不会一直占用内存空间。
+当你创建一个类实例的时候，ARC会为之分配一块内存来存储该实例的相关信息。这些信息包括：该实例的类型及其相关的属性和值。当该实例不再需要的时候，ARC会释放其占用的内存留作他用。这种机制保证了不需要的类实例占用内存会及时得到释放。
 
 However, if ARC were to deallocate an instance that was still in use, it would no longer be possible to access that instance’s properties, or call that instance’s methods. Indeed, if you tried to access the instance, your app would most likely crash.
 
 To make sure that instances don’t disappear while they are still needed, ARC tracks how many properties, constants, and variables are currently referring to each class instance. ARC will not deallocate an instance as long as at least one active reference to that instance still exists.
 
-然而，如果ARC释放了一个正在使用的类实例的内存，那就会导致该实例的方法和属性都不能访问。而且，如果你试图访问已被ARC释放的实例，你的APP很可能会崩溃。
+然而，如果ARC释放了一个正在使用的类实例的内存，那会导致该实例的方法和属性都不能访问。而且，如果你试图访问已被ARC释放的实例，你的APP很可能会崩溃。
 
 为了确保使用中的类实例不会无端消失（被ARC回收），ARC会跟踪和统计每个类实例被多少属性，常量，变量所引用。即使只有一个活动引用存在，该类实例也不会被ARC回收。
 
