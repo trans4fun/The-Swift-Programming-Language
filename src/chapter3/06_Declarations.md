@@ -963,7 +963,7 @@ For an example of how to use a deinitializer in a class declaration, see Deiniti
 
 An extension declaration allows you to extend the behavior of existing class, structure, and enumeration types. Extension declarations begin with the keyword extension and have the following form:
 
-扩展声明用于扩展一个已存在的类，结构体，枚举的行为。扩展声明以关键字extension开始，遵循如下的规则：
+扩展声明用于扩展一个已存在的类，结构体，枚举的行为。扩展声明以关键字extension开始，有如下的形式：
 
 
 
@@ -975,15 +975,15 @@ An extension declaration allows you to extend the behavior of existing class, st
 
 The body of an extension declaration contains zero or more declarations. These declarations can include computed properties, computed static properties, instance methods, static and class methods, initializers, subscript declarations, and even class, structure, and enumeration declarations. Extension declarations can’t contain destructor or protocol declarations, store properties, property observers, or other extension declarations. For a discussion and several examples of extensions that include various kinds of declarations, see Extensions.
 
-一个扩展声明体包括零个或多个声明。这些声明可以包括计算型属性，计算型静态属性，实例方法，静态和类方法，构造器， 附属脚本声明，甚至其他类，结构和枚举声明。扩展声明不能包含析构器，协议声明，存储型属性，属性监测器或其他 的扩展属性。详细讨论和查看包含多种扩展声明的实例，参见扩展一节。
+扩展声明体包括零个或多个声明。这些声明可以包括计算型属性，计算型静态属性，实例方法，静态和类方法，构造器，附属脚本声明，甚至其它类，结构和枚举声明。扩展声明不能包含析构器，协议声明，存储型属性，属性监测器或其它的扩展属性。详细讨论和查看包含多种扩展声明的实例，参见Extensions一节。
 
 Extension declarations can add protocol conformance to an existing class, structure, and enumeration type in the adopted protocols. Extension declarations can’t add class inheritance to an existing class, and therefore the type-inheritance-clause in an extension declaration contains only a list of protocols.
 
-扩展声明可以向现存的类，结构体，枚举内添加一致的协议。扩展声明不能向一个类中添加继承的类，因此 type-inheritance-clause只包含协议列表。
+扩展声明可以向存在的类，结构体，枚举添加一致的协议。扩展声明不能向一个类中添加类的继承，因此type-inheritance-clause只包含协议的列表。
 
 
 Properties, methods, and initializers of an existing type can’t be overridden in an extension of that type.
-属性，方法，现存类型的构造器不能被它们类型的扩展所重写。
+现存类型的属性，方法，构造器不能被它们的扩展重写。
 
 Extension declarations can contain initializer declarations. That said, if the type you’re extending is defined in another module, an initializer declaration must delegate to an initializer already defined in that module to ensure members of that type are properly initialized.
 扩展声明可以包含构造器声明，这意味着，如果你扩展的类型在其他模块中定义，构造器声明必须委托另一个在 那个模块里声明的构造器来恰当的初始化。
@@ -999,7 +999,8 @@ Extension declarations can contain initializer declarations. That said, if the t
 ##附属脚本声明
 
 A subscript declaration allows you to add subscripting support for objects of a particular type and are typically used to provide a convenient syntax for accessing the elements in a collection, list, or sequence. Subscript declarations are declared using the keyword subscript and have the following form:
-附属脚本用于向特定类型的对象添加附属脚本支持，通常为访问集合，列表和序列的元素时提供便利的语法。附属脚本声明使用关键字subscript，声明形式如下：
+
+附属脚本声明用于向特定类型的对象添加附属脚本支持，通常为访问集合，列表和序列的元素提供便利的语法。使用关键字subscript，声明形式如下：
 
 
 > subscript (`parameter`) -> (return type){
@@ -1014,27 +1015,31 @@ A subscript declaration allows you to add subscripting support for objects of a 
 
 Subscript declarations can appear only in the context of a class, structure, enumeration, extension, or protocol declaration.
 
+附属脚本声明只能出现在类，结构，枚举类型，扩展或协议声明的上下文中。
 
 The parameters specify one or more indexes used to access elements of the corresponding type in a subscript expression (for example, the i in the expression object[i]). Although the indexes used to access the elements can be of any type, each parameter must include a type annotation to specify the type of each index. The return type specifies the type of the element being accessed.
 
-变量(parameters)指定一个或多个用于在相应类型的附属脚本中访问元素的索引（例如，表达式object[i]中的i）。尽管用于元素访问的索引可以是任意类型的，但是每个变量必须包含一个用于指定每种索引类型的类型标注。返回类型(return type)指定被访问的元素的类型。
+参数(parameters)指定了一个或多个用于在相应类型的附属脚本表达式中访问元素的索引（例如，表达式object[i]中的i）。尽管用于访问元素的索引可以是任意类型，但是每个参数必须包含一个类型标注来指定每种索引的类型。返回类型(return type)指定被访问的元素的类型。
 
 
 As with computed properties, subscript declarations support reading and writing the value of the accessed elements. The getter is used to read the value, and the setter is used to write the value. The setter clause is optional, and when only a getter is needed, you can omit both clauses and simply return the requested value directly. That said, if you provide a setter clause, you must also provide a getter clause.
 
-和计算性属性一样，附属脚本声明支持对访问元素的读写操作。getter用于读取值，setter用于写入值。setter子句是可选的，当仅需要一个getter子句时，可以将二者都忽略且直接返回请求的值即可。也就是说，如果使用了setter子句，就必须使用getter子句。
+和计算型属性一样，附属脚本声明支持对访问元素的读写。getter用于读取，setter用于写入。setter子句是可选的，当仅需要一个getter子句时，可以将二者都忽略，直接返回请求的值即可。也就是说，如果提供了setter子句，getter子句也必须要有。
 
 The setter name and enclosing parentheses are optional. If you provide a setter name, it is used as the name of the parameter to the setter. If you do not provide a setter name, the default parameter name to the setter is value. That type of the setter name must be the same as the return type.
 
-setter的名字和封闭的括号是可选的。如果使用了setter名称，它会被当做传给setter的变量的名称。如果不使用setter名称，那么传给setter的变量的名称默认是value。setter名称的类型必须与返回类型(return type)的类型相同。
+setter的名字和封闭的括号是可选的。如果提供了setter名称，它会被setter的参数名。如果没有提供setter名称，那么传给setter的参数的名称默认是value。setter名称的类型必须与返回类型(return type)的类型相同。
 
-You can overload a subscript declaration in the type in which it is declared, as long as the parameters or thereturn type differ from the one you’re overloading. You can also override a subscript declaration inherited from a superclass. When you do so, you must mark the overridden subscript declaration with the overridekeyword.
+You can overload a subscript declaration in the type in which it is declared, as long as the parameters or the return type differ from the one you’re overloading. You can also override a subscript declaration inherited from a superclass. When you do so, you must mark the overridden subscript declaration with the override keyword.
 
-可以在附属脚本声明的类型中，可以重载附属脚本，只要变量(parameters)或返回类型(return type)与先前的不同即可。此时，必须使用override关键字声明那个被覆盖的附属脚本。(注：好乱啊！到底是重载还是覆盖？！)
+在附属脚本声明的类型中，可以重载附属脚本，只要参数(parameters)或返回类型(return type) 与先前的不同即可。如果这样做的话，必须使用override关键字声明那个被覆盖的附属脚本。
 
 You can also declare subscripts in the context of a protocol declaration, as described in Protocol Subscript Declaration.
-同样可以在协议声明的上下文中声明附属脚本，Protocol Subscript Declaration中有所描述。
-For more information about subscripting and to see examples of subscript declarations, see Subscripts.
+在协议声明的上下文中，也声明附属脚本，正如Protocol Subscript Declaration描述的一样。
+
+For more information about subscripting and to see examples of subscript declarations, see Subscripts。.
+
+获取更多关于附属脚本的信息和例子，请参看Subscripts。
 
 >GRAMMAR OF A SUBSCRIPT DECLARATION
 
