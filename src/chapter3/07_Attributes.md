@@ -155,17 +155,31 @@ Interface Builder attributes are declaration attributes used by Interface Builde
 
 You apply the `IBOutlet` and `IBInspectable` attributes to property declarations of a class. You apply the `IBAction` attribute to method declarations of a class and the `IBDesignable` attribute to class declarations.
 
+`IBOutlet`和`IBInspectable`特性用于类的属性声明，`IBAction`特性用于类的方法声明而`IBDesignable`用于类的声明。
+
 ## Type Attributes
 
+## 类型特性
+
 You can apply type attributes to types only. However, you can also apply the `noreturn` attribute to a function or method *declaration*.
+
+类型特性只能应用在类型上。尽管如此，你还是可以将`noreturn`特性应用在函数和方法的声明上。
 
 `auto_closure`
 > This attribute is used to delay the evaluation of an expression by automatically wrapping that expression in a closure with no arguments. Apply this attribute to a function or method type that takes no arguments and that returns the type of the expression. For an example of how to use the `auto_closure` attribute, see [Function Type](#).
 
-`noreturn`
-Apply this attribute to the type of a function or method to indicate that the function or method doesn’t return to its caller. You can also mark a function or method declaration with this attribute to indicate that the corresponding type of that function or method, `T`, is `@noreturn T`.
+`auto_closure`
+> 这个特性一般用于通过将表达式包裹在一个没有参数的闭包中来延迟表达式的计算。将该特性应用在不带任何参数的函数和方法中，而这些函数和方法的返回值就是需要延迟计算的表达式。关于如何使用`auto_closure`特性，参考[函数类型](#)中的例子。
 
-> GRAMMAR OF AN ATTRIBUTE
+`noreturn`
+> Apply this attribute to the type of a function or method to indicate that the function or method doesn’t return to its caller. You can also mark a function or method declaration with this attribute to indicate that the corresponding type of that function or method, `T`, is `@noreturn T`.
+
+`noreturn`
+> 将这个特性应用在函数或者方法中来表明该函数或者方法不返回任何值给它的调用者。你也可以使用这个特性来标记函数或者方法声明以及来说明这个函数或者方法，`T`，是`@noreturn T`类型。
+
+## GRAMMAR OF AN ATTRIBUTE
+
+## 特性语法总结
 
 > attribute → @attribute-nameattribute-argument-clauseopt
 
