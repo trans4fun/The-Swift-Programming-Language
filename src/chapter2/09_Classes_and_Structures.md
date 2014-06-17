@@ -292,16 +292,92 @@ When `rememberedDirection` is assigned the value of `currentDirection`, it is ac
 当`rememberedDirection`赋值为`currentDirection`时，实际上只是赋值了值拷贝而已。
 
 Changing the value of `currentDirection` thereafter does not affect the copy of the original value that was stored in `rememberedDirection`.
-改变`currentDirection`
+改变`currentDirection`的值并不会影响存储了原始值副本的`rememberedDirection`。
 ‌
-Classes Are Reference Types
-Unlike value types, reference types are not copied when they are assigned to a variable or constant, or when they are passed to a function. Rather than a copy, a reference to the same existing instance is used instead.
+### Classes Are Reference Types
+### 类是引用类型
 
-Here’s an example, using the VideoMode class defined above:
+Unlike value types, *reference types* are not copied when they are assigned to a variable or constant, or when they are passed to a function. Rather than a copy, a reference to the same existing instance is used instead.
 
+与值类型不同，在赋值给变量、常量或者传参时，引用类型不会被复制，而是传递与当前值相同的引用。
+
+Here’s an example, using the `VideoMode` class defined above:
+请看这个例子，例子中使用了上文定义的`VideoMode`：
+
+```
 let tenEighty = VideoMode()
 tenEighty.resolution = hd
 tenEighty.interlaced = true
 tenEighty.name = "1080i"
 tenEighty.frameRate = 25.0
-This example declares a new constant called tenEighty and sets it to refer to a new instance of the VideoMode class. The video mode is assigned a copy of the HD resolution of 1920 by 1080 from before. It is set to be interlaced, and is given a name of "1080i". Finally, it is set to a frame rate of 25.0 frames per second.
+```
+
+This example declares a new constant called `tenEighty` and sets it to refer to a new instance of the `VideoMode` class. The video mode is assigned a copy of the HD resolution of `1920` by `1080` from before. It is set to be interlaced, and is given a name of `"1080i"`. Finally, it is set to a frame rate of `25.0` frames per second.
+
+例子中声明了一个名为`tenEighty`的新常量，并将它赋值为一个新的`VideoMode`实例。视频模式使用了上文的`hd`值的拷贝，其分辨率为`1920`x`1080`。`tenEighty`的`interlaced`为true，`name`为`1080i`，`frameRate`为`25.0`帧每秒。
+
+Next, `tenEighty` is assigned to a new constant, called `alsoTenEighty`, and the frame rate of `alsoTenEighty` is modified:
+
+然后，一个新常量`alsoTenEighty`被赋值为`tenEighty`，`alsoTenEighty`的帧率做了如下修改：
+
+```
+let alsoTenEighty = tenEighty
+alsoTenEighty.frameRate = 30.0
+```
+
+Because classes are reference types, `tenEighty` and `alsoTenEighty` actually both refer to the same `VideoMode` instance. Effectively, they are just two different names for the same single instance.
+
+因为类是引用类型，`tenEighty`和`alsoTenEighty`都指向了同一个`VideoMode`实例。实际上它们是同一个实例的两个不同的名字而已。
+
+Checking the `frameRate` property of `tenEighty` shows that it correctly reports the new frame rate of `30.0` from the underlying `VideoMode` instance:
+
+接下来我们检查一下`tenEighty`的属性`frameRate`，这能说明`VideoMode`实例的帧率真的变成了新值`30.0`。
+
+```
+println("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
+// prints "The frameRate property of tenEighty is now 30.0"
+```
+
+Note that `tenEighty` and `alsoTenEighty` are declared as constants, rather than variables. However, you can still change `tenEighty.frameRate` and `alsoTenEighty.frameRate` because the values of the `tenEighty` and `alsoTenEighty` constants themselves do not actually change. `tenEighty` and `alsoTenEighty` themselves do not “store” the `VideoMode` instance—instead, they both refer to a `VideoMode` instance behind the scenes. It is the `frameRate` property of the underlying `VideoMode` that is changed, not the values of the constant references to that `VideoMode`.
+
+请注意`tenEighty`和`alsoTenEighty`都被声明成了常量而不是变量。但是因为修改其属性的值并不会改变`tenEighty`和`alsoTenEighty`的值，我们还是可以修改`tenEighty.frameRate`和`alsoTenEighty.frameRate`。`tenEighty`和`alsoTenEighty`并不存储`VideoMode`实例，而是引用一个`VideoMode`实例的地址。改变`frameRate`的值只是改变了引用的`VideoMode`实例的属性，并没有改变引用的`VideoMode`的地址。
+‌
+### Identity Operators
+### 身份操作符
+
+Because classes are reference types, it is possible for multiple constants and variables to refer to the same single instance of a class behind the scenes. (The same is not true for structures and enumerations, because they are value types and are always copied when they are assigned to a constant or variable, or passed to a function.)
+
+因为类是引用类型，因此允许多个常量和变量都引用同一个类实例。（结构体和枚举却不是，因为它们是值类型，并且在赋值给变量常量或者传值的时候传递的都是值的拷贝。）
+
+It can sometimes be useful to find out if two constants or variables refer to exactly the same instance of a class. To enable this, Swift provides two identity operators:
+
+* Identical to (===)
+* Not identical to (!==)
+
+有时候需要判断两个常量或变量是否指向同一个类实例。Swift提供了两个身份操作符来实现这个功能：
+
+ * 指向同一实例(===)
+ * 指向不同实例（!==）
+
+Use these operators to check whether two constants or variables refer to the same single instance:
+
+以下例子使用了这两个操作符来判断两个常量或变量是否是同一实例：
+
+```
+if tenEighty === alsoTenEighty {
+    println("tenEighty and alsoTenEighty refer to the same Resolution instance.")
+}
+// prints "tenEighty and alsoTenEighty refer to the same Resolution instance."
+```
+
+Note that “identical to” (represented by three equals signs, or ===) does not mean the same thing as “equal to” (represented by two equals signs, or ==):
+
+* “Identical to” means that two constants or variables of class type refer to exactly the same class instance.
+* “Equal to” means that two instances are considered “equal” or “equivalent” in value, for some appropriate meaning of “equal”, as defined by the type’s designer.
+
+
+When you define your own custom classes and structures, it is your responsibility to decide what qualifies as two instances being “equal”. The process of defining your own implementations of the “equal to” and “not equal to” operators is described in Equivalence Operators.
+
+‌
+Pointers
+If you have experience with C, C++, or Objective-C, you may know that these languages use pointers to refer to addresses in memory. A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but is not a direct pointer to an address in memory, and does not require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift.
