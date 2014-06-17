@@ -124,7 +124,7 @@ If the constant name of a constant declaration is a tuple pattern, the name of e
   
 In this example, firstNumber is a named constant for the value 10, and secondNumber is a named constant for the value 42. Both constants can now be used independently:
 
-在这个例子，firstNumer是一个命名常量，值是10。secondNumber是一个命命名常量，值是4。.这两个常量现在都可以独立的使用。
+在这个例子，firstNumer是一个命名常量，值是10。secondNumber是一个命名常量，值是4。这两个常量现在都可以独立的使用。
 
     println("The first number is \(firstNumber).")
     // prints "The first number is 10."
@@ -290,7 +290,7 @@ For more information and to see an example of how to use property observers, see
 
 To declare a class computed property, mark the declaration with the class keyword. To declare a static variable property, mark the declaration with the static keyword. Class and static properties are discussed in Type Properties.
 
-要声明一个类计算属性，要用class关键字标记声明。声明静态的变量属性，用关键字static标记声明。类和静态属性在Type属性里讨论。
+要声明一个类的计算型属性，要用关键字class标记声明。声明静态的变量属性，用关键字static标记。类和静态属性在Type属性里有讨论。
 
 >GRAMMAR OF A VARIABLE DECLARATION
 
@@ -341,13 +341,13 @@ To declare a class computed property, mark the declaration with the class keywor
 
 A type alias declaration introduces a named alias of an existing type into your program. Type alias declarations begin with the keyword typealias and have the following form:
 
-类型alias声明引入了一个存在类型的名字到你的程序当中。类型alias声明以关键字typelias开头，使用一下的形式：
+类型别名声明引入了存在类型的名字到程序中，以关键字typelias开头，采用如下的形式：
 
   typealias name = existing type
   
 After a type alias is declared, the aliased name can be used instead of the existing type everywhere in your program. The existing type can be a named type or a compound type. Type aliases do not create new types; they simply allow a name to refer to an existing type.
 
-在一个类型alias声明后，声明的名字可以使用在你的程序的的任何地方使用了。存在的类型可能是一个命令类型或是计算类型。类型 alias不能创造新类型，他们只是简单的把名字指向一个存在的类型。
+在声明一个类型别名后，那个别名可以使用在你的程序的的任何有那个类型的地方使用了。存在的类型可能是命名类型或是复合类型。类型 别名不是创造新类型，它们只是简单的把名字指向一个存在的类型。
 
 See also Protocol Associated Type Declaration.
 
@@ -367,25 +367,27 @@ See also Protocol Associated Type Declaration.
 
 A :newTerm`function declaration` introduces a function or method into your program. A function declared in the context of class, structure, enumeration, or protocol is referred to as a method. Function declarations are declared using the keyword func and have the following form:
 
-一个新术语”函数声明“引入了一个函数或者方法到程序中。在类，结构，枚举或者协议韩经理声明的函数会被挡住函数。番薯声明使用关键字func声明，采用以下的形式。
+新术语”函数声明“引入了一个函数或者方法到程序中。在类，结构，枚举或者协议里声明的函数会被当做方法。函数声明使用关键字func，采用以下的形式。
 
   func function name(parameters) -> return type {
     statements
   }
+  
 If the function has a return type of Void, the return type can be omitted as follows:
 
-如果函数有void的返回类型，返回类型可像下面这样忽略：
+如果函数的返回类型是void，返回类型可像下面这样忽略：
 
 func function name(parameters) {
     statements
 }
+
 The type of each parameter must be included—it can’t be inferred. By default, the parameters to a function are constants. Write var in front of a parameter’s name to make it a variable, scoping any changes made to the variable just to the function body, or write inout to make those changes also apply to the argument that was passed in the caller’s scope. For a discussion of in-out parameters, see In-Out Parameters.
 
-每个参数的类型必须包含-不能通过推断。默认情况下，函数的参数是常量。在参数名的前面写一个var会让他成为一个变量，对变量的做的任何变化只会在函数体力有效，或者写入input使这些改变也会应用唉调用者范围的参数。
+必须包含每个参数的类型-参数类型不能通过推断。默认情况下，函数的参数是常量。在参数名的前面写一个var会让它成为一个变量，对变量的做的任何变化只会在函数内有效，或者用inout使的这些改变可以在调用域内生效。
 
 Functions can return multiple values using a tuple type as the return type of the function.
 
-函数可以使用元组类型作为函数的返回类型来返回多个值
+函数可以使用元组类型作为函数的返回类型来返回多个值。
 
 A function definition can appear inside another function declaration. This kind of function is known as a nested function. For a discussion of nested functions, see Nested Functions.
 
@@ -402,10 +404,10 @@ Function parameters are a comma separated list where each parameter has one of s
 
 For function parameters, the parameter name is used within the function body, but is not used when calling the function. For method parameters, the parameter name is used as within the function body, and is also used as a label for the argument when calling the method. The name of a method’s first parameter is used only within the function body, like the parameter of a function. For example:
 
-对于函数参数，参数名字在函数体内部使用，但是在调用函数的时候不会使用。对于方法参数，参数名可以在函数体使用，也在调用方法时可以作为参数的标签使用。函数的一个参数名字仅仅在函数体力使用，就像函数的参数。例如
+对于函数参数，参数名字在函数体内部使用，但是在调用函数的时候不会使用。对于方法参数，参数名可以在函数体使用，在调用方法时也可以作为参数的标签使用。函数的一个参数名字仅仅在函数内使用，就像函数的参数。例如
 
 
-func f(x: Int, y: String) -> String {
+    func f(x: Int, y: String) -> String {
         return y + String(x)
     }
     f(7, "hello")  // x and y have no name
@@ -421,7 +423,7 @@ func f(x: Int, y: String) -> String {
 
 You can override the default behavior for how parameter names are used with one of the following forms:
 
-你可以重写参数名字使用的默认行为，采用如下的形式：
+可以重写参数名字使用的默认行为，采用如下的形式：
 
 
   external parameter name local parameter name: parameter type
@@ -446,7 +448,8 @@ An underscore (_) before a local parameter name gives that parameter no name to 
 ##特殊类型的参数
 
 Parameters can be ignored, take a variable number of values, and provide default values using the following forms:
-参数可以忽略，需要不同数量的值，会提供默认值。使用如下的形式：
+
+参数可以忽略，需要不同数量的值，会提供默认值，使用如下的形式：
 
 
  _ : <#parameter type#.
@@ -456,11 +459,11 @@ Parameters can be ignored, take a variable number of values, and provide default
 
 A parameter named with an underscore (_) is explicitly ignored an can’t be accessed within the body of the function.
 
-带有下划线的参数会显式的被忽略，在函数体内部不能被访问到。
+带有下划线的参数会显式的被忽略，在函数内部不能被访问到。
 
 A parameter with a base type name followed immediately by three dots (...) is understood as a variadic parameter. A function can have at most one variadic parameter, which must be its last parameter. A variadic parameter is treated as an array that contains elements of the base type name. For instance, the variadic parameter Int... is treated as Int[]. For an example that uses a variadic parameter, see Variadic Parameters.
 
-带有基本类型后面接着3个点的参数。
+基本类型名的参数，如果紧跟着三个点(...)，被理解为是可变参数。一个函数最多可以有一个可变参数，且必须是最后一个参数。可变参数被作包含基本类型的元素数组。举例来讲，可变参数int...被看做是int[]。 查看可变参数的使用例子，详见可变参数(variadic parameters)一节。
 
 A parameter with an equals sign (=) and an expression after its type is understood to have a default value of the given expression. If the parameter is omitted when calling the function, the default value is used instead. If the parameter is not omitted, it must have its name in the function call. For example, f() and f(x: 7) are both valid calls to a function with a single default parameter named x, but f(7) is invalid because it provides a value without a name.
 
