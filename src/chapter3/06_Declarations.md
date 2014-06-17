@@ -557,7 +557,6 @@ Like structures but unlike classes, enumerations are value types; instances of a
 You can extend the behavior of an enumeration type with an extension declaration, as discussed in Extension Declaration.
 
 
-
 可以使用extension声明扩展枚举类型的行为，如果Extension Declaration Enumerations with Cases of Any Type描述的那样。
 
 The following form declares an enumeration type that contains enumeration cases of any type:
@@ -618,13 +617,13 @@ The raw value of an enumeration case can be accessed by calling its toRaw method
 
 ##访问枚举case
 
-To reference the case of an enumeration type, use dot (.) syntax, as in EnumerationType.EnumerationCase. When the enumeration type can be inferred from context, you can omit it (the dot is still required), as described inEnumeration Syntax and Implicit Member Expression.
+To reference the case of an enumeration type, use dot (.) syntax, as in EnumerationType.EnumerationCase. When the enumeration type can be inferred from context, you can omit it (the dot is still required), as described in Enumeration Syntax and Implicit Member Expression.
 
-正如EnumerationType.EnumerationCase，可以使用语法.来引用一个enumeration类型的case，正如inEnumeration Syntax and Implicit Member Expression所描述的。
+和EnumerationType.EnumerationCase一样，可以使用语法.来引用一个enumeration类型的case，就像inEnumeration Syntax and Implicit Member Expression所描述的。
 
 To check the values of enumeration cases, use a switch statement, as shown in Matching Enumeration Values with a Switch Statement. The enumeration type is pattern-matched against the enumeration case patterns in the case blocks of the switch statement, as described in Enumeration Case Pattern.
 
-使用switch语句来检验枚举事件的值，正如使用switch语句匹配枚举值（Matching Enumeration Values with a Switch Statement)一节描述的那样。
+使用switch语句来检验枚举事件的值，如使用switch语句匹配枚举值（Matching Enumeration Values with a Switch Statement)一节描述的那样。
 
 >GRAMMAR OF AN ENUMERATION DECLARATION
 
@@ -646,10 +645,12 @@ To check the values of enumeration cases, use a switch statement, as shown in Ma
     raw-value-assignment → =­literal­
 
 ##Structure Declaration
+
 ##结构声明
+
 A structure declaration introduces a named structure type into your program. Structure declarations are declared using the keyword struct and have the following form:
 
-结构声明引入了命名的类型到程序中。结构声明使用struct声明，采用如下的形式：
+结构声明引入了命名的类型到程序中。结构声明使用关键字struct，采用如下的形式：
 
    struct structure name: adopted protocols {
      declarations
@@ -658,11 +659,11 @@ A structure declaration introduces a named structure type into your program. Str
 
 The body of a structure contains zero or more declarations. These declarations can include both stored and computed properties, static properties, instance methods, static methods, initializers, type aliases, and even other structure, class, and enumeration declarations. Structure declarations can’t contain destructor or protocol declarations. For a discussion and several examples of structures that include various kinds of declarations, see Classes and Structures.
 
-结构体包含0或者更多的声明。这个声明能包括可存储和计算的属性，静态属性，示例方法，静态方法，实例化，type aliases，甚至其他结构，类和枚举声明。结构声明不能包含析构或者协议声明。在Classes and Structures里，包括好几种了类型的声明的桃花好几个结构例子。
+结构体包含0或者更多的声明。这个声明能包括存储型和计算型的属性，静态属性，示例方法，静态方法，构造器，类型别名，甚至其它结构，类和枚举声明。结构声明不能包含析构或者协议声明。在Classes and Structures里，包括好几种了不同类型的声明的结构例子。
 
 Structure types can adopt any number of protocols, but can’t inherit from classes, enumerations, or other structures.
 
-结构类型可以采用任何数量的协议，但是从classes继承，枚举或者其他结构。
+结构类型可以采用任何数量的协议，但是不能从classes，枚举或者它结构继承。
 
 There are three ways create an instance of a previously declared structure:
 
@@ -682,18 +683,19 @@ There are three ways create an instance of a previously declared structure:
 
 The process of initializing a structure’s declared properties is described in Initialization.
 
-初始化一个结构的声明的属性的过程在Initialization里描述的一样。
+初始化一个结构的声明的属性的过程在Initialization描述。
 
 Properties of a structure instance can be accessed using dot (.) syntax, as described in Accessing Properties.
 
-一个结构实例的属性使用通过.法来访问。
+一个结构实例的属性使用通过.语来访问。
 
 Structures are value types; instances of a structure are copied when assigned to variables or constants, or when passed as arguments to a function call. For information about value types, see Structures and Enumerations Are Value Types.
 
-结构是值类型；一个结构的实例复制在赋值给变量或者常量或者在传递参数给函数调用的时候。关于值类型的信息，请参看Structures and Enumerations Are Value Types.
+结构是值类型；一个结构的实例在赋值给变量或者常量或者在传递参数给函数调用的时候采用复制的形式。关于值类型的信息，请参看Structures and Enumerations Are Value Types.
 
 You can extend the behavior of a structure type with an extension declaration, as discussed in Extension Declaration.
-你可以用一个扩展声明来扩展一个结构类型的行为，正如Extension Declaration讨论的。
+
+你可以用一个扩展声明来扩展结构类型的行为，正如Extension Declaration讨论的。
 
 >GRAMMAR OF A STRUCTURE DECLARATION
 
@@ -718,14 +720,14 @@ A class declaration introduces a named class type into your program. Class decla
 
 The body of a class contains zero or more declarations. These declarations can include both stored and computed properties, instance methods, class methods, initializers, a single destructor method, type aliases, and even other class, structure, and enumeration declarations. Class declarations can’t contain protocol declarations. For a discussion and several examples of classes that include various kinds of declarations, see Classes and Structures.
 
-一个class的主题会包含0或多个声明。这些声明可以包括可存储的和可计算的属性，实例方法，类方法，初始化器，一个析构函数，类型 别名，和甚至其它的class，结构，枚举声明。类声明不能包括是协议声明。
+一个class的主题会包含0或多个声明。这些声明可以包括存储型和计算型的属性，实例方法，类方法，构造器，单个析构函数，类型 别名，和甚至其它的class，结构，枚举声明。类声明不能包括协议声明。详细讨论和例子请看 Classes and Structures
 
 A class type can inherit from only one parent class, its superclass, but can adopt any number of protocols. The superclass appears first in the type-inheritance-clause, followed by any adopted protocols.
-一个class类只能从一个父类中继承，但是可以有多个洗衣。超类首先出现在类型继承语句中，后面跟着采用的协议。
+一个class类只能从一个父类中继承，但是可以有多个协议。超类首先出现在类型继承语句中，后面跟着采用的协议。
 
 As discussed in Initializer Declaration, classes can have designated and convenience initializers. When you declare either kind of initializer, you can require any subclass to override it by marking the initializer with therequired attribute. The designated initializer of a class must initialize all of the class’s declared properties and it must do so before calling any of its superclass’s designated initializers.
 
-正如在初始化声明讨论的一样，类的初始化很特别很便利。当你声明不同种类的初始化器时，你可以使用required属性要求任何子类重写他。这个特定的初始化器必须初始化类的所有声明的属性。在调用任何自雷的特定的初始化器时都必须这么做。
+正如在初始化声明讨论的一样，类可以有指定和便利的构造器。当你声明某种构造器时，可以使用required属性要求所有子类重写。这个特定的构造器必须初始化类的所有声明的属性。在调用任何超类的特定的构造器时都必须这么做。
 
 A class can override properties, methods, and initializers of its superclass. Overridden methods and properties must be marked with the override keyword.
 
@@ -733,7 +735,7 @@ A class can override properties, methods, and initializers of its superclass. Ov
 
 Although properties and methods declared in the superclass are inherited by the current class, designated initializers declared in the superclass are not. That said, if the current class overrides all of the superclass’s designated initializers, it inherits the superclass’s convenience initializers. Swift classes do not inherit from a universal base class.
 
-尽管在子类中声明的属性和方法可以被当前的类继承，但是在超类中指定的构造器却不行。也就是说，如果当前类重写了超类的所有指定的构造器，它就会继续超类的便利构造器。Swift类不会从通用的基类中继承。
+尽管在子类中声明的属性和方法可以被当前的类继承，但是在超类中指定的构造器却不可以。也就是说，如果当前类重写了超类的所有指定的构造器，它就会继续超类的便利构造器。Swift类不会从通用的基类中继承。
 
 There are two ways create an instance of a previously declared class:
 
@@ -869,7 +871,7 @@ protocol-property-declaration → variable-declaration-head­variable-name­type
 
 Protocols declare that conforming types must implement a method by including a protocol method declaration in the body of the protocol declaration. Protocol method declarations have the same form as function declarations, with two exceptions: They don’t include a function body, and you can’t provide any default parameter values as part of the function declaration. For examples of conforming types that implement the method requirements of a protocol, see Method Requirements.
 
-协议声明conforming类型必须在协议声明体里通过包括一个协议方法声明来实现方法。协议方法声明与函数声明有同样的形式，只有2点例外：他们不需要包括函数体，你不能提供任何某人参数值作为函数声明的一部分。
+协议声明一致性类型必须在协议声明体里通过包括一个协议方法声明来实现方法。协议方法声明与函数声明有同样的形式，只有2点例外：他们不需要包括函数体，你不能提供任何某人参数值作为函数声明的一部分。
 
 
 To declare a class or static method requirement in a protocol declaration, mark the method declaration with the class keyword. Classes that implement this method also declare the method with the class keyword. Structures that implement it must declare the method with the static keyword instead. If you’re implementing the method in an extension, use the class keyword if you’re extending a class and the static keyword if you’re extending a structure.
