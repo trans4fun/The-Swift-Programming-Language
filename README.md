@@ -18,7 +18,7 @@ The Swift Programming Language 中文化项目
    * 控制流 [认领 by 墨昕]
    * 函数 [认领 by 紫溪]
    * 闭包 [认领 by 闻西]
-   * 枚举 [认领 by 灵吾]
+   * 枚举 [已完成 by 灵吾]
    * 类和结构体 [认领 by 晓毒]
    * 属性 [认领 by 周源]
    * 方法 [已完成 by 米尔]
