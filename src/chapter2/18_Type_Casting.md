@@ -7,10 +7,11 @@ Type casting in Swift is implemented with the is and as operators. These two ope
 You can also use type casting to check whether a type conforms to a protocol, as described in Checking for Protocol Conformance.
 
 # 类型检查
-类型检查是一种方法来检查一个实例的类型，并且/或者处理该实例，就好像它是一个不同的超类或子类从别的在自己的类层次结构中的某个地方。 
+类型检查是检查实例类型的方法，并且可以用来类型转换，就好像它是一个不同的超类或子类从别的在自己的类层次结构中的某个地方。 
 
-类型转换使用`is`和`as`操作符来实现。这两个操作符提供了一种简单和富有表现力的方法来检查一个值的类型或者把某个值转换为不同的类型。 
-你还可以使用类型转换来检查类型是否符合，如在检查协议一致性描述。
+类型检查使用`is`和`as`操作符来实现。这两个操作符提供了一种简单明了的方式来进行类型检查和类型转换。 
+
+你还可以使用类型检查来检查类型是否符合接口，以及是否和接口描述保持一致。
 
 ##Defining a Class Hierarchy for Type Casting
 
@@ -97,7 +98,7 @@ item is Movie returns true if the current MediaItem is a Movie instance and fals
 
 这个例子遍历了数组中的所有元素，每一次循环，都会把数组中的一个实例赋值给`item`。 
 
-如果`item`是`Movie`类型，则返回 `true`否则返回`false`,同样，也会检查`item`是否是`Song`类型。最后， `movieCount`和`songCount`就能统计出到底每个类型有多少个。
+如果`item`是`Movie`类型，则返回 `true`否则返回`false`,同样，也会检查`item`是否是`Song`类型。最后， `movieCount`和`songCount`就能统计出到底每个类型的数量。
 
 
 ##Downcasting
@@ -146,24 +147,21 @@ The example starts by trying to downcast the current item as a Movie. Because it
 
 Downcasting to Movie fails when applied to the two Song instances in the library array. To cope with this, the example above uses optional binding to check whether the optional Movie actually contains a value (that is, to find out whether the downcast succeeded.) This optional binding is written “if let movie = item as? Movie”, which can be read as:
 
-当在库阵列施加到两个乐曲实例向下转换到电影失败。为了解决这个问题，上面的示例使用可选的绑定检查可选电影实际上是否包含一个值（也就是要找出垂头丧气是否成功。）这个可选的结合上记着说“如果让电影=项目作为？电影“，这可以被理解为：
-
 “Try to access item as a Movie. If this is successful, set a new temporary constant called movie to the value stored in the returned optional Movie.”
 
-“尝试访问项目作为一个电影。如果这是成功，树立了新的临时常数，称为电影存储在返回的可选电影的价值。“ 
+当把数组`library`中的两个`Song`对象进行向下转型为`Movie`时，会转型失败。为了解决这个问题，示例使用了一个临时的赋值来检查是否转型成功。临时赋值的写法是`if let movie = item as? Movie`,这句话的意思是“尝试把`item`转型为`Movie`，如果转型成功，则把转化后的对象存储在一个临时的变量`movie`中”
 
 If the downcasting succeeds, the properties of movie are then used to print a description for that Movie instance, including the name of its director. A similar principle is used to check for Song instances, and to print an appropriate description (including artist name) whenever a Song is found in the library.
 
-如果向下转型成功，电影的属性，然后用于打印的Movie实例说明，包括其导演的名字。类似的原理是用来检查宋实例，并打印相应的描述（包括艺术家的名字），每当乐曲库中找到。
+如果向下转型成功，则会打印`Movie`对象相关的属性，包括导演的姓名，同样，如果`Song`转型成功，也会打印出`Song`相关的属性，例如歌手的姓名。
 
 > NOTE
 
 > Casting does not actually modify the instance or change its values. The underlying instance remains the same; it is >simply treated and accessed as an instance of the type to which it has been cast.
  
- 
- >注意 
+>注意 
 
->铸造实际上并不修改实例或改变其值。相关实例保持不变;它是>简单的处理，并作为访问到它已被转换到的类型的一个实例。
+>实际上，类型转换并没有对对象进行修改，它底层仍然保持一致，只是使用时，被当作一种类型来处理和访问。
 
 ##Type Casting for Any and AnyObject
 
@@ -176,31 +174,30 @@ NOTE
 Use Any and AnyObject only when you explicitly need the behavior and capabilities they provide. It is always better to be specific about the types you expect to work with in your code.
 
 
-## 类型转换为任何和AnyObject 
+## Any和AnyObject 的类型转换
 
-swift 提供了两种特殊类型的别名与非特定类型的工作： 
+`Swift` 提供了两种特殊类型，用来表示非特定类型。
 
-AnyObject可以代表任何类类型的实例。 
-任何可以代表任何类型的实例可言，除了函数类型。 
-注 
+`AnyObject`可以表示任何类类型的实例。 
+`Any` 可以代表任何类型的实例，除了函数类型。 
 
-使用任何与AnyObject只有当你明确需要他们提供的行为和能力。它始终是更好地具体说明你希望在你的代码工作的类型。
-
+注意：
+只有当你确定需要使用`Any`和`AnyObject`的特性的时候，再使用它们。一般情况下，最好还是指定具体的类型。
 ###AnyObject
 
 When working with Cocoa APIs, it is common to receive an array with a type of AnyObject[], or “an array of values of any object type”. This is because Objective-C does not have explicitly typed arrays. However, you can often be confident about the type of objects contained in such an array just from the information you know about the API that provided the array.
 
 ### AnyObject 
-
-当Cocoa API的工作，是很常见的接收数组与一类AnyObject[]，或者“任何对象类型的值的数组”。这是因为Objective-C中没有显式类型的数组。但是，你常常可以充满信心包含在刚刚从你了解所提供的数组的API的信息，例如一个数组对象的类型。
+当使用Cocoa APIs的时候，经常接收到一个AnyObject的数组，它里面可以放入任何类型。这是因为Object-C 没有确定类型的数组。尽管如此，通过对API的学习和了解，你仍然可以放心的使用这种API。
 
 In these situations, you can use the forced version of the type cast operator (as) to downcast each item in the array to a more specific class type than AnyObject, without the need for optional unwrapping.
 
 The example below defines an array of type AnyObject[] and populates this array with three instances of the Movie class:
 
-在这些情况下，您可以使用类型转换运算符的强迫版本（如）向下转换到每个项目在数组中以一个更具体的类类型比AnyObject，而不需要选配解缠。 
 
-下面的例子定义类型AnyObject[]数组，并填充这个数组的Movie类的三个实例：
+在这些情况下，您可以使用as 把AnyObject转化为一个具体的类型，而不需要进行拆包。
+
+下面的例子定义了一个类型为AnyObject[]的数组，并填充了三个Movie类型的对象。
 
     let someObjects: AnyObject[] = [
         Movie(name: "2001: A Space Odyssey", director: "Stanley Kubrick"),
@@ -210,7 +207,7 @@ The example below defines an array of type AnyObject[] and populates this array 
     
 Because this array is known to contain only Movie instances, you can downcast and unwrap directly to a non-optional Movie with the forced version of the type cast operator (as):
 
-因为这个数组是已知含有唯一的电影实例，则可以向下转换，直接解开到一个非可选的电影与类型转换运算符（如）的强迫版本：
+因为你已经知道这个数组中全都是Movie类型的对象，所以你可以直接使用as进行向下转型：
 
     for object in someObjects {
         let movie = object as Movie
@@ -221,7 +218,7 @@ Because this array is known to contain only Movie instances, you can downcast an
     // Movie: 'Alien', dir. Ridley Scott
 For an even shorter form of this loop, downcast the someObjects array to a type of Movie[] instead of downcasting each item:
 
-对于这个循环的一个更短的形式，向下转型的someObjects阵列的类型电影[]的，而不是向下转换每个项目：
+上面的代码可以简写，你可以直接把数组进行转型而不用对数组中的每一个对象进行转型。
 
     for movie in someObjects as Movie[] {
         println("Movie: '\(movie.name)', dir. \(movie.director)")
@@ -236,7 +233,7 @@ Here’s an example of using Any to work with a mix of different types, includin
 
 ### Any
 
-下面是使用Any与混合不同类型的，包括非类类型的工作的一个例子。该示例创建一个名为事情一个数组，它可以存储任何类型的值：
+下面的例子中，使用了`Any`和其他多种混合类型，包括一些非类类型。在这个例子中，我们创建了一个`things`数组用来存储任何类型的元素。
 
     var things = Any[]()
      
@@ -253,9 +250,9 @@ The things array contains two Int values, two Double values, a String value, a t
 
 You can use the is and as operators in a switch statement’s cases to discover the specific type of a constant or variable that is known only to be of type Any or AnyObject. The example below iterates over the items in the things array and queries the type of each item with a switch statement. Several of the switch statement’s cases bind their matched value to a constant of the specified type to enable its value to be printed:
 
-事情数组包含两个int值，两个Double值，一个字符串值，类型（Double，Double）的一个元组，和电影“捉鬼敢死队”，导演伊万·瑞特曼。 
+`things`数组包含两个`int`值，两个`Double`值，一个字符串值，一个元组，和一个Movie对象。 
 
-您可以使用is和as在switch语句的情况下，运营商发现，只知道是任何类型或AnyObject的常量或变量的具体类型。下面迭代的事情阵列项目的例子，查询每个项目的用switch语句的类型。几个switch语句的情况下，其匹配的值绑定到指定的类型，使其值要打印的常数：
+你可以在`switch`语句中使用`is`和`as`操作符来确定数组中`Any`和`AnyObject`变量的的具体类型。下面的例子遍历了数组`things`中的每一个元素，并确定了他们的类型。为了打印元素的值，一些`switch` 语句把元素赋值给一个指定的类型。
 
     for thing in things {
         switch thing {
@@ -293,4 +290,4 @@ You can use the is and as operators in a switch statement’s cases to discover 
 
 >注意 
 
-> switch语句的情况下使用的类型转换运算符的强迫版本（作为，不作为？）检查并转换成一个>特定类型。这种检查始终是一个安全的switch case语句的上下文中。
+> 这个示例使用 `as` 而不是 `as?` 来进行类型转换，因为在`switch`1上下文中，类型检查时安全的。
