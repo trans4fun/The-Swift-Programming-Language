@@ -251,37 +251,74 @@ Unlike many other languages, Swift does not require you to write a semicolon (;)
 	let cat = "🐱"; println(cat)
 	// prints "🐱"
 
-Integers
+# Integers
+# 整数
 
 Integers are whole numbers with no fractional component, such as 42 and -23. Integers are either signed (positive, zero, or negative) or unsigned (positive or zero).
 
+整数就是没有小数部分的完整的数字，如42和-23.整数可以有符号（正数，0，或负数），也可以没有符号（正数或0）。
+
 Swift provides signed and unsigned integers in 8, 16, 32, and 64 bit forms. These integers follow a naming convention similar to C, in that an 8-bit unsigned integer is of type UInt8, and a 32-bit signed integer is of type Int32. Like all types in Swift, these integer types have capitalized names.
 
-Integer Bounds
+Swift提供8，16，32和64进制的带符号和不带符号的整数类型。这些整数遵从和C类似的命名约定，在这个约定中，8进制的无符号整数的类型为`UInt8`，而一个32进制的有符号整数的类型是`Int32`。和Swift的所有类型一样，这些整数的类型是首字母大写的。
+
+# Integer Bounds
+# 整数边界
 
 You can access the minimum and maximum values of each integer type with its min and max properties:
 
-let minValue = UInt8.min  // minValue is equal to 0, and is of type UInt8
-let maxValue = UInt8.max  // maxValue is equal to 255, and is of type UInt8
+你可以通过整数类型的`max`和`min`属性来访问它的最大值和最小值：
+
+	let minValue = UInt8.min  // minValue is equal to 0, and is of type UInt8
+	let maxValue = UInt8.max  // maxValue is equal to 255, and is of type UInt8
+	let minValue = UInt8.min  // 最小值是 0, 类型是 UInt8
+	let maxValue = UInt8.max  // 最大值是 255, 类型是 UInt8
+
 The values of these properties are of the appropriate-sized number type (such as UInt8 in the example above) and can therefore be used in expressions alongside other values of the same type.
 
-Int
+这些属性值是相应数字类型的合适范围（比如上面例子里的`UInt8`），因此它们可以在其他拥有相同类型值的表达式中沿用。
+
+# Int
+# 整数
 
 In most cases, you don’t need to pick a specific size of integer to use in your code. Swift provides an additional integer type, Int, which has the same size as the current platform’s native word size:
 
+在大多数情况下，你不需要在代码中指定整数的范围。Swift提供了一个专门的整数类型，`Int`，它和当前平台的原生长度范围相同。
+
 On a 32-bit platform, Int is the same size as Int32.
+
+在32位的平台上，`Int`和`Int32`范围相同。
+
 On a 64-bit platform, Int is the same size as Int64.
+
+在64位的平台上，`Int`和`Int64`范围相同。
+
 Unless you need to work with a specific size of integer, always use Int for integer values in your code. This aids code consistency and interoperability. Even on 32-bit platforms, Int can store any value between -2,147,483,648 and 2,147,483,647, and is large enough for many integer ranges.
 
-UInt
+如果你不需要处理特定的整数范围，请在代码中的整数值使用`Int`类型。这有助于代码的一致性和可复用性。即使在32位的平台上，`Int`类型可以储存从-2,147,483,648到2,147,483,647的整数，大多数情况下这足够用了。
+
+# UInt
+# 无符号整数
 
 Swift also provides an unsigned integer type, UInt, which has the same size as the current platform’s native word size:
 
-On a 32-bit platform, UInt is the same size as UInt32.
-On a 64-bit platform, UInt is the same size as UInt64.
-NOTE
+Swift也提供了无符号整数类型，`UInt`,它和当前平台的原生长度范围相同。
 
-Use UInt only when you specifically need an unsigned integer type with the same size as the platform’s native word size. If this is not the case, Int is preferred, even when the values to be stored are known to be non-negative. A consistent use of Int for integer values aids code interoperability, avoids the need to convert between different number types, and matches integer type inference, as described in Type Safety and Type Inference.
+On a 32-bit platform, UInt is the same size as UInt32.
+
+在32位的平台上，`UInt`和`UInt32`范围相同。
+
+On a 64-bit platform, UInt is the same size as UInt64.
+
+在64位的平台上，`UInt`和`UInt64`范围相同。
+
+> NOTE
+
+> Use UInt only when you specifically need an unsigned integer type with the same size as the platform’s native word size. If this is not the case, Int is preferred, even when the values to be stored are known to be non-negative. A consistent use of Int for integer values aids code interoperability, avoids the need to convert between different number types, and matches integer type inference, as described in Type Safety and Type Inference.
+
+> 注意
+
+> 只在你需要特别指定无符号整数与当前平台原生长度范围相同时才使用`UInt`，否则，推荐使用`Int`，即使是你知道不会存储负值的时候。使用一致的`Int`整数类型有助于代码的服用，避免了不同数字类型之间的转换，并且匹配整数的类型推断，详见[类型安全和类型推断](link)。
 
 Floating-Point Numbers
 
