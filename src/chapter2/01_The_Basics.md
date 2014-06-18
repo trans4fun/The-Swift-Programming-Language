@@ -113,6 +113,7 @@ The welcomeMessage variable can now be set to any string value without error:
 # 命名常量和变量
 
 You can use almost any character you like for constant and variable names, including Unicode characters:
+
 你可以使用几乎所有你喜欢的符号来命名常量和变量，包括unicode字符：
 
 ```
@@ -153,3 +154,89 @@ Unlike a variable, the value of a constant cannot be changed once it is set. Att
 	let languageName = "Swift"
 	languageName = "Swift++"
 	// this is a compile-time error - languageName cannot be changed
+
+# Printing Constants and Variables
+# 输出常量和变量
+
+You can print the current value of a constant or variable with the println function:
+
+你可以用`printIn`函数输出常量和变量的当前值：
+
+```
+println(friendlyWelcome)
+// prints "Bonjour!"
+// 输出 "Bonjour!"
+```
+
+println is a global function that prints a value, followed by a line break, to an appropriate output. If you are working in Xcode, for example, println prints its output in Xcode’s “console” pane. (A second function, print, performs the same task without appending a line break to the end of the value to be printed.)
+
+`printIn`是一个输出值的全局函数，为了得到良好的输出结果，输出后会加上一个空行。如果你使用的是Xcode，`printIn`会将结果输出到Xcode的调试信息栏。（另一个函数，`print`，会执行几乎相同的任务，除了不会在输出结果之后加空行以外。）
+
+The println function prints any String value you pass to it:
+
+`printIn`函数会输出任何你赋值的字符串：
+
+```
+println("This is a string")
+// prints "This is a string"
+```
+
+The println function can print more complex logging messages, in a similar manner to Cocoa’s NSLog function. These messages can include the current values of constants and variables.
+
+`printIn`函数可以输出更复杂的记录信息，和Cocoa的NSlog函数类似。这些信息可以包含常量和变量的当前值。
+
+Swift uses string interpolation to include the name of a constant or variable as a placeholder in a longer string, and to prompt Swift to replace it with the current value of that constant or variable. Wrap the name in parentheses and escape it with a backslash before the opening parenthesis:
+
+Swift使用字符串内插(string interpolation)的方式将常量或变量名以占位符的形式加入一个长的字符串中，并且提示Swift用常量或变量的当前值取代替它。将名字包裹在括号中并在前面加上反斜扛来转义。
+
+```
+println("The current value of friendlyWelcome is \(friendlyWelcome)")
+// prints "The current value of friendlyWelcome is Bonjour!"
+// 输出 "The current value of friendlyWelcome is Bonjour!"
+```
+
+> NOTE
+
+> All options you can use with string interpolation are described in String Interpolation.
+
+> 注意
+
+> 关于字符串插值的详细参数，参见[字符串插值](link)。
+
+# Comments
+# 注释
+
+Use comments to include non-executable text in your code, as a note or reminder to yourself. Comments are ignored by the Swift compiler when your code is compiled.
+
+将代码中不会执行的文本，笔记或者备忘，用注释来表达。注释在编译时会被忽略。
+
+Comments in Swift are very similar to comments in C. Single-line comments begin with two forward-slashes (//):
+
+Swift中的注释和C中的注释十分相似。单行的注释以两个正斜杠 (//)开头：
+
+	// this is a comment
+	// 这是一个注释
+
+You can also write multiline comments, which start with a forward-slash followed by an asterisk (/*) and end with an asterisk followed by a forward-slash (*/):
+
+你也可以写多行的注释，用一个正斜杠跟着一个星号开头 (/*) ，用一个星号跟着一个正斜杠结束(*/)：
+
+	/* this is also a comment,
+	but written over multiple lines */
+	/* 这还是一个注释,
+	但是是多行的 */
+
+Unlike multiline comments in C, multiline comments in Swift can be nested inside other multiline comments. You write nested comments by starting a multiline comment block and then starting a second multiline comment within the first block. The second block is then closed, followed by the first block:
+
+和C中的多行注释不同，Swift的多行注释可以嵌套在另一个多行注释内部。你可以这样写嵌套的注释：开始一个多行注释块，在第一块多行注释内部跟着开始第二个多行注释。第二个多行注释块结束，然后第一个多行注释块结束。
+
+	/* this is the start of the first multiline comment
+	/* this is the second, nested multiline comment */
+	this is the end of the first multiline comment */
+	/* 这是第一个多行注释开始
+	/* 这是第二个，嵌套的多行注释 */
+	这是第一个多行注释的结束 */
+
+Nested multiline comments enable you to comment out large blocks of code quickly and easily, even if the code already contains multiline comments.
+
+嵌套的多行注释让你可以简单快捷的注释一大段代码，即使这块代码之前已经有多行注释块。
