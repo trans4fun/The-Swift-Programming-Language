@@ -182,7 +182,43 @@ number73 = Apartment(number: 73)
 ```
 Here’s how the strong references look after creating and assigning these two instances. The john variable now has a strong reference to the new Person instance, and the number73 variable has a strong reference to the new Apartment instance:
 
-下图展示了创建和分配两个实例之后的强引用关系。john变量和新Person实例之间有一条强引用关系，number73变量和新Apartment实例之间也有一条强引用关系。
+这里展示了创建和分配两个实例之后的强引用关系。john变量和新Person实例之间有一条强引用关系，number73变量和新Apartment实例之间也有一条强引用关系。
 
 ![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/referenceCycle01_2x.png)
 
+You can now link the two instances together so that the person has an apartment, and the apartment has a tenant. Note that an exclamation mark (!) is used to unwrap and access the instances stored inside the john and number73 optional variables, so that the properties of those instances can be set:
+
+现在将两个实例连接在一起，让人住进一间公寓，公寓也有了一个租客。注意那个感叹号（!），它用于打开和访问存储于john和number73实例中的可选变量，这样实例的属性才能够被设置：
+
+```
+john!.apartment = number73
+number73!.tenant = john
+```
+
+Here’s how the strong references look after you link the two instances together:
+这里展示了两个实例连接在一直之后的强引用关系：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/referenceCycle02_2x.png)
+
+Unfortunately, linking these two instances creates a strong reference cycle between them. The Person instance now has a strong reference to the Apartment instance, and the Apartment instance has a strong reference to the Person instance. Therefore, when you break the strong references held by the john and number73 variables, the reference counts do not drop to zero, and the instances are not deallocated by ARC:
+
+不幸的是，连接两个实例后导致它们之间形成了强引用循环。现在Person实例有一个指向Apartment的强引用，同时Apartment实例也有一个指向Person的强引用。因此，当你断开由变量john和number73保持的强引用时，引用计数不会减为0，因此实例也不会被ARC销毁。
+
+```
+john = nil
+number73 = nil
+```
+
+Note that neither deinitializer was called when you set these two variables to nil. The strong reference cycle prevents the Person and Apartment instances from ever being deallocated, causing a memory leak in your app.
+
+需要注意的是，尽管在你将john和number73设为nil时析构函数也会被调用，但是强引用循环阻止了Person 和 Apartment类实例的销毁，在你的App中导致了内存泄漏。
+
+Here’s how the strong references look after you set the john and number73 variables to nil:
+
+下图展示了将john和number73设为nil后的强引用关系：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/referenceCycle03_2x.png)
+
+The strong references between the Person instance and the Apartment instance remain and cannot be broken.
+
+Person类实例与Apartment类实例之间的强引用关系将保持且无法被断开。
