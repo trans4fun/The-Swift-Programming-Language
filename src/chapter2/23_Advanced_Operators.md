@@ -272,10 +272,179 @@ Swift操作符的优先级和结合性的完整规则，请看表达式。
 
 类和结构体重新自定义已有操作符的功能，这称为操作符重载。
 
+下面的例子展示了一个自定义结构体的加法运算。加操作符是一个二元操作符，因为它有两个操作数，而且是中置操作符，必须出现在两个操作数之间。
 
+例子中定义了一个名为Vector2D 的结构体，表示二维坐标向量(x, y)。随后定义了Vector2D 实例对象相加的操作符函数。
 
+```
+struct Vector2D {
+	var x = 0.0, y = 0.0
+}
+@infix func + (left: Vector2D, right: Vector2D) -> Vector2D {
+	return Vector2D(x: left.x + right.x, y: left.y + right.y)
+}
+```
 
+该操作符函数定义了一个全局的+函数，参数是两个Vector2D 类型的实例，返回值也是一个Vector2D 类型。函数声明中，在关键字fun之前用@infix 属性定义一个中置操作符。
 
+在这个代码实现中，参数被命名为left和right，代表+左边和右边的两个Vector2D对象。函数返回了一个新的Vector2D对象，这个对象的x和y分别等于两个参数对象的x和y的和。
+
+这个函数是全局的，而不是Vector2D结构的成员方法，所以任意两个Vector2D对象都可以使用这个中置运算符：
+
+```
+let vector = Vector2D(x: 3.0, y: 1.0)
+let anotherVector = Vector2D(x: 2.0, y: 4.0)
+let combinedVector = vector + anotherVector
+// combinedVector 是一个Vector2D 实例 ，值为(5.0, 5.0)
+```
+
+这个例子将向量 (3.0，1.0) 和 (2.0，4.0) 相加，得到向量 (5.0，5.0)，如下图所示：
+
+## 前置和后置操作符
+
+上个例子演示了一个二元中置操作符的自定义实现，同样类和结构体也可以重载标准的一元操作符。一元操作符只有一个操作数，在操作数之前为前置操作符（比如-a），在操作数之后为后置操作符（比如i++）。
+
+函数声明中，在关键字fun之前用@ prefix 属性定义前置操作符，@postfix 定义后置操作符。
+
+```
+@prefix func - (vector: Vector2D) -> Vector2D {
+  return Vector2D(x: -vector.x, y: -vector.y)
+}
+```
+
+这段代码实现了Vector2D对象的一元减操作符(-a)，@prefix表明它是前置的。
+
+对于数值，一元减操作符可以把正数变负数，把负数变正数。对于Vector2D对象，一元减操作符将其x和y都进行一元减运算。
+
+```
+let positive = Vector2D(x: 3.0, y: 4.0)
+let negative = -positive
+// negative 是 Vector2D实例，值为(-3.0, -4.0)
+let alsoPositive = -negative
+// alsoPositive 也是 Vector2D实例，值为(3.0, 4.0)
+```
+
+## 复合赋值操作符
+
+复合赋值是其他操作符和赋值操作符一起执行的运算。如+=把加运算和赋值运算组合成一个操作。实现一个复合赋值操作符需要使用@assignment属性，操作符左边的参数作为函数输入，函数内再修改它的值。
+
+下面的例子实现了Vector2D 对象的+=操作符：
+
+```
+@assignment func += (inout left: Vector2D, right: Vector2D) {
+	left = left + right
+}
+```
+
+加法运算之前定义过了，这里无需重新定义。加赋操作符函数使用已有的加法运算将左值加上右值：
+
+```
+var original = Vector2D(x: 1.0, y: 2.0)
+let vectorToAdd = Vector2D(x: 3.0, y: 4.0)
+original += vectorToAdd
+// 运算后original 等于 (4.0, 6.0)
+```
+
+可以将 @assignment 属性和 @prefix 或 @postfix 属性组合起来，比如像下面Vector2D对象的前置运算符(++a)：
+
+```
+@prefix @assignment func ++ (inout vector: Vector2D) -> Vector2D {
+	vector += Vector2D(x: 1.0, y: 1.0)
+	return vector
+}
+```
+
+这个自加操作符函数使用了前面定义过的加赋运算，将自己加上一个值为 (1.0，1.0) 的对象然后将返回值赋给自己。
+
+```
+var toIncrement = Vector2D(x: 3.0, y: 4.0)
+let afterIncrement = ++toIncrement
+// toIncrement 等于(4.0, 5.0)
+// afterIncrement 也等于 (4.0, 5.0)
+```
+
+> <b>注意：</b>
+>
+> 默认的赋值符(=)是不可重载的。只有复合赋值符可以重载。条件操作符 a？b：c 也是不可重载的。
+
+## 比较操作符
+
+自定义的类和结构体默认没有相等(==)和不等(!=)操作符，因为Swift无法知道自定义类型怎样算相等，怎样算不等。
+
+定义相等操作符跟定义其他中置操作符类似：
+
+```
+@infix func == (left: Vector2D, right: Vector2D) -> Bool {
+	return (left.x == right.x) && (left.y == right.y)
+}
+@infix func != (left: Vector2D, right: Vector2D) -> Bool {
+	return !(left == right)
+}
+```
+
+上述代码实现了相等操作符==来判断两个Vector2D对象是否相等，相等的概念就是它们有相同的x值和y值。将相等操作符==的结果取反就实现了不等运算符!=。
+
+现在我们可以使用这两个操作符来判断两个Vector2D对象是否相等。
+
+```
+let twoThree = Vector2D(x: 2.0, y: 3.0)
+let anotherTwoThree = Vector2D(x: 2.0, y: 3.0)
+if twoThree == anotherTwoThree {
+println("这两个向量相等")
+}
+// 输出结果 "这两个向量相等"
+```
+
+## 自定义操作符
+
+除了标准的操作符，你还可以声明一些个性的操作符，但自定义操作符只能使用这些字符/ = - + * % < >！& | ^。~。
+
+新的操作符需要在全局域使用operator关键字声明，可以声明为前置，中置或后置的。
+
+```
+operator prefix +++ {}
+```
+
+这段代码定义了一个新的前置操作符+++，此前Swift并不存在这个操作符，此处针对Vector2D 对象的这个操作符具有个性化的含义。+++被定义为 双自增 操作符，它使用之前定义的加赋运算将自已加上自己然后返回。
+
+```
+@prefix @assignment func +++ (inout vector: Vector2D) -> Vector2D {
+vector += vector
+return vector
+}
+```
+
+Vector2D 的 +++ 和 ++ 很类似, 唯一不同的是前者加自己, 后者是加值为 (1.0, 1.0) 的向量。
+
+```
+var toBeDoubled = Vector2D(x: 1.0, y: 4.0)
+let afterDoubling = +++toBeDoubled
+// toBeDoubled 等于 (2.0, 8.0)
+// afterDoubling 也等于 (2.0, 8.0)
+```
+
+## 自定义中置操作符的优先级和结合性
+
+可以为自定义的中置操作符指定优先级和结合性。可以回头看看优先级和结合性中解释的，这两个因素是如何影响复合表达式的求值顺序的。
+
+结合性有left，right和none三种情况。左结合操作符跟其他优先级相同的左结合操作符写在一起时，会跟左边的操作数结合。同理，右结合操作符会跟右边的操作数结合。而非结合操作符不能跟其他优先级相同的操作符写在一起。
+
+结合性默认为none，优先级默认为100。
+
+下面的例子定义了一个左结合且优先级为140的中置操作符+-。
+
+```
+operator infix +- { associativity left precedence 140 }
+func +- (left: Vector2D, right: Vector2D) -> Vector2D {
+	return Vector2D(x: left.x + right.x, y: left.y - right.y)
+}
+let firstVector = Vector2D(x: 1.0, y: 2.0)
+let secondVector = Vector2D(x: 3.0, y: 4.0)
+let plusMinusVector = firstVector +- secondVector
+// plusMinusVector 是 Vector2D实例，等于 (4.0, -2.0)
+```
+
+这个操作符把两个向量的x相加， y相减。因为它实际上属于加减运算，所以让它保持了和加减法一样的结合性和优先级(左结合，优先级为140)。查阅完整的Swift默认优先级和结合性的设置，请移步表达式;
 
 
 
