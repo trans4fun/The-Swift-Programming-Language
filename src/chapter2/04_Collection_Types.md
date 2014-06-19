@@ -195,7 +195,8 @@ Similarly, you remove an item from the array with the `removeAtIndex` method. Th
 
 相同地，`removeAtIndex`方法可以从数组中移除一个数组项。该方法移除指定索引的数组项，并返回被移除的数组项（如果不需要，我们可以忽略返回的值）：
 
-```let mapleSyrup = shoppingList.removeAtIndex(0)
+```
+let mapleSyrup = shoppingList.removeAtIndex(0)
 // the item that was at index 0 has just been removed
 // shoppingList now contains 6 items, and no Maple Syrup
 // the mapleSyrup constant is now equal to the removed" Maple Syrup" string
@@ -254,6 +255,7 @@ For more about the `for-in` loop, see [For Loops]().
 
 获取更多关于`for-in`循环的介绍，请参见[For循环](id3)。
 
+
 ####Creating and Initializing an Array
 ####创建和初始化数组
 You can create an empty array of a certain type (without setting any initial values) using initializer syntax:
@@ -303,6 +305,7 @@ Finally, you can create a new array by adding together two existing arrays of co
 var sixDoubles = threeDoubles + anotherThreeDoubles
 // sixDoubles is inferred as Double[], and equals [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
 ```
+
 
 ###Dictionaries
 ###字典
