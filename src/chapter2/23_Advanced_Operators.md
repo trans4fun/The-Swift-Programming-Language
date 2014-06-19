@@ -19,7 +19,7 @@ Swift支持C语言里所有的位操作符，如下所述：
 
 按位非操作符（~）对操作数每一位取反：
 
-![按位非操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitwiseNOT_2x.png)
+![按位非](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitwiseNOT_2x.png)
 
 按位非是前置操作符，紧置于操作数之前，不带空格：
 
@@ -28,16 +28,19 @@ let initialBits: UInt8 = 0b00001111
 let invertedBits = ~initialBits // 等于 11110000
 ```
 
-UInt8 是8位无符号整型，可以存储0-255之间的任意数。这个例子先初始化了一个UInt8 整型变量initialBits，二进制值为00001111，前四位为0，后四位为1，换算成十进制等于15。
+`UInt8` 是8位无符号整型，可以存储0-255之间的任意数。这个例子先初始化了一个`UInt8` 整型变量`initialBits`，二进制值为`00001111`，前四位为0，后四位为1，换算成十进制等于15。
 
 
-接着将这个变量initialBits进行按位非操作得到常量invertedBits，0变成1，1变成0，得到的二进制值为11110000，换算成十进制等于240。
+接着将这个变量`initialBits`进行按位非操作得到常量`invertedBits`，0变成1，1变成0，得到的二进制值为`11110000`，换算成十进制等于240。
 
 ### 按位与
 
 按位与操作符（&）有两个操作数。按位与操作就是将两个操作数的每一位对齐，当对应位都是1时返回1，其他情况都返回0。
 
-以下代码，firstSixBits 和lastSixBits 中间4个位都等于1，将它们按位与操作后得到二进制数00111100，换算成十进制为60：
+![按位与](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitwiseAND_2x.png)
+
+
+以下代码，`firstSixBits` 和`lastSixBits` 中间4个位都等于1，将它们按位与操作后得到二进制数`00111100`，换算成十进制为60：
 
 ```
 let firstSixBits: UInt8 = 0b11111100
@@ -49,7 +52,10 @@ let middleFourBits = firstSixBits & lastSixBits // 等于 00111100
 
 按位或操作符（|）也有两个操作数。按位或操作就是将两个操作数的每一位对齐，当对应位有一个是1时就返回1，而只有两个位都是0的情况才返回0。
 
-以下代码，someBits 和moreBits 在不同位上有1，将它们按位或操作后得到二进制数11111110，换算成十进制为254：
+![按位或](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitwiseOR_2x.png)
+
+
+以下代码，`someBits` 和`moreBits` 在不同位上有1，将它们按位或操作后得到二进制数`11111110`，换算成十进制为254：
 
 ```
 let someBits: UInt8 = 0b10110010
@@ -61,7 +67,10 @@ let combinedbits = someBits | moreBits // 等于 11111110
 
 按位异或操作符（^）比较两个操作数的对应位，当两个位不同时返回1，相同时返回0。
 
-以下代码，firstBits 和otherBits 对应位相同的情况返回0，不同的情况返回1：
+![按位异或](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitwiseXOR_2x.png)
+
+
+以下代码，`firstBits` 和`otherBits` 对应位相同的情况返回0，不同的情况返回1：
 
 ```
 let firstBits: UInt8 = 0b00010100
@@ -69,14 +78,14 @@ let otherBits: UInt8 = 0b00000101
 let outputBits = firstBits ^ otherBits // 等于 00010001
 ```
 
-## 按位左移、右移操作符
+### 按位左移、右移操作符
 
-左移操作符（<<）和右移操作符（）将操作数的所有位向左或向右移动指定的位数。
+左移操作符（<<）和右移操作符（>>）将操作数的所有位向左或向右移动指定的位数。
 
 按位左移和右移的效果等同于将操作数乘以或除以2的倍数。向左移动一位相当于将操作数乘以2，向右移动一位相当于将操作数除以2。
 
 
-### 无符号移位操作
+#### 无符号移位操作
 
 无符号移位的规则如下：
 
@@ -86,7 +95,9 @@ let outputBits = firstBits ^ otherBits // 等于 00010001
 
 这种方法称为逻辑移位。
 
-下图展示了11111111 << 1（11111111 左移一位）和11111111 >> 1（11111111 右移一位）的结果。蓝色数字表示被移动位，灰色表示被丢弃位，空位用橙色的0填充。
+下图展示了`11111111 << 1`（11111111 左移一位）和`11111111 >> 1`（11111111 右移一位）的结果。蓝色数字表示被移动位，灰色表示被丢弃位，空位用橙色的0填充。
+
+![无符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftUnsigned_2x.png)
 
 Swift移位操作代码：
 
@@ -108,35 +119,45 @@ let greenComponent = (pink & 0x00FF00) >> 8 // greenComponent是0x66, 即102
 let blueComponent = pink & 0x0000FF // blueComponent是0x99, 即153
 ```
 
-这个例子中用一个UInt32 常量pink 来存储css中粉色的颜色值。CSS中颜色#CC6699在Swift用十六进制0xCC6699来表示。这个颜色值经过按位与（&）和按位右移操作后可分解出它的红色成分（CC）、绿色成分（66）和蓝色成分（99）。
+这个例子中用一个`UInt32` 常量`pink` 来存储css中粉色的颜色值。CSS中颜色`#CC6699`在Swift用十六进制`0xCC6699`来表示。这个颜色值经过按位与（&）和按位右移操作后可分解出它的红色成分（CC）、绿色成分（66）和蓝色成分（99）。
 
-对0xCC6699 和0xFF0000进行按位与操作就可以得到红色成分。0xFF0000 里的0类似于遮罩，将0xCC6699的第二和第三字节过滤掉后返回0xCC0000 。
+对`0xCC6699` 和`0xFF0000`进行按位与操作就可以得到红色成分。`0xFF0000` 里的0类似于遮罩，将`0xCC6699`的第二和第三字节过滤掉后返回`0xCC0000` 。
 
-然后，将0xCC0000 向右移动16位。因为十六进制中每两个字符占8个比特位，所以移动16位的结果是把0xCC0000 变成0x0000CC，等同于0xCC，换算成十进制是204。
+然后，将`0xCC0000` 向右移动16位。因为十六进制中每两个字符占8个比特位，所以移动16位的结果是把`0xCC0000` 变成`0x0000CC`，等同于0xCC，换算成十进制是204。
 
-同理，对0xCC6699 和0x00FF00进行按位与操作可以得到绿色成分。将结果值0x006600再向右移动8位得到0x66，换算成十进制是102。
+同理，对`0xCC6699` 和`0x00FF00`进行按位与操作可以得到绿色成分。将结果值`0x006600`再向右移动8位得到0x66，换算成十进制是102。
 
-最后，对0xCC6699 和0x0000FF进行按位与操作可以得到蓝色成分。结果值0x000099不需要再做移位操作，因为0x000099 等价于0x99，换算成十进制是153。
+最后，对`0xCC6699` 和`0x0000FF`进行按位与操作可以得到蓝色成分。结果值`0x000099`不需要再做移位操作，因为`0x000099` 等价于0x99，换算成十进制是153。
 
-### 有符号移位操作
+#### 有符号移位操作
 
 有符号的移位操作相对复杂得多，因为正负号也是用二进制位表示的。(下面举的例子虽然都是8位的，但原理是通用的。)
 
 有符号整型的第一位为符号位，0代表正数，1代表负数，其余的为数值位。有符号和无符号正整数的存储结构是相同的，比如数值4的二进制结构图：
 
+![有符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftSignedFour_2x.png)
+
 符号位为0，代表正数，其余7个数值位用二进制表示十进制的4。
 
 负数的存储不太一样，它存储的是2的n次方减去它的绝对值，n为数值位的位数。比如一个8位的数有7个数值位，所以是2的7次方，即128。我们来看下数值-4的二进制结构图：
 
+![有符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftSignedMinusFour_2x.png)
+
 这里符号位为1，代表负数，其余7个数值位的值是124（即128-4）：
+
+![有符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftSignedMinusFourValue_2x.png)
 
 负数的编码方式称为二进制补码表示。这种表示方式看起来很奇怪，但它有几个优点。
 
 首先，对全部8个比特位(包括符号位)做标准的二进制加法就可以完成-1 加 -4 的操作，加法过程中丢弃超出的比特位。
 
+![有符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftSignedAddition_2x.png)
+
 第二，使用二进制补码表示方式，我们可以和正数一样对负数进行按位左移或右移，同样也是左移1位时乘于2，右移1位时除于2。但是，对有符号整型的右移有一个特别的要求：
 
 + 有符号和无符号整型按位右移时规则相同，但有符号整型移位后出现的空位使用符号位来填充，而不是0。
+
+![有符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftSigned_2x.png)
 
 这就确保了按位右移后，有符号整型的符号不会发生变化。这称为算术移位。
 
