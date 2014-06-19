@@ -19,6 +19,8 @@ Swift支持C语言里所有的位操作符，如下所述：
 
 按位非操作符（~）对操作数每一位取反：
 
+![按位非操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitwiseNOT_2x.png)
+
 按位非是前置操作符，紧置于操作数之前，不带空格：
 
 ```
