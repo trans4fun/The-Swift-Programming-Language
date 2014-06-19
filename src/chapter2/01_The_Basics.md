@@ -320,19 +320,35 @@ On a 64-bit platform, UInt is the same size as UInt64.
 
 > 只在你需要特别指定无符号整数与当前平台原生长度范围相同时才使用`UInt`，否则，推荐使用`Int`，即使是你知道不会存储负值的时候。使用一致的`Int`整数类型有助于代码的服用，避免了不同数字类型之间的转换，并且匹配整数的类型推断，详见[类型安全和类型推断](link)。
 
-Floating-Point Numbers
+# Floating-Point Numbers
+# 浮点型数字
 
 Floating-point numbers are numbers with a fractional component, such as 3.14159, 0.1, and -273.15.
 
+浮点型数字是指有小数部分的数字，比如3.14159, 0.1 和 -273.15。
+
 Floating-point types can represent a much wider range of values than integer types, and can store numbers that are much larger or smaller than can be stored in an Int. Swift provides two signed floating-point number types:
 
+浮点类型比整数类型范围大很多，它可以储存比整数更大或者更小的数。Swift提供了两种有符号的浮点数类型：
+
 Double represents a 64-bit floating-point number. Use it when floating-point values must be very large or particularly precise.
+
+`Double`代表64位浮点数。当你需要特别大和特别精确的值的时候使用`Double`类型。
+
 Float represents a 32-bit floating-point number. Use it when floating-point values do not require 64-bit precision.
-NOTE
 
-Double has a precision of at least 15 decimal digits, whereas the precision of Float can be as little as 6 decimal digits. The appropriate floating-point type to use depends on the nature and range of values you need to work with in your code.
+`Float`代表32位浮点数。当不需要像64位那么精确的时候使用`Float`就够了。
 
-Type Safety and Type Inference
+> NOTE
+
+> Double has a precision of at least 15 decimal digits, whereas the precision of Float can be as little as 6 decimal digits. The appropriate floating-point type to use depends on the nature and range of values you need to work with in your code.
+
+> 注意
+
+> `Double`有至少15位数字的精确度，而`Float`的精确度最少只有6位数字。根据业务需要的值的范围去选择合适的浮点类型。
+
+# Type Safety and Type Inference
+# 类型安全和类型推断
 
 Swift is a type safe language. A type safe language encourages you to be clear about the types of values your code can work with. If part of your code expects a String, you can’t pass it an Int by mistake.
 
