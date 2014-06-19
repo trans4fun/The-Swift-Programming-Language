@@ -117,7 +117,7 @@ reference3 = nil
 // prints "John Appleseed is being deinitialized"
 ```
 
-## 类实例间的强引用循环
+## 类实例间的循环强引用
 
 In the examples above, ARC is able to track the number of references to the new Person instance you create and to deallocate that Person instance when it is no longer needed.
 
@@ -125,7 +125,7 @@ In the examples above, ARC is able to track the number of references to the new 
 
 However, it is possible to write code in which an instance of a class never gets to a point where it has zero strong references. This can happen if two class instances hold a strong reference to each other, such that each instance keeps the other alive. This is known as a strong reference cycle.
 
-然而，我们可能会写出这样的代码，导致类实例永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，以致于彼此都无法被销毁的时候。这就是所谓的强引用循环。
+然而，我们可能会写出这样的代码，导致类实例永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，以致于彼此都无法被销毁的时候。这就是所谓的循环强引用。
 
 You resolve strong reference cycles by defining some of the relationships between classes as weak or unowned references instead of as strong references. This process is described in Resolving Strong Reference Cycles Between Class Instances. However, before you learn how to resolve a strong reference cycle, it is useful to understand how such a cycle is caused.
 
@@ -134,7 +134,7 @@ You resolve strong reference cycles by defining some of the relationships betwee
 Here’s an example of how a strong reference cycle can be created by accident.
 This example defines two classes called Person and Apartment, which model a block of apartments and its residents:
 
-这是一个意外导致强引用循环的例子。例子定义了两个名为Person和Apartment的类，用来模拟公寓和公寓里的居民：
+这是一个意外导致循环强引用的例子。例子定义了两个名为Person和Apartment的类，用来模拟公寓和公寓里的居民：
 
 ```
 class Person {
@@ -196,13 +196,13 @@ number73!.tenant = john
 ```
 
 Here’s how the strong references look after you link the two instances together:
-这里展示了两个实例连接在一直之后的强引用关系：
+这里展示了两个实例连接在一起之后的强引用关系：
 
 ![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/referenceCycle02_2x.png)
 
 Unfortunately, linking these two instances creates a strong reference cycle between them. The Person instance now has a strong reference to the Apartment instance, and the Apartment instance has a strong reference to the Person instance. Therefore, when you break the strong references held by the john and number73 variables, the reference counts do not drop to zero, and the instances are not deallocated by ARC:
 
-不幸的是，连接两个实例后导致它们之间形成了强引用循环。现在Person实例有一个指向Apartment的强引用，同时Apartment实例也有一个指向Person的强引用。因此，当你断开由变量john和number73保持的强引用时，引用计数不会减为0，因此实例也不会被ARC销毁。
+不幸的是，连接两个实例后导致它们之间形成了循环强引用。现在Person实例有一个指向Apartment的强引用，同时Apartment实例也有一个指向Person的强引用。因此，当你断开由变量john和number73保持的强引用时，引用计数不会减为0，因此实例也不会被ARC销毁。
 
 ```
 john = nil
@@ -211,7 +211,7 @@ number73 = nil
 
 Note that neither deinitializer was called when you set these two variables to nil. The strong reference cycle prevents the Person and Apartment instances from ever being deallocated, causing a memory leak in your app.
 
-需要注意的是，尽管在你将john和number73设为nil时析构函数也会被调用，但是强引用循环阻止了Person 和 Apartment类实例的销毁，在你的App中导致了内存泄漏。
+需要注意的是，你将john和number73设为nil时两个析构函数都没有被调用。循环强引用阻止了Person 和 Apartment类实例的销毁，在你的App中导致了内存泄漏。
 
 Here’s how the strong references look after you set the john and number73 variables to nil:
 
@@ -222,3 +222,113 @@ Here’s how the strong references look after you set the john and number73 vari
 The strong references between the Person instance and the Apartment instance remain and cannot be broken.
 
 Person类实例与Apartment类实例之间的强引用关系将保持且无法被断开。
+
+## 解决类实例间的循环强引用
+
+Swift provides two ways to resolve strong reference cycles when you work with properties of class type: weak references and unowned references.
+
+Swift提供了两种方式来解决你在处理类属性时遇到的循环强引用问题：弱引用和无主引用。
+
+Weak and unowned references enable one instance in a reference cycle to refer to the other instance without keeping a strong hold on it. The instances can then refer to each other without creating a strong reference cycle.
+
+弱引用和无主引用允许循环引用中的一个实例引用另外一个实例而不保持强引用。这样实例能够互相引用而不产生循环强引用。
+
+Use a weak reference whenever it is valid for that reference to become nil at some point during its lifetime. Conversely, use an unowned reference when you know that the reference will never be nil once it has been set during initialization.
+
+对于生命周期中会变为nil的实例使用弱引用。相反的，对于初始化赋值后再也不会被赋值为nil的实例，使用无主引用。
+
+### 弱引用
+
+A weak reference is a reference that does not keep a strong hold on the instance it refers to, and so does not stop ARC from disposing of the referenced instance. This behavior prevents the reference from becoming part of a strong reference cycle. You indicate a weak reference by placing the weak keyword before a property or variable declaration.
+
+弱引用不会强制保持引用的实例，并且不会阻止 ARC 销毁被引用的实例。这阻止了引用成为循环强引用的组成部分。声明属性或者变量时，在前面加上weak关键字表明这是一个弱引用。
+
+Use a weak reference to avoid reference cycles whenever it is possible for that reference to have “no value” at some point in its life. If the reference will always have a value, use an unowned reference instead, as described in Unowned References. In the Apartment example above, it is appropriate for an apartment to be able to have “no tenant” at some point in its lifetime, and so a weak reference is an appropriate way to break the reference cycle in this case.
+
+在引用对象的生命周期中，如果某些时候引用对象可能无值，就使用弱引用阻止产生循环强引用。如果引用对象总是有值，则应使用无主引用，这将在无主引用部分详述。在上面Apartment的例子中，一个公寓的生命周期中，有时是没有“租客”的，这种情况下适合使用弱引用来打破引用循环。
+
+> NOTE
+> 
+> Weak references must be declared as variables, to indicate that their value can change at runtime. A weak reference cannot be declared as a constant.
+> 注意
+> 弱引用必须声明为变量，以表明它们的值在运行时是可以改变的。弱引用不能声明为常量。
+
+Because weak references are allowed to have “no value”, you must declare every weak reference as having an optional type. Optional types are the preferred way to represent the possibility for “no value” in Swift.
+
+由于弱引用类型允许没有值，因此你必须声明所有弱引用变量为可选类型。在Swift里，可选类型是表示可能没有值的变量的首选方式。
+
+Because a weak reference does not keep a strong hold on the instance it refers to, it is possible for that instance to be deallocated while the weak reference is still referring to it. Therefore, ARC automatically sets a weak reference to nil when the instance that it refers to is deallocated. You can check for the existence of a value in the weak reference, just like any other optional value, and you will never end up with a reference to an invalid instance that no longer exists.
+
+由于弱引用与其指向的实例之间不会保持强引用关系，因此即使有弱引用指向实例，实例也有可能被销毁。弱引用指向的实例被销毁后，ARC会将该弱引用指向nil。像其他可选类型变量一样，你可以检查弱引用类型的变量是否存在值来避免引用一个不存在的实例。
+
+The example below is identical to the Person and Apartment example from above, with one important difference. This time around, the Apartment type’s tenant property is declared as a weak reference:
+
+下面的例子与上文提到的Person 和 Apartment 的例子类似，但有一处重要的不同。这次，Apartment的属性tenant被声明为弱引用类型：
+
+```
+class Person {
+    let name: String
+    init(name: String) { self.name = name }
+    var apartment: Apartment?
+    deinit { println("\(name) is being deinitialized") }
+}
+
+class Apartment {
+    let number: Int
+    init(number: Int) { self.number = number }
+    weak var tenant: Person?
+    deinit { println("Apartment #\(number) is being deinitialized") }
+}
+```
+The strong references from the two variables (john and number73) and the links between the two instances are created as before:
+
+两个变量（john和number73）的强引用以及两个实例之间的连接都与之前一样被创建：
+
+```
+var john: Person?
+var number73: Apartment?
+
+john = Person(name: "John Appleseed")
+number73 = Apartment(number: 73)
+
+john!.apartment = number73
+number73!.tenant = john
+```
+
+Here’s how the references look now that you’ve linked the two instances together:
+下图展示了现在的引用关系：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/weakReference01_2x.png)
+
+The Person instance still has a strong reference to the Apartment instance, but the Apartment instance now has a weak reference to the Person instance. This means that when you break the strong reference held by the john variables, there are no more strong references to the Person instance:
+
+Person实例依然保持对Apartment实例的强引用，但是Apartment实例只有对Person实例的弱引用。这意味着当你断开john变量所保持的强引用时，就没有指向Person实例的强引用了：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/weakReference02_2x.png)
+
+Because there are no more strong references to the Person instance, it is deallocated:
+由于没有指向Person实例的强引用了，所以它被销毁了：
+
+```
+john = nil
+// prints "John Appleseed is being deinitialized"
+```
+The only remaining strong reference to the Apartment instance is from the number73 variable. If you break that strong reference, there are no more strong references to the Apartment instance:
+
+仅存的指向Apartment实例的强引用来自变量number73。如果你断开这个强引用，也就没有强引用指向Apartment的实例了：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/weakReference03_2x.png)
+
+Because there are no more strong references to the Apartment instance, it too is deallocated:
+由于也没有指向Apartment类实例的强引用了，它也被销毁了：
+
+```
+number73 = nil
+// prints "Apartment #73 is being deinitialized"
+```
+
+The final two code snippets above show that the deinitializers for the Person instance and Apartment instance print their “deinitialized” messages after the john and number73 variables are set to nil. This proves that the reference cycle has been broken.
+
+上面的两段代码展示了变量john和number73在被赋值为nil后，Person实例和Apartment实例的析构函数都打印出“销毁”的信息。这证明了引用循环被打破了。
+
+## 
