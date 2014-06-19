@@ -741,13 +741,10 @@ There are two ways create an instance of a previously declared class:
 
 有两种方式创建过去声明的类的实例：
 
-
-	* Call one of the initializers declared within the class, as described in Initializers.
-         在类的内部调用声明的初始化器。
-
-	* If no initializers are declared, and all properties of the class declaration were given initial values, call the class’s default initializer, as described in Default Initializers.
-
-       如果没有声明的初始化器，类声明的素有属性会有一个初始化值，是通过调用类的默认的初始化器来完成的。正如Default             Initializers描述的。
+- Call one of the initializers declared within the class, as described in Initializers.
+  在类的内部调用声明的初始化器。
+- If no initializers are declared, and all properties of the class declaration were given initial values, call the class’s default initializer, as described in Default Initializers.
+  如果没有声明的初始化器，类声明的素有属性会有一个初始化值，是通过调用类的默认的初始化器来完成的。正如Default             Initializers描述的。
 
 
 
