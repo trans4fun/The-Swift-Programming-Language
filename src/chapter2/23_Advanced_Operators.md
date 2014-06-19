@@ -167,7 +167,7 @@ let blueComponent = pink & 0x0000FF // blueComponent是0x99, 即153
 
 当给整型常量或变量赋值溢出时，Swift默认会报错，这就保证了操作过大或过小数据时的安全性。
 
-举个例子，Int16整型能表示-32768 到 32767之间任意的有符号整数，但如果给它 赋值超出该范围则会导致错误：
+举个例子，`Int16`整型能表示-32768 到 32767之间任意的有符号整数，但如果给它 赋值超出该范围则会导致错误：
 
 ```
 var potentialOverflow = Int16.max
@@ -197,13 +197,18 @@ willOverflow = willOverflow &+ 1
 // 现在willOverflow 等于 0
 ```
 
-willOverflow 等于UInt8 所能表示的最大值255(二进制11111111)，使用溢出加法&+加1，如下图所示因为上溢出UInt8 无法表示出这个新值了。溢出后，有效位为00000000，也就是0。
+`willOverflow` 等于`UInt8` 所能表示的最大值255(二进制`11111111`)，使用溢出加法&+加1，如下图所示因为上溢出`UInt8` 无法表示出这个新值了。溢出后，有效位为`00000000`，也就是0。
+
+![上溢出](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/overflowAddition_2x.png)
+
 
 ### 下溢出
 
 数值也有可能因为太小而越界。举个例子：
 
-UInt8能表示的最小值是0(二进制为00000000)。对00000000使用溢出减法&-减1，就会得到二进制数11111111，即十进制的255。
+`UInt8`能表示的最小值是0(二进制为`00000000`)。对`00000000`使用溢出减法&-减1，就会得到二进制数`11111111`，即十进制的255。
+
+![下溢出](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/overflowUnsignedSubtraction_2x.png)
 
 代码如下：
 
@@ -214,7 +219,9 @@ willUnderflow = willUnderflow &- 1
 // 现在willUnderflow 等于255
 ```
 
-有符号整型也有类似的下溢出，它所有的减法都是对包括符号位在内的二进制数进行二进制减法，这在 "按位左移、右移操作符" 一节提到过。Int8 能表示的最小整数是-128，即二进制的10000000。用溢出减法减去1后，变成了01111111，即Int8 能表示的最大整数127。
+有符号整型也有类似的下溢出，它所有的减法都是对包括符号位在内的二进制数进行二进制减法，这在 "按位左移、右移操作符" 一节提到过。`Int8` 能表示的最小整数是-128，即二进制的`10000000`。用溢出减法减去1后，变成了`01111111`，即`Int8` 能表示的最大整数127。
+
+![下溢出](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/overflowSignedSubtraction_2x.png)
 
 代码如下：
 
@@ -297,7 +304,7 @@ Swift操作符的优先级和结合性的完整规则，请看表达式。
 
 下面的例子展示了一个自定义结构体的加法运算。加操作符是一个二元操作符，因为它有两个操作数，而且是中置操作符，必须出现在两个操作数之间。
 
-例子中定义了一个名为Vector2D 的结构体，表示二维坐标向量(x, y)。随后定义了Vector2D 实例对象相加的操作符函数。
+例子中定义了一个名为`Vector2D` 的结构体，表示二维坐标向量`(x, y)`。随后定义了`Vector2D` 实例对象相加的操作符函数。
 
 ```
 struct Vector2D {
@@ -308,11 +315,11 @@ struct Vector2D {
 }
 ```
 
-该操作符函数定义了一个全局的+函数，参数是两个Vector2D 类型的实例，返回值也是一个Vector2D 类型。函数声明中，在关键字fun之前用@infix 属性定义一个中置操作符。
+该操作符函数定义了一个全局的+函数，参数是两个`Vector2D` 类型的实例，返回值也是一个`Vector2D` 类型。函数声明中，在关键字fun之前用@infix 属性定义一个中置操作符。
 
-在这个代码实现中，参数被命名为left和right，代表+左边和右边的两个Vector2D对象。函数返回了一个新的Vector2D对象，这个对象的x和y分别等于两个参数对象的x和y的和。
+在这个代码实现中，参数被命名为left和right，代表+左边和右边的两个`Vector2D`对象。函数返回了一个新的`Vector2D`对象，这个对象的x和y分别等于两个参数对象的x和y的和。
 
-这个函数是全局的，而不是Vector2D结构的成员方法，所以任意两个Vector2D对象都可以使用这个中置运算符：
+这个函数是全局的，而不是`Vector2D`结构的成员方法，所以任意两个`Vector2D`对象都可以使用这个中置运算符：
 
 ```
 let vector = Vector2D(x: 3.0, y: 1.0)
@@ -321,13 +328,15 @@ let combinedVector = vector + anotherVector
 // combinedVector 是一个Vector2D 实例 ，值为(5.0, 5.0)
 ```
 
-这个例子将向量 (3.0，1.0) 和 (2.0，4.0) 相加，得到向量 (5.0，5.0)，如下图所示：
+这个例子将向量 `(3.0，1.0)` 和 `(2.0，4.0)` 相加，得到向量 `(5.0，5.0)`，如下图所示：
 
-## 前置和后置操作符
+![操作符函数](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/vectorAddition_2x.png)
+
+### 前置和后置操作符
 
 上个例子演示了一个二元中置操作符的自定义实现，同样类和结构体也可以重载标准的一元操作符。一元操作符只有一个操作数，在操作数之前为前置操作符（比如-a），在操作数之后为后置操作符（比如i++）。
 
-函数声明中，在关键字fun之前用@ prefix 属性定义前置操作符，@postfix 定义后置操作符。
+函数声明中，在关键字fun之前用`@ prefix` 属性定义前置操作符，`@postfix` 定义后置操作符。
 
 ```
 @prefix func - (vector: Vector2D) -> Vector2D {
@@ -335,9 +344,9 @@ let combinedVector = vector + anotherVector
 }
 ```
 
-这段代码实现了Vector2D对象的一元减操作符(-a)，@prefix表明它是前置的。
+这段代码实现了`Vector2D`对象的一元减操作符(-a)，`@prefix`表明它是前置的。
 
-对于数值，一元减操作符可以把正数变负数，把负数变正数。对于Vector2D对象，一元减操作符将其x和y都进行一元减运算。
+对于数值，一元减操作符可以把正数变负数，把负数变正数。对于`Vector2D`对象，一元减操作符将其x和y都进行一元减运算。
 
 ```
 let positive = Vector2D(x: 3.0, y: 4.0)
@@ -347,11 +356,11 @@ let alsoPositive = -negative
 // alsoPositive 也是 Vector2D实例，值为(3.0, 4.0)
 ```
 
-## 复合赋值操作符
+### 复合赋值操作符
 
-复合赋值是其他操作符和赋值操作符一起执行的运算。如+=把加运算和赋值运算组合成一个操作。实现一个复合赋值操作符需要使用@assignment属性，操作符左边的参数作为函数输入，函数内再修改它的值。
+复合赋值是其他操作符和赋值操作符一起执行的运算。如+=把加运算和赋值运算组合成一个操作。实现一个复合赋值操作符需要使用`@assignment`属性，操作符左边的参数作为函数输入，函数内再修改它的值。
 
-下面的例子实现了Vector2D 对象的+=操作符：
+下面的例子实现了`Vector2D` 对象的+=操作符：
 
 ```
 @assignment func += (inout left: Vector2D, right: Vector2D) {
@@ -368,7 +377,7 @@ original += vectorToAdd
 // 运算后original 等于 (4.0, 6.0)
 ```
 
-可以将 @assignment 属性和 @prefix 或 @postfix 属性组合起来，比如像下面Vector2D对象的前置运算符(++a)：
+可以将 `@assignment` 属性和 `@prefix` 或 `@postfix` 属性组合起来，比如像下面`Vector2D`对象的前置运算符(++a)：
 
 ```
 @prefix @assignment func ++ (inout vector: Vector2D) -> Vector2D {
@@ -390,7 +399,7 @@ let afterIncrement = ++toIncrement
 >
 > 默认的赋值符(=)是不可重载的。只有复合赋值符可以重载。条件操作符 a？b：c 也是不可重载的。
 
-## 比较操作符
+### 比较操作符
 
 自定义的类和结构体默认没有相等(==)和不等(!=)操作符，因为Swift无法知道自定义类型怎样算相等，怎样算不等。
 
@@ -405,9 +414,9 @@ let afterIncrement = ++toIncrement
 }
 ```
 
-上述代码实现了相等操作符==来判断两个Vector2D对象是否相等，相等的概念就是它们有相同的x值和y值。将相等操作符==的结果取反就实现了不等运算符!=。
+上述代码实现了相等操作符==来判断两个`Vector2D`对象是否相等，相等的概念就是它们有相同的x值和y值。将相等操作符==的结果取反就实现了不等运算符!=。
 
-现在我们可以使用这两个操作符来判断两个Vector2D对象是否相等。
+现在我们可以使用这两个操作符来判断两个`Vector2D`对象是否相等。
 
 ```
 let twoThree = Vector2D(x: 2.0, y: 3.0)
@@ -420,15 +429,15 @@ println("这两个向量相等")
 
 ## 自定义操作符
 
-除了标准的操作符，你还可以声明一些个性的操作符，但自定义操作符只能使用这些字符/ = - + * % < >！& | ^。~。
+除了标准的操作符，你还可以声明一些个性的操作符，但自定义操作符只能使用这些字符`/ = - + * % < >！& | ^ . ~`
 
-新的操作符需要在全局域使用operator关键字声明，可以声明为前置，中置或后置的。
+新的操作符需要在全局域使用`operator`关键字声明，可以声明为前置，中置或后置的。
 
 ```
 operator prefix +++ {}
 ```
 
-这段代码定义了一个新的前置操作符+++，此前Swift并不存在这个操作符，此处针对Vector2D 对象的这个操作符具有个性化的含义。+++被定义为 双自增 操作符，它使用之前定义的加赋运算将自已加上自己然后返回。
+这段代码定义了一个新的前置操作符+++，此前Swift并不存在这个操作符，此处针对`Vector2D` 对象的这个操作符具有个性化的含义。+++被定义为双自增操作符，它使用之前定义的加赋运算将自已加上自己然后返回。
 
 ```
 @prefix @assignment func +++ (inout vector: Vector2D) -> Vector2D {
@@ -437,7 +446,7 @@ return vector
 }
 ```
 
-Vector2D 的 +++ 和 ++ 很类似, 唯一不同的是前者加自己, 后者是加值为 (1.0, 1.0) 的向量。
+`Vector2D` 的 +++ 和 ++ 很类似, 唯一不同的是前者加自己, 后者是加值为 `(1.0, 1.0)` 的向量。
 
 ```
 var toBeDoubled = Vector2D(x: 1.0, y: 4.0)
@@ -446,7 +455,7 @@ let afterDoubling = +++toBeDoubled
 // afterDoubling 也等于 (2.0, 8.0)
 ```
 
-## 自定义中置操作符的优先级和结合性
+### 自定义中置操作符的优先级和结合性
 
 可以为自定义的中置操作符指定优先级和结合性。可以回头看看优先级和结合性中解释的，这两个因素是如何影响复合表达式的求值顺序的。
 
@@ -467,7 +476,7 @@ let plusMinusVector = firstVector +- secondVector
 // plusMinusVector 是 Vector2D实例，等于 (4.0, -2.0)
 ```
 
-这个操作符把两个向量的x相加， y相减。因为它实际上属于加减运算，所以让它保持了和加减法一样的结合性和优先级(左结合，优先级为140)。查阅完整的Swift默认优先级和结合性的设置，请移步表达式;
+这个操作符把两个向量的x相加， y相减。因为它实际上属于加减运算，所以让它保持了和加减法一样的结合性和优先级(左结合，优先级为140)。查阅完整的Swift默认优先级和结合性的设置，请移步[表达式](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/doc/uid/TP40014097-CH32-XID_655).
 
 
 
