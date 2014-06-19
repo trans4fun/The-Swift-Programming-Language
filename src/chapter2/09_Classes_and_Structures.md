@@ -372,12 +372,69 @@ if tenEighty === alsoTenEighty {
 
 Note that “identical to” (represented by three equals signs, or ===) does not mean the same thing as “equal to” (represented by two equals signs, or ==):
 
+提示：三个等号(===)的身份相等与两个等号(==)的值相等操作符是不一样的。
+
 * “Identical to” means that two constants or variables of class type refer to exactly the same class instance.
 * “Equal to” means that two instances are considered “equal” or “equivalent” in value, for some appropriate meaning of “equal”, as defined by the type’s designer.
 
+ * 身份相等操作符两端的变量或常量比较的是是否从同一个类实例化而来。
+ * 值相等操作符比较的则是两端的值或者对象的内存地址是否相等，这更接近我们平常理解的相等比较。
 
 When you define your own custom classes and structures, it is your responsibility to decide what qualifies as two instances being “equal”. The process of defining your own implementations of the “equal to” and “not equal to” operators is described in Equivalence Operators.
 
+每当你定义一个类或者结构体时，你就有义务对两个实例的“相等”标准作出决断。在[比较运算符](#)中会描述如何去对对相等和不等的比较进行实现。
 ‌
-Pointers
+### Pointers
+### 指针
+
 If you have experience with C, C++, or Objective-C, you may know that these languages use pointers to refer to addresses in memory. A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but is not a direct pointer to an address in memory, and does not require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift.
+
+如果你之前有过编写C、C++或者Objective-C的经验，你应该会知道这些语言的指针都是对一个内存中的地址做引用的。一个变量或常量在Swift中与C的指针类似引用一个可以被引用的实例，但它不直接指向内存的某一个地址，也不需要在申明引用的变量名前加上星号(*)。在Swift中除此之外，引用的定义与其他语言相同。
+
+## Choosing Between Classes and Structures
+
+You can use both classes and structures to define custom data types to use as the building blocks of your program’s code.
+
+在定义时你可以在你的代码中同时使用类和结构体来表示合适的数据类型。
+
+However, structure instances are always passed by value, and class instances are always passed by reference. This means that they are suited to different kinds of tasks. As you consider the data constructs and functionality that you need for a project, decide whether each data construct should be defined as a class or as a structure.
+
+他们拥有不同的特性，结构体实例被赋值时始终传递的是值的拷贝，而类实例则始终传递的是引用。将他们根据项目的实际情况去选择定义出合适的数据是代码构建者应该去仔细斟酌的。
+
+As a general guideline, consider creating a structure when one or more of these conditions apply:
+
+通常来说，符合以下一个或多个条件时应该使用结构体去定义数据：
+
+* The structure’s primary purpose is to encapsulate a few relatively simple data values.
+* It is reasonable to expect that the encapsulated values will be copied rather than referenced when you assign or pass around an instance of that structure.
+* Any properties stored by the structure are themselves value types, which would also be expected to be copied rather than referenced.
+* The structure does not need to inherit properties or behavior from another existing type.
+
+* 结构体主要目的时用来将少量相关数据进行封装。
+* 当期望实例在赋值时传递的是封装的值的被拷贝而不是仅仅是引用。
+* 当期望数据结构中的只类型也一同拷贝传值而不是传递引用。
+* 这个数据结构不需要去继承别的类。
+
+Examples of good candidates for structures include:
+
+
+
+The size of a geometric shape, perhaps encapsulating a width property and a height property, both of type Double.
+A way to refer to ranges within a series, perhaps encapsulating a start property and a length property, both of type Int.
+A point in a 3D coordinate system, perhaps encapsulating x, y and z properties, each of type Double.
+In all other cases, define a class, and create instances of that class to be managed and passed by reference. In practice, this means that most custom data constructs should be classes, not structures.
+
+## Assignment and Copy Behavior for Collection Types
+
+Swift’s Array and Dictionary types are implemented as structures. However, arrays have slightly different copying behavior from dictionaries and other structures when they are assigned to a constant or variable, and when they are passed to a function or method.
+
+The behavior described for Array and Dictionary below is different again from the behavior of NSArray and NSDictionary in Foundation, which are implemented as classes, not structures. NSArray and NSDictionary instances are always assigned and passed around as a reference to an existing instance, rather than as a copy.
+
+> NOTE
+> 
+> The descriptions below refer to the “copying” of arrays, dictionaries, strings, and other values. Where copying is mentioned, the behavior you see in your code will always be as if a copy took place. However, Swift only performs an actual copy behind the scenes when it is absolutely necessary to do so. Swift manages all value copying to ensure optimal performance, and you should not avoid assignment to try to preempt this optimization.
+
+### Assignment and Copy Behavior for Dictionaries
+
+### Assignment and Copy Behavior for Arrays
+
