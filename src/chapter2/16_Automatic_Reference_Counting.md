@@ -331,4 +331,21 @@ The final two code snippets above show that the deinitializers for the Person in
 
 上面的两段代码展示了变量john和number73在被赋值为nil后，Person实例和Apartment实例的析构函数都打印出“销毁”的信息。这证明了引用循环被打破了。
 
-## 
+### 无主引用
+
+Like weak references, an unowned reference does not keep a strong hold on the instance it refers to. Unlike a weak reference, however, an unowned reference is assumed to always have a value. Because of this, an unowned reference is always defined as a non-optional type. You indicate an unowned reference by placing the unowned keyword before a property or variable declaration.
+
+与弱引用类似，无主引用也不会与其指向的类实例间保持强引用关系。不同的是，无主引用假定一直都是有值的。因此，无主引用总是被定义为非可选类型。你可以在属性和变量之前加上unowned关键词来声明这是无主引用。
+
+Because an unowned reference is non-optional, you don’t need to unwrap the unowned reference each time it is used. An unowned reference can always be accessed directly. However, ARC cannot set the reference to nil when the instance it refers to is deallocated, because variables of a non-optional type cannot be set to nil.
+
+由于无主引用是非可选类型的，你不必在使用的时候展开它，它可以被直接访问。与弱引用不同，当无主引用指向的实例被销毁后，ARC不会将其指向nil。
+
+> NOTE
+> 
+> If you try to access an unowned reference after the instance that it references is deallocated, you will trigger a runtime error. Use unowned references only when you are sure that the reference will always refer to an instance.
+> 
+> Note also that Swift guarantees your app will crash if you try to access an unowned reference after the instance it references is deallocated. You will never encounter unexpected behavior in this situation. Your app will always crash reliably, although you should, of course, prevent it from doing so.
+> 注意
+> 在无主引用指向的实例被销毁后，如果依然试图访问该无主引用，你会触发运行时错误。使用无主引用，需要你你能够确保引用指向的实例未被销毁。
+> 需要格外注意的是，在无主引用指向的实例被销毁后，你依然试图访问该无主引用，Swift保证，你的app会毫无意外地直接崩溃，这确实会发生。不是应该而是你必须阻止这样的情况发生。
