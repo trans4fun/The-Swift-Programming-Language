@@ -70,7 +70,9 @@ var reference3: Person?
 ```
 
 You can now create a new Person instance and assign it to one of these three variables:
-现在你可以创建Person类的新实例，并且将它赋值给三个变量其中的一个：
+
+现在创建Person类的新实例，并且将它赋值给三个变量中的一个：
+
 ```
 reference1 = Person(name: "John Appleseed")
 // prints "John Appleseed is being initialized”
@@ -86,22 +88,30 @@ Because the new Person instance has been assigned to the reference1 variable, th
 ARC会保证该Person实例保持在内存中不被销毁，因为它这满足了至少有一个强引用的条件。
 
 If you assign the same Person instance to two more variables, two more strong references to that instance are established:
+
 如果你将该实例赋值给多个变量，那么就会建立指向该实例的多个强引用：
+
 ```
 reference2 = reference1
 reference3 = reference1
 ```
+
 There are now three strong references to this single Person instance.
+
 现在这个Person实例已经有三个强引用了。
 
 If you break two of these strong references (including the original reference) by assigning nil to two of the variables, a single strong reference remains, and the Person instance is not deallocated:
-如果你通过给任意两个变量赋值nil的方式断开两个强引用（包括原始引用），只留下一个强引用，该Person实例不会被销毁：
+
+如果你通过给任意两个变量赋值nil的方式断开两个强引用（包括原始引用），留下一个强引用，该Person实例不会被销毁：
+
 ```
 reference2 = nil
 reference3 = nil
 ```
 ARC does not deallocate the Person instance until the third and final strong reference is broken, at which point it is clear that you are no longer using the Person instance:
-ARC不会销毁该Person实例，直到第三个也是最后一个强引用断开，即能够清楚的表明你不再需要该实例的时候。
+
+直到第三个也是最后一个强引用断开，即能够清楚的断定你不再需要该实例的时候，ARC才会销毁该Person实例。
+
 ```
 reference3 = nil
 // prints "John Appleseed is being deinitialized"
@@ -111,18 +121,21 @@ reference3 = nil
 
 In the examples above, ARC is able to track the number of references to the new Person instance you create and to deallocate that Person instance when it is no longer needed.
 
-在上面的例子中，ARC能够跟踪指向Person实例的引用个数，并且在该Person实例不在需要的时候销毁它。
+在上面的例子中，ARC能够跟踪指向Person实例的引用个数，并且在该Person实例不再需要的时候销毁它。
 
 However, it is possible to write code in which an instance of a class never gets to a point where it has zero strong references. This can happen if two class instances hold a strong reference to each other, such that each instance keeps the other alive. This is known as a strong reference cycle.
 
-然而，我们可能会写出这样的代码，导致一个类实例永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，以致于彼此都无法被销毁。这就是所谓的强引用循环。
+然而，我们可能会写出这样的代码，导致类实例永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，以致于彼此都无法被销毁的时候。这就是所谓的强引用循环。
 
 You resolve strong reference cycles by defining some of the relationships between classes as weak or unowned references instead of as strong references. This process is described in Resolving Strong Reference Cycles Between Class Instances. However, before you learn how to resolve a strong reference cycle, it is useful to understand how such a cycle is caused.
-你可以通过定义类之间的关系为弱引用或者无主引用来替代强引用，从而解决循环强引用的问题。具体的过程在解决类实例之间的循环强引用中有描述。不管怎样，在你学习怎样解决循环强引用之前，很有必要了解一下它是如何产生的。
+
+你可以通过定义类之间的关系为弱引用或者无主引用的方式来解决循环强引用的问题。具体的过程在解决类实例之间的循环强引用中有描述。不管怎样，在你学习怎样解决循环强引用之前，很有必要了解一下它是如何产生的。
 
 Here’s an example of how a strong reference cycle can be created by accident.
 This example defines two classes called Person and Apartment, which model a block of apartments and its residents:
+
 这是一个意外导致强引用循环的例子。例子定义了两个名为Person和Apartment的类，用来模拟公寓和公寓里的居民：
+
 ```
 class Person {
     let name: String
@@ -138,7 +151,9 @@ class Apartment {
     deinit { println("Apartment #\(number) is being deinitialized") }
 }
 ```
+
 Every Person instance has a name property of type String and an optional apartment property that is initially nil. The apartment property is optional, because a person may not always have an apartment.
+
 每一个Person实例都有一个String类型的属性name和一个初始化为nil的可选类型属性apartment。之所以将apartment定义为可选类型，是因为某人可能不总是租公寓。
 
 Similarly, every Apartment instance has a number property of type Int and has an optional tenant property that is initially nil. The tenant property is optional because an apartment may not always have a tenant.
@@ -152,17 +167,21 @@ Both of these classes also define a deinitializer, which prints the fact that an
 This next code snippet defines two variables of optional type called john and number73, which will be set to a specific Apartment and Person instance below. Both of these variables have an initial value of nil, by virtue of being optional:
 
 下面的代码片段定义了两个可选类型变量john和number73，接下来，他们将被设置为具体的Apartment实例和Person实例。两个变量的初始值都是nil，因为它们都是可选类型的：
+
 ```
 var john: Person?
 var number73: Apartment?
 ```
 You can now create a specific Person instance and Apartment instance and assign these new instances to the john and number73 variables:
+
 现在创建具体的Person实例和Apartment实例，并把这两个新实例分别赋值给john和number73：
+
 ```
 john = Person(name: "John Appleseed")
 number73 = Apartment(number: 73)
 ```
 Here’s how the strong references look after creating and assigning these two instances. The john variable now has a strong reference to the new Person instance, and the number73 variable has a strong reference to the new Apartment instance:
+
 下图展示了创建和分配两个实例之后的强引用关系。john变量和新Person实例之间有一条强引用关系，number73变量和新Apartment实例之间也有一条强引用关系。
 
 ![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/referenceCycle01_2x.png)
