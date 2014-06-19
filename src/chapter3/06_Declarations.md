@@ -670,14 +670,14 @@ There are three ways create an instance of a previously declared structure:
 有3种方式创建过去声明过的示例结构的示例。
 
 
-	-Call one of the initializers declared within the structure, as described in Initializers.
-          就像Initializers描述的，调用结构里的一个初始器之一。
+- Call one of the initializers declared within the structure, as described in Initializers.
+  就像Initializers描述的，调用结构里的一个初始器之一。
 
-	-If no initializers are declared, call the structure’s memberwise initializer, as described in Memberwise Initializers for Structure Types.
-         如果没有初始器被声明，就可以调用结构区的成员
+- If no initializers are declared, call the structure’s memberwise initializer, as described in Memberwise Initializers for Structure Types.
+  如果没有初始器被声明，就可以调用结构区的成员
 
-	-If no initializers are declared, and all properties of the structure declaration were given initial values, call the structure’s default initializer, as described in Default Initializers.
-          如果没有初始化器被声明，结构所有其他声明的属性就会被给予初始化的值，调用结构的某人初始化器，正如Default Initializers    .描述的那样。 
+- If no initializers are declared, and all properties of the structure declaration were given initial values, call the structure’s default initializer, as described in Default Initializers.
+   如果没有初始化器被声明，结构所有其他声明的属性就会被给予初始化的值，调用结构的某人初始化器，正如Default Initializers    .描述的那样。 
 
 
 
