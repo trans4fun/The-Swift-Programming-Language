@@ -11,11 +11,11 @@ Arrays and dictionaries in Swift are always clear about the types of values and 
 
 >NOTE
 
->Swift’s `Array` type exhibits different behavior to other types when assigned to a constant or variable, or when passed to a function or method. For more information, see Mutability of Collections and Assignment and Copy Behavior for Collection Types.
+>Swift’s `Array` type exhibits different behavior to other types when assigned to a constant or variable, or when passed to a function or method. For more information, see [Mutability of Collections](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/04_Collection_Types.md#mutability-of-collections) and [Assignment and Copy Behavior for Collection Types]().
 
 >注意
 
->Swift的`Array`类型在赋值给常量和变量，还有传入函数和方法时与其他类型有所不同。获取更多信息请参见[Mutability of Collections and Assignment](id1) 和 [Copy Behavior for Collection Types](id2)这两个章节。
+>Swift的`Array`类型在赋值给常量和变量，还有传入函数和方法时与其他类型有所不同。获取更多信息请参见[Mutability of Collections](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/04_Collection_Types.md#mutability-of-collections)and[AssignmentCopy Behavior for Collection Types]()这两个章节。
 
 
 ###Arrays
@@ -251,9 +251,9 @@ for (index, value) in enumerate(shoppingList) {
 // Item 4: Baking Powder
 // Item 5: Bananas
 ```
-For more about the `for-in` loop, see [For Loops]().
+For more about the `for-in` loop, see [For Loops](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/05_Control_Flow.md#for%E5%BE%AA%E7%8E%AF).
 
-获取更多关于`for-in`循环的介绍，请参见[For循环](id3)。
+获取更多关于`for-in`循环的介绍，请参见[For循环](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/05_Control_Flow.md#for%E5%BE%AA%E7%8E%AF)。
 
 
 ####Creating and Initializing an Array
@@ -321,9 +321,9 @@ Swift’s dictionary type is written as `Dictionary<KeyType, ValueType>`, where 
 
 Swift字典类型被写为`Dictionary<KeyType, ValueType>`，这里的`KeyType`是能够被作为字典键的数据的类型，`ValueType`是字典中存储的与键相关联的数据的类型。
 
-The only restriction is that `KeyType` must be *hashable*—that is, it must provide a way to make itself uniquely representable. All of Swift’s basic types (such as `String`, `Int`, `Double`, and `Bool`) are hashable by default, and all of these types can be used as the keys of a dictionary. Enumeration member values without associated values (as described in Enumerations) are also hashable by default.
+The only restriction is that `KeyType` must be *hashable*—that is, it must provide a way to make itself uniquely representable. All of Swift’s basic types (such as `String`, `Int`, `Double`, and `Bool`) are hashable by default, and all of these types can be used as the keys of a dictionary. Enumeration member values without associated values (as described in [Enumerations](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/08_Enumerations.md)) are also hashable by default.
 
-`KeyType`的唯一限制是它必须是*可哈希的*——也就是说，它必须提供一个方法来使得自己能够被唯一表示。所有的Swift基础类型（如`String`, `Int`, `Double`, 和`Bool`）默认都是可哈希的，所有的这些类型都能够被用来作为字典的键。没有关联数值的枚举类型（参见[Enumerations](#Enumerations)）也是默认可枚举的。
+`KeyType`的唯一限制是它必须是*可哈希的*——也就是说，它必须提供一个方法来使得自己能够被唯一表示。所有的Swift基础类型（如`String`, `Int`, `Double`, 和`Bool`）默认都是可哈希的，所有的这些类型都能够被用来作为字典的键。没有关联数值的枚举类型（参见[Enumerations](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/08_Enumerations.md)）也是默认可枚举的。
 
 ‌
 ####Dictionary Literals
@@ -465,9 +465,9 @@ for (airportCode, airportName) in airports {
 // TYO: Tokyo
 // LHR: London Heathrow
 ```
-For more about the `for-in` loop, see For Loops.
+For more about the `for-in` loop, see [For Loops](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/05_Control_Flow.md#for%E5%BE%AA%E7%8E%AF).
 
-更多关于`for-in`循环的介绍，请参见[For循环](id3)。
+更多关于`for-in`循环的介绍，请参见[For循环](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/05_Control_Flow.md#for%E5%BE%AA%E7%8E%AF)。
 
 You can also retrieve an iteratable collection of a dictionary’s  keys or values by accessing its `keys` and `values` properties:
 
@@ -534,11 +534,11 @@ namesOfIntegers = [:]
 
 >NOTE
 
->Behind the scenes, Swift’s array and dictionary types are implemented as *generic collections*. For more on generic types and collections, see [Generics]().
+>Behind the scenes, Swift’s array and dictionary types are implemented as *generic collections*. For more on generic types and collections, see [Generics](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/22_Generics.md).
 
 >注意
 
->在后台，Swift数组和字典类型都是由*泛型集合*实现的。更多关于泛型类型和集合的介绍，请参见[Generics](id3)。
+>在后台，Swift数组和字典类型都是由*泛型集合*实现的。更多关于泛型类型和集合的介绍，请参见[Generics](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/22_Generics.md)。
 
 ‌
 ###Mutability of Collections
