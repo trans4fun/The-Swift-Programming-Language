@@ -670,13 +670,13 @@ There are three ways create an instance of a previously declared structure:
 有3种方式创建过去声明过的示例结构的示例。
 
 
-	* Call one of the initializers declared within the structure, as described in Initializers.
+	-Call one of the initializers declared within the structure, as described in Initializers.
           就像Initializers描述的，调用结构里的一个初始器之一。
 
-	* If no initializers are declared, call the structure’s memberwise initializer, as described in Memberwise Initializers for Structure Types.
+	-If no initializers are declared, call the structure’s memberwise initializer, as described in Memberwise Initializers for Structure Types.
          如果没有初始器被声明，就可以调用结构区的成员
 
-	* If no initializers are declared, and all properties of the structure declaration were given initial values, call the structure’s default initializer, as described in Default Initializers.
+	-If no initializers are declared, and all properties of the structure declaration were given initial values, call the structure’s default initializer, as described in Default Initializers.
           如果没有初始化器被声明，结构所有其他声明的属性就会被给予初始化的值，调用结构的某人初始化器，正如Default Initializers    .描述的那样。 
 
 
@@ -1188,11 +1188,12 @@ A postfix operator is a unary operator that is written immediately after its ope
 后缀运算符一元运算符，紧跟在操作数之前，比如表达式 i++ 中的前后缀递增运算符(++)。
 
 As with prefix operators, postfix operator declarations don’t specify a precedence level. Postfix operators are nonassociative.
+
 与前缀运算符一样，后缀运算符声明不会指定优先级。后缀运算符也是非结合性的。
 
 After declaring a new operator, you implement it by declaring a function that has the same name as the operator. To see an example of how to create and implement a new operator, see Custom Operators.
 
-在声明了一个新的运算符止呕，要声明一个和运算符同名的函数来实现它。如何创建和实现新的操作符，请看Custom Operators。
+在声明了一个新的运算符之后，要声明一个和运算符同名的函数来实现它。如何创建和实现新的操作符，请看Custom Operators。
 
 
 
