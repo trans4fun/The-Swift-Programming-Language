@@ -27,7 +27,7 @@ However, if ARC were to deallocate an instance that was still in use, it would n
 
 To make sure that instances don’t disappear while they are still needed, ARC tracks how many properties, constants, and variables are currently referring to each class instance. ARC will not deallocate an instance as long as at least one active reference to that instance still exists.
 
-然而，如果ARC释放了一个正在使用的类实例的内存，那会导致该实例的方法和属性都不能访问。而且，如果你试图访问已被ARC释放的实例，你的APP很可能会崩溃。
+然而，如果ARC释放了一个正在使用的类实例的内存，那会导致该实例的方法和属性都不能访问。而且，如果你试图访问已被ARC释放的实例，你的APP多半会崩溃。
 
 为了确保使用中的类实例不会无端消失（被ARC回收），ARC会跟踪和统计每个类实例被多少属性，常量，变量所引用。即使只有一个活动引用存在，该类实例也不会被ARC回收。
 
@@ -129,12 +129,12 @@ However, it is possible to write code in which an instance of a class never gets
 
 You resolve strong reference cycles by defining some of the relationships between classes as weak or unowned references instead of as strong references. This process is described in Resolving Strong Reference Cycles Between Class Instances. However, before you learn how to resolve a strong reference cycle, it is useful to understand how such a cycle is caused.
 
-你可以通过定义类之间的关系为弱引用或者无主引用的方式来解决循环强引用的问题。具体的过程在解决类实例之间的循环强引用中有描述。不管怎样，在你学习怎样解决循环强引用之前，很有必要了解一下它是如何产生的。
+你可以通过定义类之间的关系为弱引用或者无主引用的方式来解决循环强引用的问题。具体过程将在“解决类实例之间的循环强引用”中详述。不管怎样，在学习怎样解决循环强引用之前，很有必要了解一下它是如何产生的。
 
 Here’s an example of how a strong reference cycle can be created by accident.
 This example defines two classes called Person and Apartment, which model a block of apartments and its residents:
 
-这是一个意外导致循环强引用的例子。例子定义了两个名为Person和Apartment的类，用来模拟公寓和公寓里的居民：
+这是一个意外导致循环强引用的例子。例子定义了名为Person和Apartment的两个类，用来模拟公寓和公寓里的居民：
 
 ```
 class Person {
@@ -188,7 +188,7 @@ Here’s how the strong references look after creating and assigning these two i
 
 You can now link the two instances together so that the person has an apartment, and the apartment has a tenant. Note that an exclamation mark (!) is used to unwrap and access the instances stored inside the john and number73 optional variables, so that the properties of those instances can be set:
 
-现在将两个实例连接在一起，让人住进一间公寓，公寓也有了一个租客。注意那个感叹号（!），它用于打开和访问存储于john和number73实例中的可选变量，这样实例的属性才能够被设置：
+现在将两个实例连接在一起，让john住进number73公寓，number73公寓也有了一个租客john。注意那个感叹号（!），它用于打开和访问存储于john和number73实例中的可选变量，这样实例的属性才能够被设置：
 
 ```
 john!.apartment = number73
@@ -196,6 +196,7 @@ number73!.tenant = john
 ```
 
 Here’s how the strong references look after you link the two instances together:
+
 这里展示了两个实例连接在一起之后的强引用关系：
 
 ![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/referenceCycle02_2x.png)
@@ -211,7 +212,7 @@ number73 = nil
 
 Note that neither deinitializer was called when you set these two variables to nil. The strong reference cycle prevents the Person and Apartment instances from ever being deallocated, causing a memory leak in your app.
 
-需要注意的是，你将john和number73设为nil时两个析构函数都没有被调用。循环强引用阻止了Person 和 Apartment类实例的销毁，在你的App中导致了内存泄漏。
+需要注意的是，你将john和number73设为nil时两个析构函数都没有被调用。循环强引用阻止了Person 和 Apartment类实例的销毁，这在你的App中导致了内存泄漏。
 
 Here’s how the strong references look after you set the john and number73 variables to nil:
 
@@ -241,17 +242,17 @@ Use a weak reference whenever it is valid for that reference to become nil at so
 
 A weak reference is a reference that does not keep a strong hold on the instance it refers to, and so does not stop ARC from disposing of the referenced instance. This behavior prevents the reference from becoming part of a strong reference cycle. You indicate a weak reference by placing the weak keyword before a property or variable declaration.
 
-弱引用不会强制保持引用的实例，并且不会阻止 ARC 销毁被引用的实例。这阻止了引用成为循环强引用的组成部分。声明属性或者变量时，在前面加上weak关键字表明这是一个弱引用。
+弱引用不会强制保持引用的实例，并且不会阻止 ARC 销毁被引用的实例。这避免了引用成为循环强引用的组成部分。声明属性或者变量时，在前面加上weak关键字表明这是一个弱引用。
 
 Use a weak reference to avoid reference cycles whenever it is possible for that reference to have “no value” at some point in its life. If the reference will always have a value, use an unowned reference instead, as described in Unowned References. In the Apartment example above, it is appropriate for an apartment to be able to have “no tenant” at some point in its lifetime, and so a weak reference is an appropriate way to break the reference cycle in this case.
 
-在引用对象的生命周期中，如果某些时候引用对象可能无值，就使用弱引用阻止产生循环强引用。如果引用对象总是有值，则应使用无主引用，这将在无主引用部分详述。在上面Apartment的例子中，一个公寓的生命周期中，有时是没有“租客”的，这种情况下适合使用弱引用来打破引用循环。
+在引用的生命周期中，如果某些时候引用可能无值，就使用弱引用避免产生循环强引用。如果引用总是有值，则应使用无主引用，这将在无主引用部分详述。在上面Apartment的例子中，一个公寓的生命周期中，有时是没有“租客”的，这种情况下适合使用弱引用来打破引用循环。
 
 > NOTE
 > 
 > Weak references must be declared as variables, to indicate that their value can change at runtime. A weak reference cannot be declared as a constant.
 > 注意
-> 弱引用必须声明为变量，以表明它们的值在运行时是可以改变的。弱引用不能声明为常量。
+> 弱引用必须声明为变量而不能声明为常量，以表明它们的值在运行时是可以改变的。
 
 Because weak references are allowed to have “no value”, you must declare every weak reference as having an optional type. Optional types are the preferred way to represent the possibility for “no value” in Swift.
 
@@ -348,4 +349,4 @@ Because an unowned reference is non-optional, you don’t need to unwrap the uno
 > Note also that Swift guarantees your app will crash if you try to access an unowned reference after the instance it references is deallocated. You will never encounter unexpected behavior in this situation. Your app will always crash reliably, although you should, of course, prevent it from doing so.
 > 注意
 > 在无主引用指向的实例被销毁后，如果依然试图访问该无主引用，你会触发运行时错误。使用无主引用，需要你你能够确保引用指向的实例未被销毁。
-> 需要格外注意的是，在无主引用指向的实例被销毁后，你依然试图访问该无主引用，Swift保证，你的app会毫无意外地直接崩溃，这确实会发生。不是应该而是你必须阻止这样的情况发生。
+> 需要格外注意的是，在无主引用指向的实例被销毁后，若你依然试图访问该无主引用，Swift保证，你的app会毫无意外地直接崩溃。不是应该而是你必须避免这样的情况发生。
