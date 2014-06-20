@@ -628,3 +628,117 @@ Note that the message in the HTMLElement deinitializer is not printed, which sho
 
 注意到HTMLElement析构函数的信息并没有打印出来，这说明HTMLElement实例并未被销毁。
 
+## 解决闭包引起的循环强引用
+You resolve a strong reference cycle between a closure and a class instance by defining a capture list as part of the closure’s definition. A capture list defines the rules to use when capturing one or more reference types within the closure’s body. As with strong reference cycles between two class instances, you declare each captured reference to be a weak or unowned reference rather than a strong reference. The appropriate choice of weak or unowned depends on the relationships between the different parts of your code.
+
+你可以在闭包的定义内附加定义捕获列表来解决闭包和类实例间的循环强引用问题。捕获列表为在闭包内使用一个或多个引用类型定义了一套规则。与解决两个类实例之间形成循环强引用方式一样，你应声明每个捕获的引用为弱类型或无主类型，而不是强引用类型。到底选择那种类型要看你代码不同部分之间的关系。
+
+> NOTE
+> 
+> Swift requires you to write self.someProperty or self.someMethod (rather than just someProperty or someMethod) whenever you refer to a member of self within a closure. This helps you remember that it’s possible to capture self by accident.
+> 注意
+> 在闭包内引用self成员时，Swift要求以self.someProperty或self.someMethod的方式来引用，而不是以直接使用属性或方法名的方式引用（如：someProperty 或 someMethod）。这帮你记得闭包内引用self可能意外导致self被捕获。
+
+### 定义捕获列表
+Each item in a capture list is a pairing of the weak or unowned keyword with a reference to a class instance (such as self or someInstance). These pairings are written within a pair of square braces, separated by commas.
+
+捕获列表的每一项都是weak或unown关键字和需引用的类实例（如：self或someInstance）成对组成。每一对由方括号包裹，以逗号分隔。
+
+
+Place the capture list before a closure’s parameter list and return type if they are provided:
+
+将捕获列表放在闭包参数列表和返回类型声明（若有返回值）之前：
+
+```
+@lazy var someClosure: (Int, String) -> String = {
+    [unowned self] (index: Int, stringToProcess: String) -> String in
+    // closure body goes here
+}
+```
+
+If a closure does not specify a parameter list or return type because they can be inferred from context, place the capture list at the very start of the closure, followed by the in keyword:
+
+若闭包没有确切的参数列表或返回类型（因为参数或返回类型可通过上下文推断），请将捕获列表放在闭包的最前面，并在后面加上in关键字。
+
+```
+@lazy var someClosure: () -> String = {
+    [unowned self] in
+    // closure body goes here
+}
+```
+
+### 弱引用与无主引用
+Define a capture in a closure as an unowned reference when the closure and the instance it captures will always refer to each other, and will always be deallocated at the same time.
+
+当闭包和它捕获的实例总是互相引用且同时被销毁的时候，将闭包内的捕获定义为无主引用。
+
+Conversely, define a capture as a weak reference when the captured reference may become nil at some point in the future. Weak references are always of an optional type, and automatically become nil when the instance they reference is deallocated. This enables you to check for their existence within the closure’s body.
+
+相反的，如果捕获的实例在将来的某一时刻会变为nil，就将捕获定义为弱引用。弱引用总是可选类型，而且如果它们引用的实例被销毁了，它们会自动变为nil。因此可以很容易的在闭包内检查他们是否存在。
+
+> NOTE
+> 
+> If the captured reference will never become nil, it should always be captured as an unowned reference, rather than a weak reference.
+> 注意
+> 如果捕获的引用永远不会变为nil,就要将该捕获定义为无主引用，而不是弱引用。
+
+An unowned reference is the appropriate capture method to use to resolve the strong reference cycle in the HTMLElement example from earlier. Here’s how you write the HTMLElement class to avoid the cycle:
+
+根据上述的判断原则，无主引用就是解决先前HTMLElement例子里循环强引用问题的合适方式。
+这是改写后的HTMLElement类，避免了引用循环：
+
+```
+class HTMLElement {
+    
+    let name: String
+    let text: String?
+    
+    @lazy var asHTML: () -> String = {
+        [unowned self] in
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        println("\(name) is being deinitialized")
+    }
+    
+}
+```
+
+This implementation of HTMLElement is identical to the previous implementation, apart from the addition of a capture list within the asHTML closure. In this case, the capture list is [unowned self], which means “capture self as an unowned reference rather than a strong reference”.
+
+这次HTMLElement类的实现与之前的一样，除了在asHTML闭包内增加了一个捕获列表。在这个例子里，捕获列表是[unowned self]，意思是：“用无主引用而不是强引用来捕获self”
+
+You can create and print an HTMLElement instance as before:
+你依然可以想之前那样创建并打印HTMLElement实例：
+
+```
+var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
+println(paragraph!.asHTML())
+// prints "&lt;p&gt;hello, world&lt;/p&gt;"
+```
+
+Here’s how the references look with the capture list in place:
+
+这是使用了捕获列表后的引用关系：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/closureReferenceCycle02_2x.png)
+
+
+This time, the capture of self by the closure is an unowned reference, and does not keep a strong hold on the HTMLElement instance it has captured. If you set the strong reference from the paragraph variable to nil, the HTMLElement instance is deallocated, as can be seen from the printing of its deinitializer message in the example below:
+
+这次闭包的self捕获是无主引用，不会强制保持闭包捕获的HTMLElement实例。如果你将paragraph变量设为nil，HTMLElement实例会被销毁并会看到由其析构函数打印出的销毁信息，如下所示：
+
+```
+paragraph = nil
+// prints "p is being deinitialized
+```
