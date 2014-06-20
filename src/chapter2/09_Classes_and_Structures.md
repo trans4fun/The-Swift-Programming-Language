@@ -237,21 +237,224 @@ var cinema = hd
 
 This example declares a constant called `hd` and sets it to a `Resolution` instance initialized with the width and height of full HD video (`1920` pixels wide by `1080` pixels high).
 
-例子中声明了一个名叫`hd`的常量，它的值是一个初始化成全高清视频分辨率（宽`1920`长`1080`）的`Resolution`实例。
+例子中声明了一个名叫`hd`的常量，并将它初始化为全高清视频分辨率（宽`1920`长`1080`）的`Resolution`实例。
 
-It then declares a variable called cinema and sets it to the current value of hd. Because Resolution is a structure, a copy of the existing instance is made, and this new copy is assigned to cinema. Even though hd and cinema now have the same width and height, they are two completely different instances behind the scenes.
+It then declares a variable called `cinema` and sets it to the current value of `hd`. Because `Resolution` is a structure, a copy of the existing instance is made, and this new copy is assigned to `cinema`. Even though `hd` and `cinema` now have the same width and height, they are two completely different instances behind the scenes.
+然后例子中声明了一个变量`cinema`，将`hd`的当前值赋给了它。由于`Resolution`是结构体，赋值操作会生成一个新的实例并传递给`cinema`。因此虽然`hd`和`cinema`有相同的宽高，但它们实际上仍是完全不同的实例。
 
+Next, the `width` property of `cinema` is amended to be the width of the slightly-wider 2K standard used for digital cinema projection (`2048` pixels wide and `1080` pixels high):
 
+接下来，将`cinema`的`width`属性改为数字电影中2K宽屏的标准宽度（宽`2048`像素高`1080`像素）：
 
-Next, the width property of cinema is amended to be the width of the slightly-wider 2K standard used for digital cinema projection (2048 pixels wide and 1080 pixels high):
-
+```
 cinema.width = 2048
-Checking the width property of cinema shows that it has indeed changed to be 2048:
+```
 
+Checking the `width` property of `cinema` shows that it has indeed changed to be `2048`:
+
+检查一下`cinema`的`width`属性的确改成了`2048`：
+
+```
 println("cinema is now \(cinema.width) pixels wide")
 // prints "cinema is now 2048 pixels wide"
-However, the width property of the original hd instance still has the old value of 1920:
+```
 
+However, the `width` property of the original `hd` instance still has the old value of `1920`:
+不过，原来的`hd`实例的`width`属性还是旧值`1920`：
+
+```
 println("hd is still \(hd.width) pixels wide")
 // prints "hd is still 1920 pixels wide"
-When cinema was given the current value of hd, the values stored in
+```
+
+When `cinema` was given the current value of `hd`, the *values* stored in `hd` were copied into the new `cinema` instance. The end result is two completely separate instances, which just happened to contain the same numeric values. Because they are separate instances, setting the width of `cinema` to `2048` doesn’t affect the width stored in `hd`.
+
+当使用`hd`给`cinema`赋值时，`hd`存储的*值*被复制了一份并传递给`cinema`实例。结果`hd`和`cinema`成为了仅仅是属性值相同的两个完全无关的实例。所以将`cinema`的`width`属性改为`2048`不会影响`hd`中的`width`值。
+
+The same behavior applies to enumerations:
+枚举也有相同的特性：
+
+```
+enum CompassPoint {
+    case North, South, East, West
+}
+var currentDirection = CompassPoint.West
+let rememberedDirection = currentDirection
+currentDirection = .East
+if rememberedDirection == .West {
+    println("The remembered direction is still .West")
+}
+// prints "The remembered direction is still .West"
+```
+
+When `rememberedDirection` is assigned the value of `currentDirection`, it is actually set to a copy of that value.
+
+当`rememberedDirection`赋值为`currentDirection`时，实际上只是赋值了值拷贝而已。
+
+Changing the value of `currentDirection` thereafter does not affect the copy of the original value that was stored in `rememberedDirection`.
+改变`currentDirection`的值并不会影响存储了原始值副本的`rememberedDirection`。
+‌
+### Classes Are Reference Types
+### 类是引用类型
+
+Unlike value types, *reference types* are not copied when they are assigned to a variable or constant, or when they are passed to a function. Rather than a copy, a reference to the same existing instance is used instead.
+
+与值类型不同，在赋值给变量、常量或者传参时，引用类型不会被复制，而是传递与当前值相同的引用。
+
+Here’s an example, using the `VideoMode` class defined above:
+请看这个例子，例子中使用了上文定义的`VideoMode`：
+
+```
+let tenEighty = VideoMode()
+tenEighty.resolution = hd
+tenEighty.interlaced = true
+tenEighty.name = "1080i"
+tenEighty.frameRate = 25.0
+```
+
+This example declares a new constant called `tenEighty` and sets it to refer to a new instance of the `VideoMode` class. The video mode is assigned a copy of the HD resolution of `1920` by `1080` from before. It is set to be interlaced, and is given a name of `"1080i"`. Finally, it is set to a frame rate of `25.0` frames per second.
+
+例子中声明了一个名为`tenEighty`的新常量，并将它赋值为一个新的`VideoMode`实例。视频模式使用了上文的`hd`值的拷贝，其分辨率为`1920`x`1080`。`tenEighty`的`interlaced`为true，`name`为`1080i`，`frameRate`为`25.0`帧每秒。
+
+Next, `tenEighty` is assigned to a new constant, called `alsoTenEighty`, and the frame rate of `alsoTenEighty` is modified:
+
+然后，一个新常量`alsoTenEighty`被赋值为`tenEighty`，`alsoTenEighty`的帧率做了如下修改：
+
+```
+let alsoTenEighty = tenEighty
+alsoTenEighty.frameRate = 30.0
+```
+
+Because classes are reference types, `tenEighty` and `alsoTenEighty` actually both refer to the same `VideoMode` instance. Effectively, they are just two different names for the same single instance.
+
+因为类是引用类型，`tenEighty`和`alsoTenEighty`都指向了同一个`VideoMode`实例。实际上它们是同一个实例的两个不同的名字而已。
+
+Checking the `frameRate` property of `tenEighty` shows that it correctly reports the new frame rate of `30.0` from the underlying `VideoMode` instance:
+
+接下来我们检查一下`tenEighty`的属性`frameRate`，这能说明`VideoMode`实例的帧率真的变成了新值`30.0`。
+
+```
+println("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
+// prints "The frameRate property of tenEighty is now 30.0"
+```
+
+Note that `tenEighty` and `alsoTenEighty` are declared as constants, rather than variables. However, you can still change `tenEighty.frameRate` and `alsoTenEighty.frameRate` because the values of the `tenEighty` and `alsoTenEighty` constants themselves do not actually change. `tenEighty` and `alsoTenEighty` themselves do not “store” the `VideoMode` instance—instead, they both refer to a `VideoMode` instance behind the scenes. It is the `frameRate` property of the underlying `VideoMode` that is changed, not the values of the constant references to that `VideoMode`.
+
+请注意`tenEighty`和`alsoTenEighty`都被声明成了常量而不是变量。但是因为修改其属性的值并不会改变`tenEighty`和`alsoTenEighty`的值，我们还是可以修改`tenEighty.frameRate`和`alsoTenEighty.frameRate`。`tenEighty`和`alsoTenEighty`并不存储`VideoMode`实例，而是引用一个`VideoMode`实例的地址。改变`frameRate`的值只是改变了引用的`VideoMode`实例的属性，并没有改变引用的`VideoMode`的地址。
+‌
+### Identity Operators
+### 身份操作符
+
+Because classes are reference types, it is possible for multiple constants and variables to refer to the same single instance of a class behind the scenes. (The same is not true for structures and enumerations, because they are value types and are always copied when they are assigned to a constant or variable, or passed to a function.)
+
+因为类是引用类型，因此允许多个常量和变量都引用同一个类实例。（结构体和枚举却不是，因为它们是值类型，并且在赋值给变量常量或者传值的时候传递的都是值的拷贝。）
+
+It can sometimes be useful to find out if two constants or variables refer to exactly the same instance of a class. To enable this, Swift provides two identity operators:
+
+* Identical to (===)
+* Not identical to (!==)
+
+有时候需要判断两个常量或变量是否指向同一个类实例。Swift提供了两个身份操作符来实现这个功能：
+
+ * 指向同一实例(===)
+ * 指向不同实例（!==）
+
+Use these operators to check whether two constants or variables refer to the same single instance:
+
+以下例子使用了这两个操作符来判断两个常量或变量是否是同一实例：
+
+```
+if tenEighty === alsoTenEighty {
+    println("tenEighty and alsoTenEighty refer to the same Resolution instance.")
+}
+// prints "tenEighty and alsoTenEighty refer to the same Resolution instance."
+```
+
+Note that “identical to” (represented by three equals signs, or ===) does not mean the same thing as “equal to” (represented by two equals signs, or ==):
+
+提示：三个等号(===)的身份相等与两个等号(==)的值相等操作符是不一样的。
+
+* “Identical to” means that two constants or variables of class type refer to exactly the same class instance.
+* “Equal to” means that two instances are considered “equal” or “equivalent” in value, for some appropriate meaning of “equal”, as defined by the type’s designer.
+
+ * 身份相等操作符两端的变量或常量比较的是是否从同一个类实例化而来。
+ * 值相等操作符比较的则是两端的值或者对象的内存地址是否相等，这更接近我们平常理解的相等比较。
+
+When you define your own custom classes and structures, it is your responsibility to decide what qualifies as two instances being “equal”. The process of defining your own implementations of the “equal to” and “not equal to” operators is described in Equivalence Operators.
+
+每当你定义一个类或者结构体时，你就有义务对两个实例的“相等”标准作出决断。在[比较运算符](#)中会描述如何去对对相等和不等的比较进行实现。
+‌
+### Pointers
+### 指针
+
+If you have experience with C, C++, or Objective-C, you may know that these languages use pointers to refer to addresses in memory. A Swift constant or variable that refers to an instance of some reference type is similar to a pointer in C, but is not a direct pointer to an address in memory, and does not require you to write an asterisk (*) to indicate that you are creating a reference. Instead, these references are defined like any other constant or variable in Swift.
+
+如果你之前有过编写C、C++或者Objective-C的经验，你应该会知道这些语言的指针都是对一个内存中的地址做引用的。一个变量或常量在Swift中与C的指针类似引用一个可以被引用的实例，但它不直接指向内存的某一个地址，也不需要在申明引用的变量名前加上星号(*)。在Swift中除此之外，引用的定义与其他语言相同。
+
+## Choosing Between Classes and Structures
+
+You can use both classes and structures to define custom data types to use as the building blocks of your program’s code.
+
+在定义时你可以在你的代码中同时使用类和结构体来表示合适的数据类型。
+
+However, structure instances are always passed by value, and class instances are always passed by reference. This means that they are suited to different kinds of tasks. As you consider the data constructs and functionality that you need for a project, decide whether each data construct should be defined as a class or as a structure.
+
+他们拥有不同的特性，结构体实例被赋值时始终传递的是值的拷贝，而类实例则始终传递的是引用。将他们根据项目的实际情况去选择定义出合适的数据是代码构建者应该去仔细斟酌的。
+
+As a general guideline, consider creating a structure when one or more of these conditions apply:
+
+通常来说，符合以下一个或多个条件时应该使用结构体去定义数据：
+
+* The structure’s primary purpose is to encapsulate a few relatively simple data values.
+* It is reasonable to expect that the encapsulated values will be copied rather than referenced when you assign or pass around an instance of that structure.
+* Any properties stored by the structure are themselves value types, which would also be expected to be copied rather than referenced.
+* The structure does not need to inherit properties or behavior from another existing type.
+
+* 结构体主要目的时用来将少量相关数据进行封装。
+* 当期望实例在赋值时传递的是封装的值的被拷贝而不是仅仅是引用。
+* 当期望数据结构中的只类型也一同拷贝传值而不是传递引用。
+* 这个数据结构不需要去继承别的类。
+
+Examples of good candidates for structures include:
+
+适合使用结构体的场景：
+
+* The size of a geometric shape, perhaps encapsulating a width property and a height property, both of type Double.
+* A way to refer to ranges within a series, perhaps encapsulating a start property and a length property, both of type Int.
+* A point in a 3D coordinate system, perhaps encapsulating x, y and z properties, each of type Double.
+
+In all other cases, define a class, and create instances of that class to be managed and passed by reference. In practice, this means that most custom data constructs should be classes, not structures.
+
+* 用来描述几何图形的尺寸，包含了浮点类型的宽和高两个属性。
+* 用来描述一个范围，包含一个整型开始值和一个整型长度。
+* 用来描述一个三维坐标系统，包含双精度的x,y和z三个属性。
+
+所有其他情况请定义类并使用类的实例以引用方式传递。实际上大多数情况还是应该用类来作为主要的数据结构承载，结构体仅在必要时。
+
+## Assignment and Copy Behavior for Collection Types
+
+## 集合的赋值与拷贝
+
+Swift’s Array and Dictionary types are implemented as structures. However, arrays have slightly different copying behavior from dictionaries and other structures when they are assigned to a constant or variable, and when they are passed to a function or method.
+
+在Swift中Array和Dictionary类型都是使用结构体实现的。然而当Array被赋值给常量、变量或者当作参数传入一个方法或者函数中时拷贝操作与Dictionary和其他结构体略有不同。
+
+The behavior described for Array and Dictionary below is different again from the behavior of NSArray and NSDictionary in Foundation, which are implemented as classes, not structures. NSArray and NSDictionary instances are always assigned and passed around as a reference to an existing instance, rather than as a copy.
+
+以下Array和Dictionary与Foundation框架中的NSArray和NSDictionary的实现方式是有去别的，后者使用类实现，其实例在传递过程中均以引用形式进行传递而不是拷贝。
+
+> NOTE
+> 
+> The descriptions below refer to the “copying” of arrays, dictionaries, strings, and other values. Where copying is mentioned, the behavior you see in your code will always be as if a copy took place. However, Swift only performs an actual copy behind the scenes when it is absolutely necessary to do so. Swift manages all value copying to ensure optimal performance, and you should not avoid assignment to try to preempt this optimization.
+
+> 提示
+>
+> 以下是对于数组，字典，字符串和其它值的拷贝的描述。 在你的代码中出现拷贝引用的地方便会一直时拷贝引用。然而，Swift只在确实有必要发生拷贝行为的场景下才回执行拷贝操作。为了性能的最优，Swift将会在最合适的实际进行拷贝操作，以达到性能最优的目的，而开发者不关心这方面的性能问题也没关系。
+
+### Assignment and Copy Behavior for Dictionaries
+
+### Dictionary的赋值与拷贝
+
+Whenever you assign a Dictionary instance to a constant or variable, or pass a Dictionary instance as an argument to a function or method call, the dictionary is copied at the point that the assignment or call takes place. This process is described in Structures and Enumerations Are Value Types.
+
+只要将一个Dictionary实例进行赋值或者传参操作，就会产生拷贝行为，在[结构体和枚举都是值类型](#)小节中有详细描述过。
