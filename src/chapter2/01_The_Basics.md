@@ -352,29 +352,55 @@ Float represents a 32-bit floating-point number. Use it when floating-point valu
 
 Swift is a type safe language. A type safe language encourages you to be clear about the types of values your code can work with. If part of your code expects a String, you can’t pass it an Int by mistake.
 
+Swift是一个类型安全的语言。一个类型安全的语言鼓励你声明代码中使用的值的类型。如果你期望这部分代码是字符串（String），你就不能错误的给它赋一个整型（Int）的值。
+
 Because Swift is type safe, it performs type checks when compiling your code and flags any mismatched types as errors. This enables you to catch and fix errors as early as possible in the development process.
+
+因为Swift是类型安全的，它会在编译时运行类型检查，并且将所有不匹配的类型标记为错误。这让你可以在开发过程中今早的发现和修复问题。
 
 Type-checking helps you avoid errors when you’re working with different types of values. However, this doesn’t mean that you have to specify the type of every constant and variable that you declare. If you don’t specify the type of value you need, Swift uses type inference to work out the appropriate type. Type inference enables a compiler to deduce the type of a particular expression automatically when it compiles your code, simply by examining the values you provide.
 
+当你处理不同类型的值的时候，类型检查帮助你避免错误。然而，这并不意味着你需要给每一个声明的常量和变量指定特定的类型。如果你没有指定特定的类型，Swift会使用类型推断来推断出合适的类型。当编译代码时，类型推断特性使得编译器可以简单的通过检查你提供的值来自动推断出特定表达式的类型。
+
 Because of type inference, Swift requires far fewer type declarations than languages such as C or Objective-C. Constants and variables are still explicitly typed, but much of the work of specifying their type is done for you.
+
+因为有了类型推断，Swift与类似C和Objective-C的语言相比需要更少的类型声明。常量和变量同样会有准确的类型，但是大部分关于指定类型的工作Swift已经帮你做好了。
 
 Type inference is particularly useful when you declare a constant or variable with an initial value. This is often done by assigning a literal value (or literal) to the constant or variable at the point that you declare it. (A literal value is a value that appears directly in your source code, such as 42 and 3.14159 in the examples below.)
 
+当你声明一个有初始值的常量或变量的时候类型推断特别实用。通常是当你声明一个常量和变量的时候你就给它赋一个参数值（literal value）。（参数值是会直接出现在源码里的值，比如下面例子里的42和3.14159。）
+
 For example, if you assign a literal value of 42 to a new constant without saying what type it is, Swift infers that you want the constant to be an Int, because you have initialized it with a number that looks like an integer:
 
-let meaningOfLife = 42
-// meaningOfLife is inferred to be of type Int
+举个例子，如果你给一个新的常量赋了一个参数值42，但没有说它的类型，Swift会推断你希望这个常量是一个整数类型（Int），因为你用了一个像是整数的数字来初始化：
+
+	let meaningOfLife = 42
+	// meaningOfLife is inferred to be of type Int
+	// meaningOfLife被推断为整数类型（Int）
+
 Likewise, if you don’t specify a type for a floating-point literal, Swift infers that you want to create a Double:
 
-let pi = 3.14159
-// pi is inferred to be of type Double
+类似的，如果你没有特别指定一个浮点型的参数，Swift会推断你需要一个Double类型的浮点数：
+
+	let pi = 3.14159
+	// pi is inferred to be of type Double
+	// pi被推断为Double类型
+
 Swift always chooses Double (rather than Float) when inferring the type of floating-point numbers.
+
+在推断浮点型的数字时，Swift总是会选择Double型而不是Float。
 
 If you combine integer and floating-point literals in an expression, a type of Double will be inferred from the context:
 
-let anotherPi = 3 + 0.14159
-// anotherPi is also inferred to be of type Double
+如果你将整数型和浮点型的参数值相加，这种情况下会推断为Double类型：
+
+	let anotherPi = 3 + 0.14159
+	// anotherPi is also inferred to be of type Double
+	// anotherPi也被推断为Double类型
+
 The literal value of 3 has no explicit type in and of itself, and so an appropriate output type of Double is inferred from the presence of a floating-point literal as part of the addition.
+
+参数值3本身并没有准确的类型，因此是通过相加的元素中有一个浮点型的参数值推断出合适的输出类型为Double.
 
 Numeric Literals
 
