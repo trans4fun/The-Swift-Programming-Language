@@ -110,7 +110,7 @@ A generic argument clause specifies the type arguments of a generic type. A gene
 
 The generic argument list is a comma-separated list of type arguments. A type argument is the name of an actual concrete type that replaces a corresponding type parameter in the generic parameter clause of a generic type. The result is a specialized version of that generic type. As an example, the Swift standard library defines a generic dictionary type as:
 
-泛型实参列表是由一组逗号分隔组成的类型实参
+泛型实参列表是由一组逗号分隔组成的类型实参组成。类型实参是泛型参数句式中替换对应类型形参的具体实参的名称。由此得到此泛型类形的一个特定配置。比如，Swift标准库定义泛型字典类型是这样实现的：
 
 ```
 struct Dictionary<KeyType: Hashable, ValueType>: Collection, DictionaryLiteralConvertible {
@@ -118,9 +118,22 @@ struct Dictionary<KeyType: Hashable, ValueType>: Collection, DictionaryLiteralCo
 }
 ```
 
+The specialized version of the generic Dictionary type, Dictionary<String, Int> is formed by replacing the generic parameters KeyType: Hashable and ValueType with the concrete type arguments String and Int. Each type argument must satisfy all the constraints of the generic parameter it replaces, including any additional requirements specified in a where clause. In the example above, the KeyType type parameter is constrained to conform to the Hashable protocol and therefore String must also conform to the Hashable protocol.
+
+You can also replace a type parameter with a type argument that is itself a specialized version of a generic type (provided it satisfies the appropriate constraints and requirements). For example, you can replace the type parameter T in Array<T> with a specialized version of an array, Array<Int>, to form an array whose elements are themselves arrays of integers.
 
 
+```
+let arrayOfArrays: Array<Array<Int>> = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+```
 
+As mentioned in Generic Parameter Clause, you don’t use a generic argument clause to specify the type arguments of a generic function or initializer.
+
+> **GRAMMAR OF A GENERIC ARGUMENT CLAUSE**
+
+> generic-argument-clause → <­generic-argument-list­>­
+> generic-argument-list → generic-argument­  generic-argument­,­generic-argument-list­
+> generic-argument → type­
 
 
 
