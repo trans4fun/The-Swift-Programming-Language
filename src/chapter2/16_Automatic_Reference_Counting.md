@@ -561,4 +561,70 @@ class HTMLElement {
 
 The HTMLElement class defines a name property, which indicates the name of the element, such as "p" for a paragraph element, or "br" for a line break element. HTMLElement also defines an optional text property, which you can set to a string that represents the text to be rendered within that HTML element.
 
-In addition to these two simple properties, the HTMLElement class defines a lazy property called asHTML. This property references a closure that combines name and text into an HTML string fragment. The asHTML property is of type () -> String, or “a function that takes no parameters, and returns a String
+HTMLElement类定义了一个name属性，用于标明元素的名称，如：“p”是段落元素的名称，或“br”是换行元素的名称。同时定义了一个可选类型的text属性，用于设置元素内需要渲染的内容。
+
+In addition to these two simple properties, the HTMLElement class defines a lazy property called asHTML. This property references a closure that combines name and text into an HTML string fragment. The asHTML property is of type () -> String, or “a function that takes no parameters, and returns a String “value”.
+
+除了这两个普通的属性之外，HTMLElement类还定义了一个懒属性asHTML。这个属性引用了一个用于将name和text合并为HTML片段的闭包。asHTML属性的类型是 `() -> String` 或描述为“一个返回字符串的无参函数”。
+
+By default, the asHTML property is assigned a closure that returns a string representation of an HTML tag. This tag contains the optional text value if it exists, or no text content if text does not exist. For a paragraph element, the closure would return "&lt;p&gt;some text&lt;/p&gt;" or "&lt;p /&gt;", depending on whether the text property equals "some text" or nil.
+
+默认情况下，asHTML属性被分配了一个闭包，这个闭包返回一个字符串形式的HTML标签。如果text的值存在就返回包含text值的标签，如果text的值不存在就返回不包含text值的标签。比如：一个段落标签，闭包会返回"&lt;p&gt;some text&lt;/p&gt;" 或 "&lt;p /&gt;"，这取决于text属性的值是"some text"还是nil。
+
+The asHTML property is named and used somewhat like an instance method. However, because asHTML is a closure property rather than an instance method, you can replace the default value of the asHTML property with a custom closure, if you want to change the HTML rendering for a particular HTML element.
+
+尽管asHTML是命名属性且用法类似实例方法，但是，由于asHTML是闭包属性而不是实例方法，因此如果你想渲染一个特定的HTML元素你可以用自定义闭包替换asHTML属性的默认值。
+
+> 
+> NOTE
+> 
+> The asHTML property is declared as a lazy property, because it is only needed if and when the element actually needs to be rendered as a string value for some HTML output target. The fact that asHTML is a lazy property means that you can refer to self within the default closure, because the lazy property will not be accessed until after initialization has been completed and self is known to exist.
+> 注意
+> asHTML之所以被声明为懒属性，是为了满足某些HTML输出需要，并且该元素确实需要渲染为字符串的情况下才被调用。事实上，声明asHTML为懒属性是为了在默认闭包内部引用self，因为懒属性只有在初始化完成且self已存在的情况下才能被访问。
+
+The HTMLElement class provides a single initializer, which takes a name argument and (if desired) a text argument to initialize a new element. The class also defines a deinitializer, which prints a message to show when an HTMLElement instance is deallocated.
+
+HTMLElement类提供了单一的构造器，它需要传递两个参数来初始化一个新元素：name（若需要） 和 text。同时定义了析构函数，当HTMLElement的实例被销毁的时候会打印出一条提示信息。
+
+Here’s how you use the HTMLElement class to create and print a new instance:
+
+这里展示了如何创建和打印HTMLElement类的新实例：
+
+```
+var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
+println(paragraph!.asHTML())
+// prints "<p>hello, world</p>
+```
+> 
+> NOTE
+> 
+> The paragraph variable above is defined as an optional HTMLElement, so that it can be set to nil below to demonstrate the presence of a strong reference cycle.
+> 注意
+> 上面的paragraph变量被定义为可选类型是为了便于接下来可以设置为nil演示循环强引用。
+
+Unfortunately, the HTMLElement class, as written above, creates a strong reference cycle between an HTMLElement instance and the closure used for its default asHTML value. Here’s how the cycle looks:
+
+不幸的是，上面的HTMLElement类，在其类实例和做为asHTML默认值的闭包之间形成了循环强引用，如下所示：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/closureReferenceCycle01_2x.png)
+
+The instance’s asHTML property holds a strong reference to its closure. However, because the closure refers to self within its body (as a way to reference self.name and self.text), the closure captures self, which means that it holds a strong reference back to the HTMLElement instance. A strong reference cycle is created between the two. (For more information about capturing values in a closure, see Capturing Values.)
+
+实例的asHTML属性保持了一个指向它闭包的强引用。由于在闭包内部引用了self（作为访问self.name和self.text的途径），闭包捕获了self, 这意味着闭包也保持了指回HTMLElement的强引用。二者之间形成了循环强引用。（了解更多关于闭包值捕获有关的信息，请查看[值捕获](HTMLElement)有关的内容）
+
+> NOTE
+> 
+> Even though the closure refers to self multiple times, it only captures one strong reference to the HTMLElement instance.
+> 注意
+> 尽管闭包引用了self多次，但只会捕获一个指向HTMLElement实例的强引用。
+
+If you set the paragraph variable to nil and break its strong reference to the HTMLElement instance, neither the HTMLElement instance nor its closure are deallocated, because of the strong reference cycle:
+
+即使将paragraph变量设置为nil来断开其与HTMLElement实例间的强引用，HTMLElement实例与其闭包也不会被销毁，因为它们之间存在循环强引用：
+
+> paragraph = nil
+
+Note that the message in the HTMLElement deinitializer is not printed, which shows that the HTMLElement instance is not deallocated.
+
+注意到HTMLElement析构函数的信息并没有打印出来，这说明HTMLElement实例并未被销毁。
+
