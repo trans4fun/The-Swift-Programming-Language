@@ -29,7 +29,7 @@ The Swift Programming Language 中文化项目
    * 自动引用计数
    * 可选链
    * 类型检查
-   * 嵌套类型
+   * 嵌套类型 [已完成 by 导演]
    * 扩展
    * 接口
    * 泛型
