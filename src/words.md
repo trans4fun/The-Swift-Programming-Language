@@ -10,3 +10,4 @@
 - override 覆盖
 - adopt - 适配。但是一般用于被动。如 `a protocol can be adopted by a class`: 协议可以被类适配。
 - conform - 遵循。如果一个类适配了一个协议，我们就说这个类遵循这个协议。`this class conforms to that protocol`。
+- literals - 参数 - A literal value is a value that appears directly in your source code, such as 42 and 3.14159 in the examples below.
