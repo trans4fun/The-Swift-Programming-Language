@@ -417,24 +417,44 @@ As a general guideline, consider creating a structure when one or more of these 
 
 Examples of good candidates for structures include:
 
+适合使用结构体的场景：
 
+* The size of a geometric shape, perhaps encapsulating a width property and a height property, both of type Double.
+* A way to refer to ranges within a series, perhaps encapsulating a start property and a length property, both of type Int.
+* A point in a 3D coordinate system, perhaps encapsulating x, y and z properties, each of type Double.
 
-The size of a geometric shape, perhaps encapsulating a width property and a height property, both of type Double.
-A way to refer to ranges within a series, perhaps encapsulating a start property and a length property, both of type Int.
-A point in a 3D coordinate system, perhaps encapsulating x, y and z properties, each of type Double.
 In all other cases, define a class, and create instances of that class to be managed and passed by reference. In practice, this means that most custom data constructs should be classes, not structures.
+
+* 用来描述几何图形的尺寸，包含了浮点类型的宽和高两个属性。
+* 用来描述一个范围，包含一个整型开始值和一个整型长度。
+* 用来描述一个三维坐标系统，包含双精度的x,y和z三个属性。
+
+所有其他情况请定义类并使用类的实例以引用方式传递。实际上大多数情况还是应该用类来作为主要的数据结构承载，结构体仅在必要时。
 
 ## Assignment and Copy Behavior for Collection Types
 
+## 集合的赋值与拷贝
+
 Swift’s Array and Dictionary types are implemented as structures. However, arrays have slightly different copying behavior from dictionaries and other structures when they are assigned to a constant or variable, and when they are passed to a function or method.
 
+在Swift中Array和Dictionary类型都是使用结构体实现的。然而当Array被赋值给常量、变量或者当作参数传入一个方法或者函数中时拷贝操作与Dictionary和其他结构体略有不同。
+
 The behavior described for Array and Dictionary below is different again from the behavior of NSArray and NSDictionary in Foundation, which are implemented as classes, not structures. NSArray and NSDictionary instances are always assigned and passed around as a reference to an existing instance, rather than as a copy.
+
+以下Array和Dictionary与Foundation框架中的NSArray和NSDictionary的实现方式是有去别的，后者使用类实现，其实例在传递过程中均以引用形式进行传递而不是拷贝。
 
 > NOTE
 > 
 > The descriptions below refer to the “copying” of arrays, dictionaries, strings, and other values. Where copying is mentioned, the behavior you see in your code will always be as if a copy took place. However, Swift only performs an actual copy behind the scenes when it is absolutely necessary to do so. Swift manages all value copying to ensure optimal performance, and you should not avoid assignment to try to preempt this optimization.
 
+> 提示
+>
+> 以下是对于数组，字典，字符串和其它值的拷贝的描述。 在你的代码中出现拷贝引用的地方便会一直时拷贝引用。然而，Swift只在确实有必要发生拷贝行为的场景下才回执行拷贝操作。为了性能的最优，Swift将会在最合适的实际进行拷贝操作，以达到性能最优的目的，而开发者不关心这方面的性能问题也没关系。
+
 ### Assignment and Copy Behavior for Dictionaries
 
-### Assignment and Copy Behavior for Arrays
+### Dictionary的赋值与拷贝
 
+Whenever you assign a Dictionary instance to a constant or variable, or pass a Dictionary instance as an argument to a function or method call, the dictionary is copied at the point that the assignment or call takes place. This process is described in Structures and Enumerations Are Value Types.
+
+只要将一个Dictionary实例进行赋值或者传参操作，就会产生拷贝行为，在[结构体和枚举都是值类型](#)小节中有详细描述过。
