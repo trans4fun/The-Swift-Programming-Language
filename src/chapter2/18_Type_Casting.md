@@ -7,11 +7,11 @@ Type casting in Swift is implemented with the is and as operators. These two ope
 You can also use type casting to check whether a type conforms to a protocol, as described in Checking for Protocol Conformance.
 
 # 类型检查
-类型检查是检查实例类型的方法，并且可以用来类型转换，就好像它是一个不同的超类或子类从别的在自己的类层次结构中的某个地方。 
+类型检查是检查实例类型的方法，并且可以用来类型转换，可以让实例找到自己所在的继承树，以及在继承树中上下转换类型。 
 
 类型检查使用`is`和`as`操作符来实现。这两个操作符提供了一种简单明了的方式来进行类型检查和类型转换。 
 
-你还可以使用类型检查来检查类型是否符合接口，以及是否和接口描述保持一致。
+你还可以使用类型检查来检查类型是否符合接口，以及是否和接口描述保持一致 ,就像[Checking for Protocol Conformance](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-XID_363)描述的那样。
 
 ##Defining a Class Hierarchy for Type Casting
 
@@ -19,11 +19,11 @@ You can use type casting with a hierarchy of classes and subclasses to check the
 
 The first snippet defines a new base class called MediaItem. This class provides basic functionality for any kind of item that appears in a digital media library. Specifically, it declares a name property of type String, and an init name initializer. (It is assumed that all media items, including all movies and songs, will have a name.)
 
-## 定义一个类继承为类型转换
+## 为类型检查定义一个继承树
 
-您可以使用类型转换与类和子类的层次结构来检查一个特定的类实例的类型和投该实例到另一个类中的同一层级内。下面的三个代码片段定义的类层次结构和包含这些类的实例数组，用于类型转换的一个例子使用。 
+你可以使用类型检查来检查一个实例的具体类型，也可以把实例转化为继承树中的另一种类型。下面的三个代码片段定义的类层次结构和包含这些类的实例数组，作为类型转换的一个例子使用。 
 
-第一个片段定义了一个名为`MediaItem`新的基类。这个类提供基本功能，任何类型的项目出现在一个数字媒体库。具体来说，它声明一个`String`类型的`name`属性，以及一个`init`名称初始值设定项。 （假设所有的媒体项目，包括所有的电影和歌曲，将有一个名称。）
+第一个片段定义了一个名为`MediaItem`新的基类。这个类提供基本功能。具体来说，它声明一个`String`类型的`name`属性，以及一个`init`名称初始值设定项。 （假设所有的媒体项目，包括所有的电影和歌曲，将有一个名称。）
 
     class MediaItem {
         var name: String
