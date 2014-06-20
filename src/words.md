@@ -8,5 +8,5 @@
 - parameter - 参数（形式参数） --> argument 和 parameter 的区别参考[这篇文章](http://www.blogjava.net/flysky19/articles/89963.html)
 - overload 重载
 - override 覆盖
-- adopt - ？一般说 a class adopted a protocol
-- conform - adopt 和 conform 都和protocal有关，看句子`only class types can adopt and conform to a protocol`，这里两个词的区别比较难翻译
+- adopt - 适配。但是一般用于被动。如 `a protocol can be adopted by a class`: 协议可以被类适配。
+- conform - 遵循。如果一个类适配了一个协议，我们就说这个类遵循这个协议。`this class conforms to that protocol`。
