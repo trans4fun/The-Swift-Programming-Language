@@ -188,7 +188,7 @@ Here’s how the strong references look after creating and assigning these two i
 
 You can now link the two instances together so that the person has an apartment, and the apartment has a tenant. Note that an exclamation mark (!) is used to unwrap and access the instances stored inside the john and number73 optional variables, so that the properties of those instances can be set:
 
-现在将两个实例连接在一起，让john住进number73公寓，number73公寓也有了一个租客john。注意那个感叹号（!），它用于打开和访问存储于john和number73实例中的可选变量，这样实例的属性才能够被设置：
+现在将两个实例连接在一起，让john住进number73公寓，number73公寓也有了一个租客john。注意那个感叹号（!），它用于解析和访问存储于john和number73实例中的可选变量，这样实例的属性才能够被设置：
 
 ```
 john!.apartment = number73
@@ -340,13 +340,225 @@ Like weak references, an unowned reference does not keep a strong hold on the in
 
 Because an unowned reference is non-optional, you don’t need to unwrap the unowned reference each time it is used. An unowned reference can always be accessed directly. However, ARC cannot set the reference to nil when the instance it refers to is deallocated, because variables of a non-optional type cannot be set to nil.
 
-由于无主引用是非可选类型的，你不必在使用的时候展开它，它可以被直接访问。与弱引用不同，当无主引用指向的实例被销毁后，ARC不会将其指向nil。
+由于无主引用是非可选类型的，你不必在使用的时候解析它，它可以被直接访问。与弱引用不同，当无主引用指向的实例被销毁后，ARC不会将其指向nil。
 
 > NOTE
 > 
 > If you try to access an unowned reference after the instance that it references is deallocated, you will trigger a runtime error. Use unowned references only when you are sure that the reference will always refer to an instance.
 > 
 > Note also that Swift guarantees your app will crash if you try to access an unowned reference after the instance it references is deallocated. You will never encounter unexpected behavior in this situation. Your app will always crash reliably, although you should, of course, prevent it from doing so.
+
 > 注意
 > 在无主引用指向的实例被销毁后，如果依然试图访问该无主引用，你会触发运行时错误。使用无主引用，需要你你能够确保引用指向的实例未被销毁。
 > 需要格外注意的是，在无主引用指向的实例被销毁后，若你依然试图访问该无主引用，Swift保证，你的app会毫无意外地直接崩溃。不是应该而是你必须避免这样的情况发生。
+
+The following example defines two classes, Customer and CreditCard, which model a bank customer and a possible credit card for that customer. These two classes each store an instance of the other class as a property. This relationship has the potential to create a strong reference cycle.
+
+接下来的例子定义了两个类，Customer和CreditCard，分别为银行客户和信用卡建模。这两个类通过属性互相保存了对方的实例。这种关系，在它们之间潜在地形成了循环强引用。
+
+The relationship between Customer and CreditCard is slightly different from the relationship between Apartment and Person seen in the weak reference example above. In this data model, a customer may or may not have a credit card, but a credit card will always be associated with a customer. To represent this, the Customer class has an optional card property, but the CreditCard class has a non-optional customer property.
+
+Customer 与 CreditCard之间的关系与上文弱引用例子里提到的Apartment 和 Person之间的关系有些许不同。在这个数据模型里，一位客户可能有也可能没有信用卡，但是一张信用卡必然与某位银行客户关联。为了表示这种关系，Customer类声明了一个可选类型的属性card，但CreditCard类声明了一个非可选类型的属性customer。
+
+Furthermore, a new CreditCard instance can only be created by passing a number value and a customer instance to a custom CreditCard initializer. This ensures that a CreditCard instance always has a customer instance associated with it when the CreditCard instance is created.
+
+此外，只能通过向CreditCard类构造器传递一个数值和一个Customer类实例的方式创建新的CreditCard类实例。这是为了保证创建CreditCard类实例的时候总是有一位客户实例与之关联。
+
+Because a credit card will always have a customer, you define its customer property as an unowned reference, to avoid a strong reference cycle:
+
+由于一张信用卡一定会有一位客户实例与之关联，你将其属性customer定义为无主类型以避免循环强引用：
+
+```
+class Customer {
+    let name: String
+    var card: CreditCard?
+    init(name: String) {
+        self.name = name
+    }
+    deinit { println("\(name) is being deinitialized") }
+}
+ 
+class CreditCard {
+    let number: Int
+    unowned let customer: Customer
+    init(number: Int, customer: Customer) {
+        self.number = number
+        self.customer = customer
+    }
+    deinit { println("Card #\(number) is being deinitialized") }
+}
+```
+
+This next code snippet defines an optional Customer variable called john, which will be used to store a reference to a specific customer. This variable has an initial value of nil, by virtue of being optional:
+
+如下代码片段定义了一个可选Customer类型的变量john，john将用于存储到特定客户的引用。由于是可选类型，这个变量初始值是nil.
+
+```
+var john: Customer?
+```
+
+You can now create a Customer instance, and use it to initialize and assign a new CreditCard instance as that customer’s card property:
+
+现在创建Customer类实例，并用它初始化CreditCard类实例，同时，将CreditCard类实例分配给Customer类实例的客户属性。
+
+```
+john = Customer(name: "John Appleseed")
+john!.card = CreditCard(number: 1234_5678_9012_3456, customer: john!)
+```
+
+Here’s how the references look, now that you’ve linked the two instances:
+
+下图展示了两个实例连接起来后的引用关系：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/unownedReference01_2x.png)
+
+The Customer instance now has a strong reference to the CreditCard instance, and the CreditCard instance has an unowned reference to the Customer instance.
+
+Customer类实例拥有一个指向CreditCard类实例的强引用，同时CreditCard类实例有一个指向Customer类实例的无主引用。
+
+Because of the unowned customer reference, when you break the strong reference held by the john variable, there are no more strong references to the Customer instance:
+
+由于无主引用customer的存在，当你断开由变量john保持的强引用后，就没有强引用指向Customer类实例了：
+
+![](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/unownedReference02_2x.png)
+
+Because there are no more strong references to the Customer instance, it is deallocated. After this happens, there are no more strong references to the CreditCard instance, and it too is deallocated:
+
+由于没有强引用指向Customer类实例了，它被销毁了。在此之后，由于也没有强引用指向CreditCard类实例了，它也被销毁了。
+
+```
+john = nil
+// prints "John Appleseed is being deinitialized"
+// prints "Card #1234567890123456 is being deinitialized"
+```
+
+The final code snippet above shows that the deinitializers for the Customer instance and CreditCard instance both print their “deinitialized” messages after the john variable is set to nil.
+
+上面的代码展示了变量john被赋值为nil后，Customer实例和CreditCard实例的析构函数都打印出了“销毁”的信息。
+
+## 无主引用与隐式解析可选属性
+
+The examples for weak and unowned references above cover two of the more common scenarios in which it is necessary to break a strong reference cycle.
+
+弱引用和无主引用的例子涵盖了两种常用的需要打破循环强引用的场景。
+
+The Person and Apartment example shows a situation where two properties, both of which are allowed to be nil, have the potential to cause a strong reference cycle. This scenario is best resolved with a weak reference.
+
+Person和Apartment的例子展示了两个属性的值都允许为nil，并会潜在地产生循环强引用。这种场景最适合用弱引用来解决。
+
+The Customer and CreditCard example shows a situation where one property that is allowed to be nil and another property that cannot be nil have the potential to cause a strong reference cycle. This scenario is best resolved with an unowned reference.
+
+Customer和CreditCard的例子展示了一个属性的值允许为nil，而另一个不允许为nil，并会潜在地产生循环强引用。这种场景最适合通过无主引用来解决。
+
+However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it is useful to combine an unowned property on one class with an implicitly unwrapped optional property on the other class.
+
+但是，还有第三种场景：就是两个属性都一直有值，并且一旦初始化完成他们就永远都不可能是nil的情况。这种情况下，在一个类中使用无主属性，在另一个类中使用隐式解析可选属性，是解决此类循环强引用问题的有效手段。
+
+This enables both properties to be accessed directly (without optional unwrapping) once initialization is complete, while still avoiding a reference cycle. This section shows you how to set up such a relationship.
+
+只要初始化完成，这两个属性都是可以被直接访问的（没有可选类型的解析过程）同时也可以避免循环引用。这部分将向你介绍如何建立这种关系。
+
+The example below defines two classes, Country and City, each of which stores an instance of the other class as a property. In this data model, every country must always have a capital city, and every city must always belong to a country. To represent this, the Country class has a capitalCity property, and the City class has a country property:
+
+下面的例子定义了两个类，Country 和 City，它们彼此通过属性保存了对方的实例引用。在这个数据模型里，国家是必须有首都的，而一个城市也必须是属于某个国家。为了表示这种关系，Country类声明了一个capitalCity属性，City类也声明了一个country属性：
+
+```
+class Country {
+    let name: String
+    let capitalCity: City!
+    init(name: String, capitalName: String) {
+        self.name = name
+        self.capitalCity = City(name: capitalName, country: self)
+    }
+}
+ 
+class City {
+    let name: String
+    unowned let country: Country
+    init(name: String, country: Country) {
+        self.name = name
+        self.country = country
+    }
+}
+```
+
+To set up the interdependency between the two classes, the initializer for City takes a Country instance, and stores this instance in its country property.
+
+为了构建两个类之间的依赖关系，City类的构造器接收一个Country实例并把它存储在country属性里。
+
+The initializer for City is called from within the initializer for Country. However, the initializer for Country cannot pass self to the City initializer until a new Country instance is fully initialized, as described in Two-Phase Initialization.
+
+City的构造器将在Country的构造器里被调用。但是，Country的构造器无法传递自身（`self`）到City的构造器，直到Country实例已完全初始化。这在[两段式构造过程](http://TODO)中有介绍。
+
+To cope with this requirement, you declare the capitalCity property of Country as an implicitly unwrapped optional property, indicated by the exclamation mark at the end of its type annotation (City!). This means that the capitalCity property has a default value of nil, like any other optional, but can be accessed without the need to unwrap its value as described in Implicitly Unwrapped Optionals.
+
+为了满足要求，你将Country类的capitalCity属性声明为隐式解析可选属性（通过在capitalCity类型后加感叹号`City!`来声明）。这意味着，像其他可选类型属性一样，capitalCity属性的默认值为nil, 但是它可以不经解析直接被访问。这在[隐式解析可选类型](http://TODO)中有详细介绍。
+
+Because capitalCity has a default nil value, a new Country instance is considered fully initialized as soon as the Country instance sets its name property within its initializer. This means that the Country initializer can start to reference and pass around the implicit self property as soon as the name property is set. The Country initializer can therefore pass self as one of the parameters for the City initializer when the Country initializer is setting its own capitalCity property.
+
+由于capitalCity默认值为nil, 因此当Country实例的name属性在构造器内被赋值的时候，就认为初始化已经全部完成。这意味着name属性一被赋值，Country类构造器就可以开始引用和传递隐式的`self`。Country构造器也因此可以在为capitalCity属性赋值时把`self`作为参数给City的构造器。
+
+All of this means that you can create the Country and City instances in a single statement, without creating a strong reference cycle, and the capitalCity property can be accessed directly, without needing to use an exclamation mark to unwrap its optional value:
+
+上述这一切，意味着你可以在单一语句中同时创建Country和City的实例，这里没有形成循环强引用，同时capitalCity也可以直接被访问，也不必用感叹号来解析其可选值，如下所示：
+
+```
+var country = Country(name: "Canada", capitalName: "Ottawa")
+println("\(country.name)'s capital city is called \(country.capitalCity.name)")
+// prints "Canada's capital city is called Ottawa
+```
+
+In the example above, the use of an implicitly unwrapped optional means that all of the two-phase class initializer requirements are satisfied. The capitalCity property can be used and accessed like a non-optional value once initialization is complete, while still avoiding a strong reference cycle.
+
+在上面的例子中，应用“隐式解析可选属性”使得两段式类构造器所需要的条件均得到满足。一旦初始化完成，capitalCity属性可以像非可选值那样被直接访问，同时还避免了循环强引用。
+
+## 闭包引起的循环强引用
+You saw above how a strong reference cycle can be created when two class instance properties hold a strong reference to each other. You also saw how to use weak and unowned references to break these strong reference cycles.
+
+在上文中你已经了解了两个实例属性互相保持彼此的强引用是如何导致循环强引用的。你也知道了可以利用弱引用和无主引用来断开强引用循环。
+
+A strong reference cycle can also occur if you assign a closure to a property of a class instance, and the body of that closure captures the instance. This capture might occur because the closure’s body accesses a property of the instance, such as self.someProperty, or because the closure calls a method on the instance, such as self.someMethod(). In either case, these accesses cause the closure to “capture” self, creating a strong reference cycle.
+
+如果你将一个闭包分配给一个类实例的属性，同时闭包内部又捕获了该实例，也会形成循环强引用。这种捕获之所以可能发生，是因为闭包内部访问了该实例的属性，如：self.someProperty，或是访问了该实例的方法，如：self.someMethod()。这两种类型的访问，都会导致闭包“捕获”self，造成循环强引用。
+
+This strong reference cycle occurs because closures, like classes, are reference types. When you assign a closure to a property, you are assigning a reference to that closure. In essence, it’s the same problem as above—two strong references are keeping each other alive. However, rather than two class instances, this time it’s a class instance and a closure that are keeping each other alive.
+
+这种因闭包导致的循环强引用，和“类”的情况类似，都是引用类型的问题。
+
+Swift provides an elegant solution to this problem, known as a closure capture list. However, before you learn how to break a strong reference cycle with a closure capture list, it is useful to understand how such a cycle can be caused.
+
+针对这类问题，Swift提供了一种优雅的解决方案：闭包捕获列表。
+
+The example below shows how you can create a strong reference cycle when using a closure that references self. This example defines a class called HTMLElement, which provides a simple model for an individual element within an HTML document:
+
+下面的例子展示了闭包是如何导致循环强引用的。例子定义了一个名为HTMLElement的类，为HTML文档中的一类元素建模：
+
+```
+class HTMLElement {
+    
+    let name: String
+    let text: String?
+    
+    @lazy var asHTML: () -> String = {
+        if let text = self.text {
+            return "<\(self.name)>\(text)</\(self.name)>"
+        } else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name: String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        println("\(name) is being deinitialized")
+    }
+    
+}
+```
+
+The HTMLElement class defines a name property, which indicates the name of the element, such as "p" for a paragraph element, or "br" for a line break element. HTMLElement also defines an optional text property, which you can set to a string that represents the text to be rendered within that HTML element.
+
+In addition to these two simple properties, the HTMLElement class defines a lazy property called asHTML. This property references a closure that combines name and text into an HTML string fragment. The asHTML property is of type () -> String, or “a function that takes no parameters, and returns a String
