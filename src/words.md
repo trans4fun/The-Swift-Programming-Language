@@ -1,1 +1,12 @@
-Class - 类 - Classes, structures, and enumerations can define subscripts
+- Class - 类 - Classes, structures, and enumerations can define subscripts
+- attribute - 特性
+- property - 属性
+- initializer - 构造函数？（和Constructor怎么区分？）
+- designated initializer - 预设构造函数
+- convenience initializer - 便利构造函数
+- argument - 参数（实际参数）
+- parameter - 参数（形式参数） --> argument 和 parameter 的区别参考[这篇文章](http://www.blogjava.net/flysky19/articles/89963.html)
+- overload 重载
+- override 覆盖
+- adopt - ？一般说 a class adopted a protocol
+- conform - adopt 和 conform 都和protocal有关，看句子`only class types can adopt and conform to a protocol`，这里两个词的区别比较难翻译

@@ -58,7 +58,7 @@ You can apply a declaration attribute to declarations only. However, you can als
 > Apply this attribute to a class or to a property, method, or subscript member of a class. It’s applied to a class to indicate that the class can’t be subclassed. It’s applied to a property, method, or subscript of a class to indicate that that class member can’t be overridden in any subclass.
 
 `final`
-> 这个特性用于描述类或者类的属性、方法、或者下标脚本上。如若一个类具有该特性，则表明这个类不能被继承。如果一个类的属性、方法或者下标脚本具有该特性，则表明这个类的成员不能被任何子类覆盖。
+> 这个特性用于描述类或者类的属性、方法、或者下标上。如若一个类具有该特性，则表明这个类不能被继承。如果一个类的属性、方法或者下标具有该特性，则表明这个类的成员不能被任何子类覆盖。
 
 `lazy`
 > Apply this attribute to a stored variable property of a class or structure to indicate that the property’s initial value is calculated and stored at most once, when the property is first accessed. For an example of how to use the `lazy` attribute, see [Lazy Stored Properties](#).
@@ -111,7 +111,7 @@ You can apply a declaration attribute to declarations only. However, you can als
 ```
 
 `objc`
-> 这个特性用于描述任何可以在Objective-C中表示的声明，如非嵌套类，协议，类和协议的属性和方法（包括getter和setter），构造函数，析构函数和下标脚本。`objc`特性告诉编译器该声明可以在Objective-C的代码中被使用。
+> 这个特性用于描述任何可以在Objective-C中表示的声明，如非嵌套类，协议，类和协议的属性和方法（包括getter和setter），构造函数，析构函数和下标。`objc`特性告诉编译器该声明可以在Objective-C的代码中被使用。
 
 > 如果一个类或者协议具有`objc`特性，那么这个类或者协议的所有成员都将隐形地具有`objc`特性。编译器甚至会隐形地添加`objc`特性给具有`objc`特性的类的子类。被标记`objc`特性的协议不能继承没有被标记`objc`特性的协议。
 
@@ -135,7 +135,7 @@ You can apply a declaration attribute to declarations only. However, you can als
 
 `optional` 
 
-> 这个特性用于描述协议的属性，方法和下标脚本，以此来表明遵循了该协议的类型，只需要可选地实现这些被标记的成员。
+> 这个特性用于描述协议的属性，方法和下标，以此来表明遵循了该协议的类型，只需要可选地实现这些被标记的成员。
 
 > 这个特性只能被用于描述具有`objc`特性的协议。也就是说，只有类才能接受和遵循一个具有optional特性成员的协议。更多关于如何使用`optional`特性，以及对于一个遵循了具有`optional`特性的协议的类型，在无法明确它实现了哪些可选成员的情况下，如何正确地读取其可选成员的问题，请参考[可选协议要求](#)。
 
