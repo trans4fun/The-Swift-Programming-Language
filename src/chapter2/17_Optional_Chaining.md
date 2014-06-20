@@ -1,79 +1,103 @@
-Optional Chaining
-On This Page
-Optional chaining is a process for querying and calling properties, methods, and subscripts on an optional that might currently be nil. If the optional contains a value, the property, method, or subscript call succeeds; if the optional is nil, the property, method, or subscript call returns nil. Multiple queries can be chained together, and the entire chain fails gracefully if any link in the chain is nil.
+> 翻译：[zearlin](https://github.com/zearlin)  
 
-NOTE
+# Optional Chaining
+-----------------
 
-Optional chaining in Swift is similar to messaging nil in Objective-C, but in a way that works for any type, and that can be checked for success or failure.
+可选链（Optional Chaining）是针对当前可能为空值（`nil`）的可选元素的属性，方法及下标调用和查寻的一种处理。 若可选元素为赋值对应的属性，方法或下标都会被成功调用；反之当可选成员为空值（`nil`）时，侧其属性，方法或下标调为会返回空值（`nil`）。多个的查寻可一起链式调用，并当链路的任意一环为nil时链路调用失败。
 
-Optional Chaining as an Alternative to Forced Unwrapping
+> 注意：  
+Swift中的可选链与Object-C中空值的方法调用相似，是一种更为全面的实现，适用于所有的类型及支持调用成功与否的判断。
 
-You specify optional chaining by placing a question mark (?) after the optional value on which you wish to call a property, method or subscript if the optional is non-nil. This is very similar to placing an exclamation mark (!) after an optional value to force the unwrapping of its value. The main difference is that optional chaining fails gracefully when the optional is nil, whereas forced unwrapping triggers a runtime error when the optional is nil.
+## 可选链，强制解析的一种替代方案
 
-To reflect the fact that optional chaining can be called on a nil value, the result of an optional chaining call is always an optional value, even if the property, method, or subscript you are querying returns a non-optional value. You can use this optional return value to check whether the optional chaining call was successful (the returned optional contains a value), or did not succeed due to a nil value in the chain (the returned optional value is nil).
+当你想调用一个属性，方法或下标时通过在可选元素（`optional value`）后添置一个问号（?）来声明一个为可选链，当可选元素为非空时，侧与通过添置感叹号（!）来强解析其值的做法非常相似。主要的区别在于当可选元素为空时可选链会得体地以调用失败结束，而强制解析则会引发一个运行时错误。
 
-Specifically, the result of an optional chaining call is of the same type as the expected return value, but wrapped in an optional. A property that normally returns an Int will return an Int? when accessed through optional chaining.
+考虑到可选链空值调用这一情况，可选链的返回值一定为可选值，即使你所查寻的属性，方法或下标返回的并不是是一个可选值。你可以通过返回的可选值来判断可选链的调用是成功的（返回的可选元素有值），还是因为链式中的空值元素而调用失败（返回的可选元素为空）。
 
-The next several code snippets demonstrate how optional chaining differs from forced unwrapping and enables you to check for success.
+具体来说，可选链的返回值类型与预期的返回值类型一致，但封装为了一个可选元素。原本返回为整型的属性，在可选链调用中会返回为可选整型(Int?)
 
-First, two classes called Person and Residence are defined:
+我们将在后续的几个代码片段中解释可选链与强制解析的区别及让你了解如果判断调用成功与否。
 
+首先，我们先定义Person与Residence两个类：
+
+```swift
 class Person {
     var residence: Residence?
 }
- 
+
 class Residence {
     var numberOfRooms = 1
 }
-Residence instances have a single Int property called numberOfRooms, with a default value of 1. Person instances have an optional residence property of type Residence?.
+```
 
-If you create a new Person instance, its residence property is default initialized to nil, by virtue of being optional. In the code below, john has a residence property value of nil:
+`Residence`实例拥有一个命名为`numberOfRooms`的整型属性。而`Person`实例有一个可选属性`residence`其类型为`Residence?`。
 
+如果你创建一个新的`Person`实例，它的`residence`属性由于是被定义为可选型的，此属性将默认初始化为空。下面的代码中，john的residence属性值为空：
+
+
+```swift
 let john = Person()
-If you try to access the numberOfRooms property of this person’s residence, by placing an exclamation mark after residence to force the unwrapping of its value, you trigger a runtime error, because there is no residence value to unwrap:
+```
 
+如果你在`residence`后添置感叹号（`!`）以强制解析的方式来访问`person`的`residence`的属性`numberOfRooms`时，会引发一个运行时错误，因为`residence`为空无法被解析。
+
+```swift
 let roomCount = john.residence!.numberOfRooms
-// this triggers a runtime error
-The code above succeeds when john.residence has a non-nil value and will set roomCount to an Int value containing the appropriate number of rooms. However, this code always triggers a runtime error when residence is nil, as illustrated above.
+//将导致运行时错误
+```
+当`john.residence`为非空及为`roomCount`设一个可理的房间数时以述的代码会被成功调用。然后如上面所演示的，当`residence`为空这段代码就会触发一个运行时错误。
 
-Optional chaining provides an alternative way to access the value of numberOfRooms. To use optional chaining, use a question mark in place of the exclamation mark:
+可选链提供了访问`numberOfRooms`值的另一种方式。 在这里通过以问号来取代先前的感叹号以可选链的方式调用。
 
+```swift
 if let roomCount = john.residence?.numberOfRooms {
     println("John's residence has \(roomCount) room(s).")
 } else {
-    println("Unable to retrieve the number of rooms.")
+	println("Unable to retrieve the number of rooms.")
 }
-// prints "Unable to retrieve the number of rooms."
-This tells Swift to “chain” on the optional residence property and to retrieve the value of numberOfRooms if residence exists.
+// 打印 "Unable to retrieve the number of rooms.
+```
 
-Because the attempt to access numberOfRooms has the potential to fail, the optional chaining attempt returns a value of type Int?, or “optional Int”. When residence is nil, as in the example above, this optional Int will also be nil, to reflect the fact that it was not possible to access numberOfRooms.
+这将告诉Swift将可选的`residence`属于链式中的一环并得到`numberOfRooms`的值当`residence`存在时。
 
-Note that this is true even though numberOfRooms is a non-optional Int. The fact that it is queried through an optional chain means that the call to numberOfRooms will always return an Int? instead of an Int.
+因为尝试访问`numberOfRooms`时存在失败的可能，所以可选链返回一个类型为`Int?` 或称之为“可选整型”的值。 当`residence`为空时，这个可选整型也将为空，以表示`numberOfRooms`无法被访问。
 
-You can assign a Residence instance to john.residence, so that it no longer has a nil value:
+需要注意一点即使`numberOfRooms`为非可选整型。通来可选链的方式来调用`numberOfRooms`的值查询时返回的类型是`Int?`而不是一个常规的`Int`。
 
+我们给`john.residence`分配一个`Residence`实例让它不在为一个空值：
+
+```swift
 john.residence = Residence()
-john.residence now contains an actual Residence instance, rather than nil. If you try to access numberOfRooms with the same optional chaining as before, it will now return an Int? that contains the default numberOfRooms value of 1:
+```
 
+此时`john.residence`包含了一个真实的`Residence`实例而不再为空了。如果你以先前相同的可选链方式去访问`numberOfRooms`，它将返回一个包含默认值 1 的`Int?`：
+
+```swift
 if let roomCount = john.residence?.numberOfRooms {
     println("John's residence has \(roomCount) room(s).")
 } else {
     println("Unable to retrieve the number of rooms.")
 }
-// prints "John's residence has 1 room(s)."
-Defining Model Classes for Optional Chaining
+// 打印 "John's residence has 1 room(s)"。
+```
 
-You can use optional chaining with calls to properties, methods, and subscripts that are more than one level deep. This enables you to drill down into subproperties within complex models of interrelated types, and to check whether it is possible to access properties, methods, and subscripts on those subproperties.
+##定义可选链的模型（实体）类
 
-The code snippets below define four model classes for use in several subsequent examples, including examples of multilevel optional chaining. These classes expand upon the Person and Residence model from above by adding a Room and Address class, with associated properties, methods, and subscripts.
+可选链支持多层的属性，方法及下标调用。这一特性让你可以进一步的调用关联类型的复杂模型中的子属性及判断这些子属性对应的属性，方法及下标下否可以访问。
 
-The Person class is defined in the same way as before:
+在下面的代码片段中为后续的几个例子使用定义了四个实体类，这些类都是基于`Person`和`Residence`模型通过增加`Room`及`Address`类及一些相关的属性，方法及下标进行扩展的。
 
+`Person`类还是于先前定义的相同：
+
+```swift
 class Person {
     var residence: Residence?
 }
-The Residence class is more complex than before. This time, the Residence class defines a variable property called rooms, which is initialized with an empty array of type Room[]:
+```
 
+`Residence `类比之前复杂些。这次我们为 `Residence `声明了一个名为 `rooms `的变量，其初始值为 `Room[] `类型的空数值。
+
+```swift
 class Residence {
     var rooms = Room[]()
     var numberOfRooms: Int {
@@ -87,22 +111,27 @@ class Residence {
     }
     var address: Address?
 }
-Because this version of Residence stores an array of Room instances, its numberOfRooms property is implemented as a computed property, not a stored property. The computed numberOfRooms property simply returns the value of the count property from the rooms array.
+```
+因为在这一版的`Residence`中存储了一个Room实例数组，所以其`numberOfRooms`属性以计算属性的方式实现。计算的`numberOfRooms`属性只是简单的返回了`rooms`数组的`count`属性。
 
-As a shortcut to accessing its rooms array, this version of Residence provides a read-only subscript, which starts by asserting that the index passed to the subscript is valid. If the index is valid, the subscript returns the room at the requested index in the rooms array.
+为了更便捷的访问它的`rooms`数组，在这一版中`Residence`提供了一个只读下标，一开始我们假设传参的引索是有效的。如果索引是有效的，下标将返回`rooms`数组与请求索引相对应的`room`对象。
 
-This version of Residence also provides a method called printNumberOfRooms, which simply prints the number of rooms in the residence.
+`Residence`还提供了一个名为`printNumberOfRooms`的方法，用于简单地打印房间数。
 
-Finally, Residence defines an optional property called address, with a type of Address?. The Address class type for this property is defined below.
+最后，`Residence`还定义了一个类型为`Address?`的可选属性`address`，对应的`Address`类会在下文中定义。
 
-The Room class used for the rooms array is a simple class with one property called name, and an initializer to set that property to a suitable room name:
+`rooms`数组中用到的`Room`类非常简单只拥有一个`name`属性及对应设置房间名的构造器。
 
+```swift
 class Room {
     let name: String
     init(name: String) { self.name = name }
 }
-The final class in this model is called Address. This class has three optional properties of type String?. The first two properties, buildingName and buildingNumber, are alternative ways to identify a particular building as part of an address. The third property, street, is used to name the street for that address:
+```
 
+模型中最后的一个类叫`Address`。类中有三个类型为`String?`的可选属性。作为地址信息中的一部分头两个属性`buildingName`及`buildingNumber`是两个可供选择的方式来定位特定的建筑物。 第三个属性，`stree`，则用来保存地址中的街道名称的：
+
+```swift
 class Address {
     var buildingName: String?
     var buildingNumber: String?
@@ -117,128 +146,155 @@ class Address {
         }
     }
 }
-The Address class also provides a method called buildingIdentifier, which has a return type of String?. This method checks the buildingName and buildingNumber properties and returns buildingName if it has a value, or buildingNumber if it has a value, or nil if neither property has a value.
+```
+`Address`类中还提供了一个名为`buildingIdentifier`的方法，其返回类型为`String?`。 这个方法检查`buildingName`及`buildingName`是否有值，若`buildingName`有值则返回`buildingName`，若非则返回`buildingNumber`的值，如果两者均无则返回空。
 
-Calling Properties Through Optional Chaining
+##以可选链方式的属性调用
 
-As demonstrated in Optional Chaining as an Alternative to Forced Unwrapping, you can use optional chaining to access a property on an optional value, and to check if that property access is successful. You cannot, however, set a property’s value through optional chaining.
+如先前演示的可选链做为强制解析的一个替代方式，你可以利用可选链来访问可选元素的属性，及检测属性的访问是否能成功，但你不能通过可选链的方式为属性赋值。
 
-Use the classes defined above to create a new Person instance, and try to access its numberOfRooms property as before:
+利用前先写好的类一个新的`Person`实例，并与之前先一样尝试访问它的`numberOfRooms`属性：
 
+```swift
 let john = Person()
 if let roomCount = john.residence?.numberOfRooms {
     println("John's residence has \(roomCount) room(s).")
 } else {
     println("Unable to retrieve the number of rooms.")
 }
-// prints "Unable to retrieve the number of rooms."
-Because john.residence is nil, this optional chaining call fails in the same way as before, without error.
+// 打印 "Unable to retrieve the number of rooms。
+```
 
-Calling Methods Through Optional Chaining
+因为`john.residence`为空，所以这个可选链与先前的一样调用失败并没引错误。
 
-You can use optional chaining to call a method on an optional value, and to check whether that method call is successful. You can do this even if that method does not define a return value.
+##以可选链方式的方法调用法
 
-The printNumberOfRooms method on the Residence class prints the current value of numberOfRooms. Here’s how the method looks:
+你能以可选链的方式去调用一个可选元素的方法，及检测是否方法调用不否成功。即使在方法没有定义返回值的情况下一样可行。
 
-func printNumberOfRooms() {
-    println("The number of rooms is \(numberOfRooms)")
+`Residence`的`printNumberOfRooms`方法会打印`numberOfRooms`的当前值。方法如下：
+
+```swift
+func printNumberOfRooms(){
+	println(“The number of rooms is \(numberOfRooms)”)
 }
-This method does not specify a return type. However, functions and methods with no return type have an implicit return type of Void, as described in Functions Without Return Values.
+```
+这个方法没有声明返回值，无返回值函数及方法都会带有一个隐式的返回类型为`Void`（参见Function Without Return Values）。
 
-If you call this method on an optional value with optional chaining, the method’s return type will be Void?, not Void, because return values are always of an optional type when called through optional chaining. This enables you to use an if statement to check whether it was possible to call the printNumberOfRooms method, even though the method does not itself define a return value. The implicit return value from the printNumberOfRooms will be equal to Void if the method was called succesfully through optional chaining, or nil if was not:
+如果你通过可选链的方式去调用一个可选元素的方法，该方法返回的将是`Void?`，而非`Void`，因为通过可选链方式调用的方法返回的均为可选类型。这样让你可以通过一个`If`语句去测试`printNumberOfRooms`方法是否可调用，即使该方法本身没有定义返回值。当`printNumberOfRooms`方法通过可选链调用成功时隐式的返回值为`Void`，否非为空：
 
+```swift
 if john.residence?.printNumberOfRooms() {
     println("It was possible to print the number of rooms.")
 } else {
     println("It was not possible to print the number of rooms.")
 }
-// prints "It was not possible to print the number of rooms."
-Calling Subscripts Through Optional Chaining
+// 打印 "It was not possible to print the number of rooms."。
+```
 
-You can use optional chaining to try to retrieve a value from a subscript on an optional value, and to check whether that subscript call is successful. You cannot, however, set a subscript through optional chaining.
+##以可选链方式的下标调用
 
-NOTE
+你可以通过可选链的方式去获取可选元素对应下标的值，及判断下标调用是否成功，然而，你不能在可选链中去设置一个下标的值。
 
-When you access a subscript on an optional value through optional chaining, you place the question mark before the subscript’s braces, not after. The optional chaining question mark always follows immediately after the part of the expression that is optional.
+> 注意：  
+当你要通过可选链的试访问对应可选元素的下标时，你应该将问号置于下标所带的括号前，而非后。可选链的问号通常都是紧随表达式中的可选元素后的。
 
-The example below tries to retrieve the name of the first room in the rooms array of the john.residence property using the subscript defined on the Residence class. Because john.residence is currently nil, the subscript call fails:
+下面的例子中我们将通过在`Residence`类中定义的下标去获取`rooms`数组中第一间房间的名称。由于`john.residence`当前为空，所以下标的调用失败。
 
+```swift
 if let firstRoomName = john.residence?[0].name {
     println("The first room name is \(firstRoomName).")
 } else {
     println("Unable to retrieve the first room name.")
 }
-// prints "Unable to retrieve the first room name."
-The optional chaining question mark in this subscript call is placed immediately after john.residence, before the subscript brackets, because john.residence is the optional value on which optional chaining is being attempted.
+// 打印 "Unable to retrieve the first room name."。
+```
 
-If you create and assign an actual Residence instance to john.residence, with one or more Room instances in its rooms array, you can use the Residence subscript to access the actual items in the rooms array through optional chaining:
+下标调用时我们将可选链的问号置于`john.residence`后于下标的括号前。因为`john.residence`为可选链需要尝试调用的可选元素。
 
+如果我们为`john.residence`创建并分配一个`Residence`实体且其`rooms`属性带一个或多个Room实体，你就可以通过`Residence`的下标在可选链中访问对应的成员了：
+
+```swift
 let johnsHouse = Residence()
 johnsHouse.rooms += Room(name: "Living Room")
 johnsHouse.rooms += Room(name: "Kitchen")
 john.residence = johnsHouse
- 
+
 if let firstRoomName = john.residence?[0].name {
     println("The first room name is \(firstRoomName).")
 } else {
     println("Unable to retrieve the first room name.")
 }
-// prints "The first room name is Living Room."
-Linking Multiple Levels of Chaining
+// 打印 "The first room name is Living Room."。
+```
 
-You can link together multiple levels of optional chaining to drill down to properties, methods, and subscripts deeper within a model. However, multiple levels of optional chaining do not add more levels of optionality to the returned value.
+##多层链式
 
-To put it another way:
+你可以通过多层链式来访问实体中的属性，方法及下标。多层可选链式调用并不会增加返回值的可选性/形成可选嵌套。
 
-If the type you are trying to retrieve is not optional, it will become optional because of the optional chaining.
-If the type you are trying to retrieve is already optional, it will not become more optional because of the chaining.
-Therefore:
+也就是说：
 
-If you try to retrieve an Int value through optional chaining, an Int? is always returned, no matter how many levels of chaining are used.
-Similarly, if you try to retrieve an Int? value through optional chaining, an Int? is always returned, no matter how many levels of chaining are used.
-The example below tries to access the street property of the address property of the residence property of john. There are two levels of optional chaining in use here, to chain through the residence and address properties, both of which are of optional type:
+通过可选链得到的值一定为可选类型，无论你想获取的目标值是否为可选。同理一个目标值原为可选元素，不过因为链式的调用而加深变可选性。
 
+因此：
+
+当你想从可选链中得到一个`Int`时，你得到的总会是一个`Int?`类型的值，无论通过多少层的可选链。相同的，原为`Int?`类型的返回值也一样，无论经过多少层得到的还是`Int?`类型。 
+
+下面的例子中我们将尝试访问从`john`的`residence`属性中的`address`属于获取期其`street`属性的值。这里我们将有两层的可选链调用，链式中的两环`residence`和`address`均为可选类型的属性：
+
+```swift
 if let johnsStreet = john.residence?.address?.street {
     println("John's street name is \(johnsStreet).")
 } else {
     println("Unable to retrieve the address.")
 }
-// prints "Unable to retrieve the address."
-The value of john.residence currently contains a valid Residence instance. However, the value of john.residence.address is currently nil. Because of this, the call to john.residence?.address?.street fails.
+// 打印 "Unable to retrieve the address.”。
+```
 
-Note that in the example above, you are trying to retrieve the value of the street property. The type of this property is String?. The return value of john.residence?.address?.street is therefore also String?, even though two levels of optional chaining are applied in addition to the underlying optional type of the property.
+虽然当前的`john.residence`含有一个有效的`Residence`实例。然而`john.residence.address`的还是为空值，所以调用`john.residence?.address?.street`失败了。
 
-If you set an actual Address instance as the value for john.street.address, and set an an actual value for the address’s street property, you can access the value of property through the multi-level optional chaining:
+值得注意在下面的例子中，你将尝试去获得`street`属性的值。 这个属性的类型为`String?`。所以`john.residence?.address?`的返回值也是`String?`，即使经过了两层的可选链路来访问。
 
+如果你为`john.street.address`分配一个真实的`Address`实例并为其`street`赋值，你就可以通过多层可用选连的试去访问相关的值。
+
+```swift
 let johnsAddress = Address()
 johnsAddress.buildingName = "The Larches"
 johnsAddress.street = "Laurel Street"
 john.residence!.address = johnsAddress
- 
+```
+
+```swift
 if let johnsStreet = john.residence?.address?.street {
     println("John's street name is \(johnsStreet).")
 } else {
     println("Unable to retrieve the address.")
 }
-// prints "John's street name is Laurel Street."
-Note the use of an exclamation mark during the assignment of an address instance to john.residence.address. The john.residence property has an optional type, and so you need to unwrap its actual value with an exclamation mark before accessing the residence’s address property.
+// 打印 "John's street name is Laurel Street."。
+```
 
-Chaining on Methods With Optional Return Values
+注意我们需要通过感叹号来为`jonh.residence.address`赋值。 因为`john.residence`属性是一个可选类型，所以在为`residence`的`address`属性赋值前，我们需要用感叹得到它的实际值先。
 
-The previous example shows how to retrieve the value of a property of optional type through optional chaining. You can also use optional chaining to call a method that returns a value of optional type, and to chain on that method’s return value if needed.
+##返回可选值方法的链式调用
 
-The example below calls the Address class’s buildingIdentifier method through optional chaining. This method returns a value of type String?. As described above, the ultimate return type of this method call after optional chaining is also String?:
+先前的例子中我们展示了如果通过可选链路来获取一个可选属性的值。如有需要我们也可以用可选链的方式去调用返回值为可选类型的方法，并也可将其返回值做为链式中的一环。
 
+下下面的例子中通过可选链调用了`Address`类的`buildingIdentifier`方法。 这个方法的返回类型为`String?`。 如先前所述，通过可选链调用该方法的最终返回类型也是为`String?`：
+
+```swift
 if let buildingIdentifier = john.residence?.address?.buildingIdentifier() {
     println("John's building identifier is \(buildingIdentifier).")
 }
-// prints "John's building identifier is The Larches."
-If you want to perform further optional chaining on this method’s return value, place the optional chaining question mark after the method’s parentheses:
+// 打印 "John's building identifier is The Larches."。
+```
 
+如果你想将该方法的返回值也置于链式中，只需将可选链路的问号置于方法调用的括号后：
+
+```swift
 if let upper = john.residence?.address?.buildingIdentifier()?.uppercaseString {
     println("John's uppercase building identifier is \(upper).")
 }
-// prints "John's uppercase building identifier is THE LARCHES."
-NOTE
+// 打印 "John's uppercase building identifier is THE LARCHES."。
+```
 
-In the example above, you place the optional chaining question mark after the parentheses, because the optional value you are chaining on is the buildingIdentifier method’s return value, and not the buildingIdentifier method itself.
+> 注意：  
+在上面的例子中，你将可选链的问号置于括后面是因为你想加入链式中的可选元素是`buildingIdentifier`的返回值，而不是该方法本身。
