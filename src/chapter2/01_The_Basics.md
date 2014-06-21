@@ -2,15 +2,15 @@
 # 基础部分
 
 Swift is a new programming language for iOS and OS X app development. Nonetheless, many parts of Swift will be familiar from your experience of developing in C and Objective-C.
-	
+
 Swift是一个用于iOS和OS X平台开发的新的编程语言。尽管如此，Swift在很多地方都会和你以往用C语言和Objective-C开发的经验类似。
 
 Swift provides its own versions of all fundamental C and Objective-C types, including Int for integers; Double and Float for floating-point values; Bool for Boolean values; and String for textual data. Swift also provides powerful versions of the two primary collection types, Array and Dictionary, as described in Collection Types.
-	
+
 Swift为所有C和Objective-C的基础类型提供了自己的版本，包括整数值Int，浮点值Double和Float，布尔值Bool，以及文本值String。Swift还提供了两个强大的常见集合类型，数组和字典，见[集合类型](link to 集合类型)。
 
 Like C, Swift uses variables to store and refer to values by an identifying name. Swift also makes extensive use of variables whose values cannot be changed. These are known as constants, and are much more powerful than constants in C. Constants are used throughout Swift to make code safer and clearer in intent when you work with values that do not need to change.
-	
+
 和C一样，Swift使用具有唯一名称的变量(variables)来储存和指向特定值。Swift还对那些值不能改变的变量进行了扩展，他们也被称为常量(Constants)，Swift中的常量比C中的常量更加强大。在Swift中当你需要处理一些恒定不变的值的时候，使用常量(Constants)可以让代码更加安全和整洁。
 
 In addition to familiar types, Swift introduces advanced types not found in Objective-C. These include tuples, which enable you to create and pass around groupings of values. Tuples can return multiple values from a function as a single compound value.
@@ -18,11 +18,11 @@ In addition to familiar types, Swift introduces advanced types not found in Obje
 除了这些我们熟知的类型以外，Swift还有一些在Objective-C中没有的高级类型，包括：元组（tuples），你可以创建和传递一组数值。元组（tuples）可以在函数中以一个复合值的形式返回多个数值。
 
 Swift also introduces optional types, which handle the absence of a value. Optionals say either “there is a value, and it equals x” or “there isn’t a value at all”. Optionals are similar to using nil with pointers in Objective-C, but they work for any type, not just classes. Optionals are safer and more expressive than nil pointers in Objective-C and are at the heart of many of Swift’s most powerful features.
-	
+
 Swift还有可选（Optionals）类型，来处理值缺失的情况。可选类型表示“值是x”或者“没有值”。可选类型类似于在Objective-C的指针中使用nil，但是可选类型可以用在任意类型上，而不只是类。相比于Objective-C中的nil，可选类型（Optionals）更加安全和高效，可选类型也是Swift的众多强大的特性的核心。
 
 Optionals are an example of the fact that Swift is a type safe language. Swift helps you to be clear about the types of values your code can work with. If part of your code expects a String, type safety prevents you from passing it an Int by mistake. This enables you to catch and fix errors as early as possible in the development prObjective Cess.
-	
+
 可选类型说明了Swift是一个类型安全的语言。Swift让你清楚的知道你的代码中可用的值的类型。如果你期望这部分代码是字符串（String），类型安全性会阻止你错误的给它赋一个整型（Int）的值。这让你在开发的过程中尽早的发现问题。
 
 # Constants and Variables
@@ -485,7 +485,7 @@ Use other integer types only when they are are specifically needed for the task 
 只在当前工作中有特殊的需要的时候，才使用其他的整数类型，比如是从外部来源的需要指定精确度的数据，或者为了性能，内存使用量，或者其他必要的优化。在这些情况下使用指定精确度的数字类型可以帮助我们发现溢出值和暗示这个数据的特性。
 
 ## Integer Conversion
-## 整数类型转换 
+## 整数类型转换
 
 The range of numbers that can be stored in an integer constant or variable is different for each numeric type. An Int8 constant or variable can store numbers between -128 and 127, whereas a UInt8 constant or variable can store numbers between 0 and 255. A number that will not fit into a constant or variable of a sized integer type is reported as an error when your code is compiled:
 
@@ -524,82 +524,155 @@ SomeType(ofInitialValue) is the default way to call the initializer of a Swift t
 
 SomeType(ofInitialValue)是Swift初始化并赋予一个初值的默认方法。在语言内部，UInt16类型有一个初始值设定项会接受一个UInt8的值，然后这个初始值设定项是用来从已知的UInt8中创建一个新的UInt16的值。你不能传递任意类型，只能传入UInt16提供初始化的类型。扩展已有的类型来提供更多的初始化选项，来接受新的类型（包括自定义类型），见[扩展](link)。
 
-Integer and Floating-Point Conversion
+## Integer and Floating-Point Conversion
+## 整数和浮点数转换
 
 Conversions between integer and floating-point numeric types must be made explicit:
+整数和浮点数之间的类型转换必须是显性的：
 
+```
 let three = 3
 let pointOneFourOneFiveNine = 0.14159
 let pi = Double(three) + pointOneFourOneFiveNine
 // pi equals 3.14159, and is inferred to be of type Double
+// pi等于3.14159，它被推断为Double类型
+```
 Here, the value of the constant three is used to create a new value of type Double, so that both sides of the addition are of the same type. Without this conversion in place, the addition would not be allowed.
+
+在这里，常量three的值被用来创建一个新的Double型的值，所以相加的两个数都是同样的类型了，无须转换，这个加法是允许的。
 
 The reverse is also true for floating-point to integer conversion, in that an integer type can be initialized with a Double or Float value:
 
+相对的，由浮点数到证书的转换也是可行的，也就是说一个整数类型可以被初始化为一个Double或者Float型的值：
+
+```
 let integerPi = Int(pi)
 // integerPi equals 3, and is inferred to be of type Int
+//	integerPi等于3，它被推断为整数（Int）类型
+```
+
 Floating-point values are always truncated when used to initialize a new integer value in this way. This means that 4.75 becomes 4, and -3.9 becomes -3.
 
-NOTE
+当浮点型的值初始化为一个新的整数型的值时，它的数值总是被截断的。这意味着4.75会成为4，而-3.9会成为-3。
 
-The rules for combining numeric constants and variables are different from the rules for numeric literals. The literal value 3 can be added directly to the literal value 0.14159, because number literals do not have an explicit type in and of themselves. Their type is inferred only at the point that they are evaluated by the compiler.
+> NOTE
 
-Type Aliases
+> The rules for combining numeric constants and variables are different from the rules for numeric literals. The literal value 3 can be added directly to the literal value 0.14159, because number literals do not have an explicit type in and of themselves. Their type is inferred only at the point that they are evaluated by the compiler.
+
+> 注意
+
+> 数字的常量和变量相加的规则和数字字面量的规则是不一样的。字面量3可以和字面量0.14159直接相加，因为数字字面量本身并没有一个显式的类型声明。他们的类型是在编译器运行时被推断的。
+
+# Type Aliases
+# 类型别名
 
 Type aliases define an alternative name for an existing type. You define type aliases with the typealias keyword.
 
+类型别名给已经存在的类型定义另一个名字。你用关键字`typealias`来定义类型别名。
+
 Type aliases are useful when you want to refer to an existing type by a name that is contextually more appropriate, such as when working with data of a specific size from an external source:
 
-typealias AudioSample = UInt16
-Once you define a type alias, you can use the alias anywhere you might use the original name:
+当你想用一个更合适的名字来命名一个已有的类型的时候，类型别名是很有用的，比如当你处理一个外部来源的需要指定精确度的数据时：
 
+```
+typealias AudioSample = UInt16
+```
+
+Once you define a type alias, you can use the alias anywhere you might use the original name:
+一旦你定义了类型别名，你就可以在任何你可以使用原始名字的地方使用这个别名
+
+```
 var maxAmplitudeFound = AudioSample.min
 // maxAmplitudeFound is now 0
+```
+
 Here, AudioSample is defined as an alias for UInt16. Because it is an alias, the call to AudioSample.min actually calls UInt16.min, which provides an initial value of 0 for the maxAmplitudeFound variable.
 
-Booleans
+在这里，`AudioSample`定义为`UInt16`的一个别名。因为这是一个别名，调用`AudioSample.min`实际上是调用`UInt16.min`给变量maxAmplitudeFound赋了一个0的初始值。
+
+# Booleans
+# 布尔值
 
 Swift has a basic Boolean type, called Bool. Boolean values are referred to as logical, because they can only ever be true or false. Swift provides two Boolean constant values, true and false:
 
+Swift有一个基本的布尔值类型，叫做Bool。布尔值可以当作逻辑判断，因为它们只有true或false两个值。Swift提供两种布尔值常量，true和false。
+
+```
 let orangesAreOrange = true
 let turnipsAreDelicious = false
+```
+
 The types of orangesAreOrange and turnipsAreDelicious have been inferred as Bool from the fact that they were initialized with Boolean literal values. As with Int and Double above, you don’t need to declare constants or variables as Bool if you set them to true or false as soon as you create them. Type inference helps make Swift code more concise and readable when it initializes constants or variables with other values whose type is already known.
+
+因为orangesAreOrange和turnipsAreDelicious有一个布尔的字面量作为初值，它们的类型被推断为Bool。如果你在创建常量或变量的时候就把它们的值设为true或者false，你不需要声明它们的类型是Bool。当你赋予常量或变量一个类型已知的初值时，类型推断让Swift的代码更加准确和可读。
 
 Boolean values are particularly useful when you work with conditional statements such as the if statement:
 
+在条件声明比如if语句中，布尔值特别有用：
+
+```
 if turnipsAreDelicious {
     println("Mmm, tasty turnips!")
 } else {
     println("Eww, turnips are horrible.")
 }
 // prints "Eww, turnips are horrible."
+```
+
 Conditional statements such as the if statement are covered in more detail in Control Flow.
 
-Swift’s type safety prevents non-Boolean values from being be substituted for Bool. The following example reports a compile-time error:
+关于条件声明比如if语句的更多细节会在Control Flow这一章节中详细讲解。
 
+Swift’s type safety prevents non-Boolean values from being be substituted for Bool. The following example reports a compile-time error:
+Swift的类型安全会阻止一个非布尔值替换了Bool值。下面的例子会在编译时报错：
+
+```
 let i = 1
 if i {
     // this example will not compile, and will report an error
+    // 这个例子不会顺利编译，会报错
 }
-However, the alternative example below is valid:
+```
 
+However, the alternative example below is valid:
+然而，下面这个例子是有效的：
+
+```
 let i = 1
 if i == 1 {
     // this example will compile successfully
+    // 这个例子会成功编译
 }
+```
+
 The result of the i == 1 comparison is of type Bool, and so this second example passes the type-check. Comparisons like i == 1 are discussed in Basic Operators.
+
+`i == 1`比较的结果是一个Bool类型的值，因此第二个例子通过了类型检查。类似`i == 1`的比较我们会在[Basic Operators](link)更深入讨论。
 
 As with other examples of type safety in Swift, this approach avoids accidental errors and ensures that the intention of a particular section of code is always clear.
 
-Tuples
+和其他Swift的类型安全的例子一样，这个例子避免了意外的错误并且保证了特定的某块代码的意图始终是明确的。
+
+# Tuples
+# 元组
 
 Tuples group multiple values into a single compound value. The values within a tuple can be of any type and do not have to be of the same type as each other.
 
+元组将多个数值组合成一个单独的复合值。一个元组中的值可以是任何类型，不必是同一种类型。
+
 In this example, (404, "Not Found") is a tuple that describes an HTTP status code. An HTTP status code is a special value returned by a web server whenever you request a web page. A status code of 404 Not Found is returned if you request a webpage that doesn’t exist.
 
+在这个例子里， (404, "Not Found") 是一个用来形容Http状态码的元组。一个Http状态码是当你请求一个网页的时候网页服务器的返回值。当你请求的网页不存在的时候会返回`404找不到网页`的状态码。
+
+```
 let http404Error = (404, "Not Found")
 // http404Error is of type (Int, String), and equals (404, "Not Found")
+// http404Error的类型是(Int, String)，值等于(404, "Not Found")
+```
+
 The (404, "Not Found") tuple groups together an Int and a String to give the HTTP status code two separate values: a number and a human-readable description. It can be described as “a tuple of type (Int, String)”.
+
+元组`(404, "Not Found")`将一个整数值Int和一个字符串组合起来，给http状态码赋予两个独立的值：一个机器语言的数字和一句人类语言的描述。它可以描述为”一个类型为 (Int, String)的元组“。
 
 You can create tuples from any permutation of types, and they can contain as many different types as you like. There’s nothing stopping you from having a tuple of type (Int, Int, Int), or (String, Bool), or indeed any other permutation you require.
 
@@ -735,7 +808,7 @@ An implicitly unwrapped optional is a normal optional behind the scenes, but can
 let possibleString: String? = "An optional string."
 println(possibleString!) // requires an exclamation mark to access its value
 // prints "An optional string."
- 
+
 let assumedString: String! = "An implicitly unwrapped optional string."
 println(assumedString)  // no exclamation mark is needed to access its value
 // prints "An implicitly unwrapped optional string."
