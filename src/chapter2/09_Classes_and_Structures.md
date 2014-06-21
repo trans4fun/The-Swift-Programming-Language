@@ -457,4 +457,206 @@ The behavior described for Array and Dictionary below is different again from th
 
 Whenever you assign a Dictionary instance to a constant or variable, or pass a Dictionary instance as an argument to a function or method call, the dictionary is copied at the point that the assignment or call takes place. This process is described in Structures and Enumerations Are Value Types.
 
-只要将一个Dictionary实例进行赋值或者传参操作，就会产生拷贝行为，在[结构体和枚举都是值类型](#)小节中有详细描述过。
+只要将一个字典实例进行赋值或者传参操作，就会产生拷贝行为，在[结构体和枚举都是值类型](#)小节中有详细描述过。
+
+If the keys and/or values stored in the Dictionary instance are value types (structures or enumerations), they too are copied when the assignment or call takes place. Conversely, if the keys and/or values are reference types (classes or functions), the references are copied, but not the class instances or functions that they refer to. This copy behavior for a dictionary’s keys and values is the same as the copy behavior for a structure’s stored properties when the structure is copied.
+
+如果字典实例中所储存的键值是结构体或枚举类型，那么赋值的时候也是拷贝赋值。相反，如果键值是引用类型，那么赋值操作只传递会引用，而不是实例本身的拷贝。在结构体中的键值也具有相同特性。
+
+The example below defines a dictionary called ages, which stores the names and ages of four people. The ages dictionary is then assigned to a new variable called copiedAges and is copied when this assignment takes place. After the assignment, ages and copiedAges are two separate dictionaries.
+
+下面的示例定义了一个名为ages的字典实例，存储了四个人的名字和年龄。ages被赋值给了一个名为copiedAges的新变量时字典实例被重新复制了一份。赋值结束后，ages和copiedAges成为两个相互独立的字典实例。
+
+```
+var ages = ["Peter": 23, "Wei": 35, "Anish": 65, "Katya": 19]
+var copiedAges = ages
+```
+
+The keys for this dictionary are of type String, and the values are of type Int. Both types are value types in Swift, and so the keys and values are also copied when the dictionary copy takes place.
+
+这个字典的键是字符串型，值是整型。这两种类型在Swift 中都是值类型，所以当字典被拷贝时，它们也都会被一起拷贝。
+
+You can prove that the ages dictionary has been copied by changing an age value in one of the dictionaries and checking the corresponding value in the other. If you set the value for "Peter" in the copiedAges dictionary to 24, the ages dictionary still returns the old value of 23 from before the copy took place:
+
+我们可以通过改变一个字典中的年龄，然后检查另一个字典中所对应的值，来证明ages字典确实是被拷贝了。如果在copiedAges字典中将Peter的值设为24，那么ages字典中Peter值仍然会返回23：
+
+```
+copiedAges["Peter"] = 24
+println(ages["Peter"])
+// prints "23"
+```
+
+### Assignment and Copy Behavior for Arrays
+### 数组的赋值与拷贝
+
+The assignment and copy behavior for Swift’s Array type is more complex than for its Dictionary type. Array provides C-like performance when you work with an array’s contents and copies an array’s contents only when copying is necessary.
+
+在Swift 中，数组(Arrays)类型的赋值和拷贝行为要比字典(Dictionary)类型的复杂的多。当操作数组内容时，数组(Array)能提供接近C语言的的性能，并且拷贝行为只有在必要时才会发生。
+
+If you assign an Array instance to a constant or variable, or pass an Array instance as an argument to a function or method call, the contents of the array are not copied at the point that the assignment or call takes place. Instead, both arrays share the same sequence of element values. When you modify an element value through one array, the result is observable through the other.
+
+如果你将一个数组(Arrays)实例赋给一个变量或常量，或者将其作为参数传递给函数或方法，在事件发生时数组的内容不会被拷贝。而且两个数组使用的还是同一套序列。只有当你在一个数组内修改某一元素，修改结果才c会在另一数组显示。
+
+For arrays, copying only takes place when you perform an action that has the potential to modify the length of the array. This includes appending, inserting, or removing items, or using a ranged subscript to replace a range of items in the array. If and when array copying does take place, the copy behavior for an array’s contents is the same as for a dictionary’s keys and values, as described in Assignment and Copy Behavior for Dictionaries.
+
+对数组来说，拷贝行为仅仅当操作有可能修改数组长度时才会发生。这种行为包括了附加(appending),插入(inserting),删除(removing)或者使用范围下标(ranged subscript)去替换这一范围内的元素。只有当数组拷贝确要发生时，数组内容的行为规则与字典中键值的相同，详见[Dictionary的赋值与拷贝](#)。
+
+The example below assigns a new array of Int values to a variable called a. This array is also assigned to two further variables called b and c:
+
+下面的示例将一个整数数组赋给了一个名为a的变量，继而又被赋给了变量b和c：
+
+```
+var a = [1, 2, 3]
+var b = a
+var c = a
+```
+
+You can retrieve the first value in the array with subscript syntax on either a, b, or c:
+
+我们可以在a,b,c上使用下标语法以得到数组的第一个元素：
+
+```
+println(a[0])
+// 1
+println(b[0])
+// 1
+println(c[0])
+// 1
+```
+
+If you set an item in the array to a new value with subscript syntax, all three of a, b, and c will return the new value. Note that the array is not copied when you set a new value with subscript syntax, because setting a single value with subscript syntax does not have the potential to change the array’s length:
+
+如果通过下标语法修改数组中某一元素的值，那么a,b,c中的相应值都会发生改变。请注意当你用下标语法修改某一值时，并没有拷贝行为伴随发生，因为下表语法修改值时没有改变数组长度的可能：
+
+```
+a[0] = 42
+println(a[0])
+// 42
+println(b[0])
+// 42
+println(c[0])
+// 42
+```
+
+However, if you append a new item to a, you do modify the array’s length. This prompts Swift to create a new copy of the array at the point that you append the new value. Henceforth, a is a separate, independent copy of the array.
+
+然而，当你给a附加新元素时，数组的长度发生改变。 Swift 会创建这个数组的一个拷贝。此后，a将会是一个独立拷贝。
+
+If you change a value in a after the copy is made, a will return a different value from b and c, which both still reference the original array contents from before the copy took place:
+
+拷贝发生后，如果再修改a中元素值的话，a将会返回与b，c不同的结果，因为后两者引用的是原来的数组：
+
+```
+a.append(4)
+a[0] = 777
+println(a[0])
+// 777
+println(b[0])
+// 42
+println(c[0])
+// 42
+```
+
+#### Ensuring That an Array Is Unique
+
+#### 确保数组的唯一性
+
+It can be useful to ensure that you have a unique copy of an array before performing an action on that array’s contents, or before passing that array to a function or method. You ensure the uniqueness of an array reference by calling the unshare method on a variable of array type. (The unshare method cannot be called on a constant array.)
+
+在操作一个数组，或将其传递给函数以及方法调用之前是很有必要先确定这个数组是有一个唯一拷贝的。通过在数组变量上调用unshare方法来确定数组引用的唯一性。(当数组赋给常量时，不能调用unshare方法)
+
+If multiple variables currently refer to the same array, and you call the unshare method on one of those variables, the array is copied, so that the variable has its own independent copy of the array. However, no copying takes place if the variable is already the only reference to the array.
+
+如果一个数组被多个变量引用，在其中的一个变量上调用unshare方法，则会拷贝此数组，此时这个变量将会有属于它自己的独立数组拷贝。当数组仅被一个变量引用时，则不会有拷贝发生。
+
+At the end of the previous example, b and c both reference the same array. Call the unshare method on b to make it become a unique copy:
+
+在上一个示例的最后，b和c都引用了同一个数组。此时在b上调用unshare方法则会将b变成一个唯一个拷贝：
+
+```
+b.unshare()
+```
+
+If you change the first value in b after calling the unshare method, all three arrays will now report a different value:
+
+在unshare方法调用后再修改b中第一个元素的值，这三个数组(a,b,c)会返回不同的三个值：
+
+```
+b[0] = -105
+println(a[0])
+// 777
+println(b[0])
+// -105
+println(c[0])
+// 42
+```
+
+#### Checking Whether Two Arrays Share the Same Elements
+
+#### 判定两个数组是否共用相同元素
+
+Check whether two arrays or subarrays share the same storage and elements by comparing them with the identity operators (=== and !==).
+
+我们通过使用恒等运算符(identity operators) (=== 和 !==)来判定两个数组或子数组共用相同的储存空间或元素。
+
+The example below uses the “identical to” operator (===) to check whether b and c still share the same array elements:
+
+下面这个示例使用了“等同(identical to)” 运算符(===) 来判定b和c是否共用相同的数组元素：
+
+```
+if b === c {
+    println("b and c still share the same array elements.")
+} else {
+    println("b and c now refer to two independent sets of array elements.")
+}
+// prints "b and c now refer to two independent sets of array elements."
+```
+
+Alternatively, use the identity operators to check whether two subarrays share the same elements. The example below compares two identical subarrays from b and confirms that they refer to the same elements:
+
+此外，我们还可以使用恒等运算符来判定两个子数组是否共用相同的元素。下面这个示例中，比较了b的两个相等的子数组，并且确定了这两个子数组都引用相同的元素：
+
+```
+if b[0...1] === b[0...1] {
+    println("These two subarrays share the same elements.")
+} else {
+    println("These two subarrays do not share the same elements.")
+}
+// prints "These two subarrays share the same elements."
+```
+
+#### Forcing a Copy of an Array
+
+#### 强制复制数组
+
+Force an explicit copy of an array by calling the array’s copy method. This method performs a shallow copy of the array and returns a new array containing the copied items.
+
+我们通过调用数组的copy方法进行强制显式复制。这个方法对数组进行了浅拷贝(shallow copy)，并且返回一个包含此拷贝数组的新数组。
+
+The example below defines an array called names, which stores the names of seven people. A new variable called copiedNames is set to the result of calling the copy method on the names array:
+
+下面这个示例中定义了一个names数组，其包含了七个人名。还定义了一个copiedNames变量，用以储存在names上调用copy方法所返回的结果：
+
+```
+var names = ["Mohsen", "Hilary", "Justyn", "Amy", "Rich", "Graham", "Vic"]
+var copiedNames = names.copy()
+```
+
+You can prove that the names array has been copied by changing an item in one of the arrays and checking the corresponding item in the other. If you set the first item in the copiedNames array to "Mo" rather than "Mohsen", the names array still returns the old value of "Mohsen" from before the copy took place:
+
+我们可以通过修改数组中某一个元素，并且检查另一个数组中对应元素的方法来判定names数组确已被复制。如果你将copiedNames中第一个元素从"Mohsen"修改为"Mo",则names数组返回的仍是拷贝发生前的"Mohsen"：
+
+```
+copiedNames[0] = "Mo"
+println(names[0])
+// prints "Mohsen"
+```
+
+
+> NOTE
+> 
+> If you simply need to be sure that your reference to an array’s contents is the only reference in existence, call the unshare method, not the copy method. The unshare method does not make a copy of the array unless it is necessary to do so. The copy method always copies the array, even if it is already unshared.
+
+> 提示：
+> 
+> 如果你仅需要确保你对数组的引用是唯一引用，请调用unshare方法，而不是copy方法。unshare方法只在必要时才会创建数组拷贝。copy方法会在任何时候都创建一个新的拷贝，即使已经标记为唯一。
