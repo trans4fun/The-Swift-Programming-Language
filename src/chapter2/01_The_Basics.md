@@ -368,11 +368,11 @@ Because of type inference, Swift requires far fewer type declarations than langu
 
 Type inference is particularly useful when you declare a constant or variable with an initial value. This is often done by assigning a literal value (or literal) to the constant or variable at the point that you declare it. (A literal value is a value that appears directly in your source code, such as 42 and 3.14159 in the examples below.)
 
-当你声明一个有初始值的常量或变量的时候类型推断特别实用。通常是当你声明一个常量和变量的时候你就给它赋一个字面值（literal value）。（字面值是会直接出现在源码里的值，比如下面例子里的42和3.14159。）
+当你声明一个有初始值的常量或变量的时候类型推断特别实用。通常是当你声明一个常量和变量的时候你就给它赋一个字面量（literal value）。（字面量是会直接出现在源码里的值，比如下面例子里的42和3.14159。）
 
 For example, if you assign a literal value of 42 to a new constant without saying what type it is, Swift infers that you want the constant to be an Int, because you have initialized it with a number that looks like an integer:
 
-举个例子，如果你给一个新的常量赋了一个字面值42，但没有说它的类型，Swift会推断你希望这个常量是一个整数类型（Int），因为你用了一个像是整数的数字来初始化：
+举个例子，如果你给一个新的常量赋了一个字面量42，但没有说它的类型，Swift会推断你希望这个常量是一个整数类型（Int），因为你用了一个像是整数的数字来初始化：
 
 	let meaningOfLife = 42
 	// meaningOfLife is inferred to be of type Int
@@ -380,7 +380,7 @@ For example, if you assign a literal value of 42 to a new constant without sayin
 
 Likewise, if you don’t specify a type for a floating-point literal, Swift infers that you want to create a Double:
 
-类似的，如果你没有特别指定一个浮点型的字面值，Swift会推断你需要一个Double类型的浮点数：
+类似的，如果你没有特别指定一个浮点型的字面量，Swift会推断你需要一个Double类型的浮点数：
 
 	let pi = 3.14159
 	// pi is inferred to be of type Double
@@ -392,7 +392,7 @@ Swift always chooses Double (rather than Float) when inferring the type of float
 
 If you combine integer and floating-point literals in an expression, a type of Double will be inferred from the context:
 
-如果你将整数型和浮点型的字面值相加，这种情况下会推断为Double类型：
+如果你将整数型和浮点型的字面量相加，这种情况下会推断为Double类型：
 
 	let anotherPi = 3 + 0.14159
 	// anotherPi is also inferred to be of type Double
@@ -400,11 +400,14 @@ If you combine integer and floating-point literals in an expression, a type of D
 
 The literal value of 3 has no explicit type in and of itself, and so an appropriate output type of Double is inferred from the presence of a floating-point literal as part of the addition.
 
-字面值3本身并没有准确的类型，因此是通过相加的元素中有一个浮点型的字面值推断出合适的输出类型为Double.
+字面量3本身并没有准确的类型，因此是通过相加的元素中有一个浮点型的字面量推断出合适的输出类型为Double.
 
-Numeric Literals
+# Numeric Literals
+# 数字字面量
 
 Integer literals can be written as:
+
+整数字面量可以写成：
 
 A decimal number, with no prefix
 A binary number, with a 0b prefix
@@ -412,55 +415,114 @@ An octal number, with a 0o prefix
 A hexadecimal number, with a 0x prefix
 All of these integer literals have a decimal value of 17:
 
-let decimalInteger = 17
-let binaryInteger = 0b10001       // 17 in binary notation
-let octalInteger = 0o21           // 17 in octal notation
-let hexadecimalInteger = 0x11     // 17 in hexadecimal notation
+十进制的数字，不需要任何前缀
+二进制的数字，前缀是0b
+八进制的数字，前缀是0o
+十六进制的数字，前缀是0x
+下面所有的整数字面量在十进制下的值都是17：
+
+	let decimalInteger = 17
+	let binaryInteger = 0b10001       // 17 in binary notation
+	let octalInteger = 0o21           // 17 in octal notation
+	let hexadecimalInteger = 0x11     // 17 in hexadecimal notation
+
+	let decimalInteger = 17
+	let binaryInteger = 0b10001       // 二进制声明中的17
+	let octalInteger = 0o21           // 八进制声明中的17
+	let hexadecimalInteger = 0x11     // 十六进制声明中的17
+
+
 Floating-point literals can be decimal (with no prefix), or hexadecimal (with a 0x prefix). They must always have a number (or hexadecimal number) on both sides of the decimal point. They can also have an optional exponent, indicated by an uppercase or lowercase e for decimal floats, or an uppercase or lowercase p for hexadecimal floats.
+
+浮点型的字面量可以是十进制的（没有前缀），或者十六进制（前缀是0x）。在小数点两边都必须有数字（或十六进制数字符号）。它们也可以有一个可选的指数，在十进制中用大写或小写的e来表示，或者在十六进制中用大写或小写的p来表示。
 
 For decimal numbers with an exponent of exp, the base number is multiplied by 10exp:
 
+在十进制数字中有一个指数`exp`，表示基数乘以`10^exp`:
+
+```
 1.25e2 means 1.25 × 102, or 125.0.
 1.25e-2 means 1.25 × 10-2, or 0.0125.
+```
+
 For hexadecimal numbers with an exponent of exp, the base number is multiplied by 2exp:
 
+在十六进制的数字中有一个指数`exp`，表示基数乘以`2^exp`
+
+```
 0xFp2 means 15 × 22, or 60.0.
 0xFp-2 means 15 × 2-2, or 3.75.
-All of these floating-point literals have a decimal value of 12.1875:
+```
 
+All of these floating-point literals have a decimal value of 12.1875:
+以下这些浮点字面量在十进制下的值都是12.1875：
+
+```
 let decimalDouble = 12.1875
 let exponentDouble = 1.21875e1
 let hexadecimalDouble = 0xC.3p0
+```
+
 Numeric literals can contain extra formatting to make them easier to read. Both integers and floats can be padded with extra zeroes and can contain underscores to help with readability. Neither type of formatting affects the underlying value of the literal:
 
+数字字面量可以使用额外的格式让它们更易读。不论整数还是浮点数都可以添加额外的0，也可以增加下划线来增加可读性。这些格式都不会影响到这些字面量原本的值：
+
+```
 let paddedDouble = 000123.456
 let oneMillion = 1_000_000
 let justOverOneMillion = 1_000_000.000_000_1
-Numeric Type Conversion
+```
+
+# Numeric Type Conversion
+# 数字类型转换
 
 Use the Int type for all general-purpose integer constants and variables in your code, even if they are known to be non-negative. Using the default integer type in everyday situations means that integer constants and variables are immediately interoperable in your code and will match the inferred type for integer literal values.
 
+在一般情况下对整数的常量或变量使用`Int`类型，即使是你知道不会存储负值的时候。总是使用默认的整数类型意味着你的代码中整数的常量和变量是可以很好的协作的，并且可以和整数字面量推断出的类型一致。
+
 Use other integer types only when they are are specifically needed for the task at hand, because of explicitly-sized data from an external source, or for performance, memory usage, or other necessary optimization. Using explicitly-sized types in these situations helps to catch any accidental value overflows and implicitly documents the nature of the data being used.
 
-Integer Conversion
+只在当前工作中有特殊的需要的时候，才使用其他的整数类型，比如是从外部来源的需要指定精确度的数据，或者为了性能，内存使用量，或者其他必要的优化。在这些情况下使用指定精确度的数字类型可以帮助我们发现溢出值和暗示这个数据的特性。
+
+## Integer Conversion
+## 整数类型转换 
 
 The range of numbers that can be stored in an integer constant or variable is different for each numeric type. An Int8 constant or variable can store numbers between -128 and 127, whereas a UInt8 constant or variable can store numbers between 0 and 255. A number that will not fit into a constant or variable of a sized integer type is reported as an error when your code is compiled:
 
+不同整数类型的常量或变量可以储存不同范围的数字。一个`Int8`的常量或变量可以储存-128到127之间的数字，然而一个`UInt8`型的常量或变量可以储存从0到255之间的数字。如果一个数字不符合常量或变量的储值范围，编译的时候会报错：
+
+```
 let cannotBeNegative: UInt8 = -1
 // UInt8 cannot store negative numbers, and so this will report an error
+// UInt8不能储存负数，所以这里会报错
 let tooBig: Int8 = Int8.max + 1
 // Int8 cannot store a number larger than its maximum value,
 // and so this will also report an error
+// Int8不能储存一个大于其最大值的数字
+// 所以这里同样会报错
+```
+
 Because each numeric type can store a different range of values, you must opt in to numeric type conversion on a case-by-case basis. This opt-in approach prevents hidden conversion errors and helps make type conversion intentions explicit in your code.
+
+因为每一种数字类型可以储存不同范围的值，你必须根据具体的案例选择合适的数字类型转换。这种选择方式组织了隐式的转换报错，并且让你的代码中的类型转换意图更明确。
 
 To convert one specific number type to another, you initialize a new number of the desired type with the existing value. In the example below, the constant twoThousand is of type UInt16, whereas the constant one is of type UInt8. They cannot be added together directly, because they are not of the same type. Instead, this example calls UInt16(one) to create a new UInt16 initialized with the value of one, and uses this value in place of the original:
 
+要将一种特定类型转换成另一种，你需要用一个你想要的类型的新的数字来重新初始化。在下面的例子里，常量twoThousand是UInt16类型的，然而常量one是UInt8类型的。它们不能直接相加，因为i它们类型不同。因此，这个例子调用了UInt16(one)来对常量one创建一个新的UInt16初始值，然后用这个值来代替原来的值：
+
+```
 let twoThousand: UInt16 = 2_000
 let one: UInt8 = 1
 let twoThousandAndOne = twoThousand + UInt16(one)
+```
+
 Because both sides of the addition are now of type UInt16, the addition is allowed. The output constant (twoThousandAndOne) is inferred to be of type UInt16, because it is the sum of two UInt16 values.
 
+因为相加的两个数现在都是UInt16类型了，这样相加是允许的。输出结果的常量（twoThousandAndOne）被推断为UInt16类型，因为它是两个UInt16的类型的值的和。
+
 SomeType(ofInitialValue) is the default way to call the initializer of a Swift type and pass in an initial value. Behind the scenes, UInt16 has an initializer that accepts a UInt8 value, and so this initializer is used to make a new UInt16 from an existing UInt8. You can’t pass in any type here, however—it has to be a type for which UInt16 provides an initializer. Extending existing types to provide initializers that accept new types (including your own type definitions) is covered in Extensions.
+
+SomeType(ofInitialValue)是Swift初始化并赋予一个初值的默认方法。在语言内部，UInt16类型有一个初始值设定项会接受一个UInt8的值，然后这个初始值设定项是用来从已知的UInt8中创建一个新的UInt16的值。你不能传递任意类型，只能传入UInt16提供初始化的类型。扩展已有的类型来提供更多的初始化选项，来接受新的类型（包括自定义类型），见[扩展](link)。
 
 Integer and Floating-Point Conversion
 
