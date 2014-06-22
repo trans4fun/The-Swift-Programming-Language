@@ -676,135 +676,275 @@ The (404, "Not Found") tuple groups together an Int and a String to give the HTT
 
 You can create tuples from any permutation of types, and they can contain as many different types as you like. There’s nothing stopping you from having a tuple of type (Int, Int, Int), or (String, Bool), or indeed any other permutation you require.
 
+你可以创建一个含任意类型组合的元组，它们可以包含任意多的类型。谁也不能阻止你创建一个(Int, Int, Int)类型或者(String, Bool)类型，又或者任意你想要的类型组合的元组。
+
 You can decompose a tuple’s contents into separate constants or variables, which you then access as usual:
 
+你可以把一个元组的内容分解成独立的常量或变量，然后你就可以像平常一样调用它们：
+
+```
 let (statusCode, statusMessage) = http404Error
 println("The status code is \(statusCode)")
 // prints "The status code is 404"
+println("状态码是 \(statusCode)")
+// 输出”状态码是404“
 println("The status message is \(statusMessage)")
 // prints "The status message is Not Found"
+```
+
+```
+let (statusCode, statusMessage) = http404Error
+println("状态码是 \(statusCode)")
+// 输出”状态码是404“
+println("状态信息是 \(statusMessage)")
+// prints "状态信息是 Not Found"
+```
+
 If you only need some of the tuple’s values, ignore parts of the tuple with an underscore (_) when you decompose the tuple:
 
+如果你只需要元组的一部分值，当你分解元组的时候使用下划线(_)来忽略元组的一部分值：
+
+```
 let (justTheStatusCode, _) = http404Error
 println("The status code is \(justTheStatusCode)")
 // prints "The status code is 404"
+```
+
+```
+let (justTheStatusCode, _) = http404Error
+println("状态码是 \(justTheStatusCode)")
+// prints "状态码是 404"
+```
+
 Alternatively, access the individual element values in a tuple using index numbers starting at zero:
 
+同样的，使用从0开始的序列可以调用元组中的一个单独元素的值。
+
+```
 println("The status code is \(http404Error.0)")
 // prints "The status code is 404"
 println("The status message is \(http404Error.1)")
 // prints "The status message is Not Found"
+```
+
 You can name the individual elements in a tuple when the tuple is defined:
 
+定义元组的时候，你可以给元素单独命名：
+
+```
 let http200Status = (statusCode: 200, description: "OK")
+```
+
 If you name the elements in a tuple, you can use the element names to access the values of those elements:
 
+如果你给元组中的元素命名了，你可以用这个名字来调用它们的值：
+
+```
 println("The status code is \(http200Status.statusCode)")
 // prints "The status code is 200"
 println("The status message is \(http200Status.description)")
 // prints "The status message is OK"
+```
+
 Tuples are particularly useful as the return values of functions. A function that tries to retrieve a web page might return the (Int, String) tuple type to describe the success or failure of the page retrieval. By returning a tuple with two distinct values, each of a different type, the function provides more useful information about its outcome than if it could only return a single value of a single type. For more information, see Functions with Multiple Return Values.
 
-NOTE
+作为函数的返回值元组是很有用的。
 
-Tuples are useful for temporary groups of related values. They are not suited to the creation of complex data structures. If your data structure is likely to persist beyond a temporary scope, model it as a class or structure, rather than as a tuple. For more information, see Classes and Structures.
+> NOTE
 
-Optionals
+> Tuples are useful for temporary groups of related values. They are not suited to the creation of complex data structures. If your data structure is likely to persist beyond a temporary scope, model it as a class or structure, rather than as a tuple. For more information, see Classes and Structures.
+
+> 注意
+
+> 当你处理一些相关数据的临时组合，元组是很有用的。如果你的数据结构超过了一个临时的范畴，用class或者structrue会比用元组tuple更合适。更多信息，参见[Classes and Structures](link)。
+
+＃ Optionals
+# 可选类型
 
 You use optionals in situations where a value may be absent. An optional says:
 
-There is a value, and it equals x
+当值可能缺失的情况下，可以用可选类型（Options）。可选类型表示：
+
+- There is a value, and it equals x
+
 or
 
-There isn’t a value at all
-NOTE
+- There isn’t a value at all
 
-The concept of optionals doesn’t exist in C or Objective-C. The nearest thing in Objective-C is the ability to return nil from a method that would otherwise return an object, with nil meaning “the absence of a valid object.” However, this only works for objects—it doesn’t work for structs, basic C types, or enumeration values. For these types, Objective-C methods typically return a special value (such as NSNotFound) to indicate the absence of a value. This approach assumes that the method’s caller knows there is a special value to test against and remembers to check for it. Swift’s optionals let you indicate the absence of a value for any type at all, without the need for special constants.
+<!--  -->
+- 那里有一个值，它等于x
+
+或者
+
+- 值不存在
+
+> NOTE
+
+> The concept of optionals doesn’t exist in C or Objective-C. The nearest thing in Objective-C is the ability to return nil from a method that would otherwise return an object, with nil meaning “the absence of a valid object.” However, this only works for objects—it doesn’t work for structs, basic C types, or enumeration values. For these types, Objective-C methods typically return a special value (such as NSNotFound) to indicate the absence of a value. This approach assumes that the method’s caller knows there is a special value to test against and remembers to check for it. Swift’s optionals let you indicate the absence of a value for any type at all, without the need for special constants.
+
+> 注意
+
+> 可选类型在C或者Objective-C中都不存在。在Objective-C中最接近的是一个返回一个对象的方法也可以返回一个nil值的能力，nil的意思是“有效对象的缺失”。然而，它只对对象有效，对structs, basic C types, or enumeration values都是无效的。对这些类型，Objective-C通常会返回一个特殊值（比如NSNotFound）来表示值缺失。这样的方式假定我们调用方法时它必须知道有一个特殊值，并且要记得去检查它。Siwft的可选类型让你可以给任意类型的值声明这个值缺失，不需要任何其它的特殊常量。
 
 Here’s an example. Swift’s String type has a method called toInt, which tries to convert a String value into an Int value. However, not every string can be converted into an integer. The string "123" can be converted into the numeric value 123, but the string "hello, world" does not have an obvious numeric value to convert to.
 
+下面是一个例子。Siwft的字符串类型有一个toInt的方法，它会尝试将一个字符串类型转换成一个整数类型。然而，不是每一额字符串都可以转换成整数的。字符串“123”可以转换为数字量123，但是字符串"Hello, world"并没有一个明显的数字量可以转换。
+
 The example below uses the toInt method to try to convert a String into an Int:
 
+下面这个例子用`toInt`方法尝试转换字符串到整数：
+
+```
 let possibleNumber = "123"
 let convertedNumber = possibleNumber.toInt()
 // convertedNumber is inferred to be of type "Int?", or "optional Int"
+```
+
 Because the toInt method might fail, it returns an optional Int, rather than an Int. An optional Int is written as Int?, not Int. The question mark indicates that the value it contains is optional, meaning that it might contain some Int value, or it might contain no value at all. (It can’t contain anything else, such as a Bool value or a String value. It’s either an Int, or it’s nothing at all.)
 
-If Statements and Forced Unwrapping
+因为`toInt`方法可能失败，它返回的是可以可选类型的整数，而不是一个整数。一个可选的整数表示为`Int?`，而不是`Int`。最后的问号表示这个值是可选的，意味着它可能包含整数类型的值，或者它没有值。（它不能包括其它任何值，比如布尔值或者字符串。它要不是一个整数，要不就没有值。）
+
+# If Statements and Forced Unwrapping
+# If语句和强制解析
 
 You can use an if statement to find out whether an optional contains a value. If an optional does have a value, it evaluates to true; if it has no value at all, it evaluates to false.
 
+你可以使用if语句来判断一个可选类型是否有值。如果有值，它就等于true，如果没有值，就等于false。
+
 Once you’re sure that the optional does contain a value, you can access its underlying value by adding an exclamation mark (!) to the end of the optional’s name. The exclamation mark effectively says, “I know that this optional definitely has a value; please use it.” This is known as forced unwrapping of the optional’s value:
 
+一旦你确定可选类型是有值的，你可以在可选类型的名字后面加一个感叹号(!)来调用它的值。这个感叹号的意思是：”我知道这个可选类型的值一定存在一个值，请使用这个值。“这叫做可选值的强制解析：
+
+```
 if convertedNumber {
     println("\(possibleNumber) has an integer value of \(convertedNumber!)")
 } else {
     println("\(possibleNumber) could not be converted to an integer")
 }
 // prints "123 has an integer value of 123"
+```
+
 For more on the if statement, see Control Flow.
 
-NOTE
+更多信息，见[Control Flow](link)。
 
-Trying to use ! to access a non-existent optional value triggers a runtime error. Always make sure that an optional contains a non-nil value before using ! to force-unwrap its value.
+> NOTE
 
-Optional Binding
+> Trying to use ! to access a non-existent optional value triggers a runtime error. Always make sure that an optional contains a non-nil value before using ! to force-unwrap its value.
+
+> 注意
+
+> 如果你使用！来调用一个不存在的可选值，会报出实时错误。在使用！强制解析可选值之前总是确认这个可选值包含一个非nil的值。
+
+# Optional Binding
+# 可选值绑定
 
 You use optional binding to find out whether an optional contains a value, and if so, to make that value available as a temporary constant or variable. Optional binding can be used with if and while statements to check for a value inside an optional, and to extract that value into a constant or variable, as part of a single action. if and while statements are described in more detail in Control Flow.
 
+你可以使用可选值绑定(optional binding)来找出一个可选类型是否包含值，如果包含，则可以把这个值作为一个临时常量或变量来使用。可选值绑定可以和if或while语句一起来检查可选值里面的值，并且解析到一个常量或变量中，所有这些都在一步操作中完成。更多关于if和while语句的信息，见[Control Flow](link)。
+
 Write optional bindings for the if statement as follows:
 
+像这样给if语句写可选值绑定：
+
+```
 if let constantName = someOptional {
     statements
 }
+```
+
 You can rewrite the possibleNumber example from above to use optional binding rather than forced unwrapping:
 
+你可以用可选值绑定来代替强制解析来重写之前那个possibleNumber的例子：
+
+```
 if let actualNumber = possibleNumber.toInt() {
     println("\(possibleNumber) has an integer value of \(actualNumber)")
 } else {
     println("\(possibleNumber) could not be converted to an integer")
 }
 // prints "123 has an integer value of 123"
+```
+
 This can be read as:
+
+这段代码可以解读为：
 
 “If the optional Int returned by possibleNumber.toInt contains a value, set a new constant called actualNumber to the value contained in the optional.”
 
+”如果可选整数值通过possibleNumber.toInt返回一个值，设定一个叫actualNumber的新的常量来储存这个可选整数中的值。“
+
 If the conversion is successful, the actualNumber constant becomes available for use within the first branch of the if statement. It has already been initialized with the value contained within the optional, and so there is no need to use the ! suffix to access its value. In this example, actualNumber is simply used to print the result of the conversion.
+
+如果这个转换是成功的，那么常量actualNumber在if语句的第一个分支就可用了。它已经用可选量中的值初始化了，所以现在不需要用！后缀来调用这个值。在这个例子中，actualNumber只是简单的用于输出转换结果。
 
 You can use both constants and variables with optional binding. If you wanted to manipulate the value of actualNumber within the first branch of the if statement, you could write if var actualNumber instead, and the value contained within the optional would be made available as a variable rather than a constant.
 
-nil
+无论是常量还是变量你都可以使用可选值绑定。如果你希望对if语句第一个分支中actualNumber的值进行操作，你可以用if var actualNumber来声明，然后可选量中的值就会成为一个可用的变量而不是常量。
+
+# nil
+# nil
 
 You set an optional variable to a valueless state by assigning it the special value nil:
 
+给可选变量一个没有值的状态是通过给它赋予一个特殊值nil来完成的：
+
+```
 var serverResponseCode: Int? = 404
 // serverResponseCode contains an actual Int value of 404
 serverResponseCode = nil
 // serverResponseCode now contains no value
-NOTE
+```
 
-nil cannot be used with non-optional constants and variables. If a constant or variable in your code needs to be able to cope with the absence of a value under certain conditions, always declare it as an optional value of the appropriate type.
+> NOTE
+
+> nil cannot be used with non-optional constants and variables. If a constant or variable in your code needs to be able to cope with the absence of a value under certain conditions, always declare it as an optional value of the appropriate type.
+
+> 注意
+
+> nil不能被用于可选类型之外的常量和变量。如果你的代码中的常量或变量需要处理值缺失的情况，总是用一个可选的合适类型来声明它。
 
 If you define an optional constant or variable without providing a default value, the constant or variable is automatically set to nil for you:
 
+如果你定义一个可选的常量或变量，却没有赋初值，这个常量或变量会自动设为nil：
+
+```
 var surveyAnswer: String?
 // surveyAnswer is automatically set to nil
-NOTE
+```
 
-Swift’s nil is not the same as nil in Objective-C. In Objective-C, nil is a pointer to a non-existent object. In Swift, nil is not a pointer—it is the absence of a value of a certain type. Optionals of any type can be set to nil, not just object types.
+> NOTE
 
-Implicitly Unwrapped Optionals
+> Swift’s nil is not the same as nil in Objective-C. In Objective-C, nil is a pointer to a non-existent object. In Swift, nil is not a pointer—it is the absence of a value of a certain type. Optionals of any type can be set to nil, not just object types.
+
+> 注意
+
+> Swift的nil和Objective-C中的不完全一样。Objective-C中，nil是指向不存在的对象。而在Swift中，nil不知是一个指针——它是一个特定类型的值缺失。可选的任何类型都可以设为nil，不只是对象类型。
+
+# Implicitly Unwrapped Optionals
+# 隐式解析可选值
 
 As described above, optionals indicate that a constant or variable is allowed to have “no value”. Optionals can be checked with an if statement to see if a value exists, and can be conditionally unwrapped with optional binding to access the optional’s value if it does exist.
 
+像之前说的，可选值意味着一个常量或变量允许“没有值”。可以通过if语句来判断可选值中是否有值存在，如果值存在则用可选值绑定来调用可选量的值。
+
 Sometimes it is clear from a program’s structure that an optional will always have a value, after that value is first set. In these cases, it is useful to remove the need to check and unwrap the optional’s value every time it is accessed, because it can be safely assumed to have a value all of the time.
+
+有时候从程序的结构可以清楚的知道一个可选值在第一次值设定之后，它总是有值的。在这些情况下，把每次调用都检查并解析可选量的值去掉是很有用的，因为它们可以安全的被推断出它们总是有值的。
 
 These kinds of optionals are defined as implicitly unwrapped optionals. You write an implicitly unwrapped optional by placing an exclamation mark (String!) rather than a question mark (String?) after the type that you want to make optional.
 
+这些类型的可选值被定义为隐式解析可选值。当你创建可选值的时候，你可以通过写感叹号(String!)而不是问号(String?)的形式来写一个隐式解析的可选值。
+
 Implicitly unwrapped optionals are useful when an optional’s value is confirmed to exist immediately after the optional is first defined and can definitely be assumed to exist at every point thereafter. The primary use of implicitly unwrapped optionals in Swift is during class initialization, as described in Unowned References and Implicitly Unwrapped Optional Properties.
+
+如果可选值在第一次定义之后就肯定存在值并且之后每一刻都肯定存在，这种情况下隐式解析可选值是很有用红的。Swift中的隐式解析可选值的主要用法是在类的初始化过程中，参见[Unowned References and Implicitly Unwrapped Optional Properties](link)。
 
 An implicitly unwrapped optional is a normal optional behind the scenes, but can also be used like a nonoptional value, without the need to unwrap the optional value each time it is accessed. The following example shows the difference in behavior between an optional String and an implicitly unwrapped optional String:
 
+一个隐式解析可选值其实是一个普通的可选值，但它也可以像非可选的值那样使用，无须每次调用都解析可选量的值。下面的例子显示了一个普通的可选的字符串和一个隐式解析的可选字符串的区别：
+
+```
 let possibleString: String? = "An optional string."
 println(possibleString!) // requires an exclamation mark to access its value
 // prints "An optional string."
@@ -812,57 +952,113 @@ println(possibleString!) // requires an exclamation mark to access its value
 let assumedString: String! = "An implicitly unwrapped optional string."
 println(assumedString)  // no exclamation mark is needed to access its value
 // prints "An implicitly unwrapped optional string."
+```
+
 You can think of an implicitly unwrapped optional as giving permission for the optional to be unwrapped automatically whenever it is used. Rather than placing an exclamation mark after the optional’s name each time you use it, you place an exclamation mark after the optional’s type when you declare it.
 
-NOTE
+你可以把隐式解析可选值当作一个允许可选值每次都能自动解析的授权。你只需要当你声明的时候在可选量的类型后面放一个感叹号，而不用每次使用的时候都在可选值后面放感叹号。
 
-If you try to access an implicitly unwrapped optional when it does not contain a value, you will trigger a runtime error. The result is exactly the same as if you place an exclamation mark after a normal optional that does not contain a value.
+> NOTE
+
+> If you try to access an implicitly unwrapped optional when it does not contain a value, you will trigger a runtime error. The result is exactly the same as if you place an exclamation mark after a normal optional that does not contain a value.
+
+> 注意
+
+> 如果你试图调用一个没有值的隐式解析可选值，你会得到一个实时的错误。这和你在一个普通的不含值的可选值后面放感叹号的结果是完全一样的。
 
 You can still treat an implicitly unwrapped optional like a normal optional, to check if it contains a value:
 
+你仍然可以把隐式解析可选值当作一个普通的可选值，来检查它是否含有值：
+
+```
 if assumedString {
     println(assumedString)
 }
 // prints "An implicitly unwrapped optional string."
+```
+
 You can also use an implicitly unwrapped optional with optional binding, to check and unwrap its value in a single statement:
 
+你同样可以对隐式解析可选值使用可选值绑定，在一行声明中来检查和解析它的值：
+
+```
 if let definiteString = assumedString {
     println(definiteString)
 }
 // prints "An implicitly unwrapped optional string."
-NOTE
+```
 
-Implicitly unwrapped optionals should not be used when there is a possibility of a variable becoming nil at a later point. Always use a normal optional type if you need to check for a nil value during the lifetime of a variable.
+> NOTE
 
-Assertions
+> Implicitly unwrapped optionals should not be used when there is a possibility of a variable becoming nil at a later point. Always use a normal optional type if you need to check for a nil value during the lifetime of a variable.
+
+> 注意
+
+> 当一个变量有可能是nil的情况下，不应当使用隐式解析可选值。如果在整个过程中检查一个变量是否有nil值，你应该用一个普通的可选值。
+
+# Assertions
+# 断言
 
 Optionals enable you to check for values that may or may not exist, and to write code that copes gracefully with the absence of a value. In some cases, however, it is simply not possible for your code to continue execution if a value does not exist, or if a provided value does not satisfy certain conditions. In these situations, you can trigger an assertion in your code to end code execution and to provide an opportunity to debug the cause of the absent or invalid value.
 
-Debugging with Assertions
+可选值让你可以检查一个值是否存在，并且优雅的处理值缺失的情况。然而，在一些情况下，如果值不存在或者值不满足指定的条件，你的程序就无法继续执行。在这些情况下，你可以在代码中触发一个断言，来中断代码的执行并且提供一个调试为什么值缺失或无效的机会。
+
+## Debugging with Assertions
+## 用断言来调试
 
 An assertion is a runtime check that a logical condition definitely evaluates to true. Literally put, an assertion “asserts” that a condition is true. You use an assertion to make sure that an essential condition is satisfied before executing any further code. If the condition evaluates to true, code execution continues as usual; if the condition evaluates to false, code execution ends, and your app is terminated.
 
+断言是判断一个逻辑条件是否为真的实时检查。基本上，一个断言就是“断定”（asserts）一个条件为真。你可以使用断言来确保在运行后续代码之前它的一个必要的条件是已经满足了的。如果这个条件为真，代码会正常执行，如果条件为否，代码会停止执行，并且你的app会终止。
+
 If your code triggers an assertion while running in a debug environment, such as when you build and run an app in Xcode, you can see exactly where the invalid state occurred and query the state of your app at the time that the assertion was triggered. An assertion also lets you provide a suitable debug message as to the nature of the assert.
+
+如果你的代码值调试环境下触发了一个断言，比如当你在Xcode中创建并运行一个app的时候，你可以准确的看到非法语句出现的位置，也可以查询到当断言触发时app的状态。断言还允许你可以提供一个相应的调试信息。
 
 You write an assertion by calling the global assert function. You pass the assert function an expression that evaluates to true or false and a message that should be displayed if the result of the condition is false:
 
+通过调用全局的断言函数来写一个断言。你给断言函数传入一个等于true或false的表达式，当结果是false的时候，会显示出一条信息：
+
+```
 let age = -3
 assert(age >= 0, "A person's age cannot be less than zero")
 // this causes the assertion to trigger, because age is not >= 0
+```
+
 In this example, code execution will continue only if age >= 0 evaluates to true, that is, if the value of age is non-negative. If the value of age is negative, as in the code above, then age >= 0 evaluates to false, and the assertion is triggered, terminating the application.
+
+在这个例子里，只有age >= 0为真的时候代码才会继续执行，也就是，如果age的值是非负数。如果age的值是负数，在上面的代码中，这个age >= 0的条件判断为否，这个断言被触发，终止了这个程序。
 
 Assertion messages cannot use string interpolation. The assertion message can be omitted if desired, as in the following example:
 
+断言信息不能使用字符串插值。如果你想，断言信息是可以省略的，像下面这个例子：
+
+```
 assert(age >= 0)
-When to Use Assertions
+```
+
+## When to Use Assertions
+## 何时使用断言
 
 Use an assertion whenever a condition has the potential to be false, but must definitely be true in order for your code to continue execution. Suitable scenarios for an assertion check include:
 
-An integer subscript index is passed to a custom subscript implementation, but the subscript index value could be too low or too high.
-A value is passed to a function, but an invalid value means that the function cannot fulfill its task.
-An optional value is currently nil, but a non-nil value is essential for subsequent code to execute successfully.
+如果一个条件有可能为否，但只有它为真的时候代码才能继续执行，这时应该使用断言。适当的使用断言检查的场景包括：
+
+- An integer subscript index is passed to a custom subscript implementation, but the subscript index value could be too low or too high.
+- A value is passed to a function, but an invalid value means that the function cannot fulfill its task.
+- An optional value is currently nil, but a non-nil value is essential for subsequent code to execute successfully.
+
+- 一个整数类型的下标索引被传入一个自定义的下标实现，但是这个下标索引值太小或太大。
+- 一个值传入一个函数，但是如果传入不合法的值，这个函数就无法满足需求。
+- 一个可选值当前的值是nil，但是后续代码成功执行需要一个非nil值。
+
 See also Subscripts and Functions.
 
-NOTE
+参见[Subscripts and Functions](link)。
 
-Assertions cause your app to terminate and are not a substitute for designing your code in such a way that invalid conditions are unlikely to arise. Nonetheless, in situations where invalid conditions are possible, an assertion is an effective way to ensure that such conditions are highlighted and noticed during development, before your app is published.
+> NOTE
+
+> Assertions cause your app to terminate and are not a substitute for designing your code in such a way that invalid conditions are unlikely to arise. Nonetheless, in situations where invalid conditions are possible, an assertion is an effective way to ensure that such conditions are highlighted and noticed during development, before your app is published.
+
+> 注意
+
+> 断言会造成你的app终止，它并不能代替你设计代码来保证不合法情况不出现。尽管如此，当不合法的情况可能出现时，断言可以有效的保证在你的app正式发布之前，在开发过程中这种不合法的情况就会被高亮并被注意到。f
