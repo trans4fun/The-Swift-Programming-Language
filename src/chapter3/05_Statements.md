@@ -462,7 +462,7 @@ Control transfer statements can change the order in which code in your program i
 > continue-statement -> [return-statement](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/return-statement)
 
 ##Break Statement##
-##bream语句##
+##break语句##
 A break statement ends program execution of a loop or a switch statement. A break statement can consist of only the keyword break, or it can consist of the keyword break followed by the name of a statement label, as shown below.
 
     break
