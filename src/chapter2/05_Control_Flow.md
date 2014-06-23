@@ -2,11 +2,11 @@
 
 ## by moxin.xt
 
-Swift提供类似C语言的控制流语法，比如```for```和```while```循环;```if```和```switch```的条件判断表达式以及``` break```,```continue```这种跳出循环的语句。
+Swift提供类似C语言的控制流语法，比如```for```和```while```循环;```if```和```switch```的条件判断语句语句以及``` break```,```continue```这种跳出循环的语句。
 
-Swift除了支持类似C语言这种```for-condition-increment```的表达式外，还支持```for-in```这种循环语句，可以轻松的遍历数组，字典，字符串等序列。
+Swift除了支持类似C语言这种```for-condition-increment```的语句外，还支持```for-in```这种循环语句，可以轻松的遍历数组，字典，字符串等序列。
 
-Swift的```switch```语句和C语言相比很强大，它不会像C语言那样，因为在case的分支中忘记写break而执行了下一条case的语句。同时case语句可以匹配任何类型模式，包括区间蒲培，元组和特定类型描述。
+Swift的```switch```语句和C语言相比很强大，它不会像C语言那样，因为在case的分支中忘记写break而执行了下一条case的语句。同时case语句可以进行不同类型的模式匹配，包括区间匹配，元组匹配和特定类型描述。```switch```语句中待匹配的值可以绑定到临时变量或常量上，便于```case```中得代码访问，同时，一些复杂的匹配条件可已通过```where```关键字来补充。
 
 
 #For循环
@@ -32,7 +32,7 @@ for index in 1...5{
 
 ```
 
-我们首先通过(```...```)表达式创建了一个数字集合，然后枚举集合中的每个元素，```index```值首先被赋值为range(```1```),然后执行循环体内的代码,上面这个例子中循环体内只有一行代码，作用是打印出```index```的值。当这行代码执行完后，```index```值会被更新，被赋值为range(```2```),```println```再次被调用，如此反复，直到循环结束。
+我们首先通过(```...```)语句创建了一个数字集合，然后枚举集合中的每个元素，```index```值首先被赋值为range(```1```),然后执行循环体内的代码,上面这个例子中循环体内只有一行代码，作用是打印出```index```的值。当这行代码执行完后，```index```值会被更新，被赋值为range(```2```),```println```再次被调用，如此反复，直到循环结束。
 
 上面例子中```index```是个常量，在每次循环开始的时候会被自动赋值，因此它不需要在使用前通过```let```声明，因为它会被```for-in```隐式声明。
 
@@ -97,7 +97,7 @@ for (animalName, legCount) in numberOfLegs {
 ```
 ## For-Condition-Increment
 
-除了使用```for-in```这种循环表达式，Swift还提供了传统的C风格的``for```循环表达式，通常它需要一个循环执行条件和一个累加器：
+除了使用```for-in```这种循环语句，Swift还提供了传统的C风格的``for```循环语句，通常它需要一个循环执行条件和一个累加器：
 
 ```
 “for var index = 0; index < 3; ++index {
@@ -107,21 +107,21 @@ for (animalName, legCount) in numberOfLegs {
 // index is 1
 // index is 2
 ```
-下面是这种语法通用的表达式：
+下面是这种语法通用的语句：
 
 for ```initialization```;```condition```;```increment```{
 ```statements```	
 }
 
-和C语言一样，循环表达式被分号分割为3部分。但是和C语言不同的是，Swift不需要使用括号将"initialization;condition;increment"包围起来。
+和C语言一样，循环语句被分号分割为3部分。但是和C语言不同的是，Swift不需要使用括号将"initialization;condition;increment"包围起来。
 
 循环执行顺序如下：
 
-1，循环开始时执行一次initialization表达式，初始化循环使用的常量或变量。
+1，循环开始时执行一次initialization语句，初始化循环使用的常量或变量。
 
-2，condition表达式被执行，如果结果为```false```循环结束，执行循环体后面的代码。如果condition表达式结果为```true```，继续执行循环体内的代码
+2，condition语句被执行，如果结果为```false```循环结束，执行循环体后面的代码。如果condition语句结果为```true```，继续执行循环体内的代码
 
-3，当循环体内的代码被执行完时，increment表达式被执行。通常情况是增加或减少计数器的值，然后执行第2步，condition表达式会被再次执行。
+3，当循环体内的代码被执行完时，increment语句被执行。通常情况是增加或减少计数器的值，然后执行第2步，condition语句会被再次执行。
 
 上面的for循环结构也可以如下表示：
 
@@ -131,7 +131,7 @@ while ```condition``` {
 ```increment```
 }
 
-在for循环初始化时创建的变量或者常量只在循环体内有效，如果想获取循环结束时的```index```值，你必须将```index```显式的声明到循环表达式前：
+在for循环初始化时创建的变量或者常量只在循环体内有效，如果想获取循环结束时的```index```值，你必须将```index```显式的声明到循环语句前：
 
 ```
 var index: Int
@@ -215,9 +215,9 @@ println("Game over!")
 显然在上面这情况下，使用```while```循环是非常合适的，因为循环次数不确定，只能根据循环条件来判断是否要终止循环。
 
 ###Do-While
-另一个```while```循环的变种是```do-while```表达式，它首先执行一次循环，然后在判断循环执行条件。如此反复，直到循环条件返回```false```。
+另一个```while```循环的变种是```do-while```语句，它首先执行一次循环，然后在判断循环执行条件。如此反复，直到循环条件返回```false```。
 
-下面是```do-while```表达式的格式：
+下面是```do-while```语句的格式：
 
 ```
 do {
@@ -255,16 +255,16 @@ println("Game over!")
 
 这里的循环条件（```while square < finalSquare```）和前面相同，但它会在循环结束后被执行。```do-while```循环结构比前面的```while```更适合这个游戏。使用```do-while```时，```square+=board[square]```会立刻被执行，它省去了上个例子中对数组越界的判断。
 
-##条件表达式
+##条件语句
 通常情况下我们需要在满足某种条件时执行一段代码或者在出错时执行另一段代码，也可能需要在某个值过大或过小时打印输出一些提示信息。这都需要你在代码中加入判断条件。
 
-Swift提供了两种条件判断的表达式，它们是```if```和```switch```。
+Swift提供了两种条件判断的语句，它们是```if```和```switch```。
 
-通常情况下，在条件分支比较少时，你使用```if```表达式，```switch```表达式用来处理复杂的判断条件和过多的条件分支，此外```switch```在模式匹配上非常有用。
+通常情况下，在条件分支比较少时，你使用```if```语句，```switch```语句用来处理复杂的判断条件和过多的条件分支，此外```switch```在模式匹配上非常有用。
 
 ###If
 
-```If```表达式很简单，当判断条件为```true```时，执行一段代码：
+```If```语句很简单，当判断条件为```true```时，执行一段代码：
 
 ```
 var temperatureInFahrenheit = 30
@@ -275,7 +275,7 @@ if temperatureInFahrenheit <= 32 {
 ```
 上面的例子会判断温度是否小于等于32华氏度。如果是，打印一条消息。
 
-```if```表达式通常和```else```搭配使用，当```if```表达式返回```false```时，```else```分支的代码会被执行：
+```if```语句通常和```else```搭配使用，当```if```语句返回```false```时，```else```分支的代码会被执行：
 
 ```
 temperatureInFahrenheit = 40
@@ -288,7 +288,7 @@ if temperatureInFahrenheit <= 32 {
 
 ```
 
-这种情况下```if```和```else```两个分支中的一个一定会被执行到，你也可以将多个```if```表达式连起来使用：
+这种情况下```if```和```else```两个分支中的一个一定会被执行到，你也可以将多个```if```语句连起来使用：
 
 ```
 temperatureInFahrenheit = 90
@@ -301,7 +301,7 @@ if temperatureInFahrenheit <= 32 {
 }
 // prints "It's really warm. Don't forget to wear sunscreen.
 ```
-这里，多了一个```if```表达式用来判断特定的温度范围。最后的```else```语句是可选的：
+这里，多了一个```if```语句用来判断特定的温度范围。最后的```else```语句是可选的：
 
 ```
 temperatureInFahrenheit = 72
@@ -316,7 +316,7 @@ if temperatureInFahrenheit <= 32 {
 
 ###Switch
 
-```switch```表达式会将一个值和多种模式进行匹配。匹配成功则执行该条件所对应的代码。```switch```是一种可以替换```if```进行条件判断的表达式。```switch```的语法格式如下：
+```switch```语句会将一个值和多种模式进行匹配。匹配成功则执行该条件所对应的代码。```switch```是一种可以替换```if```进行条件判断的语句。```switch```的语法格式如下：
 
 ```
 switch some value to consider {
@@ -329,13 +329,13 @@ default:
     otherwise, do something else
 }
 ```
-每个```switch```表达式都对应多个```case```表达式。除了可以用```case```表达式来比较具体的值以外，Swift提供了许多复杂的模式匹配，下一小节会详细介绍。
+每个```switch```语句都对应多个```case```语句。除了可以用```case```语句来比较具体的值以外，Swift提供了许多复杂的模式匹配，下一小节会详细介绍。
 
-```switch```语句内包含多个代码执行分支，这点和```if```表达式很像。```switch```表达式决定了那个分支会被执行，通常是根据变量值来决定的。
+```switch```语句内包含多个代码执行分支，这点和```if```语句很像。```switch```语句决定了那个分支会被执行，通常是根据变量值来决定的。
 
-每个```switch```表达式必须是完整的，意思是它提供的分支条件必须能涵盖所有情况，你可以定义一个默认的分支条件用来处理一些意外的条件。这种分支通常用关键字```default```表示，并且它必须是最后一个分支条件。
+每个```switch```语句必须是完整的，意思是它提供的分支条件必须能涵盖所有情况，你可以定义一个默认的分支条件用来处理一些意外的条件。这种分支通常用关键字```default```表示，并且它必须是最后一个分支条件。
 
-这个例子使用```switch```表达式类匹配一个小写字母变量```someCharacter```：
+这个例子使用```switch```语句类匹配一个小写字母变量```someCharacter```：
 
 ```
 let someCharacter: Character = "e"
@@ -350,15 +350,15 @@ default:
 }
 // prints "e is a vowel”
 ```
-```switch```表达式的第一个```case```分支是匹配五个元音字母。同理，第二个```case```分支用来匹配所有的字符常量。
+```switch```语句的第一个```case```分支是匹配五个元音字母。同理，第二个```case```分支用来匹配所有的字符常量。
 
-通常来说列举出所有的字符不太现实，因此```switch```表达式提供了```default```分支用来匹配所有其它的字符，这确保了```switch```表达式的完整性。
+通常来说列举出所有的字符不太现实，因此```switch```语句提供了```default```分支用来匹配所有其它的字符，这确保了```switch```语句的完整性。
 
 
 ###没有隐式贯穿
 
 
-和C语言或Objective-C相比，Swift中的```switch```表达式在执行完一条```case```分支的代码后，则认为```switch```语句执行完毕。在某个```case```分支没有```break```的情况下，不会继续执行下一条```case```分支的代码。这比C语言更简单和安全。
+和C语言或Objective-C相比，Swift中的```switch```语句在执行完一条```case```分支的代码后，则认为```switch```语句执行完毕。在某个```case```分支没有```break```的情况下，不会继续执行下一条```case```分支的代码。这比C语言更简单和安全。
 
 	注意：
 	你也可以在```case```分支代码执行前使用```break```语句来跳出这个分支，详见后面的章节。
@@ -376,7 +376,7 @@ default:
 // this will report a compile-time error
 ```
 
-和C语言不同，```switch```表达式不会既匹配`"a"`又匹配`"A"`。遇到这种情况，编译器会给出错误提示。这条规则会避免意外的执行了其它分支的代码。
+和C语言不同，```switch```语句不会既匹配`"a"`又匹配`"A"`。遇到这种情况，编译器会给出错误提示。这条规则会避免意外的执行了其它分支的代码。
 
 一条```case```分支也可以匹配多个判断条件，用逗号隔开:
 
@@ -388,12 +388,12 @@ value 2:
 }
 ```
 	注意
-	对于```switch```表达式的某个case分支，你可以通过使用```fallthrough```关键字来强制贯穿改```case```分支。
+	对于```switch```语句的某个case分支，你可以通过使用```fallthrough```关键字来强制贯穿改```case```分支。
 	更对细节在Fallthrough一节有所介绍
 	
 ###区间匹配
 
-```switch```表达式的```case```分支可以是一个值区间同样支持范围匹配。下面这个例子展示了如何使用区间匹配来输出任意数字对应的自然语言格式：
+```switch```语句的```case```分支可以是一个值区间同样支持范围匹配。下面这个例子展示了如何使用区间匹配来输出任意数字对应的自然语言格式：
 
 ```
 let count = 3_000_000_000_000
@@ -421,7 +421,7 @@ println("There are \(naturalCount) \(countedThings).")
 
 ###元组
 
-你可以使用元组在同一个```switch```表达式中测试多个值。元组中的每个元素可以是一个区间，也可以是不同的值。我们使用(_)来匹配任何可能的值。
+你可以使用元组在同一个```switch```语句中测试多个值。元组中的每个元素可以是一个区间，也可以是不同的值。我们使用(_)来匹配任何可能的值。
 
 下面的例子使用一个元组类型（```Int```,```Int```）的点(x,y)并用图标来描述它的分布：
 
@@ -445,13 +445,13 @@ default:
 
 【图】
 
-```switch```表达式用来判断这个点是否在原点；红色的X轴上；橘黄色的Y轴上；在蓝色的4x4的盒子内，还是在盒子外面。
+```switch```语句用来判断这个点是否在原点；红色的X轴上；橘黄色的Y轴上；在蓝色的4x4的盒子内，还是在盒子外面。
 
 不像C语言，Swift支持不同的```case```分支匹配同一个结果，在这个例子中，点(0,0)满足所有4个分之条件。这种情况下只有第一条```case```语句被执行。点(0,0)会首先匹配第一条```case(0,0)```，后面的```case```语句会被忽略掉。
 
 ###值绑定(Value Bindings)
 
-```switch```表达式允许在一个```case```分支中，将待匹配的值绑定到一些常量或临时变量上。这就是值绑定。
+```switch```语句允许在一个```case```分支中，将待匹配的值绑定到一些常量或临时变量上。这就是值绑定。
 下面的例子将使用值绑定的方法重写上面的代码：
 
 ```
@@ -469,7 +469,7 @@ case let (x, y):
 ```
 【图】
 
-上面我们通过```switch```表达式判断了```anotherPoint```这个点是否在红色的X，y轴上或者在非轴上的任意位置。
+上面我们通过```switch```语句判断了```anotherPoint```这个点是否在红色的X，y轴上或者在非轴上的任意位置。
 
 上面三条```case```语句使用临时变量```x```,```y```来匹配```anotherPoint```中的值。第一条```case(let x, 0)```语句用来匹配所有```y```值为0的点，并把该点的```x```值赋值给常量```x```。同理，```case(0,let y)```匹配所有```x```值为0的点，并把该点得```y```值赋给常量```y```。
 
@@ -499,22 +499,22 @@ case let (x, y):
 ```
 【图】
 
-上面的```switch```表达式用来检测```yetAnotherPoint```这个点是否在绿色或紫色的对角线上。
+上面的```switch```语句用来检测```yetAnotherPoint```这个点是否在绿色或紫色的对角线上。
 
-上面的三条```switch```表达式声明了常量```x```和```y```用来临时保存```yetAnotherPoint```中的坐标值。这两个常量同时也被```where```用来创建一个过滤条件。只有当```where```的过滤条件返回```true```时，```case```分支的代码才会被执行。
+上面的三条```switch```语句声明了常量```x```和```y```用来临时保存```yetAnotherPoint```中的坐标值。这两个常量同时也被```where```用来创建一个过滤条件。只有当```where```的过滤条件返回```true```时，```case```分支的代码才会被执行。
 
 和上面的例子一样```default```分支在这个例子中也可以被忽略。
 
-###控转移表达式
+###控转移语句
 
-控制转移表达式会改变代码执行的顺序。Swift提供了4个控制转移表达式：
+控制转移语句会改变代码执行的顺序。Swift提供了4个控制转移语句：
 
 * continue
 * break
 * fallthrough
 * return
 
-我们下面将会讨论```control```,```break````,```return```表达式，```return```将会在函数一章讨论。
+我们下面将会讨论```control```,```break````,```return```语句，```return```将会在函数一章讨论。
 
 
 
@@ -542,17 +542,17 @@ println(puzzleOutput)
 // prints "grtmndsthnklk
 ```
 
-在上面的代码中，一旦出现元音字母，当前循环就会被终止，并重新开始下一次循环。这会让```switch```表达式去匹配元音字符或空字符时不做处理，而不是让每一个匹配到的字符都被打印出来。
+在上面的代码中，一旦出现元音字母，当前循环就会被终止，并重新开始下一次循环。这会让```switch```语句去匹配元音字符或空字符时不做处理，而不是让每一个匹配到的字符都被打印出来。
 
 ###break
 
-```break```语句会立刻终止当前执行的整个控制流。```break```可被用在```switch```表达式里面或循环中用来提前结束控制流。
+```break```语句会立刻终止当前执行的整个控制流。```break```可被用在```switch```语句里面或循环中用来提前结束控制流。
 
 ###循环体内的break
 
 当在循环体内执行```break```时，会退出整个循环，代码从循环体后面的第一行开始执行。
 
-###Switch表达式中得break
+###Switch语句中得break
 
 当在```switch```中使用```break```时，会立即终止改```switch``代码块的执行，并且跳转到```switch```代码块结束的大括号(```}```)后的第一行代码。
 
@@ -592,5 +592,111 @@ if let integerValue = possibleIntegerValue {
 当switch代码块执行完后，接下来的代码先判断```possibleIntegerValue``是否被绑定成功。因为是可选类型的缘故，```possibleIntegerValue```有一个隐式的初始值nil，所以仅仅当```possibleIntegerValue```曾被switch代码块的前四个分支中的某个设置过一个值时，可选的绑定将会被判定为成功。
 
 在上面的例子中，想要把```Character```所有的的可能性都枚举出来是不现实的，所以使用```default```分支来包含所有上面没有匹配到字符的情况。由于这个```default```分支不需要执行任何动作，所以它只写了一条```break```语句。一旦落入到```default```分支中后，```break```语句就完成了该分支的所有代码操作，代码继续向下，开始执行```if let```语句。
+
+###Fallthrough
+
+Swift中的Switch语句不会从上到下进入每一个case分支。相反，一旦有一个case分支被匹配成功，整个state语句就结束执行了。相比之下，在C语言中，为了防止switch语句会贯穿执行每一个case分支，你需要在每个case分支的末尾插入```break```语句。和C语言相比，Swift支持这种避免贯穿行为会让```switch```语句更简洁和更安全也能规避错误执行多个case分支的情况。
+
+如果你一定要使用C风格的贯穿(fallthrough)机制，你可以在每个需要支持该特性的case分支中使用```fallthrough```关键字。下面这个例子展示了如何使用```fallthrough```来实现对数字的文本描述：
+
+```
+let integerToDescribe = 5
+var description = "The number \(integerToDescribe) is"
+switch integerToDescribe {
+case 2, 3, 5, 7, 11, 13, 17, 19:
+    description += " a prime number, and also"
+    fallthrough
+default:
+    description += " an integer."
+}
+println(description)
+// prints "The number 5 is a prime number, and also an integer.
+```
+这个例子中声明了一个叫```description```的```string```类型的变量，并且为其赋了初值。然后这个函数通过```switch```语句来判断```integerToDescribe```的值。如果```integerToDescribe```的值为数组中的一个素数，则该函数会为```decription```后面追加一段文本用来提示改数字式质数。然后会使用```fallthrough```关键字来执行```default```中的代码。在```default```分支中会为```description```后面继续追加一段文本。至此，```switch```语句才算执行完成。
+
+如果```integerToDescribe```的值不在这组质数当中，则它不会和第一条```case```语句匹配。由于没有其它的分支存在，所以```integerToDescribe```会落入```default```分支。
+
+当```switch```语句执行完成后，关于这个数字的描述会通过```println```函数打印出来。在这个例子中，数字```5```被正确的识别为一个质数。
+
+	注意：
+	和C语言的```switch```语句一样，```fallthrough```不会检查它落入执行的```case```分支的条件是否匹配，
+	它只是简单的执行下一条```case```(或```default```)中的代码。
+	
+###Labeled语句
+
+在```swift```中，可以在循环或```switch```函数中嵌套循环或```switch```函数来实现比较复杂的控制流结构。但是，在循环或```switch```函数中可以使用```break```语句提前终止其执行过程。因此，有些时候显示的调用```break```来标识终止循环或```switch```是非常有好处的。类似的，如果一个循环中嵌套了多个循环，使用```continue```来标识其影响的循环体也是很有用的。
+
+为了实现上面的目标，你可以通过标签来标识某个循环或```switch```语句。使用```break```或```continue```时，带上这个标签，这个标签可以用来结束或执行被标记的代码段。
+
+标签语句通常被放到一些关键字的前面，通过分号隔开。下面是一个通过标签来标记```while```语句的例子，循环或```switch```语句和它类似：
+
+```
+label name: while condition {
+    statements
+}
+
+```
+
+下面这个例子将使用```break```和```continue```,配合带标签的```while```循环，该循环和前面的梯子和蛇的例子一直。这次，该游戏新增加了一条规则
+
+* 为了胜利，你必须恰好到达第25个格子中
+
+如果某一次掷骰子会把你带到超过25的地方，必须重新掷骰子，直到你恰好到达第25号格子的位子
+
+游戏的棋盘和前面的一样：
+
+【图】
+
+```finalSquare```,```board```,```square```和```diceRoll```的值和之前初始化的值相同:
+
+```
+let finalSquare = 25
+var board = Int[](count: finalSquare + 1, repeatedValue: 0)
+board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
+board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
+var square = 0
+var diceRoll = 0
+
+```
+这个版本会使用```while```循环和```switch```语句来实现游戏的逻辑。```while```循环有个标签叫做```gameLoop```，用来表示这个循环是这个游戏的主循环。
+
+```while```循环的条件是```while square != finalSquare```用来表示你必须正好落在第25个格子中：
+
+```
+gameLoop: while square != finalSquare {
+    if ++diceRoll == 7 { diceRoll = 1 }
+    switch square + diceRoll {
+    case finalSquare:
+        // diceRoll will move us to the final square, so the game is over
+        break gameLoop
+    case let newSquare where newSquare > finalSquare:
+        // diceRoll will move us beyond the final square, so roll again
+        continue gameLoop
+    default:
+        // this is a valid move, so find out its effect
+        square += diceRoll
+        square += board[square]
+    }
+}
+println("Game over!")
+
+```
+
+在每个循环开始前都需要掷骰子，与之前立刻移动玩家不同，这次利用```switch```语句计算每次掷骰子产生的结果，从而决定玩家是否可以移动：
+
+* 如果掷骰子的结果恰好将玩家移动到最后的方格中，那么游戏结束。```break gameLoop```会将代码跳到循环后的第一条语句，继续执行后面的代码。
+
+* 如果掷骰子的结果将玩家移动到超过最后一个方格的位置，那么这次结果是无效的，玩家需要重新掷骰子。```continue gameLoop```会将当前循环终止并重新开始下一次循环。
+
+* 在所有其余的情况中，掷骰子的结果是有效的，玩家会前进```diceRoll```个格子，游戏的逻辑会检测是否遇到梯子或者蛇。循环结束时，代码将回到```while```条件判定检查是否要进行下一次循环。
+
+	注意：
+	
+	如果```break```语句没有使用```gameLoop```标签，那么它将会中断```switch```代码块而不是```while```。	使用```gameLoop```标签可以更直观的体现循环在哪里被终止的。
+	
+	我们还注意到，跳到下一次循环的语句：```continue gameLoop```并不一定要使用```gameLoop```标签。由于代码中只	有一个循环，因此```continue```语句是没有歧义的，但是在这里使用```gameLoop```标签也是没有任何坏处的。在```break```旁边加上标签可以保证代码的一致性，是代码逻辑更清楚，更容易被人读懂和理解。
+
+
+
 
 
