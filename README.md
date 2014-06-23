@@ -42,7 +42,7 @@ The Swift Programming Language 中文化项目
    * 语句 [认领 by 玩家]
    * 声明 [认领 by 墨峰]
    * 属性 [认领 by 隐若]
-   * 模式 [认领 by 栖邀]
+   * 模式 [认领 by 栖邀][review by 紫溪 0%]
    * 泛型参数 [认领 by 龙刚]
    * 语法总结 [认领 by 无独]
 
