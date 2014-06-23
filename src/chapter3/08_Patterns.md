@@ -143,7 +143,7 @@ case let (x, y):
 
 In the example above, ```let``` distributes to each identifier pattern in the tuple pattern ```(x, y)```. Because of this behavior, the ```switch``` cases ```case let (x, y):``` and ```case (let x, let y):``` match the same values.
 
-在上面的例子中，```let```将元组模式```(x, y)```分配到各个标识符模式[to:]。因为这种行为，```switch```语句中的```case let (x, y):```和```case (let x, let y):```匹配的值是一样的。
+在上面的例子中，```let```将元组模式```(x, y)```分配到各个标识符模式[to:let把元素分配给元组模式(x,y)的相应标识符模式]。因为这种行为[to:正是由于这种行为]，```switch```语句中的```case let (x, y):```和```case (let x, let y):```匹配的值是一样的。
 
 > GRAMMAR OF A VALUE-BINDING PATTERN
 > 
@@ -160,15 +160,15 @@ In the example above, ```let``` distributes to each identifier pattern in the tu
 
 A tuple pattern is a comma-separated list of zero or more patterns, enclosed in parentheses. Tuple patterns match values of corresponding tuple types.
 
-元组模式是被一对圆括号包围、并以逗号分隔的列表，列表中可以包含零或多个模式。元组模式会匹配相应元组类型的值。
+元组模式是被一对圆括号包围、并以逗号分隔的列表，列表中可以包含零或多个模式[to:元组模式是被一对圆括号包围，含有零或多个模式，并用逗号分隔的列表]。元组模式会匹配相应元组类型的值。
 
 You can constrain a tuple pattern to match certain kinds of tuple types by using type annotations. For example, the tuple pattern ```(x, y): (Int, Int)``` in the constant declaration ``` let (x, y): (Int, Int) = (1, 2)```  matches only tuple types in which both elements are of type ``` Int``` . To constrain only some elements of a tuple pattern, provide type annotations directly to those individual elements. For example, the tuple pattern in ``` let (x: String, y)```  matches any two-element tuple type, as long as the first element is of type ``` String``` .
 
-你可以使用类型注释来限制一个元组模式仅匹配某种类型的元组。例如，在常量申明```let (x, y): (Int, Int) = (1, 2)```中的元组模式```(x, y): (Int, Int)```只匹配两个元素都是```Int```这种类型的元组。如果仅需要限制元组模式中的某几个元素，直接对这几个元素提供类型注释即可。例如，在```let (x: String, y)```中的元组模式，将匹配包含两个元素且第一个元素类型是```String```的任意元组。
+你可以使用类型注释来限制一个元组模式仅匹配某种类型的元组。例如，在常量声明```let (x, y): (Int, Int) = (1, 2)```中的元组模式```(x, y): (Int, Int)```只匹配两个元素都是```Int```类型的元组。如果仅需要限制元组模式中的某几个元素，直接对这几个元素提供类型注释即可。例如，在```let (x: String, y)```中的元组模式，将匹配[增加“任意”]包含两个元素且第一个元素类型是```String```的任意[去掉“任意”]元组。
 
 When a tuple pattern is used as the pattern in a ```for-in``` statement or in a variable or constant declaration, it can contain only wildcard patterns, identifier patterns, or other tuple patterns that contain those. For example, the following code isn’t valid because the element ```0``` in the tuple pattern ```(x, 0)``` is an expression pattern:
 
-当元组模式被用在```for-in```语句、变量或常量声明中时，它可以包含通配符模式、标识符模式或者其他包含这两种模式的模式。例如，下面这段代码是不正确的，因为```(x, 0)```中的元素```0```是一个表达式模式：
+当元组模式["被用在"to“用于”]```for-in```语句、变量或常量声明中时，它只可以包含通配符模式、标识符模式或者其他包含这两种模式的模式。例如，下面这段代码是不正确的，因为元组模式```(x, 0)```中的元素```0```是一个[去掉“一个”]表达式模式：
 
 ```
 let points = [(0, 0), (1, 0), (1, 1), (2, 0), (2, 1)]
@@ -188,7 +188,7 @@ for (x, 0) in points {
 
 The parentheses around a tuple pattern that contains a single element have no effect. The pattern matches values of that single element’s type. For example, the following are equivalent:
 
-对于只包含一个元素的元组，包围元组的圆括号是不起作用的。模式会匹配该单个元素的类型。例如，下面的不同写法是等效的：
+对于只包含一个元素的元组，包围元组的圆括号是不起作用的。模式会匹配该单个元素的类型。例如，下面的不同写法是等效的["等效的"to“等价的”]：
 
 ```
 let a = 2        // a: Int = 2
@@ -246,7 +246,7 @@ If the enumeration case you’re trying to match has any associated values, the 
 
 There are two type-casting patterns, the ```is``` pattern and the ```as``` pattern. Both type-casting patterns appear only in ```switch``` statement case labels. The ```is``` and ```as``` patterns have the following form:
 
-有两种类型转换模式，分别是```is```模式和```as```模式。这两种模式均只出现在```switch```语句的case标签中。```is```模式和```as```模式有以下形式：
+有两种类型转换模式，分别是```is```模式和```as```模式。这两种模式均["均"to"都"]只出现在```switch```语句的case标签中。```is```模式和```as```模式有以下形式：
 
 > is type
 > 
@@ -323,7 +323,7 @@ default:
 
 You can overload the ```~=``` operator to provide custom expression matching behavior. For example, you can rewrite the above example to compare the point expression with a string representations of points.
 
-你可以重载```~=```操作符来提供自定义的表达式匹配行为。例如，你可以重写上面的例子来比较使用字符串所表达的点。
+你可以重载```~=```操作符来提供自定义的表达式匹配行为。例如，你可以重写上面的例子来比较使用字符串所表达的点[你可以使用point的字符串形式来比较point表达式]。
 
 ```
 // Overload the ~= operator to match a string with an integer
