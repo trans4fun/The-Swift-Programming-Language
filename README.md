@@ -13,7 +13,7 @@ The Swift Programming Language 中文化项目
 * Swift 教程
    * 基础部分 [认领 by 琼雪]
    * 基本操作符 [认领 by 冰浠]
-   * 字符串和字符 [认领 by 筱谷]
+   * 字符串和字符 [认领 by 筱谷] [review by 尘境]
    * 集合类型 [认领 by 尘境]
    * 控制流 [认领 by 墨昕]
    * 函数 [已完成 by 紫溪] [review by 飞长]
