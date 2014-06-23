@@ -16,7 +16,7 @@ The Swift Programming Language 中文化项目
    * 字符串和字符 [认领 by 筱谷]
    * 集合类型 [认领 by 尘境]
    * 控制流 [认领 by 墨昕]
-   * 函数 [认领 by 紫溪]
+   * 函数 [认领 by 紫溪   review by 飞长]
    * 闭包 [认领 by 闻西]
    * 枚举 [已完成 by 灵吾]
    * 类和结构体 [已完成 by 晓毒]
