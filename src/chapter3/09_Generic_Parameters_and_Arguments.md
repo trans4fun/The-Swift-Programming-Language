@@ -125,11 +125,16 @@ Dictionary类型的特定配置```Dictionary<String, Int>```是由具体替换�
 You can also replace a type parameter with a type argument that is itself a specialized version of a generic type (provided it satisfies the appropriate constraints and requirements). For example, you can replace the type parameter T in Array<T> with a specialized version of an array, Array<Int>, to form an array whose elements are themselves arrays of integers.
 
 
+你也可以用一个满足约束条件与依赖条件的类型实参的特定配置来替换类型形参。比如，你可以用特定的数组`Array<Int>`替换`Array<T>`中的类型形参`T`，得到
+一个数组，且它的元素是跟它本身一样的由整形元素组成的数组。
+
 ```
 let arrayOfArrays: Array<Array<Int>> = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 ```
 
 As mentioned in Generic Parameter Clause, you don’t use a generic argument clause to specify the type arguments of a generic function or initializer.
+
+正如在泛型参式句式里面提及的，不需要泛型实参句式指定泛形函数、初始化器的实参。
 
 > **GRAMMAR OF A GENERIC ARGUMENT CLAUSE**
 
