@@ -35,7 +35,7 @@ The Swift Programming Language 中文化项目
    * 泛型 [已完成 by 晴时]
    * 高级操作符 [认领 by 林晚]
 * 语言参考
-   * 关于语言参考 [认领 by 筱强]
+   * 关于语言参考 [认领 by 筱强] [review by 隐若]
    * 词法结构 [认领 by 筱强]
    * 类型 [认领 by 兰梦]
    * 表达式 [认领 by 懂象]
