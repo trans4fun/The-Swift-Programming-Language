@@ -120,14 +120,21 @@ struct Dictionary<KeyType: Hashable, ValueType>: Collection, DictionaryLiteralCo
 
 The specialized version of the generic Dictionary type, Dictionary<String, Int> is formed by replacing the generic parameters KeyType: Hashable and ValueType with the concrete type arguments String and Int. Each type argument must satisfy all the constraints of the generic parameter it replaces, including any additional requirements specified in a where clause. In the example above, the KeyType type parameter is constrained to conform to the Hashable protocol and therefore String must also conform to the Hashable protocol.
 
+Dictionary类型的特定配置```Dictionary<String, Int>```是由具体替换泛型参数```KeyType: Hashable```和```ValueType```的实参```String```与```Int```组成。每一个实参都必须满足它所替换的泛型型参所要求的约束条件，包括在```where```句式中指定的额外依赖条件。在以上的例子中，`KeyType`参数的约束条件是符合```Hashable```协议，```String```也必须符合```Hashable```协议。
+
 You can also replace a type parameter with a type argument that is itself a specialized version of a generic type (provided it satisfies the appropriate constraints and requirements). For example, you can replace the type parameter T in Array<T> with a specialized version of an array, Array<Int>, to form an array whose elements are themselves arrays of integers.
 
+
+你也可以用一个满足约束条件与依赖条件的类型实参的特定配置来替换类型形参。比如，你可以用特定的数组`Array<Int>`替换`Array<T>`中的类型形参`T`，得到
+一个数组，且它的元素是跟它本身一样的由整形元素组成的数组。
 
 ```
 let arrayOfArrays: Array<Array<Int>> = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 ```
 
 As mentioned in Generic Parameter Clause, you don’t use a generic argument clause to specify the type arguments of a generic function or initializer.
+
+正如在泛型参式句式里面提及的，不需要泛型实参句式指定泛形函数、初始化器的实参。
 
 > **GRAMMAR OF A GENERIC ARGUMENT CLAUSE**
 
