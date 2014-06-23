@@ -120,6 +120,8 @@ struct Dictionary<KeyType: Hashable, ValueType>: Collection, DictionaryLiteralCo
 
 The specialized version of the generic Dictionary type, Dictionary<String, Int> is formed by replacing the generic parameters KeyType: Hashable and ValueType with the concrete type arguments String and Int. Each type argument must satisfy all the constraints of the generic parameter it replaces, including any additional requirements specified in a where clause. In the example above, the KeyType type parameter is constrained to conform to the Hashable protocol and therefore String must also conform to the Hashable protocol.
 
+Dictionary类型的特定配置```Dictionary<String, Int>```是由具体替换泛型参数```KeyType: Hashable```和```ValueType```的实参```String```与```Int```组成。每一个实参都必须满足它所替换的泛型型参所要求的约束条件，包括在```where```句式中指定的额外依赖条件。在以上的例子中，`KeyType`参数的约束条件是符合```Hashable```协议，```String```也必须符合```Hashable```协议。
+
 You can also replace a type parameter with a type argument that is itself a specialized version of a generic type (provided it satisfies the appropriate constraints and requirements). For example, you can replace the type parameter T in Array<T> with a specialized version of an array, Array<Int>, to form an array whose elements are themselves arrays of integers.
 
 
