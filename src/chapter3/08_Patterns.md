@@ -3,15 +3,15 @@
 
 A pattern represents the structure of a single value or a composite value. For example, the structure of a tuple ```(1, 2)``` is a comma-separated list of two elements. Because patterns represent the structure of a value rather than any one particular value, you can match them with a variety of values. For instance, the pattern (x, y) matches the tuple (1, 2) and any other two-element tuple. In addition matching a pattern with a value, you can extract part or all of a composite value and bind each part to a constant or variable name.
 
-模式代表了单个值或者复合值的结构。例如，元组```(1, 2)```的结构是逗号分隔的两个元素的列表。因为模式代表一种值的结构，而不是特定的某个值，你可以把模式和各种同类型的值进行匹配。比如，模式```(x, y)```可以匹配元组```(1, 2)```，以及任何含两个元素的元组。除了将模式与一个值匹配外，你可以从合成值中提取部分或全部，然后分别把各部分和一个常量或变量进行绑定。
+模式代表了单个值或者复合值的结构。例如，元组```(1, 2)```的结构是用逗号分隔的两个元素的列表。因为[to:由于]模式代表一种值的结构，而不是特定的某个值，你可以把模式和各种同类型的值进行匹配。比如，模式```(x, y)```可以匹配元组```(1, 2)```，以及任何含有两个元素的元组。除了将模式与一个[去掉“一个”]值匹配外，你可以从合成值中提取部分或全部，然后分别把各部分和一个常量或变量进行绑定。[to:并把各部分分别同常量或变量进行绑定]。
 
 In Swift, patterns occur in variable and constant declarations (on their left-hand side), in ```for-in``` statements, and in ```switch``` statements (in their case labels). Although any pattern can occur in the case labels of a ```switch``` statement, in the other contexts, only wildcard patterns, identifier patterns, and patterns containing those two patterns can occur.
 
-在Swift中，模式出现在变量和常量的声明（放在它们的左侧），```for-in```语句及```switch```语句（放在其case标签内）中。尽管任何模式都可以出现在```switch```语句的case标签中，但在其他情况下，只有通配符模式，标识符模式和包含这两种模式的模式才能出现。
+在Swift中，模式出现在变量和常量的声明（放在它们的左侧）、```for-in```语句及```switch```语句（放在其case标签内）中。尽管任何模式都可以出现在```switch```语句的case标签中，但在其他情况下，只有通配符模式、标识符模式和包含这两种模式的模式才能出现。
 
 You can specify a type annotation for a wildcard pattern, an identifier pattern, and a tuple pattern to constraint the pattern to match only values of a certain type.
 
-你可以为通配符模式，标识符模式和元组模式指定类型注释，用来限制这种模式只匹配某种类型的值。
+你可以为通配符模式、标识符模式和元组模式指定类型注释，用来限制这种模式只匹配某种类型的值。
 
 > GRAMMAR OF A PATTERN
 >
@@ -82,7 +82,7 @@ for _ in 1...3 {
 
 An identifier pattern matches any value and binds the matched value to a variable or constant name. For example, in the following constant declaration, ```someValue``` is an identifier pattern that matches the value ```42``` of type ```Int```:
 
-标识符模式匹配任何值，并将匹配的值绑定到一个变量或常量。例如，在下面的常量声明中，```someValue```是一个标识符模式，其匹配了类型是```Int```的值```42```。
+标识符模式匹配任何值，并把匹配的值绑定到一个变量或常量。例如，在下面的常量声明中，```someValue```是一个标识符模式，其匹配了类型是```Int```的值```42```。[to:它匹配了Int类型的值42]
 
 ```
 let someValue = 42
@@ -98,7 +98,7 @@ When the match succeeds, the value ```42``` is bound (assigned) to the constant 
 
 When the pattern on the left-hand side of a variable or constant declaration is an identifier pattern, the identifier pattern is implicitly a subpattern of a value-binding pattern.
 
-当一个变量或常量声明的左边是标识符模式时，标识符模式是隐式的值绑定模式。
+当一个变量或常量声明的左边是标识符模式时，标识符模式是隐式的值绑定模式。[to:标识符模式是值绑定模式的隐式子模式]
 
 > GRAMMAR OF AN IDENTIFIER PATTERN
 > 
@@ -115,11 +115,11 @@ When the pattern on the left-hand side of a variable or constant declaration is 
 
 A value-binding pattern binds matched values to variable or constant names. Value-binding patterns that bind a matched value to the name of a constant begin with the keyword ```let```; those that bind to the name of variable begin with the keyword ```var```.
 
-值绑定模式绑定匹配的值到一个变量或常量。绑定匹配值给常量时，以关键字```let```开头；绑定给变量时，则使用关键字```var```。
+值绑定模式绑定匹配的值到一个变量或常量[to:值绑定模式把匹配的值绑定到一个变量或常量上]。绑定匹配值给常量时[to:把匹配值绑定给常量时]，以关键字```let```开头；绑定给变量时，则使用关键字```var```。
 
 Identifiers patterns within a value-binding pattern bind new named variables or constants to their matching values. For example, you can decompose the elements of a tuple and bind the value of each element to a corresponding identifier pattern.
 
-包含在值绑定模式中的标识符模式，会绑定新的变量或常量到其匹配的值。例如，你可以分解一个元组的元素，并把每个元素绑定到相应的标识符模式中。
+包含在值绑定模式中的标识符模式，会绑定新的变量或常量到其匹配的值[to:会把新命名的变量或常量绑定到它们匹配的值]。例如，你可以分解一个元组的元素，并把每个元素绑定到相应的标识符模式中。
 
 ```
 let point = (3, 2)
@@ -143,7 +143,7 @@ case let (x, y):
 
 In the example above, ```let``` distributes to each identifier pattern in the tuple pattern ```(x, y)```. Because of this behavior, the ```switch``` cases ```case let (x, y):``` and ```case (let x, let y):``` match the same values.
 
-在上面的例子中，```let```将元组模式```(x, y)```分配到各个标识符模式。因为这种行为，```switch```语句中的```case let (x, y):```和```case (let x, let y):```匹配的值是一样的。
+在上面的例子中，```let```将元组模式```(x, y)```分配到各个标识符模式[to:]。因为这种行为，```switch```语句中的```case let (x, y):```和```case (let x, let y):```匹配的值是一样的。
 
 > GRAMMAR OF A VALUE-BINDING PATTERN
 > 
