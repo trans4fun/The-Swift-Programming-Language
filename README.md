@@ -8,20 +8,20 @@ The Swift Programming Language 中文化项目
 # 任务和进度
 
 * 欢迎使用 Swift
-   * Swift 介绍 [已完成 by 飞长]
-   * Swift 初见  [认领 by 容隽]
+   * Swift 介绍 [已完成 by 飞长][review by 容隽]
+   * Swift 初见  [认领 by 容隽][review by 闻西]
 * Swift 教程
    * 基础部分 [认领 by 琼雪]
    * 基本操作符 [认领 by 冰浠]
    * 字符串和字符 [认领 by 筱谷]
    * 集合类型 [认领 by 尘境]
    * 控制流 [认领 by 墨昕]
-   * 函数 [认领 by 紫溪   review by 飞长]
+   * 函数 [认领 by 紫溪][review by 飞长]
    * 闭包 [认领 by 闻西]
    * 枚举 [已完成 by 灵吾]
    * 类和结构体 [已完成 by 晓毒]
    * 属性 [认领 by 周源]
-   * 方法 [已完成 by 米尔]
+   * 方法 [已完成 by 米尔][review by 灵吾]
    * 下标 [已完成 by 递归]
    * 继承 [已完成 by 晗光]
    * 构造过程 [认领 by 刘康]
