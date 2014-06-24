@@ -33,7 +33,7 @@ The Swift Programming Language 中文化项目
    * 扩展 [已完成 by 袁鹏]
    * 协议 [认领 by 姜天意][review by 重鱼]
    * 泛型 [已完成 by 晴时]
-   * 高级操作符 [认领 by 林晚]
+   * 高级操作符 [认领 by 林晚][review by 周源]
 * 语言参考
    * 关于语言参考 [认领 by 筱强] [review by 懂象]
    * 词法结构 [认领 by 筱强][review by 懂象]
