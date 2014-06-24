@@ -162,16 +162,16 @@ The following example defines a protocol with a single instance method requireme
     }
 This protocol, RandomNumberGenerator, requires any conforming type to have an instance method called random, which returns a Double value whenever it is called. (Although it is not specified as part of the protocol, it is assumed that this value will be a number between 0.0 and 1.0 inclusive.)
 
-RandomNumberGenerator,该协议要求任何遵循协议的类型调用一个名为random的实例方法,这个方法无论何时调用，都会返回一个Double类型的值。(这个值在0.0与1.0之间，这一点没有在协议中指出)。
+`RandomNumberGenerator`,该协议要求任何遵循协议的类型调用一个名为random的实例方法,这个方法无论何时调用，都会返回一个Double类型的值。(这个值在0.0与1.0之间，这一点没有在协议中指出)。
 
 
 The RandomNumberGenerator protocol does not make any assumptions about how each random number will be generated—it simply requires the generator to provide a standard way to generate a new random number.
 
 Here’s an implementation of a class that adopts and conforms to the RandomNumberGenerator protocol. This class implements a pseudorandom number generator algorithm known as a linear congruential generator:
 
-　RandomNumberGenerator协议不会描述如何建立一个随机数，只需要指定一个随机数生成器，从而提供一种标准的方式来生成一个新随机数。
+　`RandomNumberGenerator`协议不会描述如何建立一个随机数，只需要指定一个随机数生成器，从而提供一种标准的方式来生成一个新随机数。
 　　
-　下面是一个类的实现,遵循RandomNumberGenerator协议。这个类实现了一种伪随机数发生器算法，称为线性同余（linear congruential）发生器:
+　下面是一个类的实现,遵循`RandomNumberGenerator`协议。这个类实现了一种伪随机数发生器算法，称为线性同余（linear congruential）发生器:
 
 
     class LinearCongruentialGenerator: RandomNumberGenerator {
@@ -208,15 +208,17 @@ NOTE
 If you mark a protocol instance method requirement as mutating, you do not need to write the mutating keyword when writing an implementation of that method for a class. The mutating keyword is only used by structures and enumerations.
 
 
-如果你在一个协议中实现的突变方法是为一个类服务的，不需要为其加上mutating关键字。
-mutating关键字只用在结构体与枚举类型中。
-
+如果你在一个协议中实现的突变方法是为一个类服务的，不需要为其加`上mutating`关键字。
+mutating`关键字只用在结构体与枚举类型中。
+`
 
 The example below defines a protocol called Togglable, which defines a single instance method requirement called toggle. As its name suggests, the toggle method is intended to toggle or invert the state of any conforming type, typically by modifying a property of that type.
-下面的例子中定义了一个togglable协议，包含一个名为togger的突变实例方法。正如名称所表达的，适配此协议的某实例中，toggle方法通常会通过改变实例的某个属性，来切换或恢复其类型。
+
+下面的例子中定义了一个`togglable`协议，包含一个名为`togger`的突变实例方法。正如名称所表达的，适配此协议的某实例中，toggle方法通常会通过改变实例的某个属性，来切换或恢复其类型。
 
 The toggle method is marked with the mutating keyword as part of the Togglable protocol definition, to indicate that the method is expected to mutate the state of a conforming instance when it is called:
-toggle方法前面加上了mutating关键字，作为Togglabel协议定义的一部分，则表示一个适配toggleabel协议的实例中，这个方法会在调用时改变实例的类型。
+
+`toggle`方法前面加上了`mutating`关键字，作为`Togglabel`协议定义的一部分，则表示一个适配`toggleabel`协议的实例中，这个方法会在调用时改变实例的类型。
 
     protocol Togglable {
         mutating func toggle()
@@ -224,7 +226,7 @@ toggle方法前面加上了mutating关键字，作为Togglabel协议定义的一
     
 If you implement the Togglable protocol for a structure or enumeration, that structure or enumeration can conform to the protocol by providing an implementation of the toggle method that is also marked as mutating.
 
-当你提供的枚举或结构体遵循Togglabl协议时，需要提供一个带有`mutating`前缀的toggle方法。
+当你提供的枚举或结构体遵循`Togglable`协议时，需要提供一个带有`mutating`前缀的`toggle`方法。
 
 
 The example below defines an enumeration called OnOffSwitch. This enumeration toggles between two states, indicated by the enumeration cases On and Off. The enumeration’s toggle implementation is marked as mutating, to match the Togglable protocol’s requirements:
@@ -243,6 +245,7 @@ The example below defines an enumeration called OnOffSwitch. This enumeration to
     var lightSwitch = OnOffSwitch.Off
     lightSwitch.toggle()
     // lightSwitch is now equal to .On
+    
 Protocols as Types
 
 协议类型
@@ -250,15 +253,21 @@ Protocols as Types
 Protocols do not actually implement any functionality themselves. Nonetheless, any protocol you create will become a fully-fledged type for use in your code.
 
 尽管协议本身并不实现任何功能，但协议可以作为完整的类型来使用。
+
 Because it is a type, you can use a protocol in many places where other types are allowed, including:
+
 你可以把协议类型用在其他类型适用的场景里，比如：
 
 As a parameter type or return type in a function, method, or initializer
 
 在函数，方法或构造方法中作为形参类型（parameter type）或返回值类型（return type）
+
 As the type of a constant, variable, or property
+
 作为常量、变量或属性这三种类型之一
+
 As the type of items in an array, dictionary, or other container
+
 作为数组，字典或其他容器中的元素类型
 
 NOTE
@@ -283,21 +292,22 @@ Here’s an example of a protocol used as a type:
             return Int(generator.random() * Double(sides)) + 1
         }
     }
+    
 This example defines a new class called Dice, which represents an n-sided dice for use in a board game. Dice instances have an integer property called sides, which represents how many sides they have, and a property called generator, which provides a random number generator from which to create dice roll values.
 
-例子中定义了一个Dice类，用来表示桌游中的拥有N个面的骰子。Dice的实例包含sides和generator两个属性，前者是整型（integer），用来表示骰子有几个面，后者提供了一个随机数生成器，来表示骰子掷出的值。
+例子中定义了一个`Dice`类，用来表示桌游中的拥有N个面的骰子。`Dice`的实例包含`sides`和`generator`两个属性，前者是整型（integer），用来表示骰子有几个面，后者提供了一个随机数生成器，来表示骰子掷出的值。
 
 The generator property is of type RandomNumberGenerator. Therefore, you can set it to an instance of any type that adopts the RandomNumberGenerator protocol. Nothing else is required of the instance you assign to this property, except that the instance must adopt the RandomNumberGenerator protocol.
 
-generator属性的类型为RandomNumberGenerator，因此任何类型，若适配RandomNumberGenerator协议，其实例都可以赋值给generator，除此以外没有其他要求。
+`generator`属性的类型为`RandomNumberGenerator`，因此任何类型，若适配`RandomNumberGenerator`协议，其实例都可以赋值给`generator`，除此以外没有其他要求。
 
 Dice also has an initializer, to set up its initial state. This initializer has a parameter called generator, which is also of type RandomNumberGenerator. You can pass a value of any conforming type in to this parameter when initializing a new Dice instance.
 
-Dice类也包含一个构造方法，用于设置其初始状态。这个方法包含一个同样是RandomNumberGenerator类型的参数generator。在构造一个新的Dice的实例时，可以传入任何遵循RandomNumberGenerator协议的类型作为generator。
+`Dice`类也包含一个构造方法，用于设置其初始状态。这个方法包含一个同样是`RandomNumberGenerator`类型的参数`generator`。在构造一个新的`Dice`的实例时，可以传入任何遵循`RandomNumberGenerator`协议的类型作为`generator`
 
 Dice provides one instance method, roll, which returns an integer value between 1 and the number of sides on the dice. This method calls the generator’s random method to create a new random number between 0.0 and 1.0, and uses this random number to create a dice roll value within the correct range. Because generator is known to adopt RandomNumberGenerator, it is guaranteed to have a random method to call.
 
-Dice类提供了一个实例方法,roll,此方法会返回一个整型值，介于1和骰子面的数量之间。这个方法调用generator的随机�数方法来创建一在0.0和1.0之间的随机数,并使用这个随机数来确保骰子的滚动值在正确的范围内。因为generator适配RandomNumberGenerator协议,因此它可以保证有一个random方法供调用。
+Dice类提供了一个实例方法`roll`,此方法会返回一个整型值，介于1和骰子面的数量之间。这个方法调用`generator`的随机数方法,来创建一在0.0和1.0之间的随机数,并使用这个随机数来确保骰子的滚动值在正确的范围内。因为`generator`适配`RandomNumberGenerator`协议,因此它可以保证有一个`random`方法供调用。
 
 Here’s how the Dice class can be used to create a six-sided dice with a LinearCongruentialGenerator instance as its random number generator:
 
@@ -338,11 +348,11 @@ The example below defines two protocols for use with dice-based board games:
     
 The DiceGame protocol is a protocol that can be adopted by any game that involves dice. The DiceGameDelegate protocol can be adopted by any type to track the progress of a DiceGame.
 
-DiceGame协议可以被任意含有骰子的游戏所适配，DiceGameDelegate协议可以被任意用来追踪DiceGame过程的类型所适配
+`DiceGame`协议可以被任意含有骰子的游戏所适配，`DiceGameDelegate`协议可以被任意用来追踪`DiceGame`过程的类型所适配
 
 Here’s a version of the Snakes and Ladders game originally introduced in Control Flow. This version is adapted to use a Dice instance for its dice-rolls; to adopt the DiceGame protocol; and to notify a DiceGameDelegate about its progress:
 
-这里有一个，Snakes and Ladders游戏的新版本（之前的版本在流程控制这一节中介绍过）。新版本使用Dice类的实例作为掷骰子的需求，并且适配了DiceGame协议。同时通知(notify)DiceGameDelegate协议，用来记录游戏过程:
+这里有一个，`Snakes and Ladders`游戏的新版本（之前的版本在流程控制这一节中介绍过）。新版本使用`Dice`类的实例作为掷骰子的需求，并且适配了`DiceGame`协议。同时通知(notify)`DiceGameDelegate`协议，用来记录游戏过程:
 
     class SnakesAndLadders: DiceGame {
         let finalSquare = 25
@@ -382,30 +392,32 @@ For a description of the Snakes and Ladders gameplay, see the Break section of t
 
 This version of the game is wrapped up as a class called SnakesAndLadders, which adopts the DiceGame protocol. It provides a gettable dice property and a play method in order to conform to the protocol. (The dice property is declared as a constant property because it does not need to change after initialization, and the protocol only requires that it is gettable.)
 
-这个版本的游戏封装为SnakesAndLadders类，该类适配DiceGame协议。这个类还提供了可读的dice属性和play方法，从而遵循了DiceGame协议。(dice属性声明为常量，因为构造之后dice属性就不在改变，且协议只要求dice为只读)
+这个版本的游戏封装为`SnakesAndLadders`类，该类适配`DiceGame`协议。这个类还提供了可读的`dice`属性和`play`方法，从而遵循了`DiceGame`协议。(`dice`属性声明为常量，因为构造之后dice属性就不在改变，且协议只要求`dice`为只读)
 
 
 
 The Snakes and Ladders game board setup takes place within the class’s init() initializer. All game logic is moved into the protocol’s play method, which uses the protocol’s required dice property to provide its dice roll values.
 
-Snakes And Ladders游戏通过构造方法(initializer)init初始化游戏。所有的游戏逻辑移到了play方法中，play方法使用协议要求的dice属性，来提供骰子掷出的值。
+`Snakes And Ladders`游戏通过构造方法(initializer)`init`初始化游戏。所有的游戏逻辑移到了`play`方法中，`play`方法使用协议要求的`dice`属性，来提供骰子掷出的值。
 
 Note that the delegate property is defined as an optional DiceGameDelegate, because a delegate isn’t required in order to play the game. Because it is of an optional type, the delegate property is automatically set to an initial value of nil. Thereafter, the game instantiator has the option to set the property to a suitable delegate.
 
-注意，delegate并不是玩游戏所必须的，因此delegate被定义为DiceGameDelegate协议类型的可选属性，delegate使用nil作为初始值。此后,游戏实例可以选择将其设置为一个合适的代理。
+注意，`delegate`属性并不是游戏运行所必须的，因此`delegate`被定义为`DiceGameDelegate`协议类型的可选属性，`delegate`使用nil作为初始值。此后,游戏实例可以选择将其设置为一个合适的代理。
 
 
 
 DiceGameDelegate provides three methods for tracking the progress of a game. These three methods have been incorporated into the game logic within the play method above, and are called when a new game starts, a new turn begins, or the game ends.
 
-DicegameDelegate协议提供了三个方法来跟踪游戏过程。这三个方法存在于游戏的逻辑中，即上面的play()方法内。分别在游戏开始时，新一轮开始时，游戏结束时被调用。
+`DicegameDelegate`协议提供了三个方法来跟踪游戏过程。这三个方法存在于游戏的逻辑中，即上面的play()方法内。分别在游戏开始时，新一轮开始时，游戏结束时被调用。
 
 
 Because the delegate property is an optional DiceGameDelegate, the play method uses optional chaining each time it calls a method on the delegate. If the delegate property is nil, these delegate calls fail gracefully and without error. If the delegate property is non-nil, the delegate methods are called, and are passed the SnakesAndLadders instance as a parameter.
 
-因为delegate属性是一个遵循DiceGameDelegate的可选属性，因此在play()方法中使用了可选链（optional chaining ）来在代理时调用方法。 若delegate属性为nil， 则delegate所调用的方法正常失败（fail gracefully）且不报错。若delegate不为nil，则方法能够被调用，且作为一个参数传入SnakesAndLadders实例中
+因为`delegate`属性是一个遵循`DiceGameDelegate`的可选属性，因此在`play`方法中使用了可选链（optional chaining ）来在代理时调用方法。 若`delegate`属性为`nil`， 则`delegate`所调用的方法正常失败（fail gracefully）且不报错。若`delegate`不为`nil`，则方法能够被调用，且作为一个参数传入`SnakesAndLadders`实例中
+
 This next example shows a class called DiceGameTracker, which adopts the DiceGameDelegate protocol:
-下一个例子展示了一个名为DiceGameTracker的类，适配DiceGameDelegate协议。
+
+下一个例子展示了一个名为`DiceGameTracker`的类，适配`DiceGameDelegate`协议。
 
     class DiceGameTracker: DiceGameDelegate {
         var numberOfTurns = 0
@@ -424,6 +436,7 @@ This next example shows a class called DiceGameTracker, which adopts the DiceGam
             println("The game lasted for \(numberOfTurns) turns")
         }
     }
+    
 DiceGameTracker implements all three methods required by DiceGameDelegate. It uses these methods to keep track of the number of turns a game has taken. It resets a numberOfTurns property to zero when the game starts; increments it each time a new turn begins; and prints out the total number of turns once the game has ended.
 
 DiceGameTracker提供了DiceGameDelegate所要求的三个方法。它使用这三个方法来跟踪游戏进行的轮数。当游戏开始时，将numberOfTurns属性重置为0。每轮开始后递增这个值。当游戏结束时打印游戏进行的总轮数
@@ -622,15 +635,17 @@ The method implementation can now be used to print a pretty text description of 
 当遍历出的元素的值小于0时，表示一个蛇头，用`▲`符号表示
 当遍历出的元素的值等于0时，表示一个空白方块，用`○`符号表示
 
-println(game.asPrettyText())
-// A game of Snakes and Ladders with 25 squares:
-// ○ ○ ▲ ○ ○ ▲ ○ ○ ▲ ▲ ○ ○ ○ ▼ ○ ○ ○ ○ ▼ ○ ○ ▼ ○ ▼ ○
+    println(game.asPrettyText())
+    // A game of Snakes and Ladders with 25 squares:
+    // ○ ○ ▲ ○ ○ ▲ ○ ○ ▲ ▲ ○ ○ ○ ▼ ○ ○ ○ ○ ▼ ○ ○ ▼ ○ ▼ ○
+
 Protocol Composition
 协议合成
+
 It can be useful to require a type to conform to multiple protocols at once. You can combine multiple protocols into a single requirement with a protocol composition. Protocol compositions have the form protocol<SomeProtocol, AnotherProtocol>. You can list as many protocols within the pair of angle brackets (<>) as you need, separated by commas.
 
 有一种很有用的方式，来表示一种适配多个协议的类型。你可以使用协议合成（Protocol Composition）来组合多个协议。
-协议合成的格式为protocal<SomeProtocol， AnotherProtocol>。你可以在尖括号（`<>`）内列出多个协议，用逗号`,`分隔。
+协议合成的格式为protocal`<SomeProtocol,AnotherProtocol>`。你可以在尖括号（`<>`）内列出多个协议，用逗号`,`分隔。
 
 
 
