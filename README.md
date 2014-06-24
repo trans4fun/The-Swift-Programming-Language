@@ -38,7 +38,7 @@ The Swift Programming Language 中文化项目
    * 关于语言参考 [认领 by 筱强] [review by 隐若]
    * 词法结构 [认领 by 筱强][review by 懂象]
    * 类型 [认领 by 兰梦][review by 筱强]
-   * 表达式 [认领 by 懂象][review by 懂象]
+   * 表达式 [认领 by 懂象][review by 兰梦]
    * 语句 [认领 by 玩家]
    * 声明 [认领 by 墨峰]
    * 属性 [认领 by 隐若]
