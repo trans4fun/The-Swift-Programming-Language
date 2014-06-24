@@ -40,7 +40,7 @@ The Swift Programming Language 中文化项目
    * 类型 [认领 by 兰梦][review by 筱强]
    * 表达式 [认领 by 懂象][review by 兰梦]
    * 语句 [认领 by 玩家] [review by 隐若]
-   * 声明 [认领 by 墨峰]
+   * 声明 [认领 by 墨峰] [review by 龙刚]
    * 属性 [认领 by 隐若]
    * 模式 [已完成 by 栖邀] [review by 紫溪]
    * 泛型参数 [认领 by 龙刚] [review by 墨峰]
