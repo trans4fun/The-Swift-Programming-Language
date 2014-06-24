@@ -43,7 +43,7 @@ The Swift Programming Language 中文化项目
    * 声明 [认领 by 墨峰]
    * 属性 [认领 by 隐若]
    * 模式 [已完成 by 栖邀] [review by 紫溪]
-   * 泛型参数 [认领 by 龙刚]
+   * 泛型参数 [认领 by 龙刚] [review by 墨峰]
    * 语法总结 [认领 by 无独]
 
 # 分工
