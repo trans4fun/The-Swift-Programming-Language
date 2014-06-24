@@ -11,7 +11,7 @@ The Swift Programming Language 中文化项目
    * Swift 介绍 [已完成 by 飞长] [review by 容隽]
    * Swift 初见  [认领 by 容隽] [review by 闻西]
 * Swift 教程
-   * 基础部分 [已完成 by 琼雪]
+   * 基础部分 [已完成 by 琼雪] [review by 栖邀]
    * 基本操作符 [认领 by 冰浠]
    * 字符串和字符 [已完成 by 筱谷] [review by 尘境]
    * 集合类型 [认领 by 尘境]
@@ -43,7 +43,7 @@ The Swift Programming Language 中文化项目
    * 声明 [认领 by 墨峰]
    * 属性 [认领 by 隐若]
    * 模式 [已完成 by 栖邀] [review by 紫溪]
-   * 泛型参数 [认领 by 龙刚]
+   * 泛型参数 [认领 by 龙刚] [review by 墨峰]
    * 语法总结 [认领 by 无独]
 
 # 分工
