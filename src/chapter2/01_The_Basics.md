@@ -7,7 +7,7 @@ Swift是一个用于iOS和OS X平台开发的新的编程语言。尽管如此�
 
 Swift provides its own versions of all fundamental C and Objective-C types, including Int for integers; Double and Float for floating-point values; Bool for Boolean values; and String for textual data. Swift also provides powerful versions of the two primary collection types, Array and Dictionary, as described in Collection Types.
 
-Swift为所有C和Objective-C的基础类型提供了自己的版本，包括整数值Int，浮点值Double和Float，布尔值Bool，以及文本值String。Swift还提供了两个强大的常见集合类型，数组和字典，见[集合类型](link to 集合类型)。
+Swift为所有C和Objective-C的基础类型提供了自己的版本，包括整数值Int，浮点值Double和Float，布尔值Bool，以及文本值String。Swift还提供了两个强大的常见集合类型，数组和字典，见[集合类型](link)。
 
 Like C, Swift uses variables to store and refer to values by an identifying name. Swift also makes extensive use of variables whose values cannot be changed. These are known as constants, and are much more powerful than constants in C. Constants are used throughout Swift to make code safer and clearer in intent when you work with values that do not need to change.
 
@@ -93,7 +93,7 @@ The colon in the declaration means “…of type…,” so the code above can be
 
 The phrase “of type String” means “can store any String value.” Think of it as meaning “the type of thing” (or “the kind of thing”) that can be stored.
 
-“类型是”表示“可以储存任意的字符串类型的值”。可以把它想作是“一个事物的类型”它可以储存的。（Think of it as meaning “the type of thing” (or “the kind of thing”) that can be stored. 妈蛋这句真心不会翻啊……）
+“类型是字符串”表示“可以储存任意的字符串类型的值”。可以把它想作是它可以储存的“一个事物的类型”。
 
 The welcomeMessage variable can now be set to any string value without error:
 
@@ -149,7 +149,7 @@ You can change the value of an existing variable to another value of a compatibl
 
 Unlike a variable, the value of a constant cannot be changed once it is set. Attempting to do so is reported as an error when your code is compiled:
 
-和变量不同，常量的值一旦设定就不能更改。尝试这样做会导致代码编译时报错。
+和变量不同，常量的值一旦设定就不能更改。尝试更改会导致代码编译时报错。
 
 	let languageName = "Swift"
 	languageName = "Swift++"
@@ -187,7 +187,7 @@ The println function can print more complex logging messages, in a similar manne
 
 Swift uses string interpolation to include the name of a constant or variable as a placeholder in a longer string, and to prompt Swift to replace it with the current value of that constant or variable. Wrap the name in parentheses and escape it with a backslash before the opening parenthesis:
 
-Swift使用字符串内插(string interpolation)的方式将常量或变量名以占位符的形式加入一个长的字符串中，并且提示Swift用常量或变量的当前值取代替它。将名字包裹在括号中并在前面加上反斜扛来转义。
+Swift使用字符串内插(string interpolation)的方式将常量或变量名以占位符的形式加入一个长的字符串中，并且提示Swift用常量或变量的当前值取代替它。书写格式是将名字包裹在括号中并在前面加上反斜扛来转义：
 
 ```
 println("The current value of friendlyWelcome is \(friendlyWelcome)")
