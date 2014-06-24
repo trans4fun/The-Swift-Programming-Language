@@ -27,7 +27,7 @@ The Swift Programming Language 中文化项目
    * 构造过程 [认领 by 刘康] [review by 晓毒]
    * 析构过程 [认领 by 许诺] [review by 祁涛]
    * 自动引用计数 [认领 by 韩国兴/MK] [review by 孟志昂]
-   * 可选链 [认领 by 重鱼]
+   * 可选链 [认领 by 重鱼] [review by 玩家]
    * 类型转换 [认领 by 孟志昂]
    * 嵌套类型 [认领 by 祁涛]
    * 扩展 [已完成 by 袁鹏]
