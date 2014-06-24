@@ -29,7 +29,7 @@ The Swift Programming Language 中文化项目
    * 自动引用计数 [认领 by 韩国兴/MK] [review by 孟志昂]
    * 可选链 [认领 by 重鱼]
    * 类型转换 [认领 by 孟志昂]
-   * 嵌套类型 [认领 by 祁涛]
+   * 嵌套类型 [认领 by 祁涛][review by 袁鹏]
    * 扩展 [已完成 by 袁鹏]
    * 协议 [认领 by 姜天意][review by 重鱼]
    * 泛型 [已完成 by 晴时]
