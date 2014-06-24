@@ -23,7 +23,7 @@ The Swift Programming Language 中文化项目
    * 属性 [认领 by 周源]
    * 方法 [已完成 by 米尔] [review by 灵吾]
    * 下标 [已完成 by 递归] [review by 琼雪]
-   * 继承 [已完成 by 晗光]
+   * 继承 [已完成 by 晗光] [review by 递归]
    * 构造过程 [认领 by 刘康] [review by 晓毒]
    * 析构过程 [认领 by 许诺]
    * 自动引用计数 [认领 by 韩国兴/MK]
