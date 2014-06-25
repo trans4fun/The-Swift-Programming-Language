@@ -2,11 +2,11 @@
 
 Methods are functions that are associated with a particular type. Classes, structures, and enumerations can all define instance methods, which encapsulate specific tasks and functionality for working with an instance of a given type. Classes, structures, and enumerations can also define type methods, which are associated with the type itself. Type methods are similar to class methods in Objective-C.
 
-方法是指和某些特定类型相关联的函数。类、结构体、枚举都可以定义实例方法， 这些实例方法可以将特定任务和功能封装到一个指定的类型实例中。类、结构体、美剧也可以定义类型方法， 这些类型方法仅和类型本身有关联。 类型方法和 Objective-C 中的类方法(class methods)很相似。
+方法是指和某些特定类型相关联的函数。类、结构体、枚举都可以定义实例方法， 这些实例方法可以将特定任务和功能封装到一个指定类型的实例中。类、结构体、枚举也可以定义类型方法， 这些类型方法仅和类型本身有关联。 类型方法和 Objective-C 中的类方法(class methods)很相似。
 
 The fact that structures and enumerations can define methods in Swift is a major difference from C and Objective-C. In Objective-C, classes are the only types that can define methods. In Swift, you can choose whether to define a class, structure, or enumeration, and still have the flexibility to define methods on the type you create.
 
-事实上，结构体和枚举可以在 Swift 中定义方法， 成为了和 C、Objective-C 之间一个主要区别。在 Objective-C 中，只有类(Class)才能定义方法。在 Swift 中，你可以选择在类、结构体、枚举、甚至是你自己定义的类型中，去定义方法。
+事实上，Swift 中的结构体和枚举也可以定义方法， 这也是和 C、Objective-C 一个主要区别。在 Objective-C 中，只有类(Class)才能定义方法。在 Swift 中，你可以选择在类、结构体、枚举、甚至是你自己定义的类型中，去定义方法。
 
 ## 实例方法(Instance Methods)
 
@@ -16,7 +16,7 @@ Instance methods are functions that belong to instances of a particular class, s
 
 You write an instance method within the opening and closing braces of the type it belongs to. An instance method has implicit access to all other instance methods and properties of that type. An instance method can be called only on a specific instance of the type it belongs to. It cannot be called in isolation without an existing instance.
 
-实例类型要写在类型的括号中。实例方法可以隐式地访问这个类型的所有实例方法和属性。实例方法只能被它所属类型的实例调用，不能在实例之外被独立调用。
+实例类型要写在类型的大括号中。实例方法可以隐式地访问这个类型的所有实例方法和属性。实例方法只能被它所属类型的实例调用，不能在实例之外被独立调用。
 
 Here’s an example that defines a simple `Counter` class, which can be used to count the number of times an action occurs:
 
@@ -80,7 +80,7 @@ counter.reset()
 
 ```
 
-## 方法的内部参数和外部参数（Local and External Parameter Names for Methods)
+## 方法的内部参数名和外部参数名（Local and External Parameter Names for Methods)
 
 Function parameters can have both a local name (for use within the function’s body) and an external name (for use when calling the function), as described in External Parameter Names. The same is true for method parameters, because methods are just functions that are associated with a type. However, the default behavior of local names and external names is different for functions and methods.
 
@@ -147,7 +147,7 @@ The default behavior described above mean that method definitions in Swift are w
 
 Sometimes it’s useful to provide an external parameter name for a method’s first parameter, even though this is not the default behavior. You can either add an explicit external name yourself, or you can prefix the first parameter’s name with a hash symbol to use the local name as an external name too.
 
-有时候，提供为方法的第一个参数提供一个外部参数名称是有用的，即使这不是个默认行为。你可以自己增加一个明确的外部名称，也可以给第一个参数增加一个 # 的前缀，使得内部名称可以作为外部名称使用。
+有时候，为方法的第一个参数提供一个外部参数名称是有用的，即使这不是个默认行为。你可以自己增加一个明确的外部名称，也可以给第一个参数增加一个 # 的前缀，使得内部名称可以作为外部名称使用。
 
 Conversely, if you do not want to provide an external name for the second or subsequent parameter of a method, override the default behavior by using an underscore character (`_`) as an explicit external parameter name for that parameter.
 
@@ -335,7 +335,7 @@ Within the body of a type method, the implicit self property refers to the type 
 
 More generally, any unqualified method and property names that you use within the body of a type method will refer to other type-level methods and properties. A type method can call another type method with the other method’s name, without needing to prefix it with the type name. Similarly, type methods on structures and enumerations can access static properties by using the static property’s name without a type name prefix.
 
-更广泛的说，在类型方法体内，没有显式调用的方法和属性都会被指代为其他类型级别的方法和属性。类型方法可以通过其他方法名来调用其他类型方法，而不需要在方法名前增加类型名称。同样的，结构体和枚举的类型方法也可以通过静态属性名直接获取静态属性，而不需要在属性名前增加类型名称。
+更普遍地说，在类型方法体内，没有显式调用的方法和属性都会被指代为其他类型级别的方法和属性。类型方法可以通过其他方法名来调用其他类型方法，而不需要在方法名前增加类型名称。同样的，结构体和枚举的类型方法也可以通过静态属性名直接获取静态属性，而不需要在属性名前增加类型名称。
 
 The example below defines a structure called `LevelTracker`, which tracks a player’s progress through the different levels or stages of a game. It is a single-player game, but can store information for multiple players on a single device.
 
@@ -370,7 +370,7 @@ struct LevelTracker {
 
 The `LevelTracker` structure keeps track of the highest level that any player has unlocked. This value is stored in a static property called `highestUnlockedLevel`.
 
-`LevelTracker` 结构体持续记录被任何一个玩家解锁的最高关卡。这个值被保存在静态属性 `highestUnlockedLevel` 中。
+`LevelTracker` 结构体跟踪记录被任何一个玩家解锁的最高关卡。这个值被保存在静态属性 `highestUnlockedLevel` 中。
 
 `LevelTracker` also defines two type functions to work with the `highestUnlockedLevel` property. The first is a type function called `unlockLevel`, which updates the value of `highestUnlockedLevel` whenever a new level is unlocked. The second is a convenience type function called `levelIsUnlocked`, which returns `true` if a particular level number is already unlocked. (Note that these type methods can access the `highestUnlockedLevel` static property without your needing to write it as `LevelTracker.highestUnlockedLevel`.)
 
