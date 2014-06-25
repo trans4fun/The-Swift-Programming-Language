@@ -9,28 +9,64 @@ Swift provides its own versions of all fundamental C and Objective-C types, incl
 
 Swift为所有C和Objective-C的基础类型提供了自己的版本，包括整数值Int，浮点值Double和Float，布尔值Bool，以及文本值String。Swift还提供了两个强大的常见集合类型，数组和字典，见[集合类型](link to 集合类型)。
 
+***建议对语法关键字加上代码标记 {***
+
+Swift为所有C和Objective-C的基础类型提供了自己的版本，包括整数值```Int```，浮点值```Double```和```Float```，布尔值```Bool```，以及文本值```String```。Swift还提供了两个强大的常见集合类型，```Array```（数组）和```Dictionary```（字典），见[集合类型](link to 集合类型)。
+
+***}***
+
 Like C, Swift uses variables to store and refer to values by an identifying name. Swift also makes extensive use of variables whose values cannot be changed. These are known as constants, and are much more powerful than constants in C. Constants are used throughout Swift to make code safer and clearer in intent when you work with values that do not need to change.
 
 和C一样，Swift使用具有唯一名称的变量(variables)来储存和指向特定值。Swift还对那些值不能改变的变量进行了扩展，他们也被称为常量(Constants)，Swift中的常量比C中的常量更加强大。在Swift中当你需要处理一些恒定不变的值的时候，使用常量(Constants)可以让代码更加安全和整洁。
+
+***感觉括号就统一用中文，会不会好点= ={***
+
+和C一样，Swift使用具有唯一名称的变量（variables）来储存和指向特定值。Swift还对那些值不能改变的变量进行了扩展，他们也被称为常量（Constants），Swift中的常量比C中的常量更加强大。在Swift中当你需要处理一些恒定不变的值的时候，使用常量（Constants）可以让代码更加安全和整洁。
+	
+***}***
 
 In addition to familiar types, Swift introduces advanced types not found in Objective-C. These include tuples, which enable you to create and pass around groupings of values. Tuples can return multiple values from a function as a single compound value.
 
 除了这些我们熟知的类型以外，Swift还有一些在Objective-C中没有的高级类型，包括：元组（tuples），你可以创建和传递一组数值。元组（tuples）可以在函数中以一个复合值的形式返回多个数值。
 
+***加粗那句这样翻译感觉更通顺{***
+
+除了这些我们熟知的类型以外，Swift还有一些在Objective-C中没有的高级类型，***比如可以创建和传递一组数值的元组（tuples）。元组能在函数中以一个复合值的形式返回多个值。***
+	
+***}***
+
 Swift also introduces optional types, which handle the absence of a value. Optionals say either “there is a value, and it equals x” or “there isn’t a value at all”. Optionals are similar to using nil with pointers in Objective-C, but they work for any type, not just classes. Optionals are safer and more expressive than nil pointers in Objective-C and are at the heart of many of Swift’s most powerful features.
 
 Swift还有可选（Optionals）类型，来处理值缺失的情况。可选类型表示“值是x”或者“没有值”。可选类型类似于在Objective-C的指针中使用nil，但是可选类型可以用在任意类型上，而不只是类。相比于Objective-C中的nil，可选类型（Optionals）更加安全和高效，可选类型也是Swift的众多强大的特性的核心。
 
-Optionals are an example of the fact that Swift is a type safe language. Swift helps you to be clear about the types of values your code can work with. If part of your code expects a String, type safety prevents you from passing it an Int by mistake. This enables you to catch and fix errors as early as possible in the development prObjective Cess.
+***对语法关键字加代码标记，一些细节调整 {***
+
+Swift还引入了可选（Optionals）类型，来处理值缺失的情况。可选类型表示“值是x”或者“没有值”。可选类型类似于在Objective-C的指针中使用```nil```，但是可选类型可以用在任意类型上，而不只是类。相比于Objective-C中的```nil```，可选类型（Optionals）更加安全和高效，可选类型也是Swift的众多强大特性的核心。
+
+***}***
+
+Optionals are an example of the fact that Swift is a type safe language. Swift helps you to be clear about the types of values your code can work with. If part of your code expects a String, type safety prevents you from passing it an Int by mistake. This enables you to catch and fix errors as early as possible in the development process.
 
 可选类型说明了Swift是一个类型安全的语言。Swift让你清楚的知道你的代码中可用的值的类型。如果你期望这部分代码是字符串（String），类型安全性会阻止你错误的给它赋一个整型（Int）的值。这让你在开发的过程中尽早的发现问题。
+
+***对语法关键字加标记 {***
+
+可选类型说明了Swift是一个类型安全的语言。Swift让你清楚的知道你的代码中可用的值的类型。如果你期望这部分代码是字符串（```String```），类型安全性会阻止你错误的给它赋一个整型（```Int```）的值。这让你在开发过程中能尽早发现和解决问题。
+	
+***}***
 
 # Constants and Variables
 # 常量和变量
 
-**Constants and variables associate a name (such as maximumNumberOfLoginAttempts or welcomeMessage) with a value of a particular type (such as the number 10 or the string "Hello"). The value of a constant cannot be changed once it is set, whereas a variable can be set to a different value in the future.
+Constants and variables associate a name (such as maximumNumberOfLoginAttempts or welcomeMessage) with a value of a particular type (such as the number 10 or the string "Hello"). The value of a constant cannot be changed once it is set, whereas a variable can be set to a different value in the future.
 
 常量和变量对应一个变量名（如maximumNumberOfLoginAttempts或welcomeMessage）以及对应类型的值（如数字10或字符串"Hello"）。常量的值一旦设定旧不能改变，变量的值可以改变。
+
+***对语法关键字加标记 {***
+
+常量和变量对应一个变量名（如```maximumNumberOfLoginAttempts```或```welcomeMessage```）以及对应类型的值（如数字```10```或字符串```"Hello"```）。常量的值一旦设定就不能改变，变量的值可以改变。
+
+***}***
 
 # Declaring Constants and Variables
 # 声明常量和变量
