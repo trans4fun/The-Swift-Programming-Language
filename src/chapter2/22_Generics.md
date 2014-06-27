@@ -7,14 +7,14 @@ Generic code enables you to write flexible, reusable functions and types that ca
 
 Generics are one of the most powerful features of Swift, and much of the Swift standard library is built with generic code. In fact, you’ve been using generics throughout this Language Guide, even if you didn’t realize it. For example, Swift’s Array and Dictionary types are both generic collections. You can create an array that holds Int values, or an array that holds String values, or indeed an array for any other type that can be created in Swift. Similarly, you can create a dictionary to store values of any specified type, and there are no limitations on what that type can be.
 
-泛型是Swift中非常强大的特性之一，而且很多Swift中的基础库是用泛型构建的。事实上，不管你有没有意识到，其实在整本swift介绍中你都会用到泛型。例如，Swift中的Array和Dictionary类型都是泛型集合。你可以创建一个int类型的数组，也可以创建String类型的数组，事实上在Swift中你可以创建任意类型的数组。同样地，你也可以创建一个存储任意类型数据的字典类型；
+泛型是Swift中非常强大的特性之一，而且很多Swift的标准库都是用泛型构建的。事实上，不管你有没有意识到，在学习这本swift语言指南的过程中，你已经在使用泛型了。例如，Swift中的Array和Dictionary类型都是泛型集合。你可以创建一个数组用来储存int类型的数值，也可以储存string类型的数值，事实上在Swift中你可以创建数组来储存任意类型的值。同样地，你也可以创建一个存储任意数值类型的字典类型；
 
 #The Problem That Generics Solve
 #泛型解决的问题
 
 Here’s a standard, non-generic function called `swapTwoInts`, which swaps two Int values:
 
-下边代码是一个标准的、非泛型函数`swapTwoInts`, 用于交换两个int值：
+下面的代码是一个标准的、非泛型函数`swapTwoInts`, 用于交换两个int值：
 
 ```
 func swapTwoInts(inout a: Int, inout b: Int) {
@@ -42,7 +42,7 @@ println("someInt is now \(someInt), and anotherInt is now \(anotherInt)")
 
 The `swapTwoInts` function is useful, but it can only be used with Int values. If you want to swap two String values, or two Double values, you have to write more functions, such as the `swapTwoStrings` and `swapTwoDoubles `functions shown below:
 
-`swapTwoInts`函数是有用的，但是这个函数只能交换int值。如果想交换两个NSString、或者是两个Double类型的值，你不得不写更多的代码，比如`swapTwoStrings`,`swapTwoDoublesfunctions`,如下所示：
+`swapTwoInts`函数非常有用，但是它只能交换int值。如果想交换两个String、或者是两个Double类型的值，你不得不再写几个函数，比如`swapTwoStrings`,`swapTwoDoublesfunctions`,如下所示：
 
 ```
 func swapTwoStrings(inout a: String, inout b: String) {
@@ -59,11 +59,11 @@ func swapTwoDoubles(inout a: Double, inout b: Double) {
 
 You may have noticed that the bodies of the `swapTwoInts`, `swapTwoStrings`, and `swapTwoDoubles` functions are identical. The only difference is the type of the values that they accept (Int, String, and Double).
 
-也许，你已经注意到了，这三个函数的内容基本上是相同的，唯一的区别就是传参类型不一样，分别是Int,String,Double.
+也许你已经注意到了，这三个函数的内容基本上是相同的，唯一的区别就是传参类型不一样（Int,String,Double）。
 
 It would be much more useful, and considerably more flexible, to write a single function that could swap two values of any type. This is the kind of problem that generic code can solve. (A generic version of these functions is defined below.)
 
-你会想，如果可以只写一个函数就可以交换两个任意类型的值，那一定会很强大、相当的灵活。这正是泛型所解决的问题。(泛型版的这种函数如下）。
+如果可以只编写一个函数就能提供交换两个任意类型的值的功能的话，这种方式将更加有用和灵活。而这正是泛型所要解决的问题。(下面是使用泛型重新编写的函数）。
 
 ```
 NOTE
@@ -71,7 +71,7 @@ In all three functions, it is important that the types of a and b are defined to
 ```
 ```
 注意
-在上边的三个函数中，a和b的类型必须是一样的。如果不一样，就不能交互两者的值。Swift是类型安全的语言，不允许一个`String`和`Double`类型变量互相交互值。如果试图操作，会有编译错误。
+上面的三个函数中，a和b的类型必须是一样的。如果不一样，就不能交换两者的值。Swift是类型安全的语言，不允许一个`String`和`Double`类型变量互相交换值。如果试图进行这样的操作，会出现编译错误。
 ```
 
 #Generic Functions
@@ -79,7 +79,7 @@ In all three functions, it is important that the types of a and b are defined to
 
 Generic functions can work with any type. Here’s a generic version of the `swapTwoInts` function from above, called `swapTwoValues`:
 
-泛型函数可以工作于任何类型。下面就是上边提到的`swapTwoInts`的泛型版本，`swapTwoValues`：
+泛型函数可以和任何类型一起使用。下面就是上面的`swapTwoInts`的泛型版本，`swapTwoValues`：
 
 ```
 func swapTwoValues<T>(inout a: T, inout b: T) {
@@ -90,7 +90,7 @@ func swapTwoValues<T>(inout a: T, inout b: T) {
 ```
 The body of the `swapTwoValues` function is identical to the body of the `swapTwoInts` function. However, the first line of `swapTwoValues` is slightly different from `swapTwoInts`. Here’s how the first lines compare:
 
-除了第一行有一点区别之外，`swapTwoValues`和`swapTwoInts`的主题内容是一样的，如下所示：
+`swapTwoValues`和`swapTwoInts`的函数主体内容是一样的，仅仅在第一行有一些细微的区别，下面是两者的比较：
 
 ```
 func swapTwoInts(inout a: Int, inout b: Int)
@@ -99,19 +99,19 @@ func swapTwoValues<T>(inout a: T, inout b: T)
 
 The generic version of the function uses a placeholder type name (called T, in this case) instead of an actual type name (such as Int, String, or Double). The placeholder type name doesn’t say anything about what T must be, but it does say that both a and b must be of the same type T, whatever T represents. The actual type to use in place of T will be determined each time the `swapTwoValues` function is called.
 
-泛型版本使用了节点类型命名（一般都使用字母T）来代替实际的类型名称（比如Int,String,或者Double）。节点类型定义限制a和b必须是相同类型，而不限制到底是什么类型，T可以代表任意类型。只有当`swapTwoValues`真正调用的时候，才会决定T代表什么类型。
+泛型版本使用了占位符作为类型的名称（在这里使用T作为占位符）来代替实际的类型名称（比如Int,String,或者Double）。占位符类型定义限制a和b必须是相同类型，而不限制到底是什么类型，T可以代表任意类型。只有当`swapTwoValues`真正调用的时候，才会决定T代表什么类型。
 
 The other difference is that the generic function’s name (swapTwoValues) is followed by the placeholder type name (T) inside angle brackets (<T>). The brackets tell Swift that T is a placeholder type name within the`swapTwoValues` function definition. Because T is a placeholder, Swift does not look for an actual type called T.
 
-另一个区别是泛型函数后边跟着的类型（T）是放到尖括号里边的（<T>）。尖括号告诉Swift，T是`swapTwoValues`所定义的一个节点类型。由于T表示节点，swift不会查找命名为T的类型。
+另一个区别是泛型函数后边跟着的类型（T）是放到尖括号里边的（<T>）。尖括号告诉Swift，T是`swapTwoValues`的函数定义中的一个占位符类型。由于T是一个占位符，因此swift不会去查找是否存在命名为T的类型。
 
 The `swapTwoValues` function can now be called in the same way as `swapTwoInts`, except that it can be passed two values of any type, as long as both of those values are of the same type as each other. Each time `swapTwoValues` is called, the type to use for T is inferred from the types of values passed to the function.
 
-除了要求传入的两个任何类型值是同一类型外，`swapTwoValues`函数，也可以作为`swapTwoInts`函数被调用。每次`swapTwoValues`被调用，T所代表的类型值都会传给函数。
+`swapTwoValues`函数现在可以和`swapTwoInts`一样被调用。除此之外，`swapTwoValues`可以接收两个任意类型的参数，只要这两个参数的类型相同。每次`swapTwoValues`被调用，T所代表类型会根据实际传入的参数来确定。
 
 In the two examples below, T is inferred to be Int and String respectively:
 
-在下边的例子中，T分别指定为Int和String类型。
+在下边的例子中，T分别代表Int和String类型。
 
 ```
 var someInt = 3
@@ -131,21 +131,21 @@ The swapTwoValues function defined above is inspired by a generic function calle
 ```
 ```
 注意
-上边定义的`swapTwoValues`函数是受`swap`函数的启发而实现的，存在Swift的基础库中，可以在其它类中任意使用。如果你需要`swapTwoValues`类似的功能，可以直接使用Swift中已存在的`swap`方法。
+上边定义的`swapTwoValues`函数是受到一个泛型函数`swap`的启发而实现的，这个函数被包含在Swift的标准库中，你可以直接在你的应用中使用它。如果在你的代码中需要一个和`swapTwoValues`类似的功能，可以直接使用Swift中已存在的`swap`方法，而不需要自己再实现一遍。
 ```
 #Type Parameters
-#参数类型
+#类型参数
 In the swapTwoValues example above, the placeholder type T is an example of a type parameter. Type parameters specify and name a placeholder type, and are written immediately after the function’s name, between a pair of matching angle brackets (such as <T>).
 
-在上边的`swapTwoValues`例子中，T占位符是一种参数类型实例。参数类型实例指定相同的占位符类型，紧跟在函数名称之后尖括号内（例如<T>）。
+在上边的`swapTwoValues`例子中，占位符T是一个关于使用类型参数的例子。类型参数通过给定一个占位符类型的方式，放置于紧跟在函数名称之后的尖括号内（例如<T>）。
 
 Once specified, a type parameter can be used to define the type of a function’s parameters (such as the a and b parameters of the swapTwoValues function); or as the function’s return type; or as a type annotation within the body of the function. In each case, the placeholder type represented by the type parameter is replaced with an actual type whenever the function is called. (In the swapTwoValues example above, T was replaced with Int the first time the function was called, and was replaced with String the second time it was called.)
 
-一旦被指定，参数类型可以用作函数的参数值类型（例如`swapTwoValues`参数中的a和b参数）；或者也可以作为函数的返回值类型。这每个例子中，占位符类型可以代表类型参数，当在函数被调用时，会以真实类型代替，在`swapTwoValues`的例子中，当第一次调用时，T会被Int代替，第二次调用中T会被String代替。
+一旦被指定，参数类型可以用来定义函数接收的参数（例如`swapTwoValues`函数中的a和b参数）；或者也可以作为函数的返回值类型。这每个例子中，被类型参数代表的占位符类型，在函数被调用时，会被真实的参数类型所代替。（在`swapTwoValues`的例子中，当函数被第一次调用时，T会被Int代替，第二次调用中T会被String代替。）
 
 You can provide more than one type parameter by writing multiple type parameter names within the angle brackets, separated by commas.
 
-你可支持多个类型参数，命名在尖括号中，用逗号分开。
+你可以在尖括号中通过逗号分隔的方式指定多个类型参数名称，来为函数提供多个类型参数的功能。
 ‌
 #Naming Type Parameters
 #参数类型命名
