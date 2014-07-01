@@ -95,8 +95,7 @@ for name in names {
 
 You can also iterate over a dictionary to access its key-value pairs. Each item in the dictionary is returned as a (key, value) tuple when the dictionary is iterated, and you can decompose the (key, value) tuple’s members as explicitly named constants for use within in the body of the for-in loop. Here, the dictionary’s keys are decomposed into a constant called animalName, and the dictionary’s values are decomposed into a constant called legCount:
 
-你也同样可以遍历字典中的key-value。遍历时，字典中的每个元素都以```(key,value)```元组结构返回，你也可以在```for-in```中将元组中的key,value当做常量显式的分解出来。这里，key被分解为为常量```animalName```,value被分解为
-```legCount```：
+你也同样可以遍历字典中的key-value。遍历时，字典中的每个元素都以```(key,value)```元组结构返回，你也可以在```for-in```中将元组中的key,value当做常量显式的分解出来。这里，key被分解为为常量```animalName```,value被分解为```legCount```：
 
 ```
 “let numberOfLegs = ["spider": 8, "ant": 6, "cat": 4]
