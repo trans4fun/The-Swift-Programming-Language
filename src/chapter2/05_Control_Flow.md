@@ -17,7 +17,7 @@ Swift的```switch```语句和C语言相比很强大，它不会像C语言那样�
 
 A for loop performs a set of statements a certain number of times. Swift provides two kinds of for loop:
 
-```for```循环可以将一段代码执行若干次。Swift提供两种```for```循环：
+for循环可以将一段代码执行若干次。Swift提供两种for循环：
 
 for-in performs a set of statements for each item in a range, sequence, collection, or progression.
 for-condition-increment performs a set of statements until a specific condition is met, typically by incrementing a counter each time the loop ends.
