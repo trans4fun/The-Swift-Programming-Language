@@ -35,7 +35,7 @@ This example prints the first few entries in the five-times-table:
 
 下面这个例子可以打印出一个5次循环的结果：
 
-```
+```Java
 for index in 1...5{
 	println("\(index) times 5 is \(index * 5)")
 }
@@ -62,7 +62,7 @@ If you don’t need each value from the range, you can ignore the values by usin
 
 如果你在遍历某个集合时并不关心集合中的元素，你可以通过下划线来代替集合中的元素变量名：
 
-```
+```Java
 let base = 3
 let power = 10
 var answer = 1
@@ -81,7 +81,7 @@ Use the for-in loop with an array to iterate over its items:我们还可以
 
 使用`for-in`遍历数组中的元素:
 
-```
+```Java
 let names = ["Anna", "Alex", "Brian", "Jack"]
 for name in names {
     println("Hello, \(name)!")
@@ -97,7 +97,7 @@ You can also iterate over a dictionary to access its key-value pairs. Each item 
 
 你也同样可以遍历字典中的key-value。遍历时，字典中的每个元素都以`(key,value)`元组结构返回，你也可以在`for-in`中将元组中的key,value当做常量显式的分解出来。这里，key被分解为为常量`animalName`,value被分解为`legCount`：
 
-```
+```Java
 let numberOfLegs = ["spider": 8, "ant": 6, "cat": 4]
 for (animalName, legCount) in numberOfLegs {
     println("\(animalName)s have \(legCount) legs")
@@ -116,7 +116,7 @@ In addition to arrays and dictionaries, you can also use the for-in loop to iter
 
 除了数组和字典，你同样可以使用`for-in`来遍历字符串中的`Character`：
 
-```
+```Java
 for character in "Hello" {
     println(character)
 }
@@ -133,7 +133,7 @@ In addition to for-in loops, Swift supports traditional C-style for loops with a
 
 除了使用`for-in`这种循环语句，Swift还提供了传统的C风格的`for`循环语句，通常它需要一个循环执行条件和一个累加器：
 
-```
+```Java
 for var index = 0; index < 3; ++index {
     println("index is \(index)")
 }
@@ -182,7 +182,7 @@ Constants and variables declared within the initialization expression (such as v
 
 在for循环初始化时创建的变量或者常量只在循环体内有效，如果想获取循环结束时的`index`值，你必须将`index`显式的声明到循环语句前：
 
-```
+```Java
 var index: Int
 for index = 0; index < 3; ++index {
     println("index is \(index)")
@@ -227,7 +227,7 @@ This example plays a simple game of Snakes and Ladders (also known as Chutes and
 
 下面是一个简单的Snakes and Ladders游戏（也叫Chutes and Ladders）
 
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/snakesAndLadders_2x.png)
 
 The rules of the game are as follows:
 
@@ -602,7 +602,7 @@ default:
 
 ```
 
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/coordinateGraphSimple_2x.png)
 
 The switch statement determines if the point is at the origin (0, 0); on the red x-axis; on the orange y-axis; inside the blue 4-by-4 box centered on the origin; or outside of the box.
 
@@ -635,7 +635,7 @@ case let (x, y):
 // prints "on the x-axis with an x value of 2
 
 ```
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/coordinateGraphMedium_2x.png)
 
 The switch statement determines if the point is on the red x-axis, on the orange y-axis, or elsewhere, on neither axis.
 
@@ -679,7 +679,7 @@ case let (x, y):
 }
 // prints "(1, -1) is on the line x == -y
 ```
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/coordinateGraphComplex_2x.png)
 
 The switch statement determines if the point is on the green diagonal line where x == y, on the purple diagonal line where x == -y, or neither.
 
@@ -883,7 +883,7 @@ If a particular dice roll would take you beyond square 25, you must roll again u
 The game board is the same as before:”
 游戏的棋盘和前面的一样：
 
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/snakesAndLadders_2x.png)
 
 The values of finalSquare, board, square, and diceRoll are initialized in the same way as before:
 
