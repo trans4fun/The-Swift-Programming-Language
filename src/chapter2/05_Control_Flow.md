@@ -317,7 +317,7 @@ Here’s the general form of a do-while loop:
 ```Java
 do {
     statements
-} while condition”
+} while condition
 
 ```
 Here’s the Snakes and Ladders example again, written as a do-while loop rather than a while loop. The values of finalSquare, board, square, and diceRoll are initialized in exactly the same way as with a while loop:
