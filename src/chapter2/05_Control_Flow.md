@@ -110,7 +110,7 @@ for (animalName, legCount) in numberOfLegs {
 
 Items in a Dictionary may not necessarily be iterated in the same order as they were inserted. The contents of a Dictionary are inherently unordered, and iterating over them does not guarantee the order in which they will be retrieved. For more on arrays and dictionaries, see Collection Types.
 
-```Dictionary```中的元素的顺序在被遍历时可能和我们插入它的顺序不同，这是由于```Dictionary```自身就是无序的，它在被遍历时无法保证元素的顺序。想了解更多关于数组和字典的内容，请查阅[集合类型](link)一章。
+Dictionary中的元素的顺序在被遍历时可能和我们插入它的顺序不同，这是由于```Dictionary```自身就是无序的，它在被遍历时无法保证元素的顺序。想了解更多关于数组和字典的内容，请查阅[集合类型](link)一章。
 
 In addition to arrays and dictionaries, you can also use the for-in loop to iterate over the Character values in a string:
 
