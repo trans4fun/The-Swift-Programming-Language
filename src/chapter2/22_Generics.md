@@ -145,17 +145,17 @@ Once specified, a type parameter can be used to define the type of a function’
 
 You can provide more than one type parameter by writing multiple type parameter names within the angle brackets, separated by commas.
 
-你可以在尖括号中通过逗号分隔的方式指定多个类型参数名称，来为函数提供多个类型参数的功能。
+你可以在尖括号中通过逗号分隔的方式指定多个类型参数名称，来为函数提供多个类型参数。
 ‌
 #Naming Type Parameters
-#参数类型命名
+#类型参数命名
 In simple cases where a generic function or generic type needs to refer to a single placeholder type (such as the swapTwoValues generic function above, or a generic collection that stores a single type, such as Array), it is traditional to use the single-character name T for the type parameter. However, you are can use any valid identifier as the type parameter name.
 
-在一般的情况下，如果泛型函数或者泛型类型需要指定一个占位符（像上边的`swapTwoValues`泛型函数或者只包含单个类型的泛型集合，比如数组），通常会用一个字符T来代表参数类型。不过，你也可以用任意有效的标示符来表示参数类型。
+在一般的情况下，如果泛型函数或者泛型类型需要指定一个占位符（像上边的`swapTwoValues`泛型函数或者只包含单个类型的泛型集合，比如数组），通常会用一个字符T来代表参数类型。不过，你也可以用任意有效的标识符来表示参数类型。
 
 If you are defining more complex generic functions, or generic types with multiple parameters, it can be useful to provide more descriptive type parameter names. For example, Swift’s Dictionary type has two type parameters—one for its keys and one for its values. If you were writing Dictionary yourself, you might name these two type parameters KeyType and ValueType to remind you of their purpose as you use them within your generic code.
 
-如果你定义了复杂的泛型函数或者泛型类型，需要多个参数，使用更多的描述类型是有必要的。比如Swift中的字典类型就有两个参数，其中一个键，一个值。如果你自己写字典类型，你也许会定义两个类型`KeyType`和`ValueType`，用来记住在泛型代码中的作用。
+如果你正在定义更加复杂的泛型函数或者泛型类型，并需要多个参数，那么使用更具有描述性的类型参数名称就很有必要了。比如Swift中的字典类型就有两个参数，其中一个作为键，一个作为值。如果你实现来字典类型，你可以为这两个类型取名为`KeyType`和`ValueType`，从而提醒你这两个参数在泛型代码中的作用。
 
 ```
 NOTE
@@ -169,11 +169,11 @@ Always give type parameters UpperCamelCase names (such as T and KeyType) to indi
 #泛型类型
 In addition to generic functions, Swift enables you to define your own generic types. These are custom classes, structures, and enumerations that can work with any type, in a similar way to Array and Dictionary.
 
-除了泛型函数，Swift可以定义自己的泛型类型。可以是自定义的类、结构、枚举类作用于任何类型。和数组及字段的方式相同。
+除了泛型函数，Swift可以让你定义自己的泛型类型。这些类型可以是自定义的类、结构和枚举，他们和数组以及字典一样，可以和其他任意类型一起工作。
 
 This section shows you how to write a generic collection type called Stack. A stack is an ordered set of values, similar to an array, but with a more restricted set of operations than Swift’s Array type. An array allows new items to be inserted and removed at any location in the array. A stack, however, allows new items to be appended only to the end of the collection (known as pushing a new value on to the stack). Similarly, a stack allows items to be removed only from the end of the collection (known as popping a value off the stack).
 
-这部分展示如何写泛型版本的堆栈。堆栈是一系类值域的集合，和数组类似，但是比数据的有更多的限制的集合。数组允许元素可以从任何位置插入或者删除。堆栈，只允许从集合的顶部插入元素（如同push一个值到堆栈）。同样的，堆栈只允许从集合的顶部删除一个元素（记为从堆栈pop出一个值）。
+本节将展示如何编写堆栈这样的泛型集合类型。堆栈是一个具有特定顺序的数值的集合，和数组类似，但是和数组相比，堆栈在操作上有更多的限制。数组允许元素可以从任何位置插入或者删除。而堆栈只允许添加新元素到集合的顶部（叫做push一个新值到堆栈）。同样的，堆栈只允许从集合的顶部删除一个元素（叫做从堆栈pop出一个值）。
 
 ```
 NOTE
@@ -182,12 +182,12 @@ The concept of a stack is used by the UINavigationController class to model the 
 
 ```
 注意
-堆栈的概念被用在`UINavigationController`类中，模拟试图控制器的导航结构。你调用`UINavigationController`的`pushViewController:animated: `方法添加一个视图到堆栈中，调用` popViewControllerAnimated:`方法从堆栈中删除一个试图。堆栈是非常有用的，当你需要一个严格的“先进先出”的方式来管理集合时。
+堆栈的概念被用在`UINavigationController`类中，作为视图控制器的导航结构的数据模型。你调用`UINavigationController`的`pushViewController:animated: `方法添加一个视图到堆栈中，调用` popViewControllerAnimated:`方法从堆栈中删除一个试图。当你需要一个严格的“先进先出”方式来管理集合时，堆栈是非常有用的。
 ```
 
 The illustration below shows the push / pop behavior for a stack:
 
-下边图表展示的是堆栈的进入、进出特性：
+下面的图表展示了堆栈的进入、退出操作：
 
 ![stack](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/stackPushPop_2x.png)
 
@@ -199,14 +199,14 @@ The illustration below shows the push / pop behavior for a stack:
 5. After popping a value, the stack once again holds three values.
 
 1.当前堆栈里有3个值
-2.第四个值从堆栈的顶部push进去
-3.现在堆栈中有4个值，其中最先进的在最顶部
+2.第四个值从堆栈的顶部被“push”进去
+3.现在堆栈中有4个值，其中最新的值在最顶部
 4.堆栈最顶部的值被移除，或者叫“popped”
 5.当推出一个值后，堆栈重新变成了三个值
 
 Here’s how to write a non-generic version of a “stack, in this case for a stack of Int values
 
-下边是如何写一个不是泛型版本的堆栈，这个例子中得堆栈是Int类型：
+下面展示如何编写一个非泛型版本的堆栈，这个例子中的堆栈是Int类型：
 
 ```
 struct IntStack {
@@ -221,16 +221,16 @@ struct IntStack {
 ```
 This structure uses an Array property called items to store the values in the stack. Stack provides two methods, push and pop, to push and pop values on and off the stack. These methods are marked as mutating, because they need to modify (or mutate) the structure’s items array.
 
-这个结构中使用数组属性`items`去存储堆栈中的数据。堆栈提供两个方法`push` 和`pop`，用于推入数据到堆栈，或者从堆栈推出数据。这些方法定义为`mutating`类型，原因是需要修改结构中得items数组的值。
+这个结构中使用数组属性items来存储堆栈中的数据。堆栈提供了`push` 和`pop`两个方法，用于推入数据到堆栈，或者从堆栈推出数据。这些方法被标记为`mutating`，因为他们需要修改结构中的items数组的值。
 
 The IntStack type shown above can only be 
 “used with Int values, however. It would be much more useful to define a generic Stack class, that can manage a stack of any type of value.
 
-上边的这个`IntStack`类型只能用于Int值。然而，定义泛型类型的堆栈类型，可以管理堆栈中得任意类型，是非常有用的。
+上边的这个`IntStack`类型只能用于Int值。如果定义一个可以管理任何数据类型的泛型类型的堆栈类型，可以管理堆栈中得任意类型，是非常有用的。
 
 Here’s a generic version of the same code:
 
-上边是相同代码的泛型版本：
+下面是堆栈的泛型版本：
 
 ```
 struct Stack<T> {
@@ -245,23 +245,23 @@ struct Stack<T> {
 ```
 Note how the generic version of Stack is essentially the same as the non-generic version, but with a placeholder type parameter called T instead of an actual type of Int. This “type parameter is written within a pair of angle brackets (<T>) immediately after the structure’s name.
 
-可以注意到，除了使用T代替真实int类型之外，下边的泛型版本的堆栈结构和上边非泛型版本的基本上一样的。这种类型参数是在紧接着结构的名称后跟着一对尖括号（<T>）.
+可以注意到，除了使用T作为占位符类型参数来代替真实int类型之外，泛型版本的堆栈结构和上边非泛型版本基本上是一样的。这个类型参数直接跟在结构的名称后并被一对尖括号包裹（<T>）.
 
 T defines a placeholder name for “some type T” to be provided later on. This future type can be referred to as “T” anywhere within the structure’s definition. In this case, T is used as a placeholder in three places:
 
-`T`定义了一个名称为”某种类型T“的节点提供给后边用。这种将来类型可以在结构体定义中的任何地方表示为`T`。在这个例子中，`T`在如下的几个地方会被使用：
+T作为一个占位符名称来代替后续实际会给定的“某种类型T”。这种将来类型可以在结构体定义中的任何地方使用`T`来表示。在这个例子中，`T`在如下三个位置作为占位符：
 
 1. To create a property called items, which is initialized with an empty array of values of type T
 2. To specify that the push method has a single parameter called item, which must be of type T
 3. To specify that the value returned by the pop method will be a value of type T
 
-1.创建成员变量`items`，被初始化为包含类型T的空数组
+1.创建成员变量`items`，并将它初始化为包含类型T的空数组
 2.指定`push`方法有一个参数item，类型为T类型
 3.指定`pop`方法返回结果类型为T
 
 You create instances of Stack in a similar way to Array and Dictionary, by writing the actual type to be used for this specific stack within angle brackets after the type name when creating a new instance with initializer syntax:
 
-像创建Array和Dictionary一样，创建一个Stack实例，在初始化时，紧随类型名后边尖括号中写出实际用到的类型：
+像创建Array和Dictionary一样，使用构造函数的语法来实例化Stack时，在类型名后边尖括号中写出实际用到的类型：
 
 ```
 var stackOfStrings = Stack<String>()
@@ -274,7 +274,7 @@ stackOfStrings.push("cuatro")
 
 Here’s how stackOfStrings looks after pushing these four values on to the stack:
 
-下边展示`stackOfStrings`是如何把四个值push进栈：
+下边展示`stackOfStrings`如何把四个值push进栈：
 
 ![进栈](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/stackPushedFourStrings_2x.png)
 
@@ -294,26 +294,26 @@ Here’s how the stack looks after popping its top value:
 
  Because it is a generic type, Stack can be used to create a stack of any valid type in Swift, in a similar manner to Array and Dictionary. 
  
- 由于`Stack`是泛型类型，所以在Swift中可以用于创建任何有效类型的栈，方式同`Array`和`Dictionary`。
+ 由于`Stack`是泛型类型，所以在Swift中可以用于创建任何合法类型的栈，方式同`Array`和`Dictionary`。
 
 #Type Constraints
 #类型约束
 
 The swapTwoValues function and the Stack type can work with any type. However, it is sometimes useful to enforce certain type constraints on the types that can be used with generic functions and generic types. Type constraints specify that a type parameter must inherit from a specific class, or conform to a particular protocol or protocol composition.
 
-`swapTwoValues`函数和`Stack`类型可以作用于任何类型，不过，有的时候对泛型函数和泛型类型上做类型强制约束是非常有用的。类型约束指定参数类型必须继承一个指定类型参数或者遵循一个特定的协议或协议构成。
+`swapTwoValues`函数和`Stack`类型可以和任何类型一起使用，不过，有的时候对泛型函数和泛型类型中使用的类型进行相应的约束是非常有用的。类型约束指定参数类型必须继承一个指定的类或者遵循一个特定的协议或协议组合。
 
 For example, Swift’s Dictionary type places a limitation on the types that can be used as keys for a dictionary. As described in Dictionaries, the type of a dictionary’s keys must be hashable. That is, it must provide a way to make itself uniquely representable. Dictionary needs its keys to be hashable so that it can check whether it already contains a value for a particular key. Without this requirement, Dictionary could not tell whether it should insert or replace a value for a particular key, nor would it be able to find a value for a given key that is already in the dictionary.
 
-例如，Swift中的`Dictionary`对键值做了约束。在字典的描述中，字典的键值类型必须是可哈希的，就是说他必须有一种方法保证其是唯一的。`Dictionary`约定键值是可哈希的，是为了便于检查其是否已经包含某个特定键的值。如果没有这个约束，就不能告诉是否可以插入或者替换某个特定键的值，也不能查找到某个已经存储在字典中的特定值。
+例如，Swift中的`Dictionary`对键值做了约束。在字典的描述中，字典的键值类型必须是可散列的，就是说必须有一种方法能保证其每个键值都是唯一的。`Dictionary`对于键值可散列的要求，是为了便于检查其是否已经包含某个特定键的值。如果没有这个约束，就不能判断是否可以插入或者替换某个特定键的值，也不能查找到某个已经存储在字典中的特定值。
 
 This requirement is enforced by a type constraint on the key type for Dictionary, which specifies that the key type must conform to the Hashable protocol, a special protocol defined in the Swift standard library. All of Swift’s basic types (such as String, Int, Double, and Bool) are hashable by default.
 
-这个需求强制加上一个类型约束作用于Dictionary的键上，而且其键类型必须遵循Hashable协议（Swift 标准库中定义的一个特定协议）。所有的 Swift 基本类型（如String，Int，Double和 Bool）默认都是可哈希。
+这个需求以一个类型约束的形式被添加在Dictionary的键类型上，以此表明键的类型必须遵循Hashable协议（Swift 标准库中定义的一个特定协议）。所有的 Swift 基本类型（如String，Int，Double和 Bool）默认都是可散列的。
 
 You can define your own type constraints when creating custom generic types, and these constraints provide much of the power of generic programming. Abstract concepts like Hashable characterize types in terms of their conceptual characteristics, rather than their explicit type.
 
-当你创建自定义泛型类型时，你可以定义你自己的类型约束，当然，这些约束要支持泛型编程的强力特征中的多数。抽象概念如可哈希具有的类型特征是根据它们概念特征来界定的，而不是它们的直接类型特征。
+你可以在创建自定义泛型类型时，定义你自己的类型约束，这些类型约束为你提供了很多泛型编程的能力。像可散列这样的抽象概念，从概念层面为类型添加特征，而不是直接指定具体的类型。
 
 ##Type Constraint Syntax
 
