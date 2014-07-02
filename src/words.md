@@ -12,7 +12,7 @@
 - adopt - 适配。但是一般用于被动。如 `a protocol can be adopted by a class`: 协议可以被类适配。
 - conform - 遵循。如果一个类适配了一个协议，我们就说这个类遵循这个协议。`this class conforms to that protocol`。
 - literal value - 字面量 - A literal value is a value that appears directly in your source code, such as 42 and 3.14159 in the examples below.
-
 - as described in - 详见 - You can provide a default value for a stored property as part of its definition, as described in Default Property Values.
+- access - 引用 - you can use the element names to access the values of those elements.
 - example - 示例 - The example below defines a structure called FixedLengthRange, which describes a range of integers whose range length cannot be changed once it is created
 
