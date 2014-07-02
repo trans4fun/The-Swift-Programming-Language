@@ -17,7 +17,7 @@ The Swift Programming Language 中文化项目
    * 集合类型 [认领 by 尘境]
    * 控制流 [认领 by 墨昕]
    * 函数 [已完成 by 紫溪] [review by 飞长]
-   * 闭包 [认领 by 闻西]
+   * 闭包 [认领 by 闻西] [review by 米尔]
    * 枚举 [已完成 by 灵吾] [review by 筱谷]
    * 类和结构体 [已完成 by 晓毒]
    * 属性 [认领 by 周源] [review by 林晚]
