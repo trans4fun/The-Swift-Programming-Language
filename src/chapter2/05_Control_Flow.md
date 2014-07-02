@@ -35,7 +35,7 @@ This example prints the first few entries in the five-times-table:
 
 下面这个例子可以打印出一个5次循环的结果：
 
-```
+```Java
 for index in 1...5{
 	println("\(index) times 5 is \(index * 5)")
 }
@@ -62,7 +62,7 @@ If you don’t need each value from the range, you can ignore the values by usin
 
 如果你在遍历某个集合时并不关心集合中的元素，你可以通过下划线来代替集合中的元素变量名：
 
-```
+```Java
 let base = 3
 let power = 10
 var answer = 1
@@ -81,7 +81,7 @@ Use the for-in loop with an array to iterate over its items:我们还可以
 
 使用`for-in`遍历数组中的元素:
 
-```
+```Java
 let names = ["Anna", "Alex", "Brian", "Jack"]
 for name in names {
     println("Hello, \(name)!")
@@ -97,7 +97,7 @@ You can also iterate over a dictionary to access its key-value pairs. Each item 
 
 你也同样可以遍历字典中的key-value。遍历时，字典中的每个元素都以`(key,value)`元组结构返回，你也可以在`for-in`中将元组中的key,value当做常量显式的分解出来。这里，key被分解为为常量`animalName`,value被分解为`legCount`：
 
-```
+```Java
 let numberOfLegs = ["spider": 8, "ant": 6, "cat": 4]
 for (animalName, legCount) in numberOfLegs {
     println("\(animalName)s have \(legCount) legs")
@@ -116,7 +116,7 @@ In addition to arrays and dictionaries, you can also use the for-in loop to iter
 
 除了数组和字典，你同样可以使用`for-in`来遍历字符串中的`Character`：
 
-```
+```Java
 for character in "Hello" {
     println(character)
 }
@@ -133,7 +133,7 @@ In addition to for-in loops, Swift supports traditional C-style for loops with a
 
 除了使用`for-in`这种循环语句，Swift还提供了传统的C风格的`for`循环语句，通常它需要一个循环执行条件和一个累加器：
 
-```
+```Java
 for var index = 0; index < 3; ++index {
     println("index is \(index)")
 }
@@ -182,7 +182,7 @@ Constants and variables declared within the initialization expression (such as v
 
 在for循环初始化时创建的变量或者常量只在循环体内有效，如果想获取循环结束时的`index`值，你必须将`index`显式的声明到循环语句前：
 
-```
+```Java
 var index: Int
 for index = 0; index < 3; ++index {
     println("index is \(index)")
@@ -217,7 +217,7 @@ Here’s the general form of a while loop:
 
 一个`while`循环从判断执行条件开始。如果条件为`true`，则循环执行循环体内的代码，知道条件变为`false`。下面是通用的`while`语法格式：
 
-```
+```Java
 while condition {
     statements
 }
@@ -227,7 +227,7 @@ This example plays a simple game of Snakes and Ladders (also known as Chutes and
 
 下面是一个简单的Snakes and Ladders游戏（也叫Chutes and Ladders）
 
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/snakesAndLadders_2x.png)
 
 The rules of the game are as follows:
 
@@ -247,7 +247,7 @@ The game board is represented by an array of Int values. Its size is based on a 
 
 游戏的板子可以看做是一个`Int`型的数组。大小由常量`finalSquare`决定，这个常量也会用来初始化数组和判断获胜条件。数组被初始化为26个0，注意不是25（数组范围从0到25）：
 
-```
+```Java
 let finalSquare = 25
 var board = Int[](count: finalSquare + 1, repeatedValue: 0)”
 ```
@@ -256,7 +256,7 @@ Some squares are then set to have more specific values for the snakes and ladder
 
 板子上的许多方格用来被指定为梯子或者蛇。如果是梯子，那么这个方格的值为正数，如果是蛇，则方格的值为负数：
 
-```
+```Java
 board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
 board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
 
@@ -269,7 +269,7 @@ The player’s starting square is “square zero”, which is just off the botto
 
 玩家从板子左下角的第0号方块开始，第一次掷骰子会将玩家移动到：
 
-```
+```Java
 var square = 0
 var diceRoll = 0
 while square < finalSquare {
@@ -314,17 +314,17 @@ Here’s the general form of a do-while loop:
 
 下面是`do-while`语句的格式：
 
-```
+```Java
 do {
     statements
-} while condition”
+} while condition
 
 ```
 Here’s the Snakes and Ladders example again, written as a do-while loop rather than a while loop. The values of finalSquare, board, square, and diceRoll are initialized in exactly the same way as with a while loop:
 
 还是上面的蛇和梯子的例子，我们来使用`do-while`实现，初始化变量的过程同`while`循环：
 
-```
+```Java
 let finalSquare = 25
 var board = Int[](count: finalSquare + 1, repeatedValue: 0)
 board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
@@ -340,7 +340,7 @@ At the start of the game, the player is on “square zero”. board[0] always eq
 
 这次，我们首先来判断第一次遇到的是梯子还是蛇。因为没有梯子会把玩家直接送到25，所以这个判断是安全的。开始时，玩家的位置在"0"，`board[0]`的值永远为0：
 
-```
+```Java
 do {
     // move up or down for a snake or ladder
     square += board[square]
@@ -375,7 +375,7 @@ In its simplest form, the if statement has a single if condition. It executes a 
 
 `If`语句很简单，当判断条件为`true`时，执行一段代码：
 
-```
+```Java
 var temperatureInFahrenheit = 30
 if temperatureInFahrenheit <= 32 {
     println("It's very cold. Consider wearing a scarf.")
@@ -391,7 +391,7 @@ The if statement can provide an alternative set of statements, known as an else 
 
 `if`语句通常和`else`搭配使用，当`if`语句返回`false`时，`else`分支的代码会被执行：
 
-```
+```Java
 temperatureInFahrenheit = 40
 if temperatureInFahrenheit <= 32 {
     println("It's very cold. Consider wearing a scarf.")
@@ -409,7 +409,7 @@ You can chain multiple if statements together, to consider additional clauses:
 
 你也可以将多个`if`语句连起来使用：
 
-```
+```Java
 temperatureInFahrenheit = 90
 if temperatureInFahrenheit <= 32 {
     println("It's very cold. Consider wearing a scarf.")
@@ -427,7 +427,7 @@ Here, an additional if statement is added to respond to particularly warm temper
 
 最后的`else`语句是可选的，如果它所在的分支不不需要执行，则可以将它排除：
 
-```
+```Java
 temperatureInFahrenheit = 72
 if temperatureInFahrenheit <= 32 {
     println("It's very cold. Consider wearing a scarf.")
@@ -449,7 +449,7 @@ In its simplest form, a switch statement compares a value against one or more va
 
 最简单的`switch`的语法是用来比较一个或多个类型相同的值：
 
-```
+```Java
 switch some value to consider {
 case value 1:
     respond to value 1
@@ -478,7 +478,7 @@ This example uses a switch statement to consider a single lowercase character ca
 
 这个例子使用`switch`语句类匹配一个小写字母变量`someCharacter`：
 
-```
+```Java
 let someCharacter: Character = "e"
 switch someCharacter {
 case "a", "e", "i", "o", "u":
@@ -513,7 +513,7 @@ The body of each case must contain at least one executable statement. It is not 
 
 每条`case`分支的函数体必须至少包含一行可执行代码。下面的代码是不合法的,因为第一条case分支的函数体为空：
 
-```
+```Java
 let anotherCharacter: Character = "a"
 switch anotherCharacter {
 case "a":
@@ -533,7 +533,7 @@ Multiple matches for a single switch case can be separated by commas, and can be
 
 一条`case`分支也可以匹配多个判断条件，用逗号隔开:
 
-```
+```Java
 switch some value to consider {
 case value 1,
 value 2:
@@ -550,7 +550,7 @@ Values in switch cases can be checked for their inclusion in a range. This examp
 
 `switch`语句的`case`分支可以是一个值区间同样支持范围匹配。下面这个例子展示了如何使用区间匹配来输出任意数字对应的自然语言格式：
 
-```
+```Java
 let count = 3_000_000_000_000
 let countedThings = "stars in the Milky Way"
 var naturalCount: String
@@ -584,7 +584,7 @@ The example below takes an (x, y) point, expressed as a simple tuple of type (In
 
 下面的例子使用一个元组类型（`Int`,`Int`）的点`(x,y)`并用图标来描述它的分布：
 
-```
+```Java
 let somePoint = (1, 1)
 switch somePoint {
 case (0, 0):
@@ -602,7 +602,7 @@ default:
 
 ```
 
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/coordinateGraphSimple_2x.png)
 
 The switch statement determines if the point is at the origin (0, 0); on the red x-axis; on the orange y-axis; inside the blue 4-by-4 box centered on the origin; or outside of the box.
 
@@ -622,7 +622,7 @@ The example below takes an `(x, y)` point, expressed as a tuple of type` (Int, I
 
 下面的例子将定义一个`(Int,Int)`型的元组变量`(x,y)`，并归类它在图中的位置:
 
-```
+```Java
 let anotherPoint = (2, 0)
 switch anotherPoint {
 case (let x, 0):
@@ -635,7 +635,7 @@ case let (x, y):
 // prints "on the x-axis with an x value of 2
 
 ```
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/coordinateGraphMedium_2x.png)
 
 The switch statement determines if the point is on the red x-axis, on the orange y-axis, or elsewhere, on neither axis.
 
@@ -667,7 +667,7 @@ The example below categorizes an (x, y) point on the following graph:
 
 还是上面的例子,用来归类`(x,y)`点所在图中得位置：
 
-```
+```Java
 let yetAnotherPoint = (1, -1)
 switch yetAnotherPoint {
 case let (x, y) where x == y:
@@ -679,7 +679,7 @@ case let (x, y):
 }
 // prints "(1, -1) is on the line x == -y
 ```
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/coordinateGraphComplex_2x.png)
 
 The switch statement determines if the point is on the green diagonal line where x == y, on the purple diagonal line where x == -y, or neither.
 
@@ -724,7 +724,7 @@ The following example removes all vowels and spaces from a lowercase string to c
 
 下面的例子会移除一个小写字符串中所有的原因字母：
 
-```
+```Java
 let puzzleInput = "great minds think alike"
 var puzzleOutput = ""
 for character in puzzleInput {
@@ -772,7 +772,7 @@ The following example switches on a Character value and determines whether it re
 	
 下面这个例子用来判断一个字符的值是否是数字符号。为了简便，多个值被包含到一个分支中：
 
-```
+```Java
 let numberSymbol: Character = "三"  // Simplified Chinese for the number 3
 var possibleIntegerValue: Int?
 switch numberSymbol {
@@ -818,7 +818,7 @@ If you really need C-style fallthrough behavior, you can opt in to this behavior
 
 如果你一定要使用C风格的贯穿(fallthrough)机制，你可以在每个需要支持该特性的case分支中使用`fallthrough`关键字。下面这个例子展示了如何使用`fallthrough`来实现对数字的文本描述：
 
-```
+```Java
 let integerToDescribe = 5
 var description = "The number \(integerToDescribe) is"
 switch integerToDescribe {
@@ -863,7 +863,7 @@ A labeled statement is indicated by placing a label on the same line as the stat
 
 标签语句通常被放到一些关键字的前面，通过分号隔开。下面是一个通过标签来标记`while`语句的例子，循环或`switch`语句和它类似：
 
-```
+```Java
 label name: while condition {
     statements
 }
@@ -883,13 +883,13 @@ If a particular dice roll would take you beyond square 25, you must roll again u
 The game board is the same as before:”
 游戏的棋盘和前面的一样：
 
-【图】
+![](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/snakesAndLadders_2x.png)
 
 The values of finalSquare, board, square, and diceRoll are initialized in the same way as before:
 
 `finalSquare`,`board`,`square`和`diceRoll`的值和之前初始化的值相同:
 
-```
+```Java
 let finalSquare = 25
 var board = Int[](count: finalSquare + 1, repeatedValue: 0)
 board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
@@ -906,7 +906,7 @@ The while loop’s condition is while square != finalSquare, to reflect that you
 
 `while`循环的条件是`while square != finalSquare`用来表示你必须正好落在第25个格子中：
 
-```
+```Java
 gameLoop: while square != finalSquare {
     if ++diceRoll == 7 { diceRoll = 1 }
     switch square + diceRoll {
