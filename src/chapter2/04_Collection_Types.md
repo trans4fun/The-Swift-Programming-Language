@@ -556,9 +556,9 @@ Immutability has a slightly different meaning for arrays, however. You are still
 
 对数组来说，不可变的意义稍有不同。我们仍不允许有改变不可变数组的大小的行为，但是，我们*被*允许改变数组中某个现有索引对应的值。这使得Swift的`Array`类型能够在操作固定大小的数组时提供最佳性能。
 
-The mutability behavior of Swift’s `Array` type also affects how array instances are assigned and modified. For more information, see [Assignment and Copy Behavior for Collection Types]().
+The mutability behavior of Swift’s `Array` type also affects how array instances are assigned and modified. For more information, see [Assignment and Copy Behavior for Collection Types](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/09_Classes_and_Structures.md#assignment-and-copy-behavior-for-collection-types).
 
-Swift的`Array`类型的可变性还影响了数组实例是怎么被声明和修改的。更多介绍请参见[集合类型的声明和复制]()。
+Swift的`Array`类型的可变性还影响了数组实例是怎么被声明和修改的。更多介绍请参见[集合类型的声明和复制](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/09_Classes_and_Structures.md#%E9%9B%86%E5%90%88%E7%9A%84%E8%B5%8B%E5%80%BC%E4%B8%8E%E6%8B%B7%E8%B4%9D)。
 
 >NOTE
 

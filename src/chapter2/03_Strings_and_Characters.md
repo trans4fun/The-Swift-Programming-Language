@@ -3,21 +3,22 @@
 
 A string is an ordered collection of characters, such as "hello, world" or "albatross". Swift strings are represented by the String type, which in turn represents a collection of values of Character type.
 
-字符串指的是一组字符的有序集合，比如「hello, world」或者「albatoross」。在 Swift 里，字符串通过 `String` 类型表示，或者从另外一个角度来说，它是一组 `Character` 对象的值的集合。
+字符串指的是一组字符的有序集合[to: 字符串指的是一组有序的字符集合]，比如「hello, world」或者「albatoross」。<s>在 Swift 里，字符串通过 `String` 类型表示，或者从另外一个角度来说，它是一组 `Character` 对象的值的集合</s> [to: Swift 中的字符串用 `String` 类型来表示，反过来说，它是一组 `Character` 类型的值集]。
 
 
 
 Swift’s String and Character types provide a fast, Unicode-compliant way to work with text in your code. The syntax for string creation and manipulation is lightweight and readable, with a similar syntax to C strings. String concatenation is as simple as adding together two strings with the + operator, and string mutability is managed by choosing between a constant or a variable, just like any other value in Swift.
 
-Swift 的 `String` 和 `Character` 类型为代码里的字符操作提供了一种快速的、兼容 Unicode 的途径。跟 C 语言类似，在 Swift 里面新建和操作字符的语法十分简单易读。字符串的合并只需要在两个字符串中间见天一个 `+` 运算符，同时就像其它 Swift 值一样，可以通过定义字符串为常量或是变量来决定它是否可被修改。
+Swift 的 `String` 和 `Character` 类型为代码里的字符操作提供了一种快速的、兼容 Unicode 的途径。跟 C 语言类似，在 Swift 里面新建和操作字符的语法十分简单易读。<s>字符串的合并只需要在两个字符串中间见天一个 `+` 运算符，同时就像其它 Swift 值一样，可以通过定义字符串为常量或是变量来决定它是否可被修改。</s> [to:字符串合并就像用`+`操作符相加两个字符串那么简单，另外，就像Swift里的其他值，可以通过定义字符串为常量还是变量来设置它是否可被修改。]
 
 
 Despite this simplicity of syntax, Swift’s String type is a fast, modern string implementation. Every string is composed of encoding-independent Unicode characters, and provides support for accessing those characters in various Unicode representations.
 
-尽量语法十分简单，Swift 的 `String` 类型是一个快速且现代化的字符串实现。每个字符串都由一组独立编码的 Unicode 字符组成，并且对这些字符提供了多种可访问的 Unicode 编码形式。
+尽量语法十分简单，Swift 的 `String` 类型是一个快速且现代化的字符串实现。<s>每个字符串都由一组独立编码的 Unicode 字符组成，并且对这些字符提供了多种可访问的 Unicode 编码形式。</s> [to:每个字符串由一组独立编码的 Unicode 字符组成，并提供了这些字符的多种可访问 Unicode 编码形式。]
 
 Strings can also be used to insert constants, variables, literals, and expressions into longer strings, in a process known as string interpolation. This makes it easy to create custom string values for display, storage, and printing.
 
+[to:字符串还可以通过字符串插值这种方式插入常量、变量、字面量或表达式来变得更长。这使得创建用来展示、存储和打印的自定义字符串值变得简单。]
 
 > #### NOTE
 > 
@@ -37,11 +38,11 @@ Strings can also be used to insert constants, variables, literals, and expressio
 
 You can include predefined String values within your code as string literals. A string literal is a fixed sequence of textual characters surrounded by a pair of double quotes ("").
 
-我们可以在代码的前面先定义一些字符串字面量。字符串字面量是由一对引号（""）包裹的含有相对顺序的字符集合。
+<s>我们可以在代码的前面先定义一些字符串字面量。</s> [to: 我们可以在代码中预定义`Sting`值为*字符串字面量*。] <s>字符串字面量是由一对引号（""）包裹的含有相对顺序的字符集合。</s>[to: 字符串字面量是由一对引号（`""`）包围的固定文本字符序列。]
 
 A string literal can be used to provide an initial value for a constant or variable:
 
-字符串字面量可以给常量或者变量提供一个初始值：
+字符串字面量可以给常量或者变量<s>提供一个初始值</s>[to:提供初始值]：
 
 	let someString = "Some string literal value"
 
@@ -66,7 +67,7 @@ String literals can include the following special characters:
 
 The code below shows an example of each kind of special character. The wiseWords constant contains two escaped double quote characters. The dollarSign, blackHeart, and sparklingHeart constants demonstrate the three different Unicode scalar character formats:
 
-下面的代码中，对各种特殊字符举了一些例子。`wiseWords` 常量包含了两个被转义的引号字符。`dollarSign`、`blackHeart` 和 `sparklingHeart` 常量展示了三种不同类型的 Unicode 字符表示方式。
+下面的代码中，<s>对各种特殊字符举了一些例子</s>[to：给每种特殊字符各举了一个例子]。`wiseWords` 常量包含了两个被转义的引号字符。`dollarSign`、`blackHeart` 和 `sparklingHeart` 常量展示了三种不同类型的 Unicode 字符表示方式。
 
 	let wiseWords = "\"Imagination is more important than knowledge\" - Einstein"
 	// "Imagination is more important than knowledge" - Einstein
@@ -84,7 +85,7 @@ To create an empty String value as the starting point for building a longer stri
 	var anotherEmptyString = String()  // initializer syntax
 	// these two strings are both empty, and are equivalent to each other
 
-一般我们会初始化一个空白的字符串作为后面组装长字符串的基础，Swift 提供了两种初始化字符串的方式，第一种是给变量赋予一个空白的字符串字面量，第二种是通过新建实例的语法：
+一般我们会初始化一个<s>空白的字符串</s>[to:空字符串]作为后面组装长字符串的基础，Swift 提供了两种初始化字符串的方式，第一种是给变量赋予一个<s>空白的字符串字面量</s>[to:空字符串字面量]，第二种是通过新建实例的语法：
 
 
 	var emptyString = ""               // 空白的字符串字面量
@@ -138,7 +139,7 @@ You indicate whether a particular String can be modified (or mutated) by assigni
 
 > #### 需要注意
 
-> 这个地方跟 Objective-C 和 Cocoa 不一致，与前者不同，后者可以使用两种类型的字符串 `NSString` 和 `NSMutableString` 来区分该字符是否能被修改。
+> <s>这个地方跟 Objective-C 和 Cocoa 不一致，与前者不同，后者可以使用两种类型的字符串 `NSString` 和 `NSMutableString` 来区分该字符是否能被修改</s>[to:这种方式与 Objective-C 和 Cocoa 有所不同，这两者通过设置字符串为 `NSString` 还是 `NSMutableString` 来区分该字符是否能被修改]。
 
 
 ### Strings Are Value Types
@@ -148,7 +149,7 @@ You indicate whether a particular String can be modified (or mutated) by assigni
 Swift’s String type is a value type. If you create a new String value, that String value is copied when it is passed to a function or method, or when it is assigned to a constant or variable. In each case, a new copy of the existing String value is created, and the new copy is passed or assigned, not the original version. Value types are described in Structures and Enumerations Are Value Types.
 
 
-Swift 中的 `String` 类型属于值类型，也就是说你一旦把一个字符串传进一个方法或者函数里面，或者重新赋值到一个新的常量或变量时，字符串的值都会被复制一遍。详细来说就是，String 类型会把原来的字符串复制为一个新的拷贝，再进行传递和分配，传递后的字符串已经不是原来的那个。关于值类型的详细介绍会在 [Structures and Enumerations Are Value Types]()。
+Swift 中的 `String` 类型属于*值类型*，也就是说你一旦把一个字符串<s>传进一个方法或者函数里面</s>[to:传给一个方法或函数]，或者重新赋值<s>到</s>[to:给]一个新的常量或变量时，字符串的值都会被复制一遍。<s>详细来说就是</s>[to:在以上每种情况中，]，String 类型会把原来的字符串复制为一个新的拷贝，再进行传递和分配，<s>传递后的字符串已经不是原来的那个</s>[to:传递的字符串不是最初的那个]。关于值类型的详细介绍<s>会在</s>[to:请参见] [Structures and Enumerations Are Value Types]()。
 
 
 > #### NOTE
@@ -157,16 +158,16 @@ Swift 中的 `String` 类型属于值类型，也就是说你一旦把一个字�
 
 > ### 需要注意
 
-> 这个行为和 Cocoa 里的 `NSString` 有所区别。每当实例化一个 `NSString` 对象之后，无论怎么在函数和方法之间传递，它都只是指向原来的值的引用，并不会每次复制这个字符串对象，除非你主动要求这么做。
+> 这个行为和 Cocoa 里的 `NSString` 有所 <s>区别</s>[to:不同]。<s>每</s> 当实例化一个 `NSString` 对象之后，<s>无论怎么在函数和方法之间传递，它都只是指向原来的值的引用</s>[to:无论是把它传递给一个函数或方法，还是把它赋值给一个变量，我们传递或者赋值的是一个指向同一个 `NSString` 的引用]。<s>并不会每次复制这个字符串对象，除非你主动要求这么做</s>[to:除非我们特别要求，否则不会复制这个字符串对象]。
 
 
 Swift’s copy-by-default String behavior ensures that when a function or method passes you a String value, it is clear that you own that exact String value, regardless of where it came from. You can be confident that the string you are passed will not be modified unless you modify it yourself.
 
-Swift 这种默认复制的行为确保了每个方法或者函数里面接收到的字符串都完全属于这个方法或函数的，并不需要考虑它从哪来，这样就保证了字符串不会变动，除非主动修改它。
+Swift 这种默认复制的行为确保了每个方法或者函数里面接收到的字符串都完全属于这个方法或函数的，并不需要考虑它从哪来，<s>这样就保证了字符串不会变动，除非主动修改它</s>[to:这样就使得我们能够确保传递的字符串不会被修改，除非我们主动去修改它]。
 
 Behind the scenes, Swift’s compiler optimizes string usage so that actual copying takes place only when absolutely necessary. This means you always get great performance when working with strings as value types.
 
-实际上，Swift 的编译器优化了字符串的使用过程，只有绝对需要时才会产生复制的实际操作。这样就意味着 Swift 可以在字符串操作上和值类型保持一样的高性能。
+实际上，Swift 的编译器优化了字符串的使用 <s>过程</s>，只有绝对需要时才会产生复制的实际操作。这样就意味着 Swift 可以在字符串操作上和值类型保持一样的高性能。
 
 
 ### Working with Characters
@@ -175,7 +176,7 @@ Behind the scenes, Swift’s compiler optimizes string usage so that actual copy
 
 Swift’s String type represents a collection of Character values in a specified order. Each Character value represents a single Unicode character. You can access the individual Character values in a string by iterating over that string with a for-in loop:
 
-Swift 的 `String` 类型是由一系列 `Character` 对象根据一定的顺序排列组成的。每个 `Character` 对象都对应着一个 Unicode 字符。我们可以用一个 `for-in` 循环逐个读取字符串中的 `Character` 对象：
+Swift 的 `String` 类型<span>是由一系列 `Character` 对象根据一定的顺序排列组成的</s>[to:是一组有着特定顺序的 `Character` 序列]。每个 `Character` <s>对象都对应着</s>[to:代表了]一个 Unicode 字符。我们可以用<s>一个</s> `for-in` 循环逐个读取字符串中的 `Character` <s>对象</s>[to:值]：
 
 	for character in "Dog!🐶" {
     	println(character)
@@ -189,11 +190,11 @@ Swift 的 `String` 类型是由一系列 `Character` 对象根据一定的顺序
 
 The for-in loop is described in For Loops.
 
-`for-in` 循环的介绍在 [For Loops]()。
+`for-in` 循环的<s>介绍在</s>[to:介绍请参见] [For Loops]()。
 
 Alternatively, create a stand-alone Character constant or variable from a single-character string literal by providing a Character type annotation:
 
-此外，可以通过为一个单独的字符指定 `Character` 类型去定义一个独立的 `Character` 常量或者变量：
+此外，可以通过为一个单独的字符指定 `Character` 类型去定义一个独立的 `Character` 常量或者变量<s></s>[to:可以通过 `Character`类型声明单字符变量或常量]：
 
 	let yenSign: Character = "¥"
 	
@@ -208,7 +209,7 @@ To retrieve a count of the characters in a string, call the global countElements
 	println("unusualMenagerie has \(countElements(unusualMenagerie)) characters")
 	// prints "unusualMenagerie has 40 characters"
 
-如果需要计算一个字符串中字符的数量，可以通过调用全局方法 `countElements` 并把该字符串作为唯一的参数：
+如果需要计算一个字符串中字符的数量，可以 <s>通过</s> 调用全局方法 `countElements` 并把该字符串作为唯一的参数：
 
 	let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
 	println("unusualMenagerie 拥有 \(countElements(unusualMenagerie)) 个字符")
@@ -224,9 +225,9 @@ To retrieve a count of the characters in a string, call the global countElements
 
 > #### 需要注意
 
-> 不同的 Unicdoe 字符或者同一个 Unicode 字符的不同表示方式可能需要不同的内存大小进行存储。因此，在一个字符串中每个字符可能占用不同的内存大小。结果导致如果需要知道一个字符串的长度，必须通过迭代整个字符串中的字符才能计算出来。如果我们在处理一个超长字符串，必须要注意的是 `countElements` 方法会迭代整个字符串来精确计算该字符串的长度。
+> 不同的 Unicdoe 字符或者同一个 Unicode 字符的不同表示方式可能需要不同的内存大小进行存储。因此，<s>在一个字符串中每个字符</s>[to:一个字符串中的各个字符]可能占用不同的内存大小。<s>结果导致</s>[to:因此，]如果需要知道一个字符串的长度，必须通过<s>迭代</s>[to:遍历]整个字符串中的字符才能计算出来。如果我们在处理一个超长字符串，必须要注意的是 `countElements` 方法会<s>迭代</s>[to:遍历]整个字符串来精确计算该字符串的长度。
 
-> 另外需要注意的是，对于同一个字符串，通过执行 `countElements` 方法返回的字符串数量不一定和 `NSString` 使用 `length` 属性得到的值一样。因为 `NSString` 的 `length` 值是基于 `UTF-16` 十六位编码方式统计的，并未直接统计字符串里 Unicode 字符的数量。为了反映这个事实，Swift 里 `String` 对象的 `utf16count` 属性对应 `NSString` 类的 `length` 值。
+> 另外需要注意的是，对于同一个字符串，通过执行 `countElements` 方法返回的字符串数量不一定和 `NSString` 使用 `length` 属性得到的值一样。因为 `NSString` 的 `length` 值是基于 `UTF-16` 十六位编码方式[to:中的16位编码单元的数量来]统计的，<s>并未直接统计字符串里 Unicode 字符的数量</s>[to:而不是字符串里的 Unicode 字符的数量]。为了反映这个事实，Swift 里 `String` 对象的 `utf16count` 属性对应 `NSString` 类的 `length` 值。
 
 
 ### Concatenating Strings and Characters
@@ -309,7 +310,7 @@ In the example above, the value of multiplier is inserted into a string literal 
 
 The value of multiplier is also part of a larger expression later in the string. This expression calculates the value of Double(multiplier) * 2.5 and inserts the result (7.5) into the string. In this case, the expression is written as \(Double(multiplier) * 2.5) when it is included inside the string literal.
 
-`multiplier` 同时也在字符串后面的表达式中出现，这个表达式会被执行并把计算结果（7.5）插入到字符串中。在这个案例里面，该表达式被写成了 `\(Double(multiplier) * 2.5)` 并插在了字符串里面。
+`multiplier` 同时也在字符串后面的表达式中出现，这个表达式会被执行并把计算结果（7.5）插入到字符串中。在这个案例里面，<s>该表达式被写成了 `\(Double(multiplier) * 2.5)` 并插在了字符串里面</s>[to: 当被包含在字符串字面量中时，该表达式被写为 `\(Double(multiplier) * 2.5)`]。
 
 
 ### Comparing Strings
@@ -335,7 +336,7 @@ Two String values are considered equal if they contain exactly the same characte
 
 
 
-如果两个字符串由相同的字符和一致的顺序组成，那就认为这两个字符串是完全相等的：
+如果两个字符串<s>由相同的字符和一致的顺序组成</s>[to:包含的字符完全相同，并且这些字符的排列顺序也相同]，那就认为这两个字符串是完全相等的：
 
 	let quotation = "We're a lot alike, you and I."
 	let sameQuotation = "We're a lot alike, you and I."
@@ -350,7 +351,7 @@ Two String values are considered equal if they contain exactly the same characte
 
 To check whether a string has a particular string prefix or suffix, call the string’s hasPrefix and hasSuffix methods, both of which take a single argument of type String and return a Boolean value. Both methods perform a character-by-character comparison between the base string and the prefix or suffix string.
 
-通过调用字符串的 `hasPrefix` 或 `hasSuffix` 来判断该字符串是否含有特定的前缀或后缀，这两个方法分别都接收一个字符串参数，结果返回布尔值。这两个方法会在字符串和需要对比的前缀或后缀进行逐字对比。
+通过调用字符串的 `hasPrefix` 或 `hasSuffix` [to:方法]来判断该字符串是否含有特定的前缀或后缀，这两个方法<s>分别</s>都接收一个字符串参数，<s>结果</s>[to:并]返回布尔值。这两个方法会在字符串和需要对比的前缀或后缀进行逐字对比。
 
 The examples below consider an array of strings representing the scene locations from the first two acts of Shakespeare’s Romeo and Juliet:
 
@@ -450,7 +451,7 @@ let whispered = normal.lowercaseString
 // whispered is equal to "could you help me, please?"
 ```
 
-可以通过字符串本身的 `uppercaseString` 或 `lowercaseString` 属性取得它的全大些或全小写版本：
+[to:我们]可以通过字符串<s>本身</s>的 `uppercaseString` 或 `lowercaseString` 属性取得<s>它的全大些或全小写版本</s>[to:某个字符串的大写或小写版本]：
 
 
 ```
@@ -468,7 +469,7 @@ let whispered = normal.lowercaseString
 
 Unicode is an international standard for encoding and representing text. It enables you to represent almost any character from any language in a standardized form, and to read and write those characters to and from an external source such as a text file or web page.
 
-Unicode 是一个用来编码和表示文本的国际标准。它允许我们用一个标准格式来表示世界上几乎所有的字符，并且提供了在类似文本文件或网页中读取和写入这些字符的能力。
+`Unicode` 是一个用来编码和表示文本的国际标准。它<s>允许我们用</s> [to: 使得我们可以用] 一个标准格式来表示世界上几乎所有的字符，并且提供了在类似文本文件或网页中读取和写入这些字符的能力。
 
 Swift’s String and Character types are fully Unicode-compliant. They support a number of different Unicode encodings, as described below.
 
@@ -492,11 +493,13 @@ When a Unicode string is written to a text file or some other storage, these uni
 
 Swift provides several different ways to access Unicode representations of strings.
 
-Swift 对 Unicode 字符提供了几种不同的访问方式。
+<s>Swift 对 Unicode 字符提供了几种不同的访问方式。</s>
+[to: Swift 提供了不同的方法来访问字符的Unicode形式。]
 
 You can iterate over the string with a for-in statement, to access its individual Character values as Unicode characters. This process is described in Working with Characters.
 
-首先可以从字符串的逐字迭代中取得每个 `Character` 中的 Unicode 字符。这个过程在上面的 [字符处理]() 章节中有提到。
+<s>首先可以从字符串的逐字迭代中取得每个 `Character` 中的 Unicode 字符。</s>[to: 我们可以用 `for-in`语句遍历字符串来获取到字符串中每个`Character` 相应的 Unicode 字符。] 这个过程在上面的 [字符处理]() 章节中有提到。
+
 
 Alternatively, access a String value in one of three other Unicode-compliant representations:
 
@@ -506,7 +509,7 @@ A collection of UTF-16 code units (accessed with the string’s utf16 property)
 A collection of 21-bit Unicode scalar values (accessed with the string’s unicodeScalars property)
 ```
 
-另外，还可以通过以下三种方式中的一种访问字符串中兼容 Unicode 的字符数据： 
+另外，还可以通过以下三种 <s>方式中的一种访问字符串中兼容 Unicode 的字符数据</s>[to:统一编码方式来访问一个 `String` 的值]： 
 
 ```
 一组以 UTF-8 编码的单元 (通过字符串的 utf8 属性访问)
@@ -516,7 +519,7 @@ A collection of 21-bit Unicode scalar values (accessed with the string’s unico
 
 Each example below shows a different representation of the following string, which is made up of the characters D, o, g, !, and the 🐶 character (DOG FACE, or Unicode scalar U+1F436):
 
-下面的每个示例描述了以下字符串不同的几种表示方法，这个字符串由这几个字符组成：`D`、`o`、`g`、`!` 和 `🐶` 字符（`DOG FACE` 或者 Unicode 标量 `U+1F436`）
+下面的每个示例 <s>描述了</s>[to: 给出了] 以下字符串<s>不同的几种表示方法</s>[to:的几种不同表示方法]，这个字符串由这几个字符组成：`D`、`o`、`g`、`!` 和 `🐶` 字符（`DOG FACE` 或者 Unicode 标量 `U+1F436`）
 
 ```
 let dogString = "Dog!🐶"
@@ -527,7 +530,7 @@ let dogString = "Dog!🐶"
 
 You can access a UTF-8 representation of a String by iterating over its utf8 property. This property is of type UTF8View, which is a collection of unsigned 8-bit (UInt8) values, one for each byte in the string’s UTF-8 representation:
 
-我们可以通过迭代访问字符串的 `utf8` 属性来获得该字符串的 `UTF-8` 编码形式。该属性的类型是 `UTF8View`，由一组无符号的 8 位数值（`UInt8`）组成，每个数值代表了字符串用 `UTF-8` 编码后的字节。
+我们可以通过 <s>迭代访问</s>[to:遍历] 字符串的 `utf8` 属性来获得该字符串的 `UTF-8` 编码形式。该属性的类型是 `UTF8View`，由一组无符号的<s> 8 位数值（`UInt8`）</s> [to:  8 位（`UInt8`）数值]组成，<s>每个数值代表了字符串用 `UTF-8` 编码后的字节</s>[to：每个字节都是字符串的 UTF-8 编码形式]。
 
 ```
 for codeUnit in dogString.utf8 {
@@ -539,13 +542,13 @@ print("\n")
 
 In the example above, the first four decimal codeUnit values (68, 111, 103, 33) represent the characters D, o, g, and !, whose UTF-8 representation is the same as their ASCII representation. The last four codeUnit values (240, 159, 144, 182) are a four-byte UTF-8 representation of the DOG FACE character.
 
-上面的例子中，前四位十进制的编码单元分别代表了 `D`、`o`、`g`、`!`，这几个字符的编码形式跟 ASCII 是一致的。最后四位编码单元（240，159，144，182）是一个 4 位的 UTF-8 编码表示形式，用来表示 `DOG FACE` 字符。
+上面的例子中，前四位十进制的编码单元[to: `(68, 111, 103, 33)`]分别代表了 `D`、`o`、`g`、`!`，这几个字符的编码形式跟 ASCII 是<s>一致的</s>[to:相同的]。最后四位编码单元（240，159，144，182）是<s>一个 4 位的 UTF-8 编码表示形式，用来表示 `DOG FACE` 字符</s>[to: 字符 `DOG FACE` 的 4 位 UTF-8 编码形式]。
 
 #### UTF-16
 
 You can access a UTF-16 representation of a String by iterating over its utf16 property. This property is of type UTF16View, which is a collection of unsigned 16-bit (UInt16) values, one for each 16-bit code unit in the string’s UTF-16 representation:
 
-通过迭代访问字符串的 `utf16` 属性可以取得该字符串的 `UTF-16` 编码形式，该属性的类型是 `UTF16View`，即一组无符号 16 位数值（UInt16）的集合，每个数值代表了字符串用 `UTF-16` 编码后的字节。
+通过<s>迭代访问</s>[to:遍历]字符串的 `utf16` 属性可以取得该字符串的 `UTF-16` 编码形式，该属性的类型是 `UTF16View`，即一组无符号 <s>16 位数值（UInt16）</s>[to:16 位（UInt16）数值]的集合，<s>每个数值代表了字符串用 `UTF-16` 编码后的字节</s>[to：每个字节都是字符串的 UTF-16 编码形式]。
  
 ```
 for codeUnit in dogString.utf16 {
@@ -557,11 +560,11 @@ print("\n")
 
 Again, the first four codeUnit values (68, 111, 103, 33) represent the characters D, o, g, and !, whose UTF-16 code units have the same values as in the string’s UTF-8 representation.
 
-类似的，前四个编码单元（68，111，103，33）代表了前四个字符 `D`、`o`、`g` 和 `!`，这几个字符 `UTF-16` 和 `UTF-8` 拥有相同的表示方式。
+类似的，前四个编码单元（`68，111，103，33`）代表了<s>前四个</s>字符 `D`、`o`、`g` 和 `!`，这几个字符<s> `UTF-16` 和 `UTF-8` 拥有相同的表示方式</s>[to: 的`UTF-16` 表示方式同 `UTF-8` 的一样]。
 
 The fifth and sixth codeUnit values (55357 and 56374) are a UTF-16 surrogate pair representation of the DOG FACE character. These values are a lead surrogate value of U+D83D (decimal value 55357) and a trail surrogate value of U+DC36 (decimal value 56374).
 
-第五个和第六个编码单元（55357 和 56374）则是 `DOG FACE` 字符的代理项。这两个数值由第一部分的 `U+D83D`（十进制 55357） 和 `U+DC36`（十进制 56374）组成。
+第五个和第六个`编码单元`（`55357` 和 `56374`）则是 `DOG FACE` 字符的代理项。这两个数值由<s>第一部分的</s> `U+D83D`（十进制 55357） 和 `U+DC36`（十进制 56374）组成。
 
 #### Unicode Scalars
 
@@ -569,7 +572,7 @@ The fifth and sixth codeUnit values (55357 and 56374) are a UTF-16 surrogate pai
 
 You can access a Unicode scalar representation of a String value by iterating over its unicodeScalars property. This property is of type UnicodeScalarView, which is a collection of values of type UnicodeScalar. A Unicode scalar is any 21-bit Unicode code point that is not a lead surrogate or trail surrogate code point.
 
-通过迭代字符串的 `unicodeScalars` 属性可以获得该字符串的 Unicode 标量表示形式。该属性的类型是 `UnicodeScalarView`，由一组 `UnicodeScalar` 类型的值组成。一个 Unicode 标量是一个完整的 21 位编码，既没有首码位，也没有尾码位。
+通过<s>迭代</s>[to:遍历]字符串的 `unicodeScalars` 属性可以获得该字符串的 Unicode 标量表示形式。该属性的类型是 `UnicodeScalarView`，由一组 `UnicodeScalar` 类型的值组成。一个 Unicode 标量是一个完整的 21 位编码，既没有首码位，也没有尾码位。
 
 Each UnicodeScalar has a value property that returns the scalar’s 21-bit value, represented within a UInt32 value:
 
@@ -585,11 +588,11 @@ print("\n")
 
 The value properties for the first four UnicodeScalar values (68, 111, 103, 33) once again represent the characters D, o, g, and !. The value property of the fifth and final UnicodeScalar, 128054, is a decimal equivalent of the hexadecimal value 1F436, which is equivalent to the Unicode scalar U+1F436 for the DOG FACE character.
 
-前四个 `UnicodeScalar` 对象的 `value` 属性值（68，111，103，33）按照惯例还是代表着 `D`、`o`、`g` 和 `!` 四个字符。而第五个也就是最后一个 `UnicodeScalar` 数值 128054 的十六进制是 1F436，刚好等价于 `DOG FACE` 字符的 Unicode 标量 `U+1F436` 
+前四个 `UnicodeScalar` 对象的 `value` 属性值（`68，111，103，33`）按照惯例还是代表着 `D`、`o`、`g` 和 `!` 四个字符。而第五个也就是最后一个 `UnicodeScalar` 数值 128054 的十六进制是 1F436，刚好等价于 `DOG FACE` 字符的 Unicode 标量 `U+1F436` 。
 
 As an alternative to querying their value properties, each UnicodeScalar value can also be used to construct a new String value, such as with string interpolation:
 
-除了使用它们的 `value` 属性，每个 `UnicodeScalar` 对象也可以用来直接构造新的 `String` 对象，比如这里用的字符串插值方法：
+除了使用它们的 `value` 属性，每个 `UnicodeScalar` 对象也可以用来<s>直接</s>构造新的 `String` 对象，比如这里用的字符串插值方法：
 
 ```
 for scalar in dogString.unicodeScalars {
