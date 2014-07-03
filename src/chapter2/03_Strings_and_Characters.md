@@ -1,4 +1,4 @@
-## 字符和字符串
+# 字符和字符串
 
 
 A string is an ordered collection of characters, such as "hello, world" or "albatross". Swift strings are represented by the String type, which in turn represents a collection of values of Character type.
@@ -20,21 +20,21 @@ Strings can also be used to insert constants, variables, literals, and expressio
 
 [to:字符串还可以通过字符串插值这种方式插入常量、变量、字面量或表达式来变得更长。这使得创建用来展示、存储和打印的自定义字符串值变得简单。]
 
-> #### NOTE
+> ### NOTE
 > 
 > Swift’s String type is bridged seamlessly to Foundation’s NSString class. If you are working with the Foundation framework in Cocoa or Cocoa Touch, the entire NSString API is available to call on any String value you create, in addition to the String features described in this chapter. You can also use a String value with any API that requires an NSString instance.
 > 
 > For more information about using String with Foundation and Cocoa, see Using Swift with Cocoa and Objective-C.
 
-> #### 需要注意
+> ### 需要注意
 
 > Swift 的 `String` 类型无缝接入了 Foundation 的 `NSString` 类。如果你之前在 Cocoa 或 Cocoa Touch 中使用了 Foundation 框架，所有 `NSString` 的 API 都可以用在新的 `String` 实例对象上，而且 `String` 对象还额外添加了下文中提到的特性。同时也可以把 `String` 对象用在任何需要传入 `NSString` 实例为参数的 API 中。
 
 > 更多关于 `String` 和 Foundation 或 Coca 使用方法的信息，请查看 [Using Swift with Cocoa and Objective-C]()。
 
-### String Literals
+## String Literals
 
-### 字符串字面量
+## 字符串字面量
 
 You can include predefined String values within your code as string literals. A string literal is a fixed sequence of textual characters surrounded by a pair of double quotes ("").
 
@@ -75,9 +75,9 @@ The code below shows an example of each kind of special character. The wiseWords
 	let blackHeart = "\u2665"      // ♥,  Unicode 字符 U+2665
 	let sparklingHeart = "\U0001F496"  // 💖, Unicode 字符 U+1F496
 
-### Initializing an Empty String
+## Initializing an Empty String
 
-### 初始化字符串
+## 初始化字符串
 
 To create an empty String value as the starting point for building a longer string, either assign an empty string literal to a variable, or initialize a new String instance with initializer syntax:
 
@@ -108,9 +108,9 @@ You can find out whether a String value is empty by checking its Boolean isEmpty
 	// 会输出 "你看不到我"
 	
 
-### String Mutability
+## String Mutability
 
-### 字符串操作
+## 字符串操作
 
 You indicate whether a particular String can be modified (or mutated) by assigning it to a variable (in which case it can be modified), or to a constant (in which case it cannot be modified):
 
@@ -133,18 +133,18 @@ You indicate whether a particular String can be modified (or mutated) by assigni
 	constantString += " and another Highlander"
 	// 这段代码会在编译时报错，因为常量不能被修改
 
-> #### NOTE
+> ### NOTE
 
 > This approach is different from string mutation in Objective-C and Cocoa, where you choose between two classes (NSString and NSMutableString) to indicate whether a string can be mutated.
 
-> #### 需要注意
+> ### 需要注意
 
 > <s>这个地方跟 Objective-C 和 Cocoa 不一致，与前者不同，后者可以使用两种类型的字符串 `NSString` 和 `NSMutableString` 来区分该字符是否能被修改</s>[to:这种方式与 Objective-C 和 Cocoa 有所不同，这两者通过设置字符串为 `NSString` 还是 `NSMutableString` 来区分该字符是否能被修改]。
 
 
-### Strings Are Value Types
+## Strings Are Value Types
 
-### 字符串是值类型
+## 字符串是值类型
 
 Swift’s String type is a value type. If you create a new String value, that String value is copied when it is passed to a function or method, or when it is assigned to a constant or variable. In each case, a new copy of the existing String value is created, and the new copy is passed or assigned, not the original version. Value types are described in Structures and Enumerations Are Value Types.
 
@@ -152,11 +152,11 @@ Swift’s String type is a value type. If you create a new String value, that St
 Swift 中的 `String` 类型属于*值类型*，也就是说你一旦把一个字符串<s>传进一个方法或者函数里面</s>[to:传给一个方法或函数]，或者重新赋值<s>到</s>[to:给]一个新的常量或变量时，字符串的值都会被复制一遍。<s>详细来说就是</s>[to:在以上每种情况中，]，String 类型会把原来的字符串复制为一个新的拷贝，再进行传递和分配，<s>传递后的字符串已经不是原来的那个</s>[to:传递的字符串不是最初的那个]。关于值类型的详细介绍<s>会在</s>[to:请参见] [Structures and Enumerations Are Value Types]()。
 
 
-> #### NOTE
+> ### NOTE
 
 > This behavior differs from that of NSString in Cocoa. When you create an NSString instance in Cocoa, and pass it to a function or method or assign it to a variable, you are always passing or assigning a reference to the same single NSString. No copying of the string takes place, unless you specifically request it.
 
-> ### 需要注意
+> ## 需要注意
 
 > 这个行为和 Cocoa 里的 `NSString` 有所 <s>区别</s>[to:不同]。<s>每</s> 当实例化一个 `NSString` 对象之后，<s>无论怎么在函数和方法之间传递，它都只是指向原来的值的引用</s>[to:无论是把它传递给一个函数或方法，还是把它赋值给一个变量，我们传递或者赋值的是一个指向同一个 `NSString` 的引用]。<s>并不会每次复制这个字符串对象，除非你主动要求这么做</s>[to:除非我们特别要求，否则不会复制这个字符串对象]。
 
@@ -170,9 +170,9 @@ Behind the scenes, Swift’s compiler optimizes string usage so that actual copy
 实际上，Swift 的编译器优化了字符串的使用 <s>过程</s>，只有绝对需要时才会产生复制的实际操作。这样就意味着 Swift 可以在字符串操作上和值类型保持一样的高性能。
 
 
-### Working with Characters
+## Working with Characters
 
-### 字符处理
+## 字符处理
 
 Swift’s String type represents a collection of Character values in a specified order. Each Character value represents a single Unicode character. You can access the individual Character values in a string by iterating over that string with a for-in loop:
 
@@ -199,9 +199,9 @@ Alternatively, create a stand-alone Character constant or variable from a single
 	let yenSign: Character = "¥"
 	
 
-### Counting Characters
+## Counting Characters
 
-### 计算字符个数
+## 计算字符个数
 
 To retrieve a count of the characters in a string, call the global countElements function and pass in a string as the function’s sole parameter:
 
@@ -216,23 +216,23 @@ To retrieve a count of the characters in a string, call the global countElements
 	// hui输出 "unusualMenagerie 拥有 40 个字符"
 
 
-> #### NOTE
+> ### NOTE
 
 > Different Unicode characters and different representations of the same Unicode character can require different amounts of memory to store. Because of this, characters in Swift do not each take up the same amount of memory within a string’s representation. As a result, the length of a string cannot be calculated without iterating through the string to consider each of its characters in turn. If you are working with particularly long string values, be aware that the countElements function must iterate over the characters within a string in order to calculate an accurate character count for that string.
 
 > Note also that the character count returned by countElements is not always the same as the length property of an NSString that contains the same characters. The length of an NSString is based on the number of 16-bit code units within the string’s UTF-16 representation and not the number of Unicode characters within the string. To reflect this fact, the length property from NSString is called utf16count when it is accessed on a Swift String value.
 
 
-> #### 需要注意
+> ### 需要注意
 
 > 不同的 Unicdoe 字符或者同一个 Unicode 字符的不同表示方式可能需要不同的内存大小进行存储。因此，<s>在一个字符串中每个字符</s>[to:一个字符串中的各个字符]可能占用不同的内存大小。<s>结果导致</s>[to:因此，]如果需要知道一个字符串的长度，必须通过<s>迭代</s>[to:遍历]整个字符串中的字符才能计算出来。如果我们在处理一个超长字符串，必须要注意的是 `countElements` 方法会<s>迭代</s>[to:遍历]整个字符串来精确计算该字符串的长度。
 
 > 另外需要注意的是，对于同一个字符串，通过执行 `countElements` 方法返回的字符串数量不一定和 `NSString` 使用 `length` 属性得到的值一样。因为 `NSString` 的 `length` 值是基于 `UTF-16` 十六位编码方式[to:中的16位编码单元的数量来]统计的，<s>并未直接统计字符串里 Unicode 字符的数量</s>[to:而不是字符串里的 Unicode 字符的数量]。为了反映这个事实，Swift 里 `String` 对象的 `utf16count` 属性对应 `NSString` 类的 `length` 值。
 
 
-### Concatenating Strings and Characters
+## Concatenating Strings and Characters
 
-### 字符和字符串的拼接
+## 字符和字符串的拼接
 
 String and Character values can be added together (or concatenated) with the addition operator (+) to create a new String value:
 
@@ -278,18 +278,18 @@ You can also append a String or Character value to an existing String variable w
 	welcome += character1
 	// welcome now 现在是 "good morning!"
 
-> #### NOTE
+> ### NOTE
 
 > You can’t append a String or Character to an existing Character variable, because a Character value must contain a single character only.
 
-> #### 需要注意
+> ### 需要注意
 
 > 无法在 `Character` 对象后面追加任何 `String` 或 `Character` 字符，因为 `Character` 对象必须只有一个字符。
 
 
-### String Interpolation
+## String Interpolation
 
-### 字符串插值
+## 字符串插值
 
 String interpolation is a way to construct a new String value from a mix of constants, variables, literals, and expressions by including their values inside a string literal. Each item that you insert into the string literal is wrapped in a pair of parentheses, prefixed by a backslash:
 
@@ -313,17 +313,17 @@ The value of multiplier is also part of a larger expression later in the string.
 `multiplier` 同时也在字符串后面的表达式中出现，这个表达式会被执行并把计算结果（7.5）插入到字符串中。在这个案例里面，<s>该表达式被写成了 `\(Double(multiplier) * 2.5)` 并插在了字符串里面</s>[to: 当被包含在字符串字面量中时，该表达式被写为 `\(Double(multiplier) * 2.5)`]。
 
 
-### Comparing Strings
+## Comparing Strings
 
-### 字符串比较
+## 字符串比较
 
 Swift provides three ways to compare String values: string equality, prefix equality, and suffix equality.
 
 Swift 提供了三种对比字符串的方式：全值比较、前缀比较和后缀比较。
 
-#### String Equality
+### String Equality
 
-#### 全值比较
+### 全值比较
 
 Two String values are considered equal if they contain exactly the same characters in the same order:
 
@@ -345,9 +345,9 @@ Two String values are considered equal if they contain exactly the same characte
 	}
 	// 运行后会输出 "这两个字符串是相等的"
 	
-#### Prefix and Suffix Equality
+### Prefix and Suffix Equality
 
-#### 前缀比较和后缀比较
+### 前缀比较和后缀比较
 
 To check whether a string has a particular string prefix or suffix, call the string’s hasPrefix and hasSuffix methods, both of which take a single argument of type String and return a Boolean value. Both methods perform a character-by-character comparison between the base string and the prefix or suffix string.
 
@@ -437,9 +437,9 @@ Similarly, use the hasSuffix method to count the number of scenes that take plac
 	// 运行后输出： "6 mansion scenes; 2 cell scenes"
 
 
-### Uppercase and Lowercase Strings
+## Uppercase and Lowercase Strings
 
-### 字符串的大小写转换
+## 字符串的大小写转换
 
 You can access an uppercase or lowercase version of a string with its uppercaseString and lowercaseString properties:
 
@@ -463,9 +463,9 @@ let whispered = normal.lowercaseString
 ```
 
 
-### Unicode
+## Unicode
 
-### Unicode 字符
+## Unicode 字符
 
 Unicode is an international standard for encoding and representing text. It enables you to represent almost any character from any language in a standardized form, and to read and write those characters to and from an external source such as a text file or web page.
 
@@ -475,9 +475,9 @@ Swift’s String and Character types are fully Unicode-compliant. They support a
 
 Swift 的 `String` 和 `Character` 类型完全兼容 Unicode ，并且提供了大量 Unicode 编码的支持，下面我们会提到这点。
 
-#### Unicode Terminology
+### Unicode Terminology
 
-#### Unicode 的术语
+### Unicode 的术语
 
 Every character in Unicode can be represented by one or more unicode scalars. A unicode scalar is a unique 21-bit number (and name) for a character or modifier, such as U+0061 for LOWERCASE LATIN LETTER A ("a"), or U+1F425 for FRONT-FACING BABY CHICK ("🐥").
 
@@ -487,9 +487,9 @@ When a Unicode string is written to a text file or some other storage, these uni
 
 当一个 Unicode 的字符串被写进文本文件或者其它存储形式时，这些 unicode 标量就会从几种 Unicode 制定的编码方式中选取其中一种把该字符串编码成小块的编码单元。这些编码方式包括了 `UTF-8` 格式（会把字符串编码成 8 位编码单元），`UTF-16` 格式（把字符串编码成 16 位编码单元）。
 
-#### Unicode Representations of Strings
+### Unicode Representations of Strings
 
-#### Unicode 字符串的表示方式
+### Unicode 字符串的表示方式
 
 Swift provides several different ways to access Unicode representations of strings.
 
@@ -526,7 +526,7 @@ let dogString = "Dog!🐶"
 ```
 
 
-#### UTF-8
+### UTF-8
 
 You can access a UTF-8 representation of a String by iterating over its utf8 property. This property is of type UTF8View, which is a collection of unsigned 8-bit (UInt8) values, one for each byte in the string’s UTF-8 representation:
 
@@ -544,7 +544,7 @@ In the example above, the first four decimal codeUnit values (68, 111, 103, 33) 
 
 上面的例子中，前四位十进制的编码单元[to: `(68, 111, 103, 33)`]分别代表了 `D`、`o`、`g`、`!`，这几个字符的编码形式跟 ASCII 是<s>一致的</s>[to:相同的]。最后四位编码单元（240，159，144，182）是<s>一个 4 位的 UTF-8 编码表示形式，用来表示 `DOG FACE` 字符</s>[to: 字符 `DOG FACE` 的 4 位 UTF-8 编码形式]。
 
-#### UTF-16
+### UTF-16
 
 You can access a UTF-16 representation of a String by iterating over its utf16 property. This property is of type UTF16View, which is a collection of unsigned 16-bit (UInt16) values, one for each 16-bit code unit in the string’s UTF-16 representation:
 
@@ -566,9 +566,9 @@ The fifth and sixth codeUnit values (55357 and 56374) are a UTF-16 surrogate pai
 
 第五个和第六个`编码单元`（`55357` 和 `56374`）则是 `DOG FACE` 字符的代理项。这两个数值由<s>第一部分的</s> `U+D83D`（十进制 55357） 和 `U+DC36`（十进制 56374）组成。
 
-#### Unicode Scalars
+### Unicode Scalars
 
-#### Unicode 标量
+### Unicode 标量
 
 You can access a Unicode scalar representation of a String value by iterating over its unicodeScalars property. This property is of type UnicodeScalarView, which is a collection of values of type UnicodeScalar. A Unicode scalar is any 21-bit Unicode code point that is not a lead surrogate or trail surrogate code point.
 
