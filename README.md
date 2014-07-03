@@ -44,7 +44,7 @@ The Swift Programming Language 中文化项目
    * 属性 [认领 by 隐若] [review by 姜天意]
    * 模式 [已完成 by 栖邀] [review by 紫溪]
    * 泛型参数 [认领 by 龙刚] [review by 墨峰]
-   * 语法总结 [认领 by 无独]
+   * 语法总结 [认领 by 无独] [review by 晗光]
 
 # 分工
 * 西溪分会 10人 第一部分1-2章 第二部分1-8章
