@@ -163,11 +163,11 @@ default标签 → **default** :
 
 ###GRAMMAR OF A LABELED STATEMENT
 
-‌labeled-statement → statement-label loop-statement | statement-label switch-statement
-‌ 
-statement-label → label-name:
-‌ 
-label-name → identifier
+‌ labeled-statement → statement-label loop-statement | statement-label switch-statement
+
+‌ statement-label → label-name:
+
+‌ label-name → identifier
 
 ###标记语句语法
 标记语句 → 语句标签 循环语句 | 语句标签 switch语句
@@ -376,6 +376,7 @@ return语句 → **return** 表达式 可选
 ###GRAMMAR OF A CODE BLOCK
 
 ‌ code-block → {statements opt}
+
 ###代码块语法
 代码块 → { 多条语句 可选 }
 
@@ -407,6 +408,7 @@ return语句 → **return** 表达式 可选
 ‌ pattern-initializer → pattern initializer opt
 
 ‌ initializer → =expression
+
 ###常数声明语法
 常量声明 → 属性列表 可选 声明描述符列表 可选 **let** 模式构造器列表
 
@@ -424,7 +426,7 @@ return语句 → **return** 表达式 可选
 
 ‌ variable-declaration → variable-declaration-head variable-name type-annotation getter-setter-block
 
-variable-declaration → variable-declaration-head variable-name type-annotation getter-setter-keyword-block
+‌ variable-declaration → variable-declaration-head variable-name type-annotation getter-setter-keyword-block
 
 ‌ variable-declaration → variable-declaration-head variable-name type-annotation initializer opt willSet-didSet-block
 
@@ -1740,8 +1742,8 @@ superclass-initializer-expression → super.init
 ###GRAMMAR OF A PROTOCOL COMPOSITION TYPE
 
 ‌ protocol-composition-type → protocol <protocol-identifier-list opt>
-‌
- protocol-identifier-list → protocol-identifier  protocol-identifier,protocol-identifier-list
+
+‌ protocol-identifier-list → protocol-identifier  protocol-identifier,protocol-identifier-list
  
 ‌ protocol-identifier → type-identifier
 
