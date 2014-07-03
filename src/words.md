@@ -14,5 +14,6 @@
 - literal value - 字面量 - A literal value is a value that appears directly in your source code, such as 42 and 3.14159 in the examples below.
 - as described in - 详见 - You can provide a default value for a stored property as part of its definition, as described in Default Property Values.
 - access - 引用 - you can use the element names to access the values of those elements.
+- computed propertie - 实例属性 - This behavior is communicated by a getter and setter in the same way as for computed properties:
 - example - 示例 - The example below defines a structure called FixedLengthRange, which describes a range of integers whose range length cannot be changed once it is created
 

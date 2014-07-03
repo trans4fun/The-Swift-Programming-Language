@@ -103,7 +103,7 @@ You can query the threeTimesTable instance by calling its subscript, as shown in
 
 > <b>提示</b>
 > 
-> TimesTable例子是基于一个固定的数学公式。它并不适合开放写权限来对threeTimesTable[someIndex]进行赋值操作，这也是为什么下标只定义为只读的原因。
+> TimesTable例子是基于一个固定的数学公式。它并不适合开放写权限来对`threeTimesTable[someIndex]`进行赋值操作，这也是为什么下标只定义为只读的原因。
 
 ## Subscript Usage
 ## 下标用法
