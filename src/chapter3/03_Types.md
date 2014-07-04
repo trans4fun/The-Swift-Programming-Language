@@ -172,6 +172,7 @@ Void是空元组类型的别名，表示为()。如果在括号里面只有一�
 
 
 Swfit语言定义后缀？作为命名类型Optional的简写，换句话说，以下两种声明是相等的：
+
     var optionalInteger: Int?
     var optionalInteger: Optional<Int>
 
