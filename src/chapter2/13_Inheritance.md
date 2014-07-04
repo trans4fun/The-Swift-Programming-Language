@@ -8,7 +8,7 @@ A class can *inherit* methods, properties, and other characteristics from anothe
 Inheritance is a fundamental behavior that differentiates classes from other types in Swift.
 Classes in Swift can call and access methods, properties, and subscripts belonging to their superclass and can provide their own overriding versions of those methods, properties, and subscripts to refine or modify their behavior. Swift helps to ensure your overrides are correct by checking that the override definition has a matching superclass definition.
 
-在Swift语言中，继承是区分类与其他类型的一个基本行为。一个类可以访问并调用其父类中的方法，属性和下标，也可以通过重写它们来修改或优化它们的行为。Swift通过检查重写的定义是否能与一个父类中的定义匹配来确保重写的正确性。
+在Swift语言中，继承是区分类与其他类型的一个基本行为。一个类可以访问并调用其父类中的方法、属性和下标，也可以通过重写它们来修改或优化它们的行为。Swift通过检查重写的定义是否能与一个父类中的定义匹配来确保重写的正确性。
 
 Classes can also add property observers to inherited properties in order to be notified when the value of a property changes. Property observers can be added to any property, regardless of whether it was originally defined as a stored or computed property.
 
@@ -30,7 +30,7 @@ Swift中的类没有继承一个全局的基类。没有指定父类的类会自
 
 The example below defines a base class called `Vehicle`. This base class declares two properties(`numberOfWheels` and `maxPassengers`) that are universal to all vehicles. These properties are used by a method called `description`, which returns a `String` description of the vehicle’s characteristics:
 
-下面的例子定义了一个基类`Vehicle`。类中声明了两个所有车辆都通用的属性(`numberOfWheels`和`maxPassengers`)。这两个属性在方法`description`中被使用，这个方法返回一个`String`类型的值来描述车辆的特性。
+下面的例子定义了一个基类`Vehicle`。类中声明了两个所有车辆都通用的属性(`numberOfWheels`和`maxPassengers`)。这两个属性在方法`description`中被使用，这个方法返回一个`String`类型的值来描述车辆的特性：
 
 ```
 class Vehicle {
@@ -56,7 +56,7 @@ You use initializers to create a new instance of a type. Although initializers a
 
 In its simplest form, an initializer is like an instance method with no parameters, written using the `init` keyword:
 
-在最简单的形式中，构造器就像是一个没有参数的实例方法，用关键词`init`来声明。
+在最简单的形式中，构造器就像是一个没有参数的实例方法，用关键词`init`来声明：
 
 ```
 init() {
@@ -66,7 +66,7 @@ init() {
 
 To create a new instance of `Vehicle`, call this initializer with *initializer syntax*, written as `TypeName` followed by empty parentheses:
 
-创建一个`Vehicle`类实例需要通过使用*构造器语法*来调用构造器，写法是在类名后加上一对空的括号。
+创建一个`Vehicle`类实例需要通过使用*构造器语法*来调用构造器，写法是在类名后加上一对空的括号：
 
 ```
 let someVehicle = Vehicle()
@@ -89,7 +89,7 @@ The `Vehicle` class defines common characteristics for an arbitrary vehicle, but
 
 To indicate that a class has a superclass, write the superclass name after the original class name, separated by a colon:
 
-当声明一个类的父类时，需要将父类的名字写在原有类之后，并用冒号分隔:
+当声明一个类的父类时，需要将父类的名字写在原有类之后，并用冒号分隔：
 
 ```
 class SomeClass: SomeSuperclass {
@@ -141,7 +141,7 @@ The default value of `maxPassengers` provided by `Vehicle` is already correct fo
 
 As well as inheriting the properties of `Vehicle`, `Bicycle` also inherits its methods. If you create an instance of `Bicycle`, you can call its inherited `description` method to see how its properties have been updated:
 
-除了继承了`Vehicle`类中的属性，`Bicycle`类还继承了它的方法。创建了一个`Bicycle`的实例后，可以通过调用它继承过来的`description`方法来观察类中属性的更新。
+除了继承了`Vehicle`类中的属性，`Bicycle`类还继承了它的方法。创建了一个`Bicycle`的实例后，可以通过调用它继承过来的`description`方法来观察类中属性的更新：
 
 ```
 let bicycle = Bicycle()
@@ -195,7 +195,7 @@ Note that the `description` method is also inherited by `Tandem`. Instance metho
 ##重写
 A subclass can provide its own custom implementation of an instance method, class method, instance property, or subscript that it would otherwise inherit from a superclass. This is known as *overriding*.
 
-子类可以为继承过来的实例方法，类方法，实例属性或脚本提供它自己的实现，这个行为被称作*重写*。
+子类可以为继承过来的实例方法、类方法、实例属性或下标提供它自己的实现，这个行为被称作*重写*。
 
 To override a characteristic that would otherwise be inherited, you prefix your overriding definition with the `override` keyword. Doing so clarifies that you intend to provide an override and have not provided a matching definition by mistake. Overriding by accident can cause unexpected behavior, and any overrides without the `override` keyword are diagnosed as an error when your code is compiled.
 
@@ -203,18 +203,18 @@ To override a characteristic that would otherwise be inherited, you prefix your 
 
 The `override` keyword also prompts the Swift compiler to check that your overriding class’s superclass (or one of its parents) has a declaration that matches the one you provided for the override. This check ensures that your overriding definition is correct.
 
-`Override`关键字也会提醒Swift编译器去校验被继承的父类(或其中中一个父类)中是否有匹配的声明用于被重写。这个检查可以确保你的重写定义是正确的。
+`override`关键字也会提醒Swift编译器去校验被继承的父类(或其中中一个父类)中是否有匹配的声明用于被重写。这个检查可以确保你的重写定义是正确的。
 
 ##Accessing Superclass Methods, Properties, and Subscripts
-##访问父类的方法，属性和脚本
+##访问父类的方法、属性和下标
 
 When you provide a method, property, or subscript override for a subclass, it is sometimes useful to use the existing superclass implementation as part of your override. For example, you can refine the behavior of that existing implementation or store a modified value in an existing inherited variable.
 
-当你访问父类的方法，属性或脚本时，有时在你的重写版本中使用已存在的父类实现会很有作用。比如你可以优化一个已有的实现或者在一个继承来的变量重储存一个修改过的值。
+当你访问父类的方法、属性或下标时，有时在你的重写版本中使用已存在的父类实现会很有用。比如你可以优化一个已有的实现或者在一个继承来的变量重储存一个修改过的值。
 
 Where this is appropriate, you access the superclass version of a method, property, or subscript by using the `super` prefix:
 
-在适当的地方，你可以通过`super`前缀来访问父类版本的方法，属性或脚本：
+在适当的地方，你可以通过`super`前缀来访问父类版本的方法、属性或下标：
 
 * An overridden method named `someMethod` can call the superclass version of `someMethod` by calling `super.someMethod()` within the overriding method implementation.
 * An overridden property called `someProperty` can access the superclass version of `someProperty` as `super.someProperty` within the overriding getter or setter implementation.
@@ -222,7 +222,7 @@ Where this is appropriate, you access the superclass version of a method, proper
 
 * 一个重写的方法`someMethod`可以在方法实现中通过`super.someMethod()`来调用父类版本的`someMethod`。
 * 一个重写的属性`someProperty`可以在getter和setter方法的重写实现中通过`super.someProperty`来访问父类版本的`someProperty`。
-* 一个重写的脚本`someIndex`可以在脚本实现中通过`super[someIndex]`来调用父类版本的`someIndex`。
+* 一个重写的下标`someIndex`可以在实现中通过`super[someIndex]`来调用相同下标的父类版本的。
 
 ##Overriding Methods
 ##重写方法
@@ -232,7 +232,7 @@ You can override an inherited instance or class method to provide a tailored or 
 
 The following example defines a new subclass of `Vehicle` called `Car`, which overrides the `description` method it inherits from `Vehicle`:
 
-下面的例子定义了`Vehicle`类的一个新子类`Car`, 子类中重写了从父类中继承过来的方法`description`:
+下面的例子定义了`Vehicle`类的一个新子类`Car`, 子类中重写了从父类中继承过来的方法`description`：
 
 ```
 class Car: Vehicle {
@@ -263,7 +263,7 @@ Rather than providing a completely custom implementation of `description`, the o
 
 If you create a new instance of `Car`, and print the output of its `description` method, you can see that the description has indeed changed:
 
-如果你创建一个`Car`类的实例，并打印`description`方法的输出，你会发现描述的信息已经发生了改变。
+如果你创建一个`Car`类的实例，并打印`description`方法的输出，你会发现描述的信息已经发生了改变：
 
 ```
 let car = Car()
@@ -347,7 +347,7 @@ Note also that you cannot provide both an overriding setter and an overriding pr
 ```
 注意
 你不可以为继承来的常量存储型属性或只读计算型属性添加属性观察器。这些属性的值是不可以被修改的，所以在重写时为它们提供`willSet`和`didSet`的实现是不恰当的。
-注意你也不能同事提供重写的setter方法和属性观察期。如果你想要观察属性值的变化，并且你已经给那个属性提供了定制的setter方法，在setter方法中你就已经可以观察到任何属性值的变化了。
+注意你不能同时提供重写的setter方法和属性观察期。如果你想要观察属性值的变化，并且你已经给那个属性提供了定制的setter方法，在setter方法中你就已经可以观察到任何属性值的变化了。
 ```
 
 The following example defines a new class called `AutomaticCar`, which is a subclass of `Car`. The `AutomaticCar` class represents a car with an automatic gearbox, which automatically selects an appropriate gear to use based on the current speed. `AutomaticCar` also provides a custom `description` method to print the current gear.
@@ -370,7 +370,7 @@ class AutomaticCar: Car {
 
 Whenever you set the `speed` property of an `AutomaticCar` instance, the property’s `didSet` observer automatically sets the `gear` property to an appropriate choice of gear for the new speed. Specifically, the property observer chooses a gear which is the new `speed` value divided by `10`, rounded down to the nearest integer, plus `1`. A speed of `10.0` produces a gear of `1`, and a speed of `35.0` produces a gear of `4`:
 
-当你为一个`AutomaticCar`实例设置`speed`属性时，属性的`didSet`观察器会自动设置`gear`属性到一个合适的档位。具体的计算方法是，属性观察者将新设置的速度值除以`10`，向下取整之后再加`1`。例如速度是`10`的时候档位是`1`，速度是`35.0`的时候档位是`4`。
+当你为一个`AutomaticCar`实例设置`speed`属性时，属性的`didSet`观察器会自动设置`gear`属性到一个合适的档位。具体的计算方法是，属性观察者将新设置的速度值除以`10`，向下取整之后再加`1`。例如速度是`10`的时候档位是`1`，速度是`35.0`的时候档位是`4`：
 
 ```
 let automatic = AutomaticCar()
@@ -382,12 +382,12 @@ println("AutomaticCar: \(automatic.description())")
 ##Preventing Overrides
 ##防止重写
 You can prevent a method, property, or subscript from being overridden by marking it as *final*. Do this by writing the `@final` attribute before its introducer keyword (such as `@final var`, `@final func`, `@final class func`, and `@final subscript`).
-你可以通过标记一个属性，方法或附属脚本为*final*来防止它们被重写。具体方法是在声明它们的关键字前加上`@final` (例如`@final var`, `@final func`, `@final class func`及`@final subscript`)。
+你可以通过标记一个属性、方法或下标为*final*来防止它们被重写。具体方法是在声明它们的关键字前加上`@final` (例如`@final var`, `@final func`, `@final class func`及`@final subscript`)。
 
 Any attempts to override a final method, property, or subscript in a subclass are reported as a compile-time error. Methods, properties or subscripts that you add to a class in an extension can also be marked as final within the extension’s definition. 
 
-如果被标记为final的方法，属性或附属脚本在子类中被尝试重写，在编译时便会报错。在扩展时被添加到类中的方法，属性或附属脚本也可以在扩展的定义中标记为final。
+如果被标记为final的方法、属性或下标在子类中被尝试重写，在编译时便会报错。在扩展时被添加到类中的方法，属性或附属脚本也可以在扩展的定义中标记为final。
 
 You can mark an entire class as final by writing the `@final` attribute before the `class` keyword in its class definition (`@final class`). Any attempts to subclass a final class will be reported as a compile-time error.
 
-你也可以通过在关键字class前添加`@final`属性(`@final class`)来把整个类标记为final。如此以来这个类就不可以被继承，否则在编译时会报错。
+你也可以通过在关键字class前添加`@final`属性(`@final class`)来把整个类标记为final。如此一来这个类就不可以被继承，否则在编译时会报错。

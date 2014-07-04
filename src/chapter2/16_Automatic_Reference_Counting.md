@@ -85,7 +85,7 @@ Note that the message "John Appleseed is being initialized" is printed at the po
 Because the new Person instance has been assigned to the reference1 variable, there is now a strong reference from reference1 to the new Person instance. Because there is at least one strong reference, ARC makes sure that this Person is kept in memory and is not deallocated.
 
 由于该Person实例被赋值给了变量reference1，因此建立了一个由reference1指向该Person实例的强引用。
-ARC会保证该Person实例保持在内存中不被销毁，因为它这满足了至少有一个强引用的条件。
+因为至少有一个强引用，所以ARC会保证该Person实例保持在内存中不被销毁，。
 
 If you assign the same Person instance to two more variables, two more strong references to that instance are established:
 
@@ -110,7 +110,7 @@ reference3 = nil
 ```
 ARC does not deallocate the Person instance until the third and final strong reference is broken, at which point it is clear that you are no longer using the Person instance:
 
-直到第三个也是最后一个强引用断开，即能够清楚的断定你不再需要该实例的时候，ARC才会销毁该Person实例。
+直到第三个也是最后一个强引用断开，即你明确不再需要该实例的时候，ARC才会销毁该Person实例。
 
 ```
 reference3 = nil
@@ -125,11 +125,11 @@ In the examples above, ARC is able to track the number of references to the new 
 
 However, it is possible to write code in which an instance of a class never gets to a point where it has zero strong references. This can happen if two class instances hold a strong reference to each other, such that each instance keeps the other alive. This is known as a strong reference cycle.
 
-然而，我们可能会写出这样的代码，导致类实例永远不会有0个强引用。这种情况发生在两个类实例互相保持对方的强引用，以致于彼此都无法被销毁的时候。这就是所谓的循环强引用。
+然而，我们可能会写出这样的代码，导致类实例永远不会有0个强引用。这种情况发生在两个类实例互相持有对方的强引用，以致于彼此都无法被销毁的时候。这就是所谓的循环强引用。
 
 You resolve strong reference cycles by defining some of the relationships between classes as weak or unowned references instead of as strong references. This process is described in Resolving Strong Reference Cycles Between Class Instances. However, before you learn how to resolve a strong reference cycle, it is useful to understand how such a cycle is caused.
 
-你可以通过定义类之间的关系为弱引用或者无主引用的方式来解决循环强引用的问题。具体过程将在“解决类实例之间的循环强引用”中详述。不管怎样，在学习怎样解决循环强引用之前，很有必要了解一下它是如何产生的。
+你可以通过定义类之间的关系为弱引用或者无主引用的方式来解决循环强引用的问题。具体过程将在[解决类实例之间的循环强引用]()中详述。不管怎样，在学习怎样解决循环强引用之前，很有必要了解一下它是如何产生的。
 
 Here’s an example of how a strong reference cycle can be created by accident.
 This example defines two classes called Person and Apartment, which model a block of apartments and its residents:
@@ -212,7 +212,7 @@ number73 = nil
 
 Note that neither deinitializer was called when you set these two variables to nil. The strong reference cycle prevents the Person and Apartment instances from ever being deallocated, causing a memory leak in your app.
 
-需要注意的是，你将john和number73设为nil时两个析构函数都没有被调用。循环强引用阻止了Person 和 Apartment类实例的销毁，这在你的App中导致了内存泄漏。
+需要注意的是，你将john和number73设为nil时两个析构函数都没有被调用。循环强引用阻止了Person 和 Apartment类实例的销毁，导致你的App发生了一个内存泄漏。
 
 Here’s how the strong references look after you set the john and number73 variables to nil:
 
@@ -284,7 +284,7 @@ class Apartment {
 ```
 The strong references from the two variables (john and number73) and the links between the two instances are created as before:
 
-两个变量（john和number73）的强引用以及两个实例之间的连接都与之前一样被创建：
+然后跟之前一样，创建两个变量（john和number73）之间的强引用，并关联两个实例：
 
 ```
 var john: Person?
@@ -344,7 +344,7 @@ Like weak references, an unowned reference does not keep a strong hold on the in
 
 Because an unowned reference is non-optional, you don’t need to unwrap the unowned reference each time it is used. An unowned reference can always be accessed directly. However, ARC cannot set the reference to nil when the instance it refers to is deallocated, because variables of a non-optional type cannot be set to nil.
 
-由于无主引用是非可选类型的，你不必在使用的时候解析它，它可以被直接访问。与弱引用不同，当无主引用指向的实例被销毁后，ARC不会将其指向nil。
+由于无主引用是非可选类型的，你不必在使用的时候解析它，它可以被直接访问。不过 ARC 无法在实例被销毁后将无主引用设为nil，因为非可选类型的变量不允许被赋值为nil。
 
 > NOTE
 > 
@@ -354,15 +354,15 @@ Because an unowned reference is non-optional, you don’t need to unwrap the uno
 
 > 注意
 > 在无主引用指向的实例被销毁后，如果依然试图访问该无主引用，你会触发运行时错误。使用无主引用，你需要确保引用指向的实例未被销毁。
-> 需要格外注意的是，在无主引用指向的实例被销毁后，若你依然试图访问该无主引用，Swift保证，你的app会毫无意外地直接崩溃。不是应该而是你必须避免这样的情况发生。
+> 需要格外注意的是，在无主引用指向的实例被销毁后，若你依然试图访问该无主引用，Swift保证，你的app会毫无意外地直接崩溃，而不会发生无法预期的行为。所以你应当避免这样的事情发生。
 
 The following example defines two classes, Customer and CreditCard, which model a bank customer and a possible credit card for that customer. These two classes each store an instance of the other class as a property. This relationship has the potential to create a strong reference cycle.
 
-接下来的例子定义了两个类，Customer和CreditCard，分别为银行客户和信用卡建立数据模型。这两个类将对方的实例保存为自己的属性。这在它们之间潜在地形成了循环强引用。
+接下来的例子定义了两个类，Customer和CreditCard，模拟了银行客户和信用卡。这两个类将对方的实例保存为自己的属性。这种关系会潜在的创造循环强引用。
 
 The relationship between Customer and CreditCard is slightly different from the relationship between Apartment and Person seen in the weak reference example above. In this data model, a customer may or may not have a credit card, but a credit card will always be associated with a customer. To represent this, the Customer class has an optional card property, but the CreditCard class has a non-optional customer property.
 
-Customer 与 CreditCard之间的关系与上文弱引用例子里提到的Apartment 和 Person之间的关系有些许不同。在这个数据模型里，一位客户可能有也可能没有信用卡，但是一张信用卡必然与某位银行客户关联。为了表示这种关系，Customer类声明了一个可选类型的属性card，但CreditCard类声明了一个非可选类型的属性customer。
+Customer 与 CreditCard之间的关系与上文弱引用例子里提到的Apartment 和 Person之间的关系有些许不同。在这个数据模型里，一位客户可能有也可能没有信用卡，但是一张信用卡必然与某位客户关联。为了表示这种关系，Customer类声明了一个可选类型的属性card，但CreditCard类声明了一个非可选类型的属性customer。
 
 Furthermore, a new CreditCard instance can only be created by passing a number value and a customer instance to a custom CreditCard initializer. This ensures that a CreditCard instance always has a customer instance associated with it when the CreditCard instance is created.
 
@@ -403,7 +403,7 @@ var john: Customer?
 
 You can now create a Customer instance, and use it to initialize and assign a new CreditCard instance as that customer’s card property:
 
-现在创建Customer实例，并用它初始化CreditCard实例，同时，将CreditCard实例分配给Customer实例的card属性。
+现在创建Customer实例，并用它初始化CreditCard实例，同时，将CreditCard实例赋值给Customer实例的card属性。
 
 ```
 john = Customer(name: "John Appleseed")
@@ -456,15 +456,15 @@ Customer和CreditCard的例子展示了一个属性的值允许为nil，而另�
 
 However, there is a third scenario, in which both properties should always have a value, and neither property should ever be nil once initialization is complete. In this scenario, it is useful to combine an unowned property on one class with an implicitly unwrapped optional property on the other class.
 
-但是，还有第三种场景：就是两个属性都一直有值，并且一旦初始化完成他们就永远都不可能是nil的情况。这种情况下，在一个类中使用无主属性，在另一个类中使用隐式解析可选属性，是解决此类循环强引用问题的有效手段。
+但是，还有第三种场景：就是两个属性都一直有值，并且一旦初始化完成他们就永远都不可能是nil的情况。这种情况下，需要在一个类中使用无主属性，在另一个类中使用隐式解析可选属性。
 
 This enables both properties to be accessed directly (without optional unwrapping) once initialization is complete, while still avoiding a reference cycle. This section shows you how to set up such a relationship.
 
-只要初始化完成，这两个属性都是可以被直接访问的（没有可选类型的解析过程）同时也可以避免循环引用。这部分将向你介绍如何建立这种关系。
+只要初始化完成，这两个属性都是可以被直接访问的（不需要可选解析）同时也可以避免循环引用。这部分将向你介绍如何建立这种关系。
 
 The example below defines two classes, Country and City, each of which stores an instance of the other class as a property. In this data model, every country must always have a capital city, and every city must always belong to a country. To represent this, the Country class has a capitalCity property, and the City class has a country property:
 
-下面的例子定义了两个类，Country 和 City，它们彼此通过属性保存了对方的实例引用。在这个数据模型里，国家是必须有首都的，而一个城市也必须是属于某个国家的。为了表示这种关系，Country类声明了一个capitalCity属性，City类也声明了一个country属性：
+下面的例子定义了两个类，Country 和 City，每个类将另外一个类的实例保存为属性。在这个数据模型里，国家是必须有首都的，而一个城市也必须是属于某个国家的。为了表示这种关系，Country类声明了一个capitalCity属性，City类也声明了一个country属性：
 
 ```
 class Country {
@@ -588,7 +588,7 @@ The asHTML property is named and used somewhat like an instance method. However,
 
 The HTMLElement class provides a single initializer, which takes a name argument and (if desired) a text argument to initialize a new element. The class also defines a deinitializer, which prints a message to show when an HTMLElement instance is deallocated.
 
-HTMLElement类提供了单一的构造器，它需要传递两个参数来初始化一个新元素：name（若需要） 和 text。同时定义了析构函数，当HTMLElement的实例被销毁的时候会打印出一条提示信息。
+HTMLElement类提供了单一的构造器，它需要传递两个参数来初始化一个新元素：name（可选） 和 text。同时定义了析构函数，当HTMLElement的实例被销毁的时候会打印出一条提示信息。
 
 Here’s how you use the HTMLElement class to create and print a new instance:
 

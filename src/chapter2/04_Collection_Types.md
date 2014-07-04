@@ -1,5 +1,5 @@
-##Collection Types
-##集合类型
+# Collection Types
+# 集合类型
 
 Swift provides two *collection types*, known as arrays and dictionaries, for storing collections of values. Arrays store ordered lists of values of the same type. Dictionaries store unordered collections of values of the same type, which can be referenced and looked up through a unique identifier (also known as a *key*).
 
@@ -18,8 +18,8 @@ Arrays and dictionaries in Swift are always clear about the types of values and 
 >Swift的`Array`类型在赋值给常量和变量，还有传入函数和方法时与其他类型有所不同。获取更多信息请参见[Mutability of Collections](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/04_Collection_Types.md#mutability-of-collections)and[AssignmentCopy Behavior for Collection Types]()这两个章节。
 
 
-###Arrays
-###数组
+## Arrays
+## 数组
 An *array* stores multiple values of the same type in an ordered list. The same value can appear in an array multiple times at different positions.
 
 *数组*在一个有序列表中存储了多个相同类型的数据。相同的数据可以多次出现在数组的不同位置。
@@ -28,14 +28,14 @@ Swift arrays are specific about the kinds of values they can store. They differ 
 
 Swift数组能够存储的数据类型是确定的。这与Objective-C的类`NSArray`和`NSMutableArray`是不同的，这两个类能够存储任何一种类型的对象，并且不会提供它们返回的对象的任何信息。在Swift中，某个数组能够存储的数据类型是确定的，不是通过显式的类型声明，就是通过类型推断，不需要为class类型。假我们你创建了一个`Int`型的数组，那么就不能插入其他任何非`Int`型的值到这个数组中。Swift数组是类型安全的，并且它们能够包含的值也是明确的。
 ‌
-####Array Type Shorthand Syntax
-####数组类型缩写语法
+### Array Type Shorthand Syntax
+### 数组类型缩写语法
 The type of a Swift array is written in full as `Array<SomeType>`, where `SomeType` is the type that the array is allowed to store. You can also write the type of an array in shorthand form as `SomeType[]`. Although the two forms are functionally identical, the shorthand form is preferred, and is used throughout this guide when referring to the type of an array.
 
 Swift数组的类型的完整写法是`Array<SomeType>`, 这里的`SomeType`指的是数组能够存储的类型。我们也可以把它缩写为`SomeType[]`。这两种形式的数组在功能上完全相同，不过建议使用缩写的形式，本书中提到数组类型时都会以这种形式表示。
 ‌
-####Array Literals
-####数组字面量
+### Array Literals
+### 数组字面量
 
 You can initialize an array with an *array literal*, which is a shorthand way to write one or more values as an array collection. An array literal is written as a list of values, separated by commas, surrounded by a pair of square brackets:
 
@@ -82,8 +82,8 @@ Because all values in the array literal are of the same type, Swift can infer th
 
 因为数组字面量中所有的值的类型是相同的，Swift能够推断出`String[]`是`shoppingList`变量使用的正确类型。
 ‌
-####Accessing and Modifying an Array
-####获取和修改数组
+### Accessing and Modifying an Array
+### 获取和修改数组
 You access and modify an array through its methods and properties, or by using subscript syntax.
 
 我们可以通过数组的方法、属性或下标语法来访问和修改数组。
@@ -221,8 +221,8 @@ let apples = shoppingList.removeLast()
 // the apples constant is now equal to the removed "Apples" string
 ```
 
-####Iterating Over an Array
-####遍历数组
+### Iterating Over an Array
+### 遍历数组
 You can iterate over the entire set of values in an array with the `for-in` loop:
 
 我们可以使用`for-in`循环来遍历数组中的所有数组项：
@@ -256,8 +256,8 @@ For more about the `for-in` loop, see [For Loops](https://github.com/trans4fun/T
 获取更多关于`for-in`循环的介绍，请参见[For循环](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/05_Control_Flow.md#for%E5%BE%AA%E7%8E%AF)。
 
 
-####Creating and Initializing an Array
-####创建和初始化数组
+### Creating and Initializing an Array
+### 创建和初始化数组
 You can create an empty array of a certain type (without setting any initial values) using initializer syntax:
 
 我们可以使用初始化语法来创建某一特定类型的空数组（没有设置任何初始值）：
@@ -307,8 +307,8 @@ var sixDoubles = threeDoubles + anotherThreeDoubles
 ```
 
 
-###Dictionaries
-###字典
+## Dictionaries
+## 字典
 A *dictionary* is a container that stores multiple values of the same type. Each value is associated with a unique *key*, which acts as an identifier for that value within the dictionary. Unlike items in an array, items in a dictionary do not have a specified order. You use a dictionary when you need to look up values based on their identifier, in much the same way that a real-world dictionary is used to look up the definition for a particular word.
 
 *字典*是存储多重相同类型数值的容器。每个值和字典中作为值的唯一标识符的*键*(key)相关联。和数组中的数据项不同，字典中的数据项没有顺序。我们可以使用字典查找基于标识符的数据，就像在现实世界中可以用字典来查找某个特定字词的定义。
@@ -326,8 +326,8 @@ The only restriction is that `KeyType` must be *hashable*—that is, it must pro
 `KeyType`的唯一限制是它必须是*可哈希的*——也就是说，它必须提供一个方法来使得自己能够被唯一表示。所有的Swift基础类型（如`String`, `Int`, `Double`, 和`Bool`）默认都是可哈希的，所有的这些类型都能够被用来作为字典的键。没有关联数值的枚举类型（参见[Enumerations](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/08_Enumerations.md)）也是默认可枚举的。
 
 ‌
-####Dictionary Literals
-####字典字面量
+### Dictionary Literals
+### 字典字面量
 You can initialize a dictionary with a *dictionary literal*, which has a similar syntax to the array literal seen earlier. A dictionary literal is a shorthand way to write one or more key-value pairs as a `Dictionary` collection.
 
 你可以用*字典字面量*来初始化一个字典，这个和之前的数组字面量有着相似的语法。一个字典字面量是一个缩写的方式来表示作为`字典`集合的一个或多个键值对。
@@ -376,7 +376,7 @@ var airports = ["TYO": "Tokyo", "DUB": "Dublin"]
 Because all keys in the literal are of the same type as each other, and likewise all values are of the same type as each other, Swift can infer that `Dictionary<String, String>` is the correct type to use for the `airports` dictionary.
 由于字面量中的键和值都是相同类型的，因而Swift能够推断出`Dictionary<String, String>` 是使用字典`airports`的正确类型。
 ‌
-####Accessing and Modifying a Dictionary
+### Accessing and Modifying a Dictionary
 You access and modify a dictionary through its methods and properties, or by using subscript syntax. As with an array, you can find out the number of items in a `Dictionary` by checking its read-only `count` property:
 
 我们能够通过字典的方法和属性，以及下标语法来访问和修改字典。像数组那样，我们可以通过查询只读属性`count`来得到一个`字典`中数据项的数量。
@@ -452,8 +452,8 @@ if let removedValue = airports.removeValueForKey("DUB") {
 // prints "The removed airport's name is Dublin International.
 ```
 
-####Iterating Over a Dictionary
-####字典遍历
+### Iterating Over a Dictionary
+### 字典遍历
 You can iterate over the key-value pairs in a dictionary with a `for-in` loop. Each item in the dictionary is returned as a (`key, value`) tuple, and you can decompose the tuple’s members into temporary constants or variables as part of the iteration:
 
 我们可以用`for-in`循环遍历一个字典中的键值对。字典中的每个数据项返回相应的(`键, 值`)原则，我们可以把元组分解为临时常量或变量用于遍历：
@@ -507,8 +507,8 @@ let airportNames = Array(airports.values)
 >Swift字典类型是无序的集合。遍历字典时键、值以及键值对的访问顺序是不确定的。
 ‌
 
-####Creating an Empty Dictionary
-####创建空字典
+### Creating an Empty Dictionary
+### 创建空字典
 As with arrays, you can create an empty `Dictionary` of a certain type by using initializer syntax:
 
 如同字典，我们可以使用初始化语法创建一个特定类型的空`字典`。
@@ -541,8 +541,8 @@ namesOfIntegers = [:]
 >在后台，Swift数组和字典类型都是由*泛型集合*实现的。更多关于泛型类型和集合的介绍，请参见[Generics](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/22_Generics.md)。
 
 ‌
-###Mutability of Collections
-###集合的易变性
+## Mutability of Collections
+## 集合的易变性
 
 Arrays and dictionaries store multiple values together in a single collection. If you create an array or a dictionary and assign it to a variable, the collection that is created will be *mutable*. This means that you can change (or *mutate*) the size of the collection after it is created by adding more items to the collection, or by removing existing items from the ones it already contains. Conversely, if you assign an array or a dictionary to a constant, that array or dictionary is *immutable*, and its size cannot be changed.
 
@@ -556,9 +556,9 @@ Immutability has a slightly different meaning for arrays, however. You are still
 
 对数组来说，不可变的意义稍有不同。我们仍不允许有改变不可变数组的大小的行为，但是，我们*被*允许改变数组中某个现有索引对应的值。这使得Swift的`Array`类型能够在操作固定大小的数组时提供最佳性能。
 
-The mutability behavior of Swift’s `Array` type also affects how array instances are assigned and modified. For more information, see [Assignment and Copy Behavior for Collection Types]().
+The mutability behavior of Swift’s `Array` type also affects how array instances are assigned and modified. For more information, see [Assignment and Copy Behavior for Collection Types](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/09_Classes_and_Structures.md#assignment-and-copy-behavior-for-collection-types).
 
-Swift的`Array`类型的可变性还影响了数组实例是怎么被声明和修改的。更多介绍请参见[集合类型的声明和复制]()。
+Swift的`Array`类型的可变性还影响了数组实例是怎么被声明和修改的。更多介绍请参见[集合类型的声明和复制](https://github.com/trans4fun/The-Swift-Programming-Language/blob/master/src/chapter2/09_Classes_and_Structures.md#%E9%9B%86%E5%90%88%E7%9A%84%E8%B5%8B%E5%80%BC%E4%B8%8E%E6%8B%B7%E8%B4%9D)。
 
 >NOTE
 
