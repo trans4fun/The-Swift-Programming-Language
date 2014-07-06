@@ -2,11 +2,26 @@
 
 除了《基础操作符》里讲到的操作符，Swift还提供了一些高级操作符，用以完成更复杂的数值运算。比如位运算和移位操作符，其语法同C和Objective-C类似。
 
+> From 周源:
+移位: 我读的时候, 感觉位移更顺口一点
+
 和C语言的算术操作符不同，Swift默认不支持溢出运算。数值溢出会被捕获并报错。但是，Swift提供了另一套支持溢出运算的操作符，比如可溢出加操作符（&+），可溢出操作符都以&作为前缀。
+
+> From 周源:
+&+ -> （&+） 
+So
+& -> （&）?
 
 在自定义结构体、类或者枚举类型中，可以重载Swift操作符。通过操作符重载，可以简单地实现操作符的重定义。
 
+> From 周源:
+我理解的 "简单的实现" 有二义性, 可表示 实现简单 和 简单实现,
+这里作者的意思应该是实现简单, 我觉得 方便的实现 也可以表达作者的意思, 你怎么看? 
+
 Swift允许用户自定义操作符，并且可定制这些操作符的优先级和结合性。
+
+> From 周源: 
+这一段原文较长, 省略了部分翻译, 按照会长的意思......
 
 
 ## 位操作符
@@ -87,6 +102,8 @@ let outputBits = firstBits ^ otherBits // 等于 00010001
 
 #### 无符号移位操作
 
+> From 周源:
+移位 -> 位移?
 无符号移位的规则如下：
 
 1.	已有的位向左或向右移动指定的位数。
@@ -149,11 +166,18 @@ let blueComponent = pink & 0x0000FF // blueComponent是0x99, 即153
 
 负数的编码方式称为二进制补码表示。这种表示方式看起来很奇怪，但它有几个优点。
 
+> From 周源:
+The encoding for negative numbers is known as a two’s complement representation.
+负数的编码方式称为二进制补码表示 -> 负数的编码方式用二进制补码表示?
+
 首先，对全部8个比特位(包括符号位)做标准的二进制加法就可以完成-1 加 -4 的操作，加法过程中丢弃超出的比特位。
 
 ![有符号移位操作](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Art/bitshiftSignedAddition_2x.png)
 
 第二，使用二进制补码表示方式，我们可以和正数一样对负数进行按位左移或右移，同样也是左移1位时乘于2，右移1位时除于2。但是，对有符号整型的右移有一个特别的要求：
+
+> From 周源:
+使用二进制补码表示方式 -> 使用二进制补码?
 
 + 有符号和无符号整型按位右移时规则相同，但有符号整型移位后出现的空位使用符号位来填充，而不是0。
 
@@ -294,7 +318,7 @@ let y = x &/ 0
 
 Swift操作符的优先级和结合性的完整规则，请看表达式。
 
-> <b>注意：</b>
+> 注意：
 >
 > Swift操作符的优先级和结合性的规则跟C系语言不太一样，相对于C语言和Objective-C更加简单且保守。所以在移植已有代码到Swift时，注意确认操作数的计算顺序。
 
@@ -370,6 +394,9 @@ let alsoPositive = -negative
 
 加法运算之前定义过了，这里无需重新定义。加赋操作符函数使用已有的加法运算将左值加上右值：
 
+> From 周源
+> 加赋操作符函数使用已有的加法运算将左值加上右值： -> 加法操作符... ?
+
 ```
 var original = Vector2D(x: 1.0, y: 2.0)
 let vectorToAdd = Vector2D(x: 3.0, y: 4.0)
@@ -388,6 +415,9 @@ original += vectorToAdd
 
 这个自加操作符函数使用了前面定义过的加赋运算，将自己加上一个值为 (1.0，1.0) 的对象然后将返回值赋给自己。
 
+> From 周源
+> 加赋运算 -> 加法运算... ?
+
 ```
 var toIncrement = Vector2D(x: 3.0, y: 4.0)
 let afterIncrement = ++toIncrement
@@ -395,7 +425,7 @@ let afterIncrement = ++toIncrement
 // afterIncrement 也等于 (4.0, 5.0)
 ```
 
-> <b>注意：</b>
+> 注意：
 >
 > 默认的赋值符(=)是不可重载的。只有复合赋值符可以重载。条件操作符 a？b：c 也是不可重载的。
 
@@ -431,6 +461,9 @@ println("这两个向量相等")
 
 除了标准的操作符，你还可以声明一些个性的操作符，但自定义操作符只能使用这些字符`/ = - + * % < >！& | ^ . ~`
 
+> From 周源:
+> 个性的操作符 -> 自定义的操作符 ?
+
 新的操作符需要在全局域使用`operator`关键字声明，可以声明为前置，中置或后置的。
 
 ```
@@ -438,6 +471,10 @@ operator prefix +++ {}
 ```
 
 这段代码定义了一个新的前置操作符+++，此前Swift并不存在这个操作符，此处针对`Vector2D` 对象的这个操作符具有个性化的含义。+++被定义为双自增操作符，它使用之前定义的加赋运算将自已加上自己然后返回。
+
+> From 周源:
+> 个性化的含义 ?
+
 
 ```
 @prefix @assignment func +++ (inout vector: Vector2D) -> Vector2D {
@@ -475,6 +512,9 @@ let secondVector = Vector2D(x: 3.0, y: 4.0)
 let plusMinusVector = firstVector +- secondVector
 // plusMinusVector 是 Vector2D实例，等于 (4.0, -2.0)
 ```
+
+> From 周源:
+> plusMinusVector 是 Vector2D实例 -> plusMinusVector 是 Vector2D的实例 ?
 
 这个操作符把两个向量的x相加， y相减。因为它实际上属于加减运算，所以让它保持了和加减法一样的结合性和优先级(左结合，优先级为140)。查阅完整的Swift默认优先级和结合性的设置，请移步[表达式](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/doc/uid/TP40014097-CH32-XID_655).
 
