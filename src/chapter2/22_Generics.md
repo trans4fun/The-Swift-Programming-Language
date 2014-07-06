@@ -318,115 +318,128 @@ You can define your own type constraints when creating custom generic types, and
 ##Type Constraint Syntax
 
 ##类型约束语法
- You write type constraints by placing a single class or protocol constraint after a type parameter’s name, separated by a colon, as part of the type parameter list. The basic syntax for type constraints on a generic function is shown below (although the syntax is the same for generic types):
+
+You write type constraints by placing a single class or protocol constraint after a type parameter’s name, separated by a colon, as part of the type parameter list. The basic syntax for type constraints on a generic function is shown below (although the syntax is the same for generic types):
  
- 你可以通过在参数名称的后边以冒号分割，加上类型参数约束。基础的泛型函数的类型约束语法如下（同样的，泛型类型的语法相同）
+你可以通过在类型参数名称的后边以冒号分割，加上类型参数约束。基础的泛型函数的类型约束语法如下（同样的，这个语法也适用于泛型类型）
 
 ```
     func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {
     // function body goes here
     }
- ```
+```
+
 The hypothetical function above has two type parameters. The first type parameter, T, has a type constraint that requires T to be a subclass of SomeClass. The second type parameter, U, has a type constraint that requires U to conform to the protocol SomeProtocol.
 
 上边函数有两个参数。参数一类型参数为T，需要T必须是`SomeClass`子类；第二个参数类型为U，需要U必须遵循`SomeClass`协议。
 
 ##Type Constraints in Action
-##类型约束行为
+##类型约束实践
 
 Here’s a non-generic function called findStringIndex, which is given a String value to find and an array of String values within which to find it. The findStringIndex function returns an optional Int value, which will be the index of the first matching string in the array if it is found, or nil if the string cannot be found:
 
-这里有个名为findStringIndex的非泛型函数，该函数是去查找包含一指定String值的数组。若查找到匹配的字符串，findStringIndex函数返回该字符串在数组中的索引位置（Int），反之返回nil：
-
-    func findStringIndex(array: String[], valueToFind: String) -> Int? {
+现在有一个名为findStringIndex的非泛型函数，它接收一个字符串以及一个字符串数组作为参数，并从这个数组中对这个给定的字符串进行查找。若查找到匹配的字符串，findStringIndex函数返回该字符串在数组中的索引位置（Int），反之返回nil：
+```
+func findStringIndex(array: String[], valueToFind: String) -> Int? {
     for (index, value) in enumerate(array) {
-    if value == valueToFind {
-    return index
-    }
+        if value == valueToFind {
+        return index
+        }
     }
     return nil
-    }
+}
+```
 
 The findStringIndex function can be used to find a string value in an array of strings:
 
-`findStringIndex`用于查找数组中的指定String值：
+`findStringIndex`可以用于查找数组中指定的String值：
 
+```
     let strings = ["cat", "dog", "llama", "parakeet", "terrapin"]
     if let foundIndex = findStringIndex(strings, "llama") {
     println("The index of llama is \(foundIndex)")
     }
     // prints "The index of llama is 2"
+```
 
 The principle of finding the index of a value in an array isn’t useful only for strings, however. You can write the same functionality as a generic function called findIndex, by replacing any mention of strings with values of some type T instead.
 
-如果只是查找数组中的指定字符串用处不大，但是你可以写出相同功能的泛型版本`findIndex`，用T代替字符串类型。
+如果只是查找数组中的指定字符串用处不大，但是你可以通过使用泛型类型T来代替上面的类型`String`，写出一个具有相同功能的泛型函数`findIndex`。
 
 Here’s how you might expect a generic version of findStringIndex, called findIndex, to be written. Note that the return type of this function is still Int?, because the function returns an optional index number, not an optional value from the array. Be warned, though—this function does not compile, for reasons explained after the example:
 
-下边是你理想中的`findStringIndex`的泛型版本`findIndex`。注意到函数的返回结果仍然是Int?,这是因为这个函数使用用于返回具体的索引值，而不是搜索值。需要提醒的是，这个函数不会编译，原因后边会说明：
+下边就是`findStringIndex`的泛型版本`findIndex`。注意到函数的返回结果仍然是Int?,这是因为这个函数返回匹配到的数组索引值，而不是数组中的值。需要提醒的是，这个函数不会编译，原因后边会说明：
 
-    func findIndex<T>(array: T[], valueToFind: T) -> Int? {
+```
+func findIndex<T>(array: T[], valueToFind: T) -> Int? {
     for (index, value) in enumerate(array) {
-    if value == valueToFind {
-    return index
-    }
+        if value == valueToFind {
+            return index
+        }
     }
     return nil
-    }
+}
+```
 
 This function does not compile as written above. The problem lies with the equality check, “if value == valueToFind”. Not every type in Swift can be compared with the equal to operator (==). If you create your own class or structure to represent a complex data model, for example, then the meaning of “equal to” for that class or structure is not something that Swift can guess for you. Because of this, it is not possible to guarantee that this code will work for every possible type T, and an appropriate error is reported when you try to compile the code.
 
-这个函数按照上边的写法不会编译。原因是因为比较这部分`“if value == valueToFind”. 不是所有的泛型类型都可以用比较操作`==`。如果你创建了自己的函数或者结构代表一个负责的数据模型，那么Swift语言没法猜出这个类或者结果等于的意思。正因为如此，不能保证这个代码可以作用于所有类型T，而且会编译出错。
+这个函数按照上边的写法不会编译。原因是等价检查部分“if value == valueToFind”. 不是所有的泛型类型都可以用`==`进行比较。如果你创建了自己的类或者结构代表一个复杂的数据模型，那么Swift语言没法猜测如何对这个类或者结构进行是否相等的比较。正因为如此，这个代码无法保证可以作用于所有可能的类型T，并且当你尝试编译这段代码时，编译器会给抛出错误指出这个问题。
 
 All is not lost, however. The Swift standard library defines a protocol called Equatable, which requires any conforming type to implement the equal to operator (==) and the not equal to operator (!=) to compare any two values of that type. All of Swift’s standard types automatically support the Equatable protocol.
 
-不过，有解决方法。Swift 标准库中定义了一个Equatable协议，该协议要求任何遵循的类型实现等式符（==）和不等符（!=）对任何两个该类型进行比较。所有的 Swift 标准类型自动支持Equatable协议。
+不过还是有解决方法。Swift 标准库中定义了一个Equatable协议，该协议要求任何遵循它的类型需要实现相等符（==）和不等符（!=）来对任何两个该类型的值进行比较。所有的 Swift 标准类型都自动支持Equatable协议。
 
 Any type that is Equatable can be used safely with the findIndex function, because it is guaranteed to support the equal to operator. To express this fact, you write a type constraint of Equatable as part of the type parameter’s definition when you define the function:
 
-任何Equatable类型都可以安全的使用在findIndex函数中，它保证可以支持等号操作。为了说明这个事实，你定义函数时，可以写一个Equatable类型约束作为类型参数定义的一部分：
+任何Equatable类型都可以安全的使用在findIndex函数中，它保证可以支持相等操作。为了说明这个事实，在定义函数时，可以添加一个Equatable类型约束作为类型参数定义的一部分：
 
-    func findIndex<T: Equatable>(array: T[], valueToFind: T) -> Int? {
+```
+func findIndex<T: Equatable>(array: T[], valueToFind: T) -> Int? {
     for (index, value) in enumerate(array) {
-    if value == valueToFind {
-    return index
-    }
+        if value == valueToFind {
+            return index
+        }
     }
     return nil
-    }
+}
+```
 
-The single type parameter for findIndex is written as T: Equatable, which means “any type T that conforms to the Equatable protocol.
+The single type parameter for findIndex is written as T: Equatable, which means “any type T that conforms to the Equatable protocol”.
 
-`findIndex`的类型参数可以写成`T: Equatable`,表示任意实现` Equatable`协议的类型。
+`findIndex`的类型参数写成`T: Equatable`,表示“任意实现Equatable协议的类型”。
 
 The findIndex function now compiles successfully and can be used with any type that is Equatable, such as Double or String:
 
-`findIndex`类型现在可以成功编译，并且可以用于任意实现了` Equatable`协议的类型，比如`Doubl`e 或者`String`:
+`findIndex`类型现在可以成功编译，并且可以用于任意实现了`Equatable`协议的类型，比如`Double`e 或者`String`:
 
-    let doubleIndex = findIndex([3.14159, 0.1, 0.25], 9.3)
-    // doubleIndex is an optional Int with no value, because 9.3 is not in the array
-    let stringIndex = findIndex(["Mike", "Malcolm", "Andrea"], "Andrea")
-    // stringIndex is an optional Int containing a value of 2
+```
+let doubleIndex = findIndex([3.14159, 0.1, 0.25], 9.3)
+// doubleIndex is an optional Int with no value, because 9.3 is not in the array
+let stringIndex = findIndex(["Mike", "Malcolm", "Andrea"], "Andrea")
+// stringIndex is an optional Int containing a value of 2
+```
 
 #Associated Types
 #关联类型
 When defining a protocol, it is sometimes useful to declare one or more associated types as part of the protocol’s definition. An associated type gives a placeholder name (or alias) to a type that is used as part of the protocol. The actual type to use for that associated type is not specified until the protocol is adopted. Associated types are specified with the typealias keyword.
 
-当定义一个协议时，有时声明一个或多个关联类型作为协议的一部分非常有用。一个关联类型给定作用于协议部分的类型一个节点名（或别名）。作用于关联类型实际类型不需要指定，直到协议接受。关联类型被指定为typealias关键字。
+当定义一个协议时，有时声明一个或多个关联类型作为协议的一部分非常有用。一个关联类型为包含在协议中的某个类型提供了一个占位符名称（或别名）。一个关联类型代表的实际类型只有在这个协议真正被适配时才得到确定。关联类型通过typealias关键字来指定。
 
 ##Associated Types in Action
-##关联类型行为
+##关联类型实践
 
 Here’s an example of a protocol called Container, which declares an associated type called ItemType:
 
 下边是一个协议`Container`,定义了关联类型`ItemType`:
 
-    protocol Container {
+```
+protocol Container {
     typealias ItemType
     mutating func append(item: ItemType)
     var count: Int { get }
     subscript(i: Int) -> ItemType { get }
-    }
+}
+```
 
 The Container protocol defines three required capabilities that any container must provide:
 
@@ -437,228 +450,231 @@ The Container protocol defines three required capabilities that any container mu
 3. It must be possible to retrieve each item in the container with a subscript that takes an Int index value.
 
 1. 必须可以通过append方法添加新的元素到容器中。
-2. 必须提供一个属性方法可以获取容器中的元素数目，并返回一个Int值。
+2. 必须提供一个count属性方法可以获取容器中的元素数目，以Int值返回。
 3. 必须可以通过Int索引下标检索每个值。
 
 This protocol doesn’t specify how the items in the container should be stored or what type they are allowed to be. The protocol only specifies the three bits of functionality that any type must provide in order to be considered a Container. A conforming type can provide additional functionality, as long as it satisfies these three requirements.
 
-这个协议没有指定容器中items该如何存储，也没有指定数据是什么类型。协议只是指定了三个任意遵循Container类型所必须的功能点。只要满足这三个条件，遵循协议的类型也可以添加额外的功能。
+这个协议没有指定容器中成员该如何存储，也没有指定他们的数据类型。协议只是指定了任何遵循Container类型所必须具备的三个功能点。只要满足这三个条件，遵循协议的类型也可以添加额外的功能。
 
 Any type that conforms to the Container protocol must be able to specify the type of values it stores. Specifically, it must ensure that only items of the right type are added to the container, and it must be clear about the type of the items returned by its subscript.
 
-任意遵循Container协议的类型必须指定所存储的数据值类型。必须保证指定的数据类型可以存储到Container中，而且必须明确可以通过其下标返回结果值。
+任何遵循Container协议的类型必须能指定所存储的数据值类型。必须保证只有正确数据类型可以存储到Container中，而且对于通过其下标返回结果值的数据类型也必须是明确的。
 
 To define these requirements, the Container protocol needs a way to refer to the type of the elements that a container will hold, without knowing what that type is for a specific container. The Container protocol needs to specify that any value passed to the append method must have the same type as the container’s element type, and that the value returned by the container’s subscript will be of the same type as the container’s element type.
 
-为了定义这些条件，Container协议需要一个方法指定容器里的元素将会保留，不需要知道特定容器的类型。Container协议需要定义任何append方法添加至容器中的值和容器中的元素是相同类型，并且通过容器下标返回的容器元素值的类型是相同的。
+为了能定义这些要求，需要有一种方式，能在Container协议不知道某个具体的容器实际会存储的数据类型的前提下，还能引用到那个数据类型。Container协议需要能指明，任何通过append方法添加至容器的值的数据类型和容器中的元素的数据类型相同，并且通过容器下标返回的值的类型和容器中的元素的类型也是是相同的。
 
 To achieve this, the Container protocol declares an associated type called ItemType, written as typealias ItemType. The protocol does not define what ItemType is an alias for—that information is left for any conforming type to provide. Nonetheless, the ItemType alias provides a way to refer to the type of the items in a Container, and to define a type for use with the append method and subscript, to ensure that the expected behavior of any Container is enforced.
 
-为了达到这个目的，container协议声明了一个相关类型ItemType,记为`typealias ItemType`。该协议不会定义ItemType是谁的别名，这个信息留给任何遵循协议的类型来提供。尽管如此，ItemType别名支持一种方法识别在一个容器里的items类型，并定义一种使用在append方法和下标中的类型，保证任何期望的Container行为是强制性的。
+为了达到这个目的，container协议声明了一个相关类型ItemType,记为`typealias ItemType`。该协议不会定义ItemType是谁的别名，这个信息留给任何遵循协议的类型来提供。尽管如此，ItemType别名提供了一种方法来引用容器中的元素类型，并定义一种使用在append方法和下标中的类型，从而保证任何Container期望的行为都能得到强制实施。
 
 Here’s a version of the non-generic IntStack type from earlier, adapted to conform to the Container protocol:
 
 下边是之前的IntStack结构的非泛型版本，适用于遵循Container协议:
 
-    struct IntStack: Container {
+```
+struct IntStack: Container {
     // original IntStack implementation
     var items = Int[]()
     mutating func push(item: Int) {
-    items.append(item)
+        items.append(item)
     }
     mutating func pop() -> Int {
-    return items.removeLast()
+        return items.removeLast()
     }
     // conformance to the Container protocol
     typealias ItemType = Int
     mutating func append(item: Int) {
-    self.push(item)
+        self.push(item)
     }
     var count: Int {
-    return items.count
+        return items.count
     }
     subscript(i: Int) -> Int {
-    return items[i]
+        return items[i]
     }
-    }
+}
+```
 
 The IntStack type implements all three of the Container protocol’s requirements, and in each case wraps part of the IntStack type’s existing functionality to satisfy these requirements.
 
-`IntStack`类型实现了`Container`协议的所有需求，每个包含部分的功能都满足这些要求。
+`IntStack`类型实现了`Container`协议的所有需求，在每一个要求中，都通过包装IntStack类型现有的功能来满足。
 
 Moreover, IntStack specifies that for this implementation of Container, the appropriate ItemType to use is a type of Int. The definition of typealias ItemType = Int turns the abstract type of ItemType into a concrete type of Int for this implementation of the Container protocol.
 
-此外, `IntStack`指定了`Container`的实现，合适的`ItemType`被用作Int类型。对于Container协议实现来说，定义 `typealias ItemType = Int`，将抽象的`ItemType`类型转换为具体的Int类型。
+此外, 在`IntStack`对于协议`Container`的实现中，对应的`ItemType`类型是Int。在这次对于Container协议实现中，通过 `typealias ItemType = Int`的定义，将抽象的`ItemType`类型转换为具体的Int类型。
 
 Thanks to Swift’s type inference, you don’t actually need to declare a concrete ItemType of Int as part of the definition of IntStack. Because IntStack conforms to all of the requirements of the Container protocol, Swift can infer the appropriate ItemType to use, simply by looking at the type of the append method’s item parameter and the return type of the subscript. Indeed, if you delete the typealias ItemType = Int line from the code above, everything still works, because it is clear what type should be used for ItemType.
 
-感谢Swift类型参考，你实际上不用在IntStack定义部分声明具体的Int的ItemType。由于IntStack满足Container协议的所有要求，只需通过简单的查找append方法中的item参数类型和下标返回的类型，Swift就可以推断出合适的ItemType来使用。实际上，如果你删除了上述代码中的 typealias ItemType = Int，仍可以正常运行，因为它清楚的知道ItemType使用的是何种类型。
+感谢Swift的类型推理机制，你实际上不用在IntStack定义部分声明具体的Int类型的ItemType。由于IntStack满足Container协议的所有要求，只需通过简单的查找append方法中的item参数类型和下标返回的类型，Swift就可以推断出合适的ItemType来使用。实际上，如果你删除了上述代码中的 typealias ItemType = Int，仍可以正常运行，因为它清楚的知道ItemType使用的是何种类型。
 
 You can also make the generic Stack type conform to the Container protocol:
 
-你同样可以生成遵循Containner协议的泛型Stack类型：
+你同样可以编写遵循Containner协议的泛型Stack类型：
 
-    struct Stack<T>: Container {
+```
+struct Stack<T>: Container {
     // original Stack<T> implementation
     var items = T[]()
     mutating func push(item: T) {
-    items.append(item)
+        items.append(item)
     }
     mutating func pop() -> T {
-    return items.removeLast()
+        return items.removeLast()
     }
     // conformance to the Container protocol
     mutating func append(item: T) {
-    self.push(item)
+        self.push(item)
     }
     var count: Int {
-    return items.count
+        return items.count
     }
     subscript(i: Int) -> T {
-    return items[i]
+        return items[i]
     }
-    }
+}
+```
 
 This time, the placeholder type parameter T is used as the type of the append method’s item parameter and the return type of the subscript. Swift can therefore infer that T is the appropriate type to use as the ItemType for this particular container.
 
-这个时候，占位符T被用作append方法的item参数类型和下标的返回类型。Swift因此也就可以推断出用作ItemType的T的合适类型。
+这个时候，占位符T被用作append方法的item参数类型和下标的返回类型。Swift因此也就可以推断出ItemType的合适类型就是T。
 
 #Extending an Existing Type to Specify an Associated Type
-#扩展一个存在的类型为一指定关联类型
+#通过扩展已经存在的类型来指定关联类型
 
 You can extend an existing type to add conformance to a protocol, as described in Adding Protocol Conformance with an Extension. This includes a protocol with an associated type.
 
-你可以用[使用扩展来添加协议兼容性](../chapter2/21_Protocols.html)的方法,扩展一个已存在的类型遵循指定协议。这包含一个关联类型的协议。
+你可以用[使用扩展来添加协议兼容性](../chapter2/21_Protocols.html)的方法,通过增加对协议的遵循来扩展一个已存在的类型。这些协议也可以包含关联类型。
 
 Swift’s Array type already provides an append method, a count property, and a subscript with an Int index to retrieve its elements. These three capabilities match the requirements of the Container protocol. This means that you can extend Array to conform to the Container protocol simply by declaring that Array adopts the protocol. You do this with an empty extension, as described in Declaring Protocol Adoption with an Extension:
 
-Swift中的数据类型已经提供了`append`方法、`count`属性方法和下标索引方法。这三个功能满足`Container`协议。也就是说你可以扩展数组方法遵循Container协议，只需简单声明Array适用于该协议。你用一个空的扩展来这么做，就像[通过扩展补充协议声明](../chapter2/21_Protocols.html)中描述的一样。
+Swift中的数据类型已经提供了`append`方法、`count`属性方法和下标索引方法。这三个功能满足`Container`协议。也就是说你只需简单声明Array适配Container协议即可。你用一个空的扩展实现了这个目的，就像[通过扩展补充协议声明](../chapter2/21_Protocols.html)中描述的一样。
 
-    extension Array: Container {}
+```
+extension Array: Container {}
+```
 
 Array’s existing append method and subscript enable Swift to infer the appropriate type to use for ItemType, just as for the generic Stack type above. After defining this extension, you can use any Array as a Container.
 
-数组存在的append方法和下标索引方法使Swift可以推断出ItemType的实际类型，像上边的泛型版`Stack`一样。当定义了这个扩展之后，你可以用这个数组作为容器。
+数组中存在的append方法和下标索引方法使Swift可以推断出ItemType的实际类型，像上边的泛型版`Stack`一样。当定义了这个扩展之后，你可以用任何数组作为容器。
 
 #Where Clauses
-#Where语句
+#Where从句
 
 Type constraints, as described in Type Constraints, enable you to define requirements on the type parameters associated with a generic function or type.
 
-类型约束确保相关的泛型函数和类型的指定参数满足需求。
+类型约束能让你为泛型函数或者类型中相关的类型参数添加要求。
 
 It can also be useful to define requirements for associated types. You do this by defining where clauses as part of a type parameter list. A where clause enables you to require that an associated type conforms to a certain protocol, and/or that certain type parameters and associated types be the same. You write a where clause by placing the where keyword immediately after the list of type parameters, followed by one or more constraints for associated types, and/or one or more equality relationships between types and associated types.
 
-定义关联类型的满足条件也是非常有用的。你可以通过定义where语句作为类型参数的一部分。通过where语句指定一个关联类型遵循一个特定的协议，以及（或）那个特定的类型参数和关联类型可以是相同的。可以在类型参数后，紧跟着where语句，where语句中跟着一个或者多个针对关联类型的约束，以及（或）一个或多个类型和关联类型的等于关系。
+而为关联类型添加满足条件也是非常有用的。你可以通过定义where从句作为类型参数的一部分来添加要求。通过where语句能要求一个关联类型遵循一个特定的协议，以及（或）指定某个特定的类型参数和关联类型必须相同。where从句通过在类型参数后面添加where关键词开始，其后跟着一个或者多个针对关联类型的约束，以及（或）一个或多个类型和关联类型的等于关系。
 
 The example below defines a generic function called allItemsMatch, which checks to see if two Container instances contain the same items in the same order. The function returns a Boolean value of true if all items match and a value of false if they do not.
 
-下边的例子定义了泛型函数`allItemsMatch`,用于判断两个`Container`实例是否包含相同的元素并具有相同的顺序。如果所有元素满足条件，函数返回true,否则返回false。
+下边的例子定义了一个泛型函数`allItemsMatch`，用于判断两个`Container`实例是否包含相同的元素并具有相同的顺序。如果所有元素满足条件，函数返回true,否则返回false。
 
 The two containers to be checked do not have to be the same type of container (although they can be), but they do have to hold the same type of items. This requirement is expressed through a combination of type constraints and where clauses:
 
-需要检查的两个`containers`，不需要是相同类型的`container`（当然也可以是相同的），但是他们的元素必须相同。这个需求通过一个类型约束和where语句相结合来表示：
+需要检查的两个容器，不需要是相同类型的容器（当然也可以是相同的），但是他们的元素必须相同。这个需求通过一个类型约束和where从句相结合来表示：
 
-    func allItemsMatch<
-    C1: Container, C2: Container
-    where C1.ItemType == C2.ItemType, C1.ItemType: Equatable>
+```
+func allItemsMatch<C1: Container, C2: Container where C1.ItemType == C2.ItemType, C1.ItemType: Equatable>
     (someContainer: C1, anotherContainer: C2) -> Bool {
     // check that both containers contain the same number of items
     if someContainer.count != anotherContainer.count {
-    return false
+        return false
     }
     // check each pair of items to see if they are equivalent
     for i in 0..someContainer.count {
-    if someContainer[i] != anotherContainer[i] {
-    return false
-    }
+        if someContainer[i] != anotherContainer[i] {
+            return false
+        }
     }
     // all items match, so return true
     return true
-    }
+}
+```
 
 This function takes two arguments called `someContainer` and `anotherContainer`. The `someContainer` argument is of type `C1`, and the `anotherContainer` argument is of type `C2`. Both `C1` and `C2` are placeholder type parameters for two container types to be determined when the function is called.
 
-这个函数有两个参数`someContainer`和`anotherContainer`。`someContainer`参数是`C1`类型，`anotherContainer`参数是`C2`类型。`C1`和`C2`都是占位符，真正的参数类型等函数运行时决定。
+这个函数有两个参数`someContainer`和`anotherContainer`。`someContainer`参数是`C1`类型，`anotherContainer`参数是`C2`类型。`C1`和`C2`都是占位符，真正的参数类型在函数被调用时确定。
 
 The function’s type parameter list places the following requirements on the two type parameters:
 
 这个函数的类型参数列紧随在两个类型参数需求的后面：
 
-    C1 must conform to the Container protocol (written as C1: Container).
+- C1 must conform to the Container protocol (written as C1: Container).
+- C2 must also conform to the Container protocol (written as C2: Container).
+- The ItemType for C1 must be the same as the ItemType for C2 (written as C1.ItemType == C2.ItemType).
+- The ItemType for C1 must conform to the Equatable protocol (written as C1.ItemType: Equatable).
 
-    C2 must also conform to the Container protocol (written as C2: Container).
-
-    The ItemType for C1 must be the same as the ItemType for C2 (written as C1.ItemType == C2.ItemType).
-
-    The ItemType for C1 must conform to the Equatable protocol (written as C1.ItemType: Equatable).
-
-```
- C1必须遵循`Container`协议（写法`C1: Container`）
- C2必须遵循`Container`协议（写法`C2: Container`）
- C1的ItemType必须和C2的ItemType相等（写法C1.ItemType == C2.ItemType）
- C1的ItemType必须遵循`Equatable`协议
-```
+- C1必须遵循`Container`协议（写法`C1: Container`）
+- C2必须遵循`Container`协议（写法`C2: Container`）
+- C1的ItemType必须和C2的ItemType相等（写法C1.ItemType == C2.ItemType）
+- C1的ItemType必须遵循`Equatable`协议
+    
 
 The third and fourth requirements are defined as part of a where clause, and are written after the where keyword as part of the function’s type parameter list.
 
-第三四个要求在where语句中定义，并作为参数类型值部分内容放到where语句后。
+第三四个要求在where语句中定义，并作为参数类型列表的一部分放到where关键词后。
 
 These requirements mean:
 
 这几个要求意义是：
 
-    someContainer is a container of type C1.
-
-    anotherContainer is a container of type C2.
-
-    someContainer and anotherContainer contain the same type of items.
-
-    The items in someContainer can be checked with the not equal operator (!=) to see if they are different from each other.
+- someContainer is a container of type C1.
+- anotherContainer is a container of type C2.
+- someContainer and anotherContainer contain the same type of items.
+- The items in someContainer can be checked with the not equal operator (!=) to see if they are different from each other.
     
-```
-someContainer是C1类型的anotherContainer
-anotherContainer是C2类型的anotherContainer
-someContainer和anotherContainer包含相同类型的元素
-someContainer中的元素可以通过调用不等于操作(!=)判断他们是否不同
-```
+- someContainer是C1类型的容器
+- anotherContainer是C2类型的容器
+- someContainer和anotherContainer包含相同类型的元素
+- someContainer中的元素可以通过调用不等于操作(!=)判断他们是否不同
 
 The third and fourth requirements combine to mean that the items in anotherContainer can also be checked with the != operator, because they are exactly the same type as the items in someContainer.
 
-第三四个需求结合起来标示`anotherContainer`的元素同样可以调用`!=`操作，因为他们和`someContainer`中的类型是一样的。
+第三四个需求结合起来表明`anotherContainer`的元素同样可以调用`!=`操作，因为他们和`someContainer`中的类型是一样的。
 
 These requirements enable the allItemsMatch function to compare the two containers, even if they are of a different container type.
 
-这些要求使得`allItemsMatch`函数可以比较两个`containers`,即便他们具有不同的`containers`类型。
+这些要求使得`allItemsMatch`函数可以比较两个容器，即便他们是不同的容器类型。
 
 The allItemsMatch function starts by checking that both containers contain the same number of items. If they contain a different number of items, there is no way that they can match, and the function returns false.
 
-`allItemsMatch`函数会先检查`containers`是否包含相同数目的元素。如果包含内容不相同，他们互相也就不相等，结果返回`false`。
+`allItemsMatch`函数会先检查`containers`是否包含相同数目的元素。如果元素数目不同，他们互相也就不相等，结果返回`false`。
 
 After making this check, the function iterates over all of the items in someContainer with a for-in loop and the half-closed range operator (..). For each item, the function checks whether the item from someContainer is not equal to the corresponding item in anotherContainer. If the two items are not equal, then the two containers do not match, and the function returns false.
 
-如果具有相同的元素个数，函数通过`for-in`循环和半闭区间操作（..）来迭代`someContainer`中的所有元素。循环中，`someContainer`中的元素是否和`anotherContainer`中的对应元素相同。如果有不相同的，函数返回`false`。
+如果具有相同的元素个数，函数通过`for-in`循环和半闭区间操作(..)来迭代`someContainer`中的所有元素。循环中，检查`someContainer`中的元素是否和`anotherContainer`中的对应元素相同。如果有不相同的，函数返回`false`。
 
-If the loop finishes without finding a mismatch, the two  match, and the function returns true.
+If the loop finishes without finding a mismatch, the two match, and the function returns true.
 
-如果循环过程中没有一个不相同的，则`containers`相等，结果返回`true`。
+如果循环过程中没有一个不匹配的，则这两个容器相等，结果返回`true`。
 
 Here’s how the `allItemsMatch` function looks in action:
 
-这里演示了`allItemsMatch`函数运算的过程：
+下面展示`allItemsMatch`函数的实际使用：
 
-    var stackOfStrings = Stack<String>()
-    stackOfStrings.push("uno")
-    stackOfStrings.push("dos")
-    stackOfStrings.push("tres")
-    var arrayOfStrings = ["uno", "dos", "tres"]
-    if allItemsMatch(stackOfStrings, arrayOfStrings) {
+```
+var stackOfStrings = Stack<String>()
+stackOfStrings.push("uno")
+stackOfStrings.push("dos")
+stackOfStrings.push("tres")
+
+var arrayOfStrings = ["uno", "dos", "tres"]
+
+if allItemsMatch(stackOfStrings, arrayOfStrings) {
     println("All items match.")
-    } else {
+} else {
     println("Not all items match.")
-    }
-    // prints "All items match."
+}
+
+// prints "All items match."
+    
+```
 
 The example above creates a Stack instance to store String values, and pushes three strings onto the stack. The example also creates an Array instance initialized with an array literal containing the same three strings as the stack. Even though the stack and the array are of a different type, they both conform to the Container protocol, and both contain the same type of values. You can therefore call the allItemsMatch function with these two containers as its arguments. In the example above, the allItemsMatch function correctly reports that all of the items in the two containers match. 
 
-上边的例子中创建一个`Stack`实例存储字符串值，然后`push`三个字符串到堆栈中。同样创建一个数组实例初始化为包含三个字符串，和堆栈元素相同。尽管堆栈和数组是不同的数据类型，但是他们遵循相同的协议，并且包含相同的数据类型，相同的数据值。所以你可以调用`allItemsMatch`去比较两者。在上边的例子中，`allItemsMatch`函数会返回两者包含的所有元素相匹配。
+上边的例子中创建了一个`Stack`实例存储字符串值，然后`push`三个字符串到堆栈中。同样创建一个数组，并在初始化时加入了三个和堆栈中的元素相同的字符串。尽管堆栈和数组是不同的数据类型，但是他们都遵循Container协议，并且包含相同数据类型，相同的数据值。所以你可以调用`allItemsMatch`去比较两者。在上边的例子中，`allItemsMatch`函数正确地报告了两者包含的所有元素相匹配。
