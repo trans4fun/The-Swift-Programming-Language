@@ -14,7 +14,7 @@ Generics are one of the most powerful features of Swift, and much of the Swift s
 
 Here’s a standard, non-generic function called `swapTwoInts`, which swaps two Int values:
 
-下面的代码是一个标准的、非泛型函数`swapTwoInts`, 用于交换两个int值：
+下面的代码是一个标准的、非泛型函数`swapTwoInts`，用于交换两个int值：
 
 ```
 func swapTwoInts(inout a: Int, inout b: Int) {
@@ -26,11 +26,11 @@ func swapTwoInts(inout a: Int, inout b: Int) {
 
 This function makes use of in-out parameters to swap the values of a and b, as described in [In-Out Parameters]().
 
-这个函数使用in-out参数交换a,b值，具体的可以参考[In-Out Parameters]().
+这个函数使用in-out参数交换a，b值，具体的可以参考[In-Out Parameters]()。
 
 The `swapTwoInts` function swaps the original value of b into a, and the original value of a into b. You can call this function to swap the values in two Int variables:
 
-`swapTwoInts`函数把b的原始值赋值给a, a的原始值给b.你可以调用这个函数去交换两个整形值：
+`swapTwoInts`函数把b的原始值赋值给a，a的原始值给b。你可以调用这个函数去交换两个整形值：
 
 ```
 var someInt = 3
@@ -42,7 +42,7 @@ println("someInt is now \(someInt), and anotherInt is now \(anotherInt)")
 
 The `swapTwoInts` function is useful, but it can only be used with Int values. If you want to swap two String values, or two Double values, you have to write more functions, such as the `swapTwoStrings` and `swapTwoDoubles `functions shown below:
 
-`swapTwoInts`函数非常有用，但是它只能交换int值。如果想交换两个String、或者是两个Double类型的值，你不得不再写几个函数，比如`swapTwoStrings`,`swapTwoDoublesfunctions`,如下所示：
+`swapTwoInts`函数非常有用，但是它只能交换int值。如果想交换两个String、或者是两个Double类型的值，你不得不再写几个函数，比如`swapTwoStrings`，`swapTwoDoublesfunctions`，如下所示：
 
 ```
 func swapTwoStrings(inout a: String, inout b: String) {
@@ -63,16 +63,17 @@ You may have noticed that the bodies of the `swapTwoInts`, `swapTwoStrings`, and
 
 It would be much more useful, and considerably more flexible, to write a single function that could swap two values of any type. This is the kind of problem that generic code can solve. (A generic version of these functions is defined below.)
 
-如果可以只编写一个函数就能提供交换两个任意类型的值的功能的话，这种方式将更加有用和灵活。而这正是泛型所要解决的问题。(下面是使用泛型重新编写的函数）。
+如果可以只编写一个函数就能提供交换两个任意类型的值的功能的话，这种方式将更加有用和灵活。而这正是泛型所要解决的问题。（下面是使用泛型重新编写的函数）。
 
-```
-NOTE
-In all three functions, it is important that the types of a and b are defined to be the same as each other. If a and b were not of the same type, it would not be possible to swap their values. Swift is a type-safe language, and does not allow (for example) a variable of type String and a variable of type Double to swap values with each other. Attempting to do so would be reported as a compile-time error.
-```
-```
-注意
-上面的三个函数中，a和b的类型必须是一样的。如果不一样，就不能交换两者的值。Swift是类型安全的语言，不允许一个`String`和`Double`类型变量互相交换值。如果试图进行这样的操作，会出现编译错误。
-```
+
+> NOTE
+
+> In all three functions, it is important that the types of a and b are defined to be the same as each other. If a and b were not of the same type, it would not be possible to swap their values. Swift is a type-safe language, and does not allow (for example) a variable of type String and a variable of type Double to swap values with each other. Attempting to do so would be reported as a compile-time error.
+
+
+> 注意
+
+> 上面的三个函数中，a和b的类型必须是一样的。如果不一样，就不能交换两者的值。Swift是类型安全的语言，不允许一个`String`和`Double`类型变量互相交换值。如果试图进行这样的操作，会出现编译错误。
 
 #Generic Functions
 #泛型函数
@@ -107,11 +108,11 @@ The other difference is that the generic function’s name (swapTwoValues) is fo
 
 The `swapTwoValues` function can now be called in the same way as `swapTwoInts`, except that it can be passed two values of any type, as long as both of those values are of the same type as each other. Each time `swapTwoValues` is called, the type to use for T is inferred from the types of values passed to the function.
 
-`swapTwoValues`函数现在可以和`swapTwoInts`一样被调用。除此之外，`swapTwoValues`可以接收两个任意类型的参数，只要这两个参数的类型相同。每次`swapTwoValues`被调用，T所代表类型会根据实际传入的参数来确定。
+`swapTwoValues`函数现在可以和`swapTwoInts`一样被调用。除此之外，`swapTwoValues`可以接收两个任意类型的参数，只要这两个参数的类型相同。每次`swapTwoValues`被调用，T所代表的类型会根据实际传入的参数来确定。
 
 In the two examples below, T is inferred to be Int and String respectively:
 
-在下边的例子中，T分别代表Int和String类型。
+在下面的例子中，T分别代表Int和String类型。
 
 ```
 var someInt = 3
@@ -125,48 +126,52 @@ swapTwoValues(&someString, &anotherString)
 // someString is now "world", and anotherString is now "hello"
 ```
 
-```
-NOTE
-The swapTwoValues function defined above is inspired by a generic function called swap, which is part of the Swift standard library, and is automatically made available for you to use in your apps. If you need the behavior of the swapTwoValues function in your own code, you can use Swift’s existing swap function rather than providing your own implementation.
-```
-```
-注意
-上边定义的`swapTwoValues`函数是受到一个泛型函数`swap`的启发而实现的，这个函数被包含在Swift的标准库中，你可以直接在你的应用中使用它。如果在你的代码中需要一个和`swapTwoValues`类似的功能，可以直接使用Swift中已存在的`swap`方法，而不需要自己再实现一遍。
-```
+> NOTE
+
+>  The swapTwoValues function defined above is inspired by a generic function called swap, which is part of the Swift standard library, and is automatically made available for you to use in your apps. If you need the behavior of the swapTwoValues function in your own code, you can use Swift’s existing swap function rather than providing your own implementation.
+
+> 注意
+
+> 上面定义的`swapTwoValues`函数是受到一个泛型函数`swap`的启发而实现的，这个函数被包含在Swift的标准库中，你可以直接在你的应用中使用它。如果在你的代码中需要一个和`swapTwoValues`类似的功能，可以直接使用Swift中已存在的`swap`方法，而不需要自己再实现一遍。
+
+
 #Type Parameters
 #类型参数
+
 In the swapTwoValues example above, the placeholder type T is an example of a type parameter. Type parameters specify and name a placeholder type, and are written immediately after the function’s name, between a pair of matching angle brackets (such as <T>).
 
-在上边的`swapTwoValues`例子中，占位符T是一个关于使用类型参数的例子。类型参数通过给定一个占位符类型的方式，放置于紧跟在函数名称之后的尖括号内（例如<T>）。
+在上面的`swapTwoValues`例子中，占位符T是一个关于使用类型参数的例子。类型参数通过给定一个占位符类型的方式，放置于紧跟在函数名称之后的尖括号内（例如<T>）。
 
 Once specified, a type parameter can be used to define the type of a function’s parameters (such as the a and b parameters of the swapTwoValues function); or as the function’s return type; or as a type annotation within the body of the function. In each case, the placeholder type represented by the type parameter is replaced with an actual type whenever the function is called. (In the swapTwoValues example above, T was replaced with Int the first time the function was called, and was replaced with String the second time it was called.)
 
-一旦被指定，参数类型可以用来定义函数接收的参数（例如`swapTwoValues`函数中的a和b参数）；或者也可以作为函数的返回值类型。这每个例子中，被类型参数代表的占位符类型，在函数被调用时，会被真实的参数类型所代替。（在`swapTwoValues`的例子中，当函数被第一次调用时，T会被Int代替，第二次调用中T会被String代替。）
+一旦被指定，参数类型可以用来定义函数接收的参数（例如`swapTwoValues`函数中的a和b参数）；或者作为函数的返回值类型；或者在函数体中作为类型注释。在每一种场景子中，被类型参数代表的占位符类型，在函数被调用时，会被真实的参数类型所代替。（在`swapTwoValues`的例子中，当函数被第一次调用时，T会被Int代替，第二次调用中T会被String代替。）
 
 You can provide more than one type parameter by writing multiple type parameter names within the angle brackets, separated by commas.
 
-你可以在尖括号中通过逗号分隔的方式指定多个类型参数名称，来为函数提供多个类型参数。
+你可以在尖括号中通过逗号分隔的方式指定多个类型参数名称，为函数提供多个类型参数。
 ‌
 #Naming Type Parameters
 #类型参数命名
+
 In simple cases where a generic function or generic type needs to refer to a single placeholder type (such as the swapTwoValues generic function above, or a generic collection that stores a single type, such as Array), it is traditional to use the single-character name T for the type parameter. However, you are can use any valid identifier as the type parameter name.
 
-在一般的情况下，如果泛型函数或者泛型类型需要指定一个占位符（像上边的`swapTwoValues`泛型函数或者只包含单个类型的泛型集合，比如数组），通常会用一个字符T来代表参数类型。不过，你也可以用任意有效的标识符来表示参数类型。
+在一般的情况下，如果泛型函数或者泛型类型需要指定一个占位符（像上面的`swapTwoValues`泛型函数或者只包含单个类型的泛型集合，比如数组），通常会用一个字符T来代表参数类型。不过，你也可以用任意有效的标识符来表示参数类型。
 
 If you are defining more complex generic functions, or generic types with multiple parameters, it can be useful to provide more descriptive type parameter names. For example, Swift’s Dictionary type has two type parameters—one for its keys and one for its values. If you were writing Dictionary yourself, you might name these two type parameters KeyType and ValueType to remind you of their purpose as you use them within your generic code.
 
-如果你正在定义更加复杂的泛型函数或者泛型类型，并需要多个参数，那么使用更具有描述性的类型参数名称就很有必要了。比如Swift中的字典类型就有两个参数，其中一个作为键，一个作为值。如果你实现来字典类型，你可以为这两个类型取名为`KeyType`和`ValueType`，从而提醒你这两个参数在泛型代码中的作用。
+如果你正在定义更加复杂的泛型函数或者泛型类型，并需要多个参数，那么使用更具有描述性的类型参数名称就很有必要了。比如Swift中的字典类型就有两个参数，其中一个作为键，一个作为值。如果由你来实现字典类型，你可以为这两个类型分别取名为`KeyType`和`ValueType`，从而提醒你这两个参数在泛型代码中的作用。
 
-```
-NOTE
-Always give type parameters UpperCamelCase names (such as T and KeyType) to indicate that they are a placeholder for a type, not a value.
-```
-```
-注意
-请始终使用大写字母开头的驼峰式命名法（例如T和KeyType）来给类型参数命名，以表明它们是类型的占位符，而非类型值。
-```
+> NOTE
+
+> Always give type parameters UpperCamelCase names (such as T and KeyType) to indicate that they are a placeholder for a type, not a value.
+
+> 注意
+
+> 请始终使用大写字母开头的驼峰命名法（例如T和KeyType）来给类型参数命名，以表明它们是类型的占位符，而非类型值。
+
 #Generic Types
 #泛型类型
+
 In addition to generic functions, Swift enables you to define your own generic types. These are custom classes, structures, and enumerations that can work with any type, in a similar way to Array and Dictionary.
 
 除了泛型函数，Swift可以让你定义自己的泛型类型。这些类型可以是自定义的类、结构和枚举，他们和数组以及字典一样，可以和其他任意类型一起工作。
@@ -175,36 +180,35 @@ This section shows you how to write a generic collection type called Stack. A st
 
 本节将展示如何编写堆栈这样的泛型集合类型。堆栈是一个具有特定顺序的数值的集合，和数组类似，但是和数组相比，堆栈在操作上有更多的限制。数组允许元素可以从任何位置插入或者删除。而堆栈只允许添加新元素到集合的顶部（叫做push一个新值到堆栈）。同样的，堆栈只允许从集合的顶部删除一个元素（叫做从堆栈pop出一个值）。
 
-```
-NOTE
-The concept of a stack is used by the UINavigationController class to model the view controllers in its navigation hierarchy. You call the UINavigationController class pushViewController:animated: method to add (or push) a view controller on to the navigation stack, and its popViewControllerAnimated: method to remove (or pop) a view controller from the navigation stack. A stack is a useful collection model whenever you need a strict “last in, first out” approach to managing a collection.
-```
+> NOTE
 
-```
-注意
-堆栈的概念被用在`UINavigationController`类中，作为视图控制器的导航结构的数据模型。你调用`UINavigationController`的`pushViewController:animated: `方法添加一个视图到堆栈中，调用` popViewControllerAnimated:`方法从堆栈中删除一个试图。当你需要一个严格的“先进先出”方式来管理集合时，堆栈是非常有用的。
-```
+> The concept of a stack is used by the UINavigationController class to model the view controllers in its navigation hierarchy. You call the UINavigationController class pushViewController:animated: method to add (or push) a view controller on to the navigation stack, and its popViewControllerAnimated: method to remove (or pop) a view controller from the navigation stack. A stack is a useful collection model whenever you need a strict “last in, first out” approach to managing a collection.
+
+> 注意
+
+> 堆栈的概念被用在`UINavigationController`类中作为视图控制器的导航结构的数据模型。你可以通过调用`UINavigationController`的`pushViewController:animated: `方法来添加一个视图到堆栈中，调用` popViewControllerAnimated:`方法从堆栈中删除一个试图。当你需要一个严格的“先进先出”方式来管理集合时，堆栈是非常有用的。
+
 
 The illustration below shows the push / pop behavior for a stack:
 
-下面的图表展示了堆栈的进入、退出操作：
+下面的图表展示了堆栈的进入、推出操作：
 
 ![stack](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/stackPushPop_2x.png)
 
 
-1. There are currently three values on the stack.
-2. A fourth value is “pushed” on to the top of the stack.
-3. The stack now holds four values, with the most recent one at the top.
-4. The top item in the stack is removed, or “popped”.
-5. After popping a value, the stack once again holds three values.
+ 1. There are currently three values on the stack.
+ 2. A fourth value is “pushed” on to the top of the stack.
+ 3. The stack now holds four values, with the most recent one at the top.
+ 4. The top item in the stack is removed, or “popped”.
+ 5. After popping a value, the stack once again holds three values.
 
-1.当前堆栈里有3个值
-2.第四个值从堆栈的顶部被“push”进去
-3.现在堆栈中有4个值，其中最新的值在最顶部
-4.堆栈最顶部的值被移除，或者叫“popped”
-5.当推出一个值后，堆栈重新变成了三个值
+ 1. 当前堆栈里有3个值。
+ 2. 第四个值从堆栈的顶部被“push”进去。
+ 3. 现在堆栈中有4个值，其中最新的值在最顶部。
+ 4. 堆栈最顶部的值被移除，或者叫“popped”。
+ 5. 当推出一个值后，堆栈重新变成了三个值。
 
-Here’s how to write a non-generic version of a “stack, in this case for a stack of Int values
+Here’s how to write a non-generic version of a “stack”, in this case for a stack of Int values
 
 下面展示如何编写一个非泛型版本的堆栈，这个例子中的堆栈是Int类型：
 
@@ -226,7 +230,7 @@ This structure uses an Array property called items to store the values in the st
 The IntStack type shown above can only be 
 “used with Int values, however. It would be much more useful to define a generic Stack class, that can manage a stack of any type of value.
 
-上边的这个`IntStack`类型只能用于Int值。如果定义一个可以管理任何数据类型的泛型类型的堆栈类型，可以管理堆栈中得任意类型，是非常有用的。
+上面的这个`IntStack`类型只能用于Int值。如果定义一个可以管理任何数据类型的泛型类型的堆栈类型，可以管理堆栈中的任意类型，那将非常有用。
 
 Here’s a generic version of the same code:
 
@@ -245,19 +249,19 @@ struct Stack<T> {
 ```
 Note how the generic version of Stack is essentially the same as the non-generic version, but with a placeholder type parameter called T instead of an actual type of Int. This “type parameter is written within a pair of angle brackets (<T>) immediately after the structure’s name.
 
-可以注意到，除了使用T作为占位符类型参数来代替真实int类型之外，泛型版本的堆栈结构和上边非泛型版本基本上是一样的。这个类型参数直接跟在结构的名称后并被一对尖括号包裹（<T>）.
+可以注意到，除了使用T作为占位符类型参数来代替真实int类型之外，泛型版本的堆栈结构和上面非泛型版本基本上是一样的。这个类型参数直接跟在结构的名称后并被一对尖括号包裹（<T>）.
 
 T defines a placeholder name for “some type T” to be provided later on. This future type can be referred to as “T” anywhere within the structure’s definition. In this case, T is used as a placeholder in three places:
 
-T作为一个占位符名称来代替后续实际会给定的“某种类型T”。这种将来类型可以在结构体定义中的任何地方使用`T`来表示。在这个例子中，`T`在如下三个位置作为占位符：
+其中T作为一个占位符名称来代替后续实际会给定的“某种类型T”。这种将来类型可以在结构体定义中的任何地方使用`T`来表示。在这个例子中，`T`在如下三个位置作为占位符：
 
-1. To create a property called items, which is initialized with an empty array of values of type T
-2. To specify that the push method has a single parameter called item, which must be of type T
-3. To specify that the value returned by the pop method will be a value of type T
+ 1. To create a property called items, which is initialized with an empty array of values of type T
+ 2. To specify that the push method has a single parameter called item, which must be of type T
+ 3. To specify that the value returned by the pop method will be a value of type T
 
-1.创建成员变量`items`，并将它初始化为包含类型T的空数组
-2.指定`push`方法有一个参数item，类型为T类型
-3.指定`pop`方法返回结果类型为T
+ 1. 创建成员变量`items`，并将它初始化为包含类型T的空数组
+ 2. 指定`push`方法有一个参数item，类型为T类型
+ 3. 指定`pop`方法返回结果类型为T
 
 You create instances of Stack in a similar way to Array and Dictionary, by writing the actual type to be used for this specific stack within angle brackets after the type name when creating a new instance with initializer syntax:
 
@@ -274,27 +278,28 @@ stackOfStrings.push("cuatro")
 
 Here’s how stackOfStrings looks after pushing these four values on to the stack:
 
-下边展示`stackOfStrings`如何把四个值push进栈：
+下面展示`stackOfStrings`如何把四个值push进栈：
 
 ![进栈](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/stackPushedFourStrings_2x.png)
 
- Popping a value from the stack returns and removes the top value, "cuatro":
+Popping a value from the stack returns and removes the top value, "cuatro":
  
- 下图是如何从栈中pop一个值的过程，移除栈最顶上结果，“cuatro”,并返回其值：
+下图是如何从栈中pop一个值的过程，移除栈最顶上结果，“cuatro”,并返回其值：
 
 ```
-    let fromTheTop = stackOfStrings.pop()
-    // fromTheTop is equal to "cuatro", and the stack now contains 3 strings
+let fromTheTop = stackOfStrings.pop()
+// fromTheTop is equal to "cuatro", and the stack now contains 3 strings
 ```
+
 Here’s how the stack looks after popping its top value: 
 
-下边是推出最顶层数据之后的堆栈效果：
+下面是推出最顶层数据之后的堆栈效果：
 
 ![移除堆栈效果](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Art/stackPoppedOneString_2x.png)
 
- Because it is a generic type, Stack can be used to create a stack of any valid type in Swift, in a similar manner to Array and Dictionary. 
+Because it is a generic type, Stack can be used to create a stack of any valid type in Swift, in a similar manner to Array and Dictionary. 
  
- 由于`Stack`是泛型类型，所以在Swift中可以用于创建任何合法类型的栈，方式同`Array`和`Dictionary`。
+由于`Stack`是泛型类型，所以在Swift中可以用于创建任何合法类型的栈，方式同`Array`和`Dictionary`。
 
 #Type Constraints
 #类型约束
@@ -321,17 +326,17 @@ You can define your own type constraints when creating custom generic types, and
 
 You write type constraints by placing a single class or protocol constraint after a type parameter’s name, separated by a colon, as part of the type parameter list. The basic syntax for type constraints on a generic function is shown below (although the syntax is the same for generic types):
  
-你可以通过在类型参数名称的后边以冒号分割，加上类型参数约束。基础的泛型函数的类型约束语法如下（同样的，这个语法也适用于泛型类型）
+你可以通过在类型参数名称的后边以冒号分割，加上类型参数约束。基础的泛型函数的类型约束语法如下（同样的，这个语法也适用于泛型类型）：
 
 ```
-    func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {
+func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {
     // function body goes here
-    }
+}
 ```
 
 The hypothetical function above has two type parameters. The first type parameter, T, has a type constraint that requires T to be a subclass of SomeClass. The second type parameter, U, has a type constraint that requires U to conform to the protocol SomeProtocol.
 
-上边函数有两个参数。参数一类型参数为T，需要T必须是`SomeClass`子类；第二个参数类型为U，需要U必须遵循`SomeClass`协议。
+上面函数有两个参数。参数一类型参数为T，需要T必须是`SomeClass`子类；第二个参数类型为U，需要U必须遵循`SomeClass`协议。
 
 ##Type Constraints in Action
 ##类型约束实践
@@ -339,6 +344,7 @@ The hypothetical function above has two type parameters. The first type paramete
 Here’s a non-generic function called findStringIndex, which is given a String value to find and an array of String values within which to find it. The findStringIndex function returns an optional Int value, which will be the index of the first matching string in the array if it is found, or nil if the string cannot be found:
 
 现在有一个名为findStringIndex的非泛型函数，它接收一个字符串以及一个字符串数组作为参数，并从这个数组中对这个给定的字符串进行查找。若查找到匹配的字符串，findStringIndex函数返回该字符串在数组中的索引位置（Int），反之返回nil：
+
 ```
 func findStringIndex(array: String[], valueToFind: String) -> Int? {
     for (index, value) in enumerate(array) {
@@ -355,11 +361,11 @@ The findStringIndex function can be used to find a string value in an array of s
 `findStringIndex`可以用于查找数组中指定的String值：
 
 ```
-    let strings = ["cat", "dog", "llama", "parakeet", "terrapin"]
-    if let foundIndex = findStringIndex(strings, "llama") {
+let strings = ["cat", "dog", "llama", "parakeet", "terrapin"]
+if let foundIndex = findStringIndex(strings, "llama") {
     println("The index of llama is \(foundIndex)")
-    }
-    // prints "The index of llama is 2"
+}
+// prints "The index of llama is 2"
 ```
 
 The principle of finding the index of a value in an array isn’t useful only for strings, however. You can write the same functionality as a generic function called findIndex, by replacing any mention of strings with values of some type T instead.
@@ -368,7 +374,7 @@ The principle of finding the index of a value in an array isn’t useful only fo
 
 Here’s how you might expect a generic version of findStringIndex, called findIndex, to be written. Note that the return type of this function is still Int?, because the function returns an optional index number, not an optional value from the array. Be warned, though—this function does not compile, for reasons explained after the example:
 
-下边就是`findStringIndex`的泛型版本`findIndex`。注意到函数的返回结果仍然是Int?,这是因为这个函数返回匹配到的数组索引值，而不是数组中的值。需要提醒的是，这个函数不会编译，原因后边会说明：
+下面就是`findStringIndex`的泛型版本`findIndex`。注意到函数的返回结果仍然是Int?，这是因为这个函数返回匹配到的数组索引值，而不是数组中的值。需要提醒的是，这个函数不会编译，原因后边会说明：
 
 ```
 func findIndex<T>(array: T[], valueToFind: T) -> Int? {
@@ -383,7 +389,7 @@ func findIndex<T>(array: T[], valueToFind: T) -> Int? {
 
 This function does not compile as written above. The problem lies with the equality check, “if value == valueToFind”. Not every type in Swift can be compared with the equal to operator (==). If you create your own class or structure to represent a complex data model, for example, then the meaning of “equal to” for that class or structure is not something that Swift can guess for you. Because of this, it is not possible to guarantee that this code will work for every possible type T, and an appropriate error is reported when you try to compile the code.
 
-这个函数按照上边的写法不会编译。原因是等价检查部分“if value == valueToFind”. 不是所有的泛型类型都可以用`==`进行比较。如果你创建了自己的类或者结构代表一个复杂的数据模型，那么Swift语言没法猜测如何对这个类或者结构进行是否相等的比较。正因为如此，这个代码无法保证可以作用于所有可能的类型T，并且当你尝试编译这段代码时，编译器会给抛出错误指出这个问题。
+这个函数按照上面的写法不会编译。原因是等价检查部分“if value == valueToFind”。 不是所有的泛型类型都可以用`==`进行比较。如果你创建了自己的类或者结构代表一个复杂的数据模型，那么Swift语言没法猜测如何对这个类或者结构进行是否相等的比较。正因为如此，这个代码无法保证可以作用于所有可能的类型T，并且当你尝试编译这段代码时，编译器会给抛出错误指出这个问题。
 
 All is not lost, however. The Swift standard library defines a protocol called Equatable, which requires any conforming type to implement the equal to operator (==) and the not equal to operator (!=) to compare any two values of that type. All of Swift’s standard types automatically support the Equatable protocol.
 
@@ -406,7 +412,7 @@ func findIndex<T: Equatable>(array: T[], valueToFind: T) -> Int? {
 
 The single type parameter for findIndex is written as T: Equatable, which means “any type T that conforms to the Equatable protocol”.
 
-`findIndex`的类型参数写成`T: Equatable`,表示“任意实现Equatable协议的类型”。
+`findIndex`的类型参数写成`T: Equatable`，表示“任意实现Equatable协议的类型”。
 
 The findIndex function now compiles successfully and can be used with any type that is Equatable, such as Double or String:
 
@@ -421,6 +427,7 @@ let stringIndex = findIndex(["Mike", "Malcolm", "Andrea"], "Andrea")
 
 #Associated Types
 #关联类型
+
 When defining a protocol, it is sometimes useful to declare one or more associated types as part of the protocol’s definition. An associated type gives a placeholder name (or alias) to a type that is used as part of the protocol. The actual type to use for that associated type is not specified until the protocol is adopted. Associated types are specified with the typealias keyword.
 
 当定义一个协议时，有时声明一个或多个关联类型作为协议的一部分非常有用。一个关联类型为包含在协议中的某个类型提供了一个占位符名称（或别名）。一个关联类型代表的实际类型只有在这个协议真正被适配时才得到确定。关联类型通过typealias关键字来指定。
@@ -430,7 +437,7 @@ When defining a protocol, it is sometimes useful to declare one or more associat
 
 Here’s an example of a protocol called Container, which declares an associated type called ItemType:
 
-下边是一个协议`Container`,定义了关联类型`ItemType`:
+下面是一个协议`Container`，定义了关联类型`ItemType`:
 
 ```
 protocol Container {
@@ -467,11 +474,11 @@ To define these requirements, the Container protocol needs a way to refer to the
 
 To achieve this, the Container protocol declares an associated type called ItemType, written as typealias ItemType. The protocol does not define what ItemType is an alias for—that information is left for any conforming type to provide. Nonetheless, the ItemType alias provides a way to refer to the type of the items in a Container, and to define a type for use with the append method and subscript, to ensure that the expected behavior of any Container is enforced.
 
-为了达到这个目的，container协议声明了一个相关类型ItemType,记为`typealias ItemType`。该协议不会定义ItemType是谁的别名，这个信息留给任何遵循协议的类型来提供。尽管如此，ItemType别名提供了一种方法来引用容器中的元素类型，并定义一种使用在append方法和下标中的类型，从而保证任何Container期望的行为都能得到强制实施。
+为了达到这个目的，container协议声明了一个相关类型ItemType，记为`typealias ItemType`。该协议不会定义ItemType是谁的别名，这个信息留给任何遵循协议的类型来提供。尽管如此，ItemType别名提供了一种方法来引用容器中的元素类型，并定义一种使用在append方法和下标中的类型，从而保证任何Container期望的行为都能得到强制实施。
 
 Here’s a version of the non-generic IntStack type from earlier, adapted to conform to the Container protocol:
 
-下边是之前的IntStack结构的非泛型版本，适用于遵循Container协议:
+下面是之前的IntStack结构的非泛型版本，适用于遵循Container协议:
 
 ```
 struct IntStack: Container {
@@ -545,7 +552,7 @@ This time, the placeholder type parameter T is used as the type of the append me
 
 You can extend an existing type to add conformance to a protocol, as described in Adding Protocol Conformance with an Extension. This includes a protocol with an associated type.
 
-你可以用[使用扩展来添加协议兼容性](../chapter2/21_Protocols.html)的方法,通过增加对协议的遵循来扩展一个已存在的类型。这些协议也可以包含关联类型。
+你可以用[使用扩展来添加协议兼容性](../chapter2/21_Protocols.html)的方法，通过增加对协议的遵循来扩展一个已存在的类型。这些协议也可以包含关联类型。
 
 Swift’s Array type already provides an append method, a count property, and a subscript with an Int index to retrieve its elements. These three capabilities match the requirements of the Container protocol. This means that you can extend Array to conform to the Container protocol simply by declaring that Array adopts the protocol. You do this with an empty extension, as described in Declaring Protocol Adoption with an Extension:
 
@@ -557,7 +564,7 @@ extension Array: Container {}
 
 Array’s existing append method and subscript enable Swift to infer the appropriate type to use for ItemType, just as for the generic Stack type above. After defining this extension, you can use any Array as a Container.
 
-数组中存在的append方法和下标索引方法使Swift可以推断出ItemType的实际类型，像上边的泛型版`Stack`一样。当定义了这个扩展之后，你可以用任何数组作为容器。
+数组中存在的append方法和下标索引方法使Swift可以推断出ItemType的实际类型，像上面的泛型版`Stack`一样。当定义了这个扩展之后，你可以用任何数组作为容器。
 
 #Where Clauses
 #Where从句
@@ -572,7 +579,7 @@ It can also be useful to define requirements for associated types. You do this b
 
 The example below defines a generic function called allItemsMatch, which checks to see if two Container instances contain the same items in the same order. The function returns a Boolean value of true if all items match and a value of false if they do not.
 
-下边的例子定义了一个泛型函数`allItemsMatch`，用于判断两个`Container`实例是否包含相同的元素并具有相同的顺序。如果所有元素满足条件，函数返回true,否则返回false。
+下面的例子定义了一个泛型函数`allItemsMatch`，用于判断两个`Container`实例是否包含相同的元素并具有相同的顺序。如果所有元素满足条件，函数返回true，否则返回false。
 
 The two containers to be checked do not have to be the same type of container (although they can be), but they do have to hold the same type of items. This requirement is expressed through a combination of type constraints and where clauses:
 
@@ -677,4 +684,4 @@ if allItemsMatch(stackOfStrings, arrayOfStrings) {
 
 The example above creates a Stack instance to store String values, and pushes three strings onto the stack. The example also creates an Array instance initialized with an array literal containing the same three strings as the stack. Even though the stack and the array are of a different type, they both conform to the Container protocol, and both contain the same type of values. You can therefore call the allItemsMatch function with these two containers as its arguments. In the example above, the allItemsMatch function correctly reports that all of the items in the two containers match. 
 
-上边的例子中创建了一个`Stack`实例存储字符串值，然后`push`三个字符串到堆栈中。同样创建一个数组，并在初始化时加入了三个和堆栈中的元素相同的字符串。尽管堆栈和数组是不同的数据类型，但是他们都遵循Container协议，并且包含相同数据类型，相同的数据值。所以你可以调用`allItemsMatch`去比较两者。在上边的例子中，`allItemsMatch`函数正确地报告了两者包含的所有元素相匹配。
+上面的例子中创建了一个`Stack`实例存储字符串值，然后`push`三个字符串到堆栈中。同样创建一个数组，并在初始化时加入了三个和堆栈中的元素相同的字符串。尽管堆栈和数组是不同的数据类型，但是他们都遵循Container协议，并且包含相同数据类型，相同的数据值。所以你可以调用`allItemsMatch`去比较两者。在上面的例子中，`allItemsMatch`函数正确地报告了两者包含的所有元素相匹配。
