@@ -40,7 +40,7 @@ All of this information is rolled up into the function’s definition, which is 
 
 The definition describes what the function does, what it expects to receive, and what it returns when it is done. The definition makes it easy for the function to be called elsewhere in your code in a clear and unambiguous way:
 
-函数定义描述了函数是做什么的，期望接收什么和执行结束后返回什么。这个定义使得在代码中的任何地方可以清晰明确地调用函数变得简单。
+函数定义描述了函数是做什么的，期望接收什么和执行结束后返回什么。这样在代码中的任何地方都可以清楚明确地调用函数，而这种函数定义使这些变得更简单。
 
 ```js
 println(sayHello("Anna"))
@@ -73,7 +73,7 @@ println(sayHelloAgain("Anna"))
 // prints "Hello again, Anna!”
 ```
 
-# Function Parameters and Return Values 函数参数和返回值
+# Function Parameters and Return Values 函数的参数和返回值
 
 
 Function parameters and return values are extremely flexible in Swift. You can define anything from a simple utility function with a single unnamed parameter to a complex function with expressive parameter names and different parameter options.
