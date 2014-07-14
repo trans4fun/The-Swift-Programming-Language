@@ -14,7 +14,7 @@ The Swift Programming Language 中文化项目
    * 基础部分 [已完成 by 琼雪] [review by 栖邀]
    * 基本操作符 [已完成 by 冰浠] [review by 姜天意]
    * 字符串和字符 [已完成 by 筱谷] [review by 尘境]
-   * 集合类型 [已完成 by 尘境]
+   * 集合类型 [已完成 by 尘境] [review by 紫溪]
    * 控制流 [已完成 by 墨昕]
    * 函数 [已完成 by 紫溪] [review by 飞长]
    * 闭包 [已完成 by 闻西] [review by 米尔]
