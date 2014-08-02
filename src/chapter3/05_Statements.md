@@ -11,11 +11,10 @@
  - [控制传递语句](#control_transfer_statements)
 
   
-在swift语言中，语句可大致分为简单语句和控制流语句两种类型的语句，简单语句是最常见的，常用来控制语句控制流语句也可分为循环语句:用来重复的执行代码块；分支语句：用来执行满足特定条件的代码块;控制语句用来决定代码的执行顺序。后续会详细阐述各控制流语句的使用。
+在swift语言中，语句可大致分为简单语句和控制流语句两种类型的语句，简单语句是最常见的，常用来构造表达式和声明。控制流语句则是用来控制程序执行的流程，控制流语句也可分为循环语句:用来重复的执行代码块；分支语句：用来执行满足特定条件的代码块;控制语句用来决定代码的执行顺序。后续会详细阐述各控制流语句的使用。
 
 
-和javascript类似，在一行语句的结束尾可以不添加分号(;)，但是如果一行有多个独立语句必须要添加。在语法上讲，在语句末尾是否添加分好都是可以的，但是从团队协助以及减少错误方面来讲，最好统一加上，一般而言大公司的svn服务器上都会添加一个钩子，用来减少出错的可能，所以最好还是养成添加的习惯。
-
+在一行语句的结束尾可以不添加分号(;)，但是如果一行有多个独立语句必须要添加。在语法上讲，在语句末尾是否添加分好都是可以的，但是从团队协助以及减少错误方面来讲，最好统一加上。
 
 > 语句语法  
 > *语句* → [*表达式*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/swift/grammar/expression) **;** _可选_  
@@ -30,8 +29,8 @@
 <a name="loop_statements"></a>
 ##循环语句##
 
-各个编程语言从语法上讲，基本的变量，语句都是类似的，swift循环语句也提供四种方式来循环语句：`for`语句 `for in`语句 `while`语句 `do-shile`语句
-通过`break`和`continue`可以改变循环语句的控制流，和其他语言类似，具体可参考break和continue
+循环语句允许重复执行代码块，具体取决于特定的循环条件。swift循环语句也提供四种方式来循环语句：`for`语句 `for in`语句 `while`语句 `do-shile`语句
+通过`break`和`continue`可以改变循环语句的控制流。
 
 > 循环语句语法  
 > *循环语句* → [*for语句*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/for-statement)  
@@ -41,7 +40,6 @@
 
 ##for语句##
 
-
 `for`语句可以重复的执行一端代码，并且可以递增一个计数器
 `for`语句的形式如下
 
@@ -50,10 +48,11 @@
     }
 
 
-`initialzation` `condition`和`increment`之间的分号 不可少，`｛`也不可少
+`initialzation` `condition`和`increment`之间的分号和`{}`都是不可少的
+`for`语句的执行流程如下:
 
  1. `initialzation`只是被执行一次，通常用于声明和初始化在接下来循环中需要的变量
- 2. `condition`：如果为真（`true`）`statements`将会执行，进行第3步，如果为`false`则`statements`和`increment`都不会被执行，for至此执行完毕
+ 2. 计算`condition`表达式：如果为真（`true`）`statements`将会执行，进行第3步，如果为`false`则`statements`和`increment`都不会被执行，for至此执行完毕
  3. 计算`increment`表达式，然后转到第2步。
  
 定义在`initialzation`中的变量仅在`for`语句的作用域以内有效。`condition`表达式的值的类型必须遵循LogicValue协议。
@@ -77,7 +76,7 @@
     
 
 
-`for-in`语句在循环开始前会调用`collection`表达式的`generate`方法来获取一个生成器类型（这是一个遵循Generator协议的类型）的值。接下来循环开始，调用`collection`表达式的`next`方法。如果其返回值不是`None`，它将会被赋给`item`，然后执行`statements`，执行完毕后回到循环开始处；否则，将不会赋值给`item`也不会执行`statements`，`for-in`至此执行完毕。这和`javascript`中的`for in`语句是一样的，可以理解为循环`collection`，如果有key的取出，去执行接下来的`statements`
+`for-in`语句在循环开始前会调用`collection`表达式的`generate`方法来获取一个生成器类型（这是一个遵循Generator协议的类型）的值。接下来循环开始，调用`collection`表达式的`next`方法。如果其返回值不是`None`，它将会被赋给`item`，然后执行`statements`，执行完毕后回到循环开始处；否则，将不会赋值给`item`也不会执行`statements`，`for-in`至此执行完毕。
 
 `For-In`循环语法  
 > *for-in语句* → **for** [*模式*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Patterns.html#//apple_ref/swift/grammar/pattern) **in** [*表达式*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/swift/grammar/expression) [*代码块*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/swift/grammar/code-block) 
@@ -92,9 +91,13 @@
     }
 
     
-`while`语句的执行流程为判断`condition`，如果为真(`true`),这会执行`statements`,否则`while`语句执行到此结束
+`while`语句的执行流程如下:
+
+ 1. 计算`initialzation`表达式，如果为真(`true`)，转到第2步，如果为假(`false`),`while`至此执行完毕
+ 2. 执行`statements`，然后转到第1步，重复流程
+
 由于`condition`的值在`statements`执行前就已计算出，因此`while`语句中的`statements`可能会被执行若干次，也可能不会被执行。
-`condition`表达式的值的类型必须遵循LogicValue协议。同时，`condition`表达式也可以使用可选绑定，请参考可选绑定待添加链接。
+`condition`表达式的值的类型必须遵循LogicValue协议。同时，`condition`表达式也可以使用可选绑定
 
 > While 循环语法  
 > *while语句* → **while** [*while-condition*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/while-condition) [*code-block*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/swift/grammar/expression)  
@@ -102,7 +105,6 @@
 
 
 ##Do-While 语句##
-
 
 `do-while`语句允许代码块被执行一次或多次。
 `do-while`语句的形式如下：
@@ -114,26 +116,29 @@
 
 `do-while`语句的执行流程如下:
 
- 1. 执行`statements`，完后钻到2
+ 1. 执行`statements`，然后转到第2步
  2. 计算condition表达式，如果返回（`true`）继续回到1新一轮执行，否则`do-while`至此执行完毕
 
 
  由于`condition`是在`statements`执行之后才会计算，因此可见，相比较`while`而言，`do-while`至少会执行一次
-`condition`表达式的值的类型必须遵循`LogicValue`协议。同时，`condition`表达式也可以使用可选绑定，请参考可选绑定。
+`condition`表达式的值的类型必须遵循`LogicValue`协议。同时，`condition`表达式也可以使用可选绑定。
+
 > do-while-statement→ do [code-block](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/swift/grammar/code-block) while [while-condition](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/while-condition)
 
 
 <a name="branch_statements"></a>
 ##分支语句##
 
-通过一个或者多个条件的值，来决定语句允许程序执行指定部分的代码，swift和其他语言类似提供了`if`语句和`switch`语句
+通过一个或者多个条件的值，来决定语句允许程序执行指定部分的代码，swift提供了两种类型的分支语句:`if`语句和`switch`语句
+
 `switch`语句中的控制流可以用`break`语句修改，请参考[Break](http://chinaz.com/swift/chapter3/10_Statements.html#break_statement) 语句。
+
 >branch-statement → [if-statement](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/if-statement)
 >branch-statement → [switch-statement](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/switch-statement)
 
 ##if语句##
 
-通过一个或多个条件的值来决定执行哪一块的代码，if语句主要有三种使用方式，但无乱哪种方式都需要添加`{`和`}`
+通过一个或多个条件的值来决定执行哪一块的代码，if语句有两种标准方式，但无乱哪种方式都需要添加`{`和`}`
 第一种形式是当且仅当条件为真时执行代码，像下面这样：
 
     if `condition` {
@@ -149,8 +154,7 @@
         `statements to execute if condition is false`
     }
     
-第三种则是else中又需要进行判断，即有多种判断情况：
-
+同时，else语句也可包含`if`语句，从而形成了一条链来测试更多的条件，像下面这样
     if `condition 1` {
         `statements to execute if condition 1 is true`
     } else if `condition 2` {
@@ -161,16 +165,18 @@
     }
 
 
-`if`语句中条件的值的类型必须遵循`LogicValue`协议。同时，条件也可以使用可选绑定，请参考可选绑定`待添加链接`
+`if`语句中条件的值的类型必须遵循`LogicValue`协议。同时，条件也可以使用可选绑定
+
 >if-statement → if [if-condition](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/if-condition) [code-block](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/if-condition) [else-clause](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/else-clause) opt
 
 >if-condition → [expression](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/swift/grammar/expression) | [declaration](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/swift/grammar/declaration)
 
 >else-clause → else [code-block](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Declarations.html#//apple_ref/swift/grammar/code-block) | else [if-statement opt](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/if-statement)
 
+
 ##Switch 语句##
 
-取决于`switch~语句的控制表达式(control expression)，`switch`语句将决定执行哪一块代码。
+`switch`语句通过`switch~语句的控制表达式(control expression)来决定执行哪一块的代码
 
 switch语句的形式如下：
 
@@ -186,13 +192,13 @@ switch语句的形式如下：
             `statements`
     }
 
-`switch`语句的表达式`control expression`会首选被计算，然后与下面的每个`case`的模式进行匹配，如果匹配成功，程序将会执行对应`case`中的`statements`,需要注意的是每个case不能为空，也就是说在case中至少有一条语句，如果在相应case中不想执行代码，只需要在程序中写个`break`即可
+`switch`语句的表达式`control expression`会首选被计算，然后与下面的每个`case`的模式进行匹配，如果匹配成功，程序将会执行对应`case`中的`statements`,需要注意的是每个case块不能为空，也就是说在case中至少有一条语句，如果在相应匹配到的case中不想执行代码，只需要在程序中写个`break`即可
 
 case let (x, y) where x == y:
 
 可以用作控制表达式的值是什么灵活的，除了标量类型(scalartypes,如`Int`、`Character`)之外，你还可以使用其他任何类型的值，包括浮点数，字符串，远组，自定义类的实例以及可选(`optional`)类型，甚至是枚举类型中的成员和指定的范围(`range`)等。关于在`switch`语句中使用这些类型，请参考控制流章节的Switch.
 
-你可以在模式后端添加一个保护作用的表达式(guard expression)，构成是这样的:关键字`where`后面跟着一个作为额外测试条件的表达式，因此当且仅当表达式匹配的一个case的某个模式在保护作用的表达式为真时，对应case中的`statements`才会被执行，在下面例子中，控制表达式只会匹配含有两个相等元素的元组
+你可以在模式后端添加一个保护作用的表达式(guard expression)，构成是这样的:关键字`where`后面跟着一个作为额外测试条件的表达式，因此当且仅当表达式匹配的一个case的某个模式在保护作用的表达式为真时，对应case中的`statements`才会被执行，在下面例子中，控制表达式只会匹配含有两个相等元素的元组,如`(1,1):
 
     case let (x, y) where x == y:
     }
@@ -268,7 +274,7 @@ switch语句也可以包含默认(default)块，只有其它case块都无法匹�
 
 ##Continue 语句##
 
-continue语句用于终止循环中当前迭代的执行，但不会终止该循环的执行。使用continue语句时，和break一样，可以只写continue这个关键词，也可以在continue后面跟上标签名(label name)，像下面这样：
+`continue`语句用于终止循环中当前迭代的执行，但不会终止该循环的执行。使用`continue`语句时，和`break`一样，可以只写continue这个关键词，也可以在continue后面跟上标签名(label name)，像下面这样：
 
     continue
     continue label name
@@ -280,9 +286,9 @@ continue语句用于终止循环中当前迭代的执行，但不会终止该循
 
 在这两种情况下，控制权都会被传递给循环外面的第一行语句。
 
-在for语句中，continue语句执行后，increment表达式还是会被计算，这是因为每次循环体执行完毕后increment表达式都会被计算。
+在`for`语句中，`continue`语句执行后，`increment`表达式还是会被计算，这是因为每次循环体执行完毕后`increment`表达式都会被计算。
 
-关于使用continue语句的例子，请参考控制流一章的Continue和带标签的语句
+关于使用`continue`语句的例子，请参考控制流一章的Continue和带标签的语句
 
 > continue-statement -> continue [label-name](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Statements.html#//apple_ref/swift/grammar/label-name)opt
 
